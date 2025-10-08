@@ -1,13 +1,30 @@
 <div>
     <style>
-        .modal {
-  position: fixed !important;
-  z-index: 9999 !important;
-}
-
-.modal-backdrop {
-  z-index: 9998 !important;
-}
+        .blog-image-preview {
+            max-width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .action-buttons .btn {
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+        .blog-content-preview {
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+        .status-badge {
+            font-size: 12px;
+            padding: 4px 8px;
+        }
     </style>
 
     <div class="main_content_iner ">
@@ -38,36 +55,58 @@
                                             </div>
                                         </div>
                                         <div class="add_button ms-2">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" class="btn_1">Add New</a>
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#addBlogModal" class="btn_1">Add New</a>
                                         </div>
                                     </div>
                                 </div>
         
                                 <div class="QA_table mb_30">
-                                    <!-- table-responsive -->
-                                    <table class="table lms_table_active3 ">
+                                    <table class="table lms_table_active3">
                                         <thead>
                                             <tr>
-                                                <th scope="col">title</th>
-                                                <th scope="col">Group</th>
-                                                <th scope="col">description</th>
+                                                <th scope="col">Title</th>
+                                                <th scope="col">Category</th>
                                                 <th scope="col">Image</th> 
                                                 <th scope="col">Status</th>
+                                                <th scope="col">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @if($blogs !=null)
+                                            @if($blogs != null)
                                             @foreach ($blogs as $blog)
-                                                   <tr>
-                                                        <th scope="row"> <a href="#" class="question_content">{{$blog->title}}</a></th>
-                                                        <td>{{$blog->group}}</td>
-                                                        <td>{!! $blog->description !!}</td>
-                                                        <td><img class="img" src="{{ asset('storage/'.$blog->image) }}" width="300px" height="300px"></td>
-                                                        <td>{{$blog->status}}</td>
-                                                      
-                                                     </tr>
+                                                <tr>
+                                                    <th scope="row"><a href="#" class="question_content">{{ $blog->title }}</a></th>
+                                                    <td>{{ $blog->category }}</td>
+                                                    <td>
+                                                        @if($blog->image)
+                                                            <img class="img" src="{{ asset('storage/'.$blog->image) }}" width="100px" height="100px" style="object-fit: cover;">
+                                                        @else
+                                                            No Image
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        <span class="badge status-badge bg-{{ $blog->status == 'published' ? 'success' : ($blog->status == 'draft' ? 'warning' : 'secondary') }}">
+                                                            {{ ucfirst($blog->status) }}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="action-buttons">
+                                                            <button type="button" class="btn btn-info btn-sm" 
+                                                                    onclick="openViewModal({{ $blog->id }})">
+                                                                <i class="ti-eye"></i> View
+                                                            </button>
+                                                            <button type="button" class="btn btn-warning btn-sm" 
+                                                                    onclick="openEditModal({{ $blog->id }})">
+                                                                <i class="ti-pencil"></i> Edit
+                                                            </button>
+                                                            <button type="button" class="btn btn-danger btn-sm" 
+                                                                    onclick="confirmDelete({{ $blog->id }})">
+                                                                <i class="ti-trash"></i> Delete
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                             @endforeach
-                                         
                                             @endif
                                         </tbody>
                                     </table>
@@ -76,12 +115,37 @@
                         </div>
                     </div>
                 </div>
-                
             </div>
         </div>
     </div>
+    <div>
+        
+        @push('modals')
+            @livewire('blog.backend-blog-modal')
+        @endpush
+    </div>
+    <script>
+        function openViewModal(blogId) {
+            // Dispatch event to the modal component
+            Livewire.dispatch('viewBlog', {blogId: blogId});
+        }
 
+        function openEditModal(blogId) {
+            // Dispatch event to the modal component
+            Livewire.dispatch('editBlog', {blogId: blogId});
+        }
+
+        function confirmDelete(blogId) {
+            if (confirm('Are you sure you want to delete this blog post?')) {
+                Livewire.dispatch('deleteBlog', {blogId: blogId});
+            }
+        }
+
+        // Listen for blog updates to refresh the page
+        document.addEventListener('livewire:initialized', () => {
+            Livewire.on('blog-updated', () => {
+                window.location.reload();
+            });
+        });
+    </script>
 </div>
-@push('modals')
-    @livewire('blog.backend-blog-modal')
-@endpush

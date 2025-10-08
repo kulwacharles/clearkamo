@@ -3,7 +3,7 @@
 namespace App\Livewire\Blog;
 
 use Livewire\Component;
-use APP\Models\Blog;
+use App\Models\Blog;
 
 class BackendBlog extends Component
 {

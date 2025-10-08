@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
-            $table->integer('category');
+            $table->string('category');
             $table->string('title');
             $table->longText('description')->nullable();
             $table->string('image');

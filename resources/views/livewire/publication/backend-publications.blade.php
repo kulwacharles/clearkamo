@@ -1,13 +1,30 @@
 <div>
     <style>
-        .modal {
-  position: fixed !important;
-  z-index: 9999 !important;
-}
-
-.modal-backdrop {
-  z-index: 9998 !important;
-}
+        .blog-image-preview {
+            max-width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .action-buttons .btn {
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+        .blog-content-preview {
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+        .status-badge {
+            font-size: 12px;
+            padding: 4px 8px;
+        }
     </style>
 
     <div class="main_content_iner ">
@@ -18,14 +35,14 @@
                         <div class="white_card_header">
                             <div class="box_header m-0">
                                 <div class="main-title">
-                                    <h3 class="m-0">Publication List</h3>
+                                    <h3 class="m-0">Blog List</h3>
                                 </div>
                             </div>
                         </div>
                         <div class="white_card_body">
                             <div class="QA_section">
                                 <div class="white_box_tittle list_header">
-                                    <h4>Publications</h4>
+                                    <h4>Blog Posts</h4>
                                     <div class="box_right d-flex lms_block">
                                         <div class="serach_field_2">
                                             <div class="search_inner">
@@ -38,36 +55,58 @@
                                             </div>
                                         </div>
                                         <div class="add_button ms-2">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" class="btn_1">Add New</a>
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#addBlogModal" class="btn_1">Add New</a>
                                         </div>
                                     </div>
                                 </div>
         
                                 <div class="QA_table mb_30">
-                                    <!-- table-responsive -->
-                                    <table class="table lms_table_active3 ">
+                                    <table class="table lms_table_active3">
                                         <thead>
                                             <tr>
-                                                <th scope="col">title</th>
-                                                <th scope="col">Group</th>
-                                                <th scope="col">description</th>
+                                                <th scope="col">Title</th>
+                                                <th scope="col">Category</th>
                                                 <th scope="col">Image</th> 
                                                 <th scope="col">Status</th>
+                                                <th scope="col">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @if($publications !=null)
-                                            @foreach ($publications as $publication)
-                                                   <tr>
-                                                        <th scope="row"> <a href="#" class="question_content">{{$publication->title}}</a></th>
-                                                        <td>{{$publication->group}}</td>
-                                                        <td>{!! $publication->description !!}</td>
-                                                        <td><img class="img" src="{{ asset('storage/'.$publication->image) }}" width="300px" height="300px"></td>
-                                                        <td>{{$publication->status}}</td>
-                                                      
-                                                     </tr>
+                                            @if($pubs != null)
+                                            @foreach ($pubs as $pub)
+                                                <tr>
+                                                    <th scope="row"><a href="#" class="question_content">{{ $pub->title }}</a></th>
+                                                    <td>{{ $pub->category }}</td>
+                                                    <td>
+                                                        @if($pub->image)
+                                                            <img class="img" src="{{ asset('storage/'.$pub->image) }}" width="100px" height="100px" style="object-fit: cover;">
+                                                        @else
+                                                            No Image
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        <span class="badge status-badge bg-{{ $pub->status == 'published' ? 'success' : ($pub->status == 'draft' ? 'warning' : 'secondary') }}">
+                                                            {{ ucfirst($pub->status) }}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="action-buttons">
+                                                            <button type="button" class="btn btn-info btn-sm" 
+                                                                    onclick="openViewModal({{ $pub->id }})">
+                                                                <i class="ti-eye"></i> View
+                                                            </button>
+                                                            <button type="button" class="btn btn-warning btn-sm" 
+                                                                    onclick="openEditModal({{ $pub->id }})">
+                                                                <i class="ti-pencil"></i> Edit
+                                                            </button>
+                                                            <button type="button" class="btn btn-danger btn-sm" 
+                                                                    onclick="confirmDelete({{ $pub->id }})">
+                                                                <i class="ti-trash"></i> Delete
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                             @endforeach
-                                         
                                             @endif
                                         </tbody>
                                     </table>
@@ -76,12 +115,37 @@
                         </div>
                     </div>
                 </div>
-                
             </div>
         </div>
     </div>
+    <div>
+        
+        @push('modals')
+            @livewire('publication.publications-modal')
+        @endpush
+    </div>
+    <script>
+        function openViewModal(pubId) {
+            // Dispatch event to the modal component
+            Livewire.dispatch('viewPub', {pubId: pubId});
+        }
 
+        function openEditModal(pubId) {
+            // Dispatch event to the modal component
+            Livewire.dispatch('editPub', {pubId: pubId});
+        }
+
+        function confirmDelete(pubId) {
+            if (confirm('Are you sure you want to delete this Publication post?')) {
+                Livewire.dispatch('deletePub', {pubId: pubId});
+            }
+        }
+
+        // Listen for blog updates to refresh the page
+        document.addEventListener('livewire:initialized', () => {
+            Livewire.on('pub-updated', () => {
+                window.location.reload();
+            });
+        });
+    </script>
 </div>
-@push('modals')
-    @livewire('publication.publications-modal')
-@endpush

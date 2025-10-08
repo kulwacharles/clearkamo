@@ -6,12 +6,12 @@ use Livewire\Component;
 use App\Models\Publication;
 class BackendPublications extends Component
 {
-   public $publications;
+   public $pubs;
     public function render()
     {
-        return view('livewire.publication.backend-publications');
+        return view('livewire.publication.backend-publications')->layout("components.layouts.app");
     }
      public function mount(){
-        $this->publications=Publication::all();
+        $this->pubs=Publication::all();
     }
 }
