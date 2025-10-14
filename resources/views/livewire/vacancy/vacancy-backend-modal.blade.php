@@ -6,7 +6,7 @@
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add New Service Post</h5>
+                    <h5 class="modal-title">Add Vacancy Post</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" wire:click="resetAll">
                         <span>&times;</span>
                     </button>
@@ -22,30 +22,74 @@
                         @endif
 
                         <div class="row mb-3">
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <label>Title</label>
                                 <input type="text" class="form-control" wire:model="title">
                                 @error('title') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
-                            <div class="col-md-4">
-                                <label>Post Category</label>
-                                <select class="form-control" wire:model="category" required>
-                                    <option value="">Please Select Category</option>
-                                    <option value="News">News</option>
-                                    <option value="Announcement">Announcement</option>
+                            <div class="col-md-6">
+                                <label>Contract Type</label>
+                                <select class="form-control" wire:model="contract" required>
+                                    <option value="">Please Contract Type</option>
+                                    <option value="Permanent">Permanent</option>
+                                    <option value="Temporary">Temporary</option>
+                                    <option value="Intern">Intern</option>
+                                    <option value="Volunteer">Volunteer</option>
+                                    <option value="Others">Others</option>
                                 </select>
-                                @error('category') <span class="text-danger">{{ $message }}</span> @enderror
+                                @error('contract') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label>Status</label>
-                            <select class="form-control" wire:model="status" required>
-                                <option value="draft">Draft</option>
-                                <option value="published">Published</option>
-                                <option value="archived">Archived</option>
-                            </select>
-                            @error('status') <span class="text-danger">{{ $message }}</span> @enderror
+                        <div class="mb-3 row">
+                           
+                            <div class="col-md-6">
+                                <label>Post Date</label>
+                                <input type="date" class="form-control" wire:model="PostDate">
+                                @error('PostDate') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <label>Due Date</label>
+                                <input type="date" class="form-control" wire:model="DueDate">
+                                @error('DueDate') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <label>Number of Positions</label>
+                                <input type="number" class="form-control" wire:model="Positions">
+                                @error('Positions') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <label>Department</label>
+                                <select class="form-control" wire:model="Department" required>
+                                    <option >Please Department Type</option>
+                                    <option value="Information Technology">Information Technology</option>
+                                    <option value="Human Resource">Human Resource</option>
+                                    <option value="Research">Research</option>
+                                    <option value="Procurement">Procurement</option>
+                                    <option value="Medical">Medical</option>
+                                    <option value="Marketing">Marketing</option>
+                                    <option value="Logistic & Transport">Logistic & Transport</option>
+                                </select>
+                                @error('Department') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <label>Reporting To</label>
+                                <input type="text" class="form-control" wire:model="ReportTo">
+                                @error('ReportTo') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <label>Status</label>
+                                <select class="form-control" wire:model="status" required>
+                                    <option value="draft">Draft</option>
+                                    <option value="published">Published</option>
+                                    <option value="archived">Archived</option>
+                                </select>
+                                @error('status') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
                         </div>
 
                         <div class="mb-3" wire:ignore>
@@ -85,7 +129,7 @@
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit Service Post</h5>
+                    <h5 class="modal-title">Edit Vacancy Post</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" wire:click="resetAll">
                         <span>&times;</span>
                     </button>
@@ -103,32 +147,75 @@
                         <input type="hidden" wire:model="blogId">
 
                         <div class="row mb-3">
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <label>Title</label>
                                 <input type="text" class="form-control" wire:model="title">
                                 @error('title') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
-                            <div class="col-md-4">
-                                <label>Post Category</label>
-                                <select class="form-control" wire:model="category" required>
-                                    <option value="">Please Select Category</option>
-                                    <option value="News">News</option>
-                                    <option value="Announcement">Announcement</option>
+                              <div class="col-md-6">
+                                <label>Contract Type</label>
+                                <select class="form-control" wire:model="contract" required>
+                                    <option value="">Please Contract Type</option>
+                                    <option value="Permanent">Permanent</option>
+                                    <option value="Temporary">Temporary</option>
+                                    <option value="Intern">Intern</option>
+                                    <option value="Volunteer">Volunteer</option>
+                                    <option value="Others">Others</option>
                                 </select>
-                                @error('category') <span class="text-danger">{{ $message }}</span> @enderror
+                                @error('contract') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label>Status</label>
-                            <select class="form-control" wire:model="status" required>
-                                <option value="draft">Draft</option>
-                                <option value="published">Published</option>
-                                <option value="archived">Archived</option>
-                            </select>
-                            @error('status') <span class="text-danger">{{ $message }}</span> @enderror
+                        
+                         <div class="mb-3 row">
+                           
+                            <div class="col-md-6">
+                                <label>Post Date</label>
+                                <input type="date" class="form-control" wire:model="PostDate">
+                                @error('PostDate') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <label>Due Date</label>
+                                <input type="date" class="form-control" wire:model="DueDate">
+                                @error('DueDate') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                         </div>
+                         <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <label>Number of Positions</label>
+                                <input type="number" class="form-control" wire:model="Positions">
+                                @error('Positions') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <label>Department</label>
+                                <select class="form-control" wire:model="Department" required>
+                                    <option value="Information Technology">Information Technology</option>
+                                    <option value="Human Resource">Human Resourse</option>
+                                    <option value="Research">Research</option>
+                                    <option value="Procurement">Procurement</option>
+                                    <option value="Medical">Medical</option>
+                                    <option value="Marketing">Marketing</option>
+                                    <option value="Logistic & Transport">Logistic & Transport</option>
+                                </select>
+                                @error('Department') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                         </div>
+                         <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <label>Reporting To</label>
+                                <input type="text" class="form-control" wire:model="ReportTo">
+                                @error('ReportTo') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <label>Status</label>
+                                <select class="form-control" wire:model="status" required>
+                                    <option value="draft">Draft</option>
+                                    <option value="published">Published</option>
+                                    <option value="archived">Archived</option>
+                                </select>
+                                @error('status') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
                         </div>
-
                         <div class="mb-3" wire:ignore>
                             <label>Description</label>
                             <div id="editDescriptionContainer">
@@ -179,20 +266,20 @@
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">View Service Post</h5>
+                    <h5 class="modal-title">View Vacancy Post</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span>&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="row mb-3">
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <label class="fw-bold">Title</label>
                             <p class="form-control-plaintext border-bottom pb-2">{{ $viewTitle ?? 'No title' }}</p>
                         </div>
-                        <div class="col-md-4">
-                            <label class="fw-bold">Category</label>
-                            <p class="form-control-plaintext border-bottom pb-2">{{ $viewCategory ?? 'No category' }}</p>
+                        <div class="col-md-6">
+                            <label class="fw-bold">Contract Type</label>
+                            <p class="form-control-plaintext border-bottom pb-2">{{ $viewContract ?? 'No category' }}</p>
                         </div>
                     </div>
 
@@ -207,8 +294,61 @@
                                 @endif
                             </p>
                         </div>
+                        <div class="col-md-6">
+                            <label class="fw-bold">Department</label>
+                            <p class="form-control-plaintext border-bottom pb-2">
+                                @if($viewStatus)
+                                    {{ ucfirst($viewDepartment) }}
+                                @else
+                                    No Department
+                                @endif
+                            </p>
+                        </div>
                     </div>
-
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="fw-bold">Post Date</label>
+                            <p class="form-control-plaintext border-bottom pb-2">
+                                @if($viewPostDate)
+                                    {{ $viewPostDate }}
+                                @else
+                                    No Post Date
+                                @endif
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="fw-bold">Due Date</label>
+                            <p class="form-control-plaintext border-bottom pb-2">
+                                @if($viewDueDate)
+                                    {{ $viewDueDate }}
+                                @else
+                                    No Due Date
+                                @endif
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="fw-bold">Reporting  To</label>
+                            <p class="form-control-plaintext border-bottom pb-2">
+                                @if($viewReportTo)
+                                    {{ $viewReportTo }}
+                                @else
+                                    No Post Date
+                                @endif
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="fw-bold">Number of Positions</label>
+                            <p class="form-control-plaintext border-bottom pb-2">
+                                @if($viewPositions)
+                                    {{ $viewPositions }}
+                                @else
+                                    No Due Date
+                                @endif
+                            </p>
+                        </div>
+                    </div>
                     <div class="mb-3">
                         <label class="fw-bold">Description</label>
                         <div class="blog-content-preview border rounded p-3 bg-light">

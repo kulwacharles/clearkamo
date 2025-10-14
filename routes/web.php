@@ -12,6 +12,8 @@ use App\Livewire\Blog\BackendBlog;
 use App\Livewire\Publication\BackendPublications;
 use App\Livewire\Project\BackendProject;
 use App\Livewire\Service\BackendService;
+use App\Livewire\Team\BackendTeam;
+use App\Livewire\Vacancy\VacancyBackend;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -25,6 +27,8 @@ Route::prefix('/admin')->group(function () {
     Route::get('publications',BackendPublications::class)->name('publications');
     Route::get('projects',BackendProject::class)->name('projects');
     Route::get('services',BackendService::class)->name('services');
+    Route::get('vacancies',VacancyBackend::class)->name('vacancies');
+    Route::get('team',BackendTeam::class)->name('team');
 });
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

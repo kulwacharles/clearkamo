@@ -68,5 +68,25 @@
               </div>
             </a>
         </li>
+        <li class="">
+            <a wire:navigate  href="/admin/vacancies" aria-expanded="false">
+              <div class="nav_icon_small">
+                  <img src="{{asset('img/menu-icon/7.svg')}}" alt="">
+              </div>
+              <div class="nav_title">
+                  <span>Vacancies</span>
+              </div>
+            </a>
+        </li>
+        <li class="">
+            <a wire:navigate  href="/admin/team" aria-expanded="false">
+              <div class="nav_icon_small">
+                  <img src="{{asset('img/menu-icon/7.svg')}}" alt="">
+              </div>
+              <div class="nav_title">
+                  <span>Team</span>
+              </div>
+            </a>
+        </li>
       </ul>
 </nav>

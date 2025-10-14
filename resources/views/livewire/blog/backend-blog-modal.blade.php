@@ -6,7 +6,7 @@
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add New Blog Post</h5>
+                    <h5 class="modal-title">Add News & updates Post</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" wire:click="resetAll">
                         <span>&times;</span>
                     </button>
@@ -85,7 +85,7 @@
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit Blog Post</h5>
+                    <h5 class="modal-title">Edit News & updates Post</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" wire:click="resetAll">
                         <span>&times;</span>
                     </button>
@@ -176,10 +176,10 @@
     <div class="modal fade" id="viewBlogModal" tabindex="-1" role="dialog"
          aria-labelledby="viewBlogModalTitle" aria-hidden="true"
          wire:ignore.self>
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">View Blog Post</h5>
+                    <h5 class="modal-title">View News & Updates Post</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span>&times;</span>
                     </button>

@@ -6,7 +6,7 @@
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add New Service Post</h5>
+                    <h5 class="modal-title">Add Team Member</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" wire:click="resetAll">
                         <span>&times;</span>
                     </button>
@@ -22,22 +22,40 @@
                         @endif
 
                         <div class="row mb-3">
-                            <div class="col-md-8">
-                                <label>Title</label>
-                                <input type="text" class="form-control" wire:model="title">
-                                @error('title') <span class="text-danger">{{ $message }}</span> @enderror
+                            <div class="col-md-6">
+                                <label>Member Name</label>
+                                <input type="text" class="form-control" wire:model="member">
+                                @error('member') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-md-4">
-                                <label>Post Category</label>
-                                <select class="form-control" wire:model="category" required>
-                                    <option value="">Please Select Category</option>
-                                    <option value="News">News</option>
-                                    <option value="Announcement">Announcement</option>
+                                <label>Solutation</label>
+                                <select class="form-control" wire:model="salute" required>
+                                    <option value="">Please Select Salutation</option>
+                                    <option value="Mr">Mr</option>
+                                    <option value="Mrs">Mrs</option>
+                                    <option value="Miss">Miss</option>
+                                    <option value="Prof">Prof</option>
+                                    <option value="Dr">Dr</option>
+                                    <option value="Hon">Hon</option>
+                                    <option value="Eng">Eng</option>
+
                                 </select>
                                 @error('category') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
-
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label>Member Name</label>
+                                <input type="text" class="form-control" wire:model="member">
+                                @error('member') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <label>Member Name</label>
+                                <input type="text" class="form-control" wire:model="member">
+                                @error('member') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            
+                        </div>
                         <div class="mb-3">
                             <label>Status</label>
                             <select class="form-control" wire:model="status" required>
@@ -85,7 +103,7 @@
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit Service Post</h5>
+                    <h5 class="modal-title">Edit News & updates Post</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" wire:click="resetAll">
                         <span>&times;</span>
                     </button>
@@ -179,7 +197,7 @@
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">View Service Post</h5>
+                    <h5 class="modal-title">View News & Updates Post</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span>&times;</span>
                     </button>

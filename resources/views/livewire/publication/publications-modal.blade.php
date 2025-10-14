@@ -38,14 +38,21 @@
                             </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label>Status</label>
-                            <select class="form-control" wire:model="status" required>
-                                <option value="draft">Draft</option>
-                                <option value="published">Published</option>
-                                <option value="archived">Archived</option>
-                            </select>
-                            @error('status') <span class="text-danger">{{ $message }}</span> @enderror
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <label>Status</label>
+                                <select class="form-control" wire:model="status" required>
+                                    <option value="draft">Draft</option>
+                                    <option value="published">Published</option>
+                                    <option value="archived">Archived</option>
+                                </select>
+                                @error('status') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <label>Publish date</label>
+                                <input type="date" class="form-control" wire:model="published_date">
+                                @error('published_date') <span class="text-danger">{{ $message }}</span> @enderror 
+                            </div>
                         </div>
 
                         <div class="mb-3" wire:ignore>
@@ -119,14 +126,21 @@
                             </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label>Status</label>
-                            <select class="form-control" wire:model="status" required>
-                                <option value="draft">Draft</option>
-                                <option value="published">Published</option>
-                                <option value="archived">Archived</option>
-                            </select>
-                            @error('status') <span class="text-danger">{{ $message }}</span> @enderror
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <label>Status</label>
+                                <select class="form-control" wire:model="status" required>
+                                    <option value="draft">Draft</option>
+                                    <option value="published">Published</option>
+                                    <option value="archived">Archived</option>
+                                </select>
+                                @error('status') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <label>Publish date</label>
+                                <input type="date" class="form-control" wire:model="published_date">
+                                @error('published_date') <span class="text-danger">{{ $message }}</span> @enderror 
+                            </div>
                         </div>
 
                         <div class="mb-3" wire:ignore>
@@ -176,7 +190,7 @@
     <div class="modal fade" id="viewPubModal" tabindex="-1" role="dialog"
          aria-labelledby="viewBlogModalTitle" aria-hidden="true"
          wire:ignore.self>
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">View Publication Post</h5>
@@ -204,6 +218,16 @@
                                     {{ ucfirst($viewStatus) }}
                                 @else
                                     No status
+                                @endif
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="fw-bold">Publish Date</label>
+                            <p class="form-control-plaintext border-bottom pb-2">
+                                @if($viewPublishedDate)
+                                    {{ $viewPublishedDate }}
+                                @else
+                                    No publish date
                                 @endif
                             </p>
                         </div>

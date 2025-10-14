@@ -11,15 +11,16 @@ class PublicationsModal extends Component
 {
     use WithFileUploads;
 
-    public $title, $category, $description, $image, $imagePath, $pubId;
+    public $title, $category, $description, $image, $imagePath, $pubId,$published_date;
     public $status = 'draft';
     public $currentImage;
     
     // View modal properties
-    public $viewTitle, $viewCategory, $viewDescription, $viewStatus, $viewImage;
+    public $viewTitle, $viewCategory, $viewDescription, $viewStatus, $viewImage,$viewPublishedDate;
 
     protected $rules = [
         'title'       => 'required|min:3|max:255',
+        'published_date' => 'required|min:3|max:255',
         'category'    => 'required|min:3|max:255',
         'description' => 'required|min:10',
         'image'       => 'nullable|image|max:2048',
@@ -36,6 +37,7 @@ class PublicationsModal extends Component
         'image.max'            => 'The Image may not be greater than 2MB.',
         'status.required'      => 'The Status is required.',
         'status.in'            => 'The selected Status is invalid.',
+        'published_date'       => 'Publish date required'
     ];
 
     public function store()
@@ -59,7 +61,7 @@ class PublicationsModal extends Component
         // Create blog post
         $pub = new Publication;          
         $pub->title       = $this->title;
-        $pub->category    = $this->category;
+        $pub->publication_category    = $this->category;
         $pub->description = $this->description;
         $pub->image       = $imagePath;
         $pub->status      = $this->status;
@@ -82,11 +84,11 @@ class PublicationsModal extends Component
         
         $this->pubId = $pub->id;
         $this->title = $pub->title;
-        $this->category = $pub->category;
+        $this->category = $pub->publication_category;
         $this->description = $pub->description;
         $this->status = $pub->status;
         $this->currentImage = $pub->image;
-        
+        $this->published_date = $pub->published_date;
         $this->dispatch('set-ckeditor-content', content: $pub->description);
         $this->dispatch('open-modal', 'editPubModal');
     }
@@ -114,8 +116,9 @@ class PublicationsModal extends Component
 
         // Update blog post
         $pub->title       = $this->title;
-        $pub->category    = $this->category;
+        $pub->publication_category    = $this->category;
         $pub->description = $this->description;
+        $pub->published_date = $this->published_date;
         $pub->image       = $imagePath;
         $pub->status      = $this->status;
 
@@ -135,11 +138,11 @@ class PublicationsModal extends Component
         $pub = Publication::findOrFail($pubId);
         
         $this->viewTitle = $pub->title;
-        $this->viewCategory = $pub->category;
+        $this->viewCategory = $pub->publication_category;
         $this->viewDescription = $pub->description;
         $this->viewStatus = $pub->status;
         $this->viewImage = $pub->image;
-        
+        $this->viewPublishedDate = $pub->published_date;
         $this->dispatch('open-modal', 'viewPubModal');
     }
 

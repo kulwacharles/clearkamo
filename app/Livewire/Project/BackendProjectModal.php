@@ -118,9 +118,9 @@ class BackendProjectModal extends Component
 
             $extension = $this->image->getClientOriginalExtension();
             $filename  = 'clear_Kamo_' . $blog->id . '.' . $extension;
-            $imagePath = 'blogs/' . $filename;
+            $imagePath = 'projects/' . $filename;
 
-            $this->image->storePubliclyAs('blogs', $filename, 'public');
+            $this->image->storePubliclyAs('projects', $filename, 'public');
         }
 
         // Update blog post

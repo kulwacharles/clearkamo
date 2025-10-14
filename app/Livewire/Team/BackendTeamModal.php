@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Livewire\Service;
+namespace App\Livewire\Team;
 
 use Livewire\Component;
-use App\Models\Service;
+use App\Models\Blog;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
-
-class BackendServiceModal extends Component
+class BackendTeamModal extends Component
 {
     use WithFileUploads;
 
@@ -46,18 +45,18 @@ class BackendServiceModal extends Component
 
         // Handle image upload
         if ($this->image) {
-            $last = Service::latest()->first();
+            $last = Blog::latest()->first();
             $newId = $last ? $last->id + 1 : 1;
 
             $extension = $this->image->getClientOriginalExtension();
             $filename  = 'clear_Kamo_' . $newId . '.' . $extension;
-            $imagePath = 'services/' . $filename;
+            $imagePath = 'blogs/' . $filename;
 
-            $this->image->storePubliclyAs('services', $filename, 'public');
+            $this->image->storePubliclyAs('blogs', $filename, 'public');
         }
 
         // Create blog post
-        $blog = new Service;          
+        $blog = new Blog;          
         $blog->title       = $this->title;
         $blog->category    = $this->category;
         $blog->description = $this->description;
@@ -78,7 +77,7 @@ class BackendServiceModal extends Component
     // Handle edit event from blog list
     public function editBlog($blogId)
     {
-        $blog = Service::findOrFail($blogId);
+        $blog = Blog::findOrFail($blogId);
         
         $this->blogId = $blog->id;
         $this->title = $blog->title;
@@ -95,7 +94,7 @@ class BackendServiceModal extends Component
     {
         $this->validate();
 
-        $blog = Service::findOrFail($this->blogId);
+        $blog = Blog::findOrFail($this->blogId);
         $imagePath = $blog->image;
 
         // Handle image upload if new image is provided
@@ -107,9 +106,9 @@ class BackendServiceModal extends Component
 
             $extension = $this->image->getClientOriginalExtension();
             $filename  = 'clear_Kamo_' . $blog->id . '.' . $extension;
-            $imagePath = 'services/' . $filename;
+            $imagePath = 'blogs/' . $filename;
 
-            $this->image->storePubliclyAs('services', $filename, 'public');
+            $this->image->storePubliclyAs('blogs', $filename, 'public');
         }
 
         // Update blog post
@@ -122,7 +121,7 @@ class BackendServiceModal extends Component
         $result = $blog->save();
         
         if($result){
-            session()->flash('message', 'Service Post updated successfully.'); 
+            session()->flash('message', 'Blog Post updated successfully.'); 
             $this->resetAll();
             $this->dispatch('close-modal', 'editBlogModal');
             $this->dispatch('blog-updated');
@@ -132,7 +131,7 @@ class BackendServiceModal extends Component
     // Handle view event from blog list
     public function viewBlog($blogId)
     {
-        $blog = Service::findOrFail($blogId);
+        $blog = Blog::findOrFail($blogId);
         
         $this->viewTitle = $blog->title;
         $this->viewCategory = $blog->category;
@@ -146,7 +145,7 @@ class BackendServiceModal extends Component
     // Handle delete event from blog list
     public function deleteBlog($blogId)
     {
-        $blog = Service::findOrFail($blogId);
+        $blog = Blog::findOrFail($blogId);
         
         // Delete image if exists
         if ($blog->image && Storage::disk('public')->exists($blog->image)) {
@@ -155,7 +154,7 @@ class BackendServiceModal extends Component
         
         $blog->delete();
         
-        session()->flash('message', 'Service Post deleted successfully.');
+        session()->flash('message', 'Blog Post deleted successfully.');
         $this->dispatch('blog-updated');
     }
 
@@ -170,9 +169,10 @@ class BackendServiceModal extends Component
         $this->status      = 'draft';
         $this->currentImage = null;
     }
-
-    public function render()
+        public function render()
     {
-        return view('livewire.service.backend-service-modal');
+        return view('livewire.team.backen-team-modal');
     }
+
+
 }

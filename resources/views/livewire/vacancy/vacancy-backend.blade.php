@@ -35,14 +35,14 @@
                         <div class="white_card_header">
                             <div class="box_header m-0">
                                 <div class="main-title">
-                                    <h3 class="m-0">Service List</h3>
+                                    <h3 class="m-0">Vacancies List</h3>
                                 </div>
                             </div>
                         </div>
                         <div class="white_card_body">
                             <div class="QA_section">
                                 <div class="white_box_tittle list_header">
-                                    <h4>Services Posts</h4>
+                                    <h4>Vacancies Posts</h4>
                                     <div class="box_right d-flex lms_block">
                                         <div class="serach_field_2">
                                             <div class="search_inner">
@@ -65,18 +65,22 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">Title</th>
-                                                <th scope="col">Category</th>
+                                                <th scope="col">Contract</th>
+                                                <th scope="col">Post Date</th>
+                                                <th scope="col">Due Date</th>
                                                 <th scope="col">Image</th> 
                                                 <th scope="col">Status</th>
                                                 <th scope="col">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @if($services != null)
-                                            @foreach ($services as $blog)
+                                            @if($blogs != null)
+                                            @foreach ($blogs as $blog)
                                                 <tr>
-                                                    <th scope="row"><a href="#" class="question_content">{{ $blog->title }}</a></th>
-                                                    <td>{{ $blog->category }}</td>
+                                                    <td scope="row"><a href="#" class="question_content">{{ $blog->title }}</a></td>
+                                                    <td>{{ $blog->contract }}</td>
+                                                    <td>{{ $blog->post_date }}</td>
+                                                    <td>{{ $blog->due_date }}</td>
                                                     <td>
                                                         @if($blog->image)
                                                             <img class="img" src="{{ asset('storage/'.$blog->image) }}" width="100px" height="100px" style="object-fit: cover;">
@@ -121,7 +125,7 @@
     <div>
         
         @push('modals')
-            @livewire('service.backend-service-modal')
+            @livewire('vacancy.vacancy-backend-modal')
         @endpush
     </div>
     <script>
