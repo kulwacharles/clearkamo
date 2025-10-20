@@ -24,10 +24,10 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label>Member Name</label>
-                                <input type="text" class="form-control" wire:model="member">
-                                @error('member') <span class="text-danger">{{ $message }}</span> @enderror
+                                <input type="text" class="form-control" wire:model="name">
+                                @error('name') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label>Solutation</label>
                                 <select class="form-control" wire:model="salute" required>
                                     <option value="">Please Select Salutation</option>
@@ -40,34 +40,69 @@
                                     <option value="Eng">Eng</option>
 
                                 </select>
-                                @error('category') <span class="text-danger">{{ $message }}</span> @enderror
+                                @error('salute') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label>Member Name</label>
-                                <input type="text" class="form-control" wire:model="member">
-                                @error('member') <span class="text-danger">{{ $message }}</span> @enderror
+                                <label>email</label>
+                                <input type="email" class="form-control" wire:model="email">
+                                @error('email') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-md-6">
-                                <label>Member Name</label>
-                                <input type="text" class="form-control" wire:model="member">
-                                @error('member') <span class="text-danger">{{ $message }}</span> @enderror
+                                <label>Linkedin</label>
+                                <input type="text" class="form-control" wire:model="linkedin">
+                                @error('linkendin') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             
                         </div>
-                        <div class="mb-3">
-                            <label>Status</label>
-                            <select class="form-control" wire:model="status" required>
-                                <option value="draft">Draft</option>
-                                <option value="published">Published</option>
-                                <option value="archived">Archived</option>
-                            </select>
-                            @error('status') <span class="text-danger">{{ $message }}</span> @enderror
+                          <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label>Facebook</label>
+                                <input type="text" class="form-control" wire:model="facebook">
+                                @error('facebook') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <label>Instagram</label>
+                                <input type="url" class="form-control" wire:model="instagram">
+                                @error('instagram') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            
+                        </div>
+                       
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label>Youtube</label>
+                                <input type="text" class="form-control" wire:model="youtube">
+                                @error('youtube') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <label>Twitter/X</label>
+                                <input type="text" class="form-control" wire:model="twitter">
+                                @error('twitter') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            
+                        </div>
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                 <label>Status</label>
+                                <select class="form-control" wire:model="status" required>
+                                    <option value="draft">Draft</option>
+                                    <option value="published">Published</option>
+                                    <option value="archived">Archived</option>
+                                </select>
+                                @error('status') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-md-6">
+                                 <label>Position</label>
+                                <input type="text" class="form-control" wire:model="position">
+                                @error('position') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                               
                         </div>
 
                         <div class="mb-3" wire:ignore>
-                            <label>Description</label>
+                            <label>About</label>
                             <textarea id="description"></textarea>
                             @error('description') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
@@ -119,36 +154,88 @@
                         @endif
 
                         <input type="hidden" wire:model="blogId">
-
                         <div class="row mb-3">
-                            <div class="col-md-8">
-                                <label>Title</label>
-                                <input type="text" class="form-control" wire:model="title">
-                                @error('title') <span class="text-danger">{{ $message }}</span> @enderror
+                            <div class="col-md-6">
+                                <label>Member Name</label>
+                                <input type="text" class="form-control" wire:model="name">
+                                @error('name') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
-                            <div class="col-md-4">
-                                <label>Post Category</label>
-                                <select class="form-control" wire:model="category" required>
-                                    <option value="">Please Select Category</option>
-                                    <option value="News">News</option>
-                                    <option value="Announcement">Announcement</option>
+                            <div class="col-md-6">
+                                <label>Solutation</label>
+                                <select class="form-control" wire:model="salute" required>
+                                    <option value="">Please Select Salutation</option>
+                                    <option value="Mr">Mr</option>
+                                    <option value="Mrs">Mrs</option>
+                                    <option value="Miss">Miss</option>
+                                    <option value="Prof">Prof</option>
+                                    <option value="Dr">Dr</option>
+                                    <option value="Hon">Hon</option>
+                                    <option value="Eng">Eng</option>
+
                                 </select>
-                                @error('category') <span class="text-danger">{{ $message }}</span> @enderror
+                                @error('salute') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
-
-                        <div class="mb-3">
-                            <label>Status</label>
-                            <select class="form-control" wire:model="status" required>
-                                <option value="draft">Draft</option>
-                                <option value="published">Published</option>
-                                <option value="archived">Archived</option>
-                            </select>
-                            @error('status') <span class="text-danger">{{ $message }}</span> @enderror
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label>email</label>
+                                <input type="email" class="form-control" wire:model="email">
+                                @error('email') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <label>Linkedin</label>
+                                <input type="text" class="form-control" wire:model="linkedin">
+                                @error('linkendin') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            
+                        </div>
+                          <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label>Facebook</label>
+                                <input type="text" class="form-control" wire:model="facebook">
+                                @error('facebook') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <label>Instagram</label>
+                                <input type="url" class="form-control" wire:model="instagram">
+                                @error('instagram') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            
+                        </div>
+                       
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label>Youtube</label>
+                                <input type="text" class="form-control" wire:model="youtube">
+                                @error('youtube') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <label>Twitter/X</label>
+                                <input type="text" class="form-control" wire:model="twitter">
+                                @error('twitter') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            
+                        </div>
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                 <label>Status</label>
+                                <select class="form-control" wire:model="status" required>
+                                    <option value="draft">Draft</option>
+                                    <option value="published">Published</option>
+                                    <option value="archived">Archived</option>
+                                </select>
+                                @error('status') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-md-6">
+                                 <label>Position</label>
+                                <input type="text" class="form-control" wire:model="position">
+                                @error('position') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                               
                         </div>
 
                         <div class="mb-3" wire:ignore>
-                            <label>Description</label>
+                            <label>About</label>
                             <div id="editDescriptionContainer">
                                 <textarea id="editDescription">{{ $description }}</textarea>
                             </div>

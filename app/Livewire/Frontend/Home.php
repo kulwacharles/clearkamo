@@ -3,6 +3,7 @@
 namespace App\Livewire\Frontend;
 use App\Models\About;
 use App\Models\Slider;
+use App\Models\Team;
 use Livewire\Component;
 
 class Home extends Component
@@ -10,6 +11,7 @@ class Home extends Component
         public $title, $description, $years_of_experience, $image, $image2;
         public $id, $imagePath, $image2Path, $about1, $about2;
         public $slides=null;
+        public $teams;
         public function mount()
     {
         $this->slides=Slider::where("status","active")->get();
@@ -25,6 +27,7 @@ class Home extends Component
             // Push initial description into CKEditor
             //$this->dispatch('load-ckeditor-data', $this->description);
         }
+        $this->teams=Team::where('status',"published")->get();
     }
     public function render()
     {

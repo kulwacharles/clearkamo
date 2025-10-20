@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('about');
+            $table->text('description');
             $table->string('image');
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();
@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('youtube')->nullable();
             $table->string('salute');
+            $table->string('position');
             $table->timestamps();
         });
     }

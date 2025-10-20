@@ -396,297 +396,338 @@
             </div>
         </div>
         <div class="slider-area">
-            <div class="swiper th-slider" id="teamSlider4" data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"1"},"768":{"slidesPerView":"2"},"992":{"slidesPerView":"3"},"1200":{"slidesPerView":"4"}}}'>
+            <div class="swiper th-slider" id="teamSlider4" data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"1"},"768":{"slidesPerView":"2"},"992":{"slidesPerView":"3"}}}'>
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="th-team team-card style4">
-                            <div class="img-wrap">
-                                <div class="team-img">
-                                    <img src="assets/img/team/team_4_1.png" alt="Team">
-                                </div>
-                                <div class="team-social-hover">
-                                    <a href="#" class="team-social-hover_btn">
-                                        <i class="far fa-plus"></i>
-                                    </a>
-                                    <div class="th-social">
-                                        <a target="_blank" href="https://vimeo.com/">
-                                            <i class="fab fa-vimeo-v"></i>
-                                        </a>
-                                         <a target="_blank" href="https://linkedin.com/">
-                                            <i class="fab fa-linkedin-in"></i>
-                                        </a>
-                                        <a target="_blank" href="https://twitter.com/">
-                                            <i class="fab fa-twitter"></i>
-                                        </a>
-                                        <a target="_blank" href="https://facebook.com/">
-                                            <i class="fab fa-facebook-f"></i>
-                                        </a>
+                    @if($teams)
+                        @foreach ($teams as $team)
+                            <div class="swiper-slide">
+                                <div class="th-team team-card style2">
+                                    <div class="img-wrap">
+                                        <div class="team-img">
+                                            <img src="{{ asset('storage/'.$team->image) }}" alt="Team">
+                                        </div>
+                                        <div class="team-social-hover">
+                                            <a href="#" class="team-social-hover_btn">
+                                                <i class="far fa-plus"></i>
+                                            </a>
+                                            <div class="th-social">
+                                                <a target="_blank" href="https://vimeo.com/">
+                                                    <i class="fab fa-vimeo-v"></i>
+                                                </a>
+                                                <a target="_blank" href="https://linkedin.com/">
+                                                    <i class="fab fa-linkedin-in"></i>
+                                                </a>
+                                                <a target="_blank" href="https://twitter.com/">
+                                                    <i class="fab fa-twitter"></i>
+                                                </a>
+                                                <a target="_blank" href="https://facebook.com/">
+                                                    <i class="fab fa-facebook-f"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="team-card-content">
+                                        <div class="team-card-bg" data-bg-src="assets/img/bg/team_card_bg_4.jpg"></div>
+                                        <h3 class="box-title">
+                                            <a wire:navigate href="/team-details/{{ $team->id }}">{{$team->name}}</a>
+                                        </h3>
+                                        <span class="team-desig">{{$team->position}}</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="team-card-content">
-                                <div class="team-card-bg" data-bg-src="assets/img/bg/team_card_bg_4.jpg"></div>
-                                <h3 class="box-title">
-                                    <a href="team-details.html">Leslie Alexander</a>
-                                </h3>
-                                <span class="team-desig">Founder & CEO</span>
+                        @endforeach
+                        
+                    @else
+                        <div class="swiper-slide">
+                            <div class="th-team team-card style4">
+                                <div class="img-wrap">
+                                    <div class="team-img">
+                                        <img src="assets/img/team/team_4_1.png" alt="Team">
+                                    </div>
+                                    <div class="team-social-hover">
+                                        <a href="#" class="team-social-hover_btn">
+                                            <i class="far fa-plus"></i>
+                                        </a>
+                                        <div class="th-social">
+                                            <a target="_blank" href="https://vimeo.com/">
+                                                <i class="fab fa-vimeo-v"></i>
+                                            </a>
+                                            <a target="_blank" href="https://linkedin.com/">
+                                                <i class="fab fa-linkedin-in"></i>
+                                            </a>
+                                            <a target="_blank" href="https://twitter.com/">
+                                                <i class="fab fa-twitter"></i>
+                                            </a>
+                                            <a target="_blank" href="https://facebook.com/">
+                                                <i class="fab fa-facebook-f"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="team-card-content">
+                                    <div class="team-card-bg" data-bg-src="assets/img/bg/team_card_bg_4.jpg"></div>
+                                    <h3 class="box-title">
+                                        <a href="team-details.html">Leslie Alexander</a>
+                                    </h3>
+                                    <span class="team-desig">Founder & CEO</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="th-team team-card style4">
-                            <div class="img-wrap">
-                                <div class="team-img">
-                                    <img src="assets/img/team/team_4_2.png" alt="Team">
-                                </div>
-                                <div class="team-social-hover">
-                                    <a href="#" class="team-social-hover_btn">
-                                        <i class="far fa-plus"></i>
-                                    </a>
-                                    <div class="th-social">
-                                        <a target="_blank" href="https://vimeo.com/">
-                                            <i class="fab fa-vimeo-v"></i>
-                                        </a> 
-                                        <a target="_blank" href="https://linkedin.com/">
-                                            <i class="fab fa-linkedin-in"></i>
-                                        </a> 
-                                        <a target="_blank" href="https://twitter.com/">
-                                            <i class="fab fa-twitter"></i>
-                                        </a> 
-                                        <a target="_blank" href="https://facebook.com/">
-                                            <i class="fab fa-facebook-f"></i>
+                        <div class="swiper-slide">
+                            <div class="th-team team-card style4">
+                                <div class="img-wrap">
+                                    <div class="team-img">
+                                        <img src="assets/img/team/team_4_2.png" alt="Team">
+                                    </div>
+                                    <div class="team-social-hover">
+                                        <a href="#" class="team-social-hover_btn">
+                                            <i class="far fa-plus"></i>
                                         </a>
+                                        <div class="th-social">
+                                            <a target="_blank" href="https://vimeo.com/">
+                                                <i class="fab fa-vimeo-v"></i>
+                                            </a> 
+                                            <a target="_blank" href="https://linkedin.com/">
+                                                <i class="fab fa-linkedin-in"></i>
+                                            </a> 
+                                            <a target="_blank" href="https://twitter.com/">
+                                                <i class="fab fa-twitter"></i>
+                                            </a> 
+                                            <a target="_blank" href="https://facebook.com/">
+                                                <i class="fab fa-facebook-f"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="team-card-content">
-                                <div class="team-card-bg" data-bg-src="assets/img/bg/team_card_bg_4.jpg"></div>
-                                <h3 class="box-title">
-                                    <a href="team-details.html">Jenny Wilson</a>
-                                </h3>
-                                <span class="team-desig">Senior Manager</span>
+                                <div class="team-card-content">
+                                    <div class="team-card-bg" data-bg-src="assets/img/bg/team_card_bg_4.jpg"></div>
+                                    <h3 class="box-title">
+                                        <a href="team-details.html">Jenny Wilson</a>
+                                    </h3>
+                                    <span class="team-desig">Senior Manager</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="th-team team-card style4">
-                            <div class="img-wrap">
-                                <div class="team-img">
-                                    <img src="assets/img/team/team_4_3.png" alt="Team">
-                                </div>
-                                <div class="team-social-hover">
-                                    <a href="#" class="team-social-hover_btn">
-                                        <i class="far fa-plus"></i>
-                                    </a>
-                                    <div class="th-social">
-                                        <a target="_blank" href="https://vimeo.com/">
-                                            <i class="fab fa-vimeo-v"></i>
+                        <div class="swiper-slide">
+                            <div class="th-team team-card style4">
+                                <div class="img-wrap">
+                                    <div class="team-img">
+                                        <img src="assets/img/team/team_4_3.png" alt="Team">
+                                    </div>
+                                    <div class="team-social-hover">
+                                        <a href="#" class="team-social-hover_btn">
+                                            <i class="far fa-plus"></i>
                                         </a>
-                                        <a target="_blank" href="https://linkedin.com/">
-                                            <i class="fab fa-linkedin-in"></i>
-                                        </a>
-                                        <a target="_blank" href="https://twitter.com/">
-                                            <i class="fab fa-twitter"></i>
-                                        </a>
-                                        <a target="_blank" href="https://facebook.com/">
-                                            <i class="fab fa-facebook-f"></i>
-                                        </a>
+                                        <div class="th-social">
+                                            <a target="_blank" href="https://vimeo.com/">
+                                                <i class="fab fa-vimeo-v"></i>
+                                            </a>
+                                            <a target="_blank" href="https://linkedin.com/">
+                                                <i class="fab fa-linkedin-in"></i>
+                                            </a>
+                                            <a target="_blank" href="https://twitter.com/">
+                                                <i class="fab fa-twitter"></i>
+                                            </a>
+                                            <a target="_blank" href="https://facebook.com/">
+                                                <i class="fab fa-facebook-f"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="team-card-content">
-                                <div class="team-card-bg" data-bg-src="assets/img/bg/team_card_bg_4.jpg"></div>
-                                <h3 class="box-title">
-                                    <a href="team-details.html">Kristin Watson</a>
-                                </h3>
-                                <span class="team-desig">Junior Manager</span>
+                                <div class="team-card-content">
+                                    <div class="team-card-bg" data-bg-src="assets/img/bg/team_card_bg_4.jpg"></div>
+                                    <h3 class="box-title">
+                                        <a href="team-details.html">Kristin Watson</a>
+                                    </h3>
+                                    <span class="team-desig">Junior Manager</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="th-team team-card style4">
-                            <div class="img-wrap">
-                                <div class="team-img">
-                                    <img src="assets/img/team/team_4_4.png" alt="Team">
-                                </div>
-                                <div class="team-social-hover">
-                                    <a href="#" class="team-social-hover_btn">
-                                        <i class="far fa-plus"></i>
-                                    </a>
-                                    <div class="th-social">
-                                        <a target="_blank" href="https://vimeo.com/">
-                                            <i class="fab fa-vimeo-v"></i>
+                        <div class="swiper-slide">
+                            <div class="th-team team-card style4">
+                                <div class="img-wrap">
+                                    <div class="team-img">
+                                        <img src="assets/img/team/team_4_4.png" alt="Team">
+                                    </div>
+                                    <div class="team-social-hover">
+                                        <a href="#" class="team-social-hover_btn">
+                                            <i class="far fa-plus"></i>
                                         </a>
-                                        <a target="_blank" href="https://linkedin.com/">
-                                            <i class="fab fa-linkedin-in"></i>
-                                        </a>
-                                        <a target="_blank" href="https://twitter.com/">
-                                            <i class="fab fa-twitter"></i>
-                                        </a>
-                                        <a target="_blank" href="https://facebook.com/">
-                                            <i class="fab fa-facebook-f"></i>
-                                        </a>
+                                        <div class="th-social">
+                                            <a target="_blank" href="https://vimeo.com/">
+                                                <i class="fab fa-vimeo-v"></i>
+                                            </a>
+                                            <a target="_blank" href="https://linkedin.com/">
+                                                <i class="fab fa-linkedin-in"></i>
+                                            </a>
+                                            <a target="_blank" href="https://twitter.com/">
+                                                <i class="fab fa-twitter"></i>
+                                            </a>
+                                            <a target="_blank" href="https://facebook.com/">
+                                                <i class="fab fa-facebook-f"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="team-card-content">
-                                <div class="team-card-bg" data-bg-src="assets/img/bg/team_card_bg_4.jpg">
+                                <div class="team-card-content">
+                                    <div class="team-card-bg" data-bg-src="assets/img/bg/team_card_bg_4.jpg">
+                                    </div>
+                                    <h3 class="box-title">
+                                        <a href="team-details.html">Ralph Edwards</a>
+                                    </h3>
+                                    <span class="team-desig">Senior Worker</span>
                                 </div>
-                                <h3 class="box-title">
-                                    <a href="team-details.html">Ralph Edwards</a>
-                                </h3>
-                                <span class="team-desig">Senior Worker</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="th-team team-card style4">
-                            <div class="img-wrap">
-                                <div class="team-img">
-                                    <img src="assets/img/team/team_4_1.png" alt="Team">
-                                </div>
-                                <div class="team-social-hover">
-                                    <a href="#" class="team-social-hover_btn">
-                                        <i class="far fa-plus"></i>
-                                    </a>
-                                    <div class="th-social">
-                                        <a target="_blank" href="https://vimeo.com/">
-                                            <i class="fab fa-vimeo-v"></i>
-                                        </a> 
-                                        <a target="_blank" href="https://linkedin.com/">
-                                            <i class="fab fa-linkedin-in"></i>
+                        <div class="swiper-slide">
+                            <div class="th-team team-card style4">
+                                <div class="img-wrap">
+                                    <div class="team-img">
+                                        <img src="assets/img/team/team_4_1.png" alt="Team">
+                                    </div>
+                                    <div class="team-social-hover">
+                                        <a href="#" class="team-social-hover_btn">
+                                            <i class="far fa-plus"></i>
                                         </a>
-                                        <a target="_blank" href="https://twitter.com/">
-                                            <i class="fab fa-twitter"></i>
-                                        </a>
-                                        <a target="_blank" href="https://facebook.com/">
-                                            <i class="fab fa-facebook-f"></i>
-                                        </a>
+                                        <div class="th-social">
+                                            <a target="_blank" href="https://vimeo.com/">
+                                                <i class="fab fa-vimeo-v"></i>
+                                            </a> 
+                                            <a target="_blank" href="https://linkedin.com/">
+                                                <i class="fab fa-linkedin-in"></i>
+                                            </a>
+                                            <a target="_blank" href="https://twitter.com/">
+                                                <i class="fab fa-twitter"></i>
+                                            </a>
+                                            <a target="_blank" href="https://facebook.com/">
+                                                <i class="fab fa-facebook-f"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="team-card-content">
-                                <div class="team-card-bg" data-bg-src="assets/img/bg/team_card_bg_4.jpg">
+                                <div class="team-card-content">
+                                    <div class="team-card-bg" data-bg-src="assets/img/bg/team_card_bg_4.jpg">
 
+                                    </div>
+                                    <h3 class="box-title">
+                                        <a href="team-details.html">Leslie Alexander</a>
+                                    </h3>
+                                    <span class="team-desig">Founder & CEO</span>
                                 </div>
-                                <h3 class="box-title">
-                                    <a href="team-details.html">Leslie Alexander</a>
-                                </h3>
-                                <span class="team-desig">Founder & CEO</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="th-team team-card style4">
-                            <div class="img-wrap">
-                                <div class="team-img">
-                                    <img src="assets/img/team/team_4_2.png" alt="Team">
-                                </div>
-                                <div class="team-social-hover">
-                                    <a href="#" class="team-social-hover_btn">
-                                        <i class="far fa-plus"></i>
-                                    </a>
-                                    <div class="th-social">
-                                        <a target="_blank" href="https://vimeo.com/">
-                                            <i class="fab fa-vimeo-v"></i>
+                        <div class="swiper-slide">
+                            <div class="th-team team-card style4">
+                                <div class="img-wrap">
+                                    <div class="team-img">
+                                        <img src="assets/img/team/team_4_2.png" alt="Team">
+                                    </div>
+                                    <div class="team-social-hover">
+                                        <a href="#" class="team-social-hover_btn">
+                                            <i class="far fa-plus"></i>
                                         </a>
-                                        <a target="_blank" href="https://linkedin.com/">
-                                            <i class="fab fa-linkedin-in"></i>
-                                        </a>
-                                        <a target="_blank" href="https://twitter.com/">
-                                            <i class="fab fa-twitter"></i>
-                                        </a>
-                                        <a target="_blank" href="https://facebook.com/">
-                                            <i class="fab fa-facebook-f"></i>
-                                        </a>
+                                        <div class="th-social">
+                                            <a target="_blank" href="https://vimeo.com/">
+                                                <i class="fab fa-vimeo-v"></i>
+                                            </a>
+                                            <a target="_blank" href="https://linkedin.com/">
+                                                <i class="fab fa-linkedin-in"></i>
+                                            </a>
+                                            <a target="_blank" href="https://twitter.com/">
+                                                <i class="fab fa-twitter"></i>
+                                            </a>
+                                            <a target="_blank" href="https://facebook.com/">
+                                                <i class="fab fa-facebook-f"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="team-card-content">
-                                <div class="team-card-bg" data-bg-src="assets/img/bg/team_card_bg_4.jpg">
+                                <div class="team-card-content">
+                                    <div class="team-card-bg" data-bg-src="assets/img/bg/team_card_bg_4.jpg">
 
+                                    </div>
+                                    <h3 class="box-title">
+                                        <a href="team-details.html">Jenny Wilson</a>
+                                    </h3>
+                                    <span class="team-desig">Senior Manager</span>
                                 </div>
-                                <h3 class="box-title">
-                                    <a href="team-details.html">Jenny Wilson</a>
-                                </h3>
-                                <span class="team-desig">Senior Manager</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="th-team team-card style4">
-                            <div class="img-wrap">
-                                <div class="team-img">
-                                    <img src="assets/img/team/team_4_3.png" alt="Team">
-                                </div>
-                                <div class="team-social-hover">
-                                    <a href="#" class="team-social-hover_btn">
-                                        <i class="far fa-plus"></i>
-                                    </a>
-                                    <div class="th-social">
-                                        <a target="_blank" href="https://vimeo.com/">
-                                            <i class="fab fa-vimeo-v"></i>
+                        <div class="swiper-slide">
+                            <div class="th-team team-card style4">
+                                <div class="img-wrap">
+                                    <div class="team-img">
+                                        <img src="assets/img/team/team_4_3.png" alt="Team">
+                                    </div>
+                                    <div class="team-social-hover">
+                                        <a href="#" class="team-social-hover_btn">
+                                            <i class="far fa-plus"></i>
                                         </a>
-                                        <a target="_blank" href="https://linkedin.com/">
-                                            <i class="fab fa-linkedin-in"></i>
-                                        </a>
-                                        <a target="_blank" href="https://twitter.com/">
-                                            <i class="fab fa-twitter"></i>
-                                        </a>
-                                        <a target="_blank" href="https://facebook.com/">
-                                            <i class="fab fa-facebook-f"></i>
-                                        </a>
+                                        <div class="th-social">
+                                            <a target="_blank" href="https://vimeo.com/">
+                                                <i class="fab fa-vimeo-v"></i>
+                                            </a>
+                                            <a target="_blank" href="https://linkedin.com/">
+                                                <i class="fab fa-linkedin-in"></i>
+                                            </a>
+                                            <a target="_blank" href="https://twitter.com/">
+                                                <i class="fab fa-twitter"></i>
+                                            </a>
+                                            <a target="_blank" href="https://facebook.com/">
+                                                <i class="fab fa-facebook-f"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="team-card-content">
-                                <div class="team-card-bg" data-bg-src="assets/img/bg/team_card_bg_4.jpg">
+                                <div class="team-card-content">
+                                    <div class="team-card-bg" data-bg-src="assets/img/bg/team_card_bg_4.jpg">
 
+                                    </div>
+                                    <h3 class="box-title">
+                                        <a href="team-details.html">Kristin Watson</a>
+                                    </h3>
+                                    <span class="team-desig">Junior Manager</span>
                                 </div>
-                                <h3 class="box-title">
-                                    <a href="team-details.html">Kristin Watson</a>
-                                </h3>
-                                <span class="team-desig">Junior Manager</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="th-team team-card style4">
-                            <div class="img-wrap">
-                                <div class="team-img">
-                                    <img src="assets/img/team/team_4_4.png" alt="Team">
-                                </div>
-                                <div class="team-social-hover">
-                                    <a href="#" class="team-social-hover_btn">
-                                        <i class="far fa-plus"></i>
-                                    </a>
-                                    <div class="th-social">
-                                        <a target="_blank" href="https://vimeo.com/">
-                                            <i class="fab fa-vimeo-v"></i>
+                        <div class="swiper-slide">
+                            <div class="th-team team-card style4">
+                                <div class="img-wrap">
+                                    <div class="team-img">
+                                        <img src="assets/img/team/team_4_4.png" alt="Team">
+                                    </div>
+                                    <div class="team-social-hover">
+                                        <a href="#" class="team-social-hover_btn">
+                                            <i class="far fa-plus"></i>
                                         </a>
-                                        <a target="_blank" href="https://linkedin.com/">
-                                            <i class="fab fa-linkedin-in"></i>
-                                        </a>
-                                        <a target="_blank" href="https://twitter.com/">
-                                            <i class="fab fa-twitter"></i>
-                                        </a>
-                                        <a target="_blank" href="https://facebook.com/">
-                                            <i class="fab fa-facebook-f"></i>
-                                        </a>
+                                        <div class="th-social">
+                                            <a target="_blank" href="https://vimeo.com/">
+                                                <i class="fab fa-vimeo-v"></i>
+                                            </a>
+                                            <a target="_blank" href="https://linkedin.com/">
+                                                <i class="fab fa-linkedin-in"></i>
+                                            </a>
+                                            <a target="_blank" href="https://twitter.com/">
+                                                <i class="fab fa-twitter"></i>
+                                            </a>
+                                            <a target="_blank" href="https://facebook.com/">
+                                                <i class="fab fa-facebook-f"></i>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="team-card-content">
-                                <div class="team-card-bg" data-bg-src="assets/img/bg/team_card_bg_4.jpg">
+                                <div class="team-card-content">
+                                    <div class="team-card-bg" data-bg-src="assets/img/bg/team_card_bg_4.jpg">
 
+                                    </div>
+                                    <h3 class="box-title">
+                                        <a href="team-details.html">Ralph Edwards</a>
+                                    </h3>
+                                    <span class="team-desig">Senior Worker</span>
                                 </div>
-                                <h3 class="box-title">
-                                    <a href="team-details.html">Ralph Edwards</a>
-                                </h3>
-                                <span class="team-desig">Senior Worker</span>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
             <button data-slider-prev="#teamSlider4" class="slider-arrow slider-prev">

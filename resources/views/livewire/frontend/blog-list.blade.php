@@ -19,12 +19,14 @@
     
     <section class="th-blog-wrapper space-top space-extra-bottom">
         <div class="container">
-            <div class="row gx-40">
+            <div class="row gx-40"> 
+                @if($blogs)
                 <div class="col-xxl-8 col-lg-7">
-                    <div class="th-blog blog-single has-post-thumbnail">
+                   @foreach ($blogs as $blog)
+                        <div class="th-blog blog-single has-post-thumbnail">
                         <div class="blog-img">
                             <a href="blog-details.html">
-                                <img src="assets/img/blog/blog-s-1-1.jpg" alt="Blog Image">
+                                <img src="{{ asset('storage/'.$blog->image) }}" alt="Blog Image">
                             </a>
                         </div>
                         <div class="blog-content">
@@ -33,14 +35,15 @@
                                     <i class="far fa-user"></i>By Konsal
                                 </a>
                                  <a href="blog.html">
-                                    <i class="fa-light fa-calendar-days"></i>21 June, 2024
+                                    <i class="fa-light fa-calendar-days"></i>{{$blog->created_at}}
                                 </a>
                                
                              </div>
                             <h2 class="blog-title">
-                                <a href="blog-details.html">Business consulting involves providing expert</a>
+                                <a href="blog-details.html">{{$blog->title}}</a>
                             </h2>
-                            <p class="blog-text">To enhance online presence, consider optimizing your web utilizing social with your channels. An effective marketing involves market research target audience identification, competitive. Providing opportunities for professional growth a maintaining positive work environment.
+                            <p class="blog-text">
+                               {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($blog->description)), 350, '...') }}
 
                             </p>
                             <a href="blog-details.html" class="th-btn">Read More
@@ -50,8 +53,11 @@
                             </a>
                         </div>
                     </div>
+                   @endforeach
+                   
+
                     <div class="th-pagination">
-                        <ul>
+                        {{-- <ul>
                              <li>
                                 <a href="blog.html">
                                     <i class="far fa-arrow-left"></i>
@@ -71,10 +77,15 @@
                                     <i class="far fa-arrow-right"></i>
                                 </a>
                             </li>
-                        </ul>
+                        </ul> --}}
+                        {{ $blogs->links() }}
                     </div>
                 </div>
-                
+                @else
+                <div class="col-xxl-8 col-lg-7">
+                    There is no post
+                </div>
+                @endif
                 <div class="col-xxl-4 col-lg-5">
                     <aside class="sidebar-area">
                         {{-- <div class="widget widget_search">

@@ -4,31 +4,32 @@ namespace App\Livewire\Team;
 
 use Livewire\Component;
 use App\Models\Blog;
+use App\Models\Team;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
 class BackendTeamModal extends Component
 {
     use WithFileUploads;
 
-    public $title, $category, $description, $image, $imagePath, $blogId;
+    public $name, $salute, $description, $image, $imagePath, $blogId,$email,$linkedin,$instagram,$twitter,$facebook,$youtube,$position;
     public $status = 'draft';
     public $currentImage;
     
     // View modal properties
-    public $viewTitle, $viewCategory, $viewDescription, $viewStatus, $viewImage;
+    public $viewName, $viewCategory, $viewDescription, $viewStatus, $viewImage,$viewRmail,$viewLinkedin,$viewInstagram,$viewTwitter,$viewFacebook,$viewYoutube,$viewPosition;
 
     protected $rules = [
-        'title'       => 'required|min:3|max:255',
-        'category'    => 'required|min:3|max:255',
+        'name'       => 'required|min:3|max:255',
+        'salute'    => 'required|min:3|max:255',
         'description' => 'required|min:10',
         'image'       => 'nullable|image|max:2048',
         'status'      => 'required|in:published,draft,archived',
     ];
 
     protected $messages = [
-        'title.required'       => 'The Title is required.',
-        'title.min'            => 'The Title must be at least 3 characters.',
-        'category.required'    => 'The Category is required.',
+        'name.required'       => 'The Name is required.',
+        'name.min'            => 'The Title must be at least 3 characters.',
+        'salute.required'      => 'The Salutation is required.',
         'description.required' => 'The Description is required.',
         'description.min'      => 'The Description must be at least 10 characters.',
         'image.image'          => 'The Image must be valid.',
@@ -45,21 +46,28 @@ class BackendTeamModal extends Component
 
         // Handle image upload
         if ($this->image) {
-            $last = Blog::latest()->first();
+            $last = Team::latest()->first();
             $newId = $last ? $last->id + 1 : 1;
 
             $extension = $this->image->getClientOriginalExtension();
             $filename  = 'clear_Kamo_' . $newId . '.' . $extension;
-            $imagePath = 'blogs/' . $filename;
+            $imagePath = 'teams/' . $filename;
 
-            $this->image->storePubliclyAs('blogs', $filename, 'public');
+            $this->image->storePubliclyAs('teams', $filename, 'public');
         }
-
+        //dd("here");
         // Create blog post
-        $blog = new Blog;          
-        $blog->title       = $this->title;
-        $blog->category    = $this->category;
+        $blog = new Team;          
+        $blog->name       = $this->name;
+        $blog->salute      = $this->salute;
         $blog->description = $this->description;
+        $blog->youtube     = $this->youtube;
+        $blog->instagram   = $this->instagram;
+        $blog->facebook    = $this->facebook;
+        $blog->twitter    = $this->twitter;
+        $blog->linkedin   = $this->linkedin;
+        $blog->email    = $this->email;
+        $blog->position    = $this->position;
         $blog->image       = $imagePath;
         $blog->status      = $this->status;
 
@@ -77,15 +85,21 @@ class BackendTeamModal extends Component
     // Handle edit event from blog list
     public function editBlog($blogId)
     {
-        $blog = Blog::findOrFail($blogId);
+        $blog = Team::findOrFail($blogId);
         
         $this->blogId = $blog->id;
-        $this->title = $blog->title;
-        $this->category = $blog->category;
+        $this->name = $blog->name;
+        $this->salute = $blog->salute;
         $this->description = $blog->description;
         $this->status = $blog->status;
         $this->currentImage = $blog->image;
-        
+        $this->youtube = $blog->youtube    ;
+        $this->instagram = $blog->instagram;
+        $this->facebook = $blog->facebook;
+        $this->twitter = $blog->twitter ;
+        $this->position = $blog->position ;
+        $this->linkedin = $blog->linkedin;
+        $this->email = $blog->email;
         $this->dispatch('set-ckeditor-content', content: $blog->description);
         $this->dispatch('open-modal', 'editBlogModal');
     }
@@ -94,7 +108,7 @@ class BackendTeamModal extends Component
     {
         $this->validate();
 
-        $blog = Blog::findOrFail($this->blogId);
+        $blog = Team::findOrFail($this->blogId);
         $imagePath = $blog->image;
 
         // Handle image upload if new image is provided
@@ -106,15 +120,22 @@ class BackendTeamModal extends Component
 
             $extension = $this->image->getClientOriginalExtension();
             $filename  = 'clear_Kamo_' . $blog->id . '.' . $extension;
-            $imagePath = 'blogs/' . $filename;
+            $imagePath = 'teams/' . $filename;
 
-            $this->image->storePubliclyAs('blogs', $filename, 'public');
+            $this->image->storePubliclyAs('teams', $filename, 'public');
         }
 
         // Update blog post
-        $blog->title       = $this->title;
-        $blog->category    = $this->category;
+        $blog->name       = $this->name;
+        $blog->salute    = $this->salute;
         $blog->description = $this->description;
+        $blog->youtube     = $this->youtube;
+        $blog->instagram   = $this->instagram;
+        $blog->facebook    = $this->facebook;
+        $blog->twitter    = $this->twitter;
+        $blog->linkedin   = $this->linkedin;
+        $blog->email    = $this->email;
+        $blog->position    = $this->position;
         $blog->image       = $imagePath;
         $blog->status      = $this->status;
 
@@ -131,14 +152,19 @@ class BackendTeamModal extends Component
     // Handle view event from blog list
     public function viewBlog($blogId)
     {
-        $blog = Blog::findOrFail($blogId);
+        $blog = Team::findOrFail($blogId);
         
-        $this->viewTitle = $blog->title;
+        $this->viewName = $blog->name;
         $this->viewCategory = $blog->category;
         $this->viewDescription = $blog->description;
         $this->viewStatus = $blog->status;
         $this->viewImage = $blog->image;
-        
+        $this->viewYoutube = $blog->youtube    ;
+        $this->viewInstagram = $blog->instagram;
+        $this->viewFacebook = $blog->facebook;
+        $this->viewTwitter = $blog->twitter ;
+        $this->viewPosition = $blog->position ;
+        $this->viewLinkedin = $blog->linkedin;
         $this->dispatch('open-modal', 'viewBlogModal');
     }
 
@@ -160,18 +186,25 @@ class BackendTeamModal extends Component
 
     public function resetAll()
     {
-        $this->title       = null;
-        $this->category    = null;
+        $this->name       = null;
+        $this->salute    = null;
         $this->description = '';
         $this->image       = null;
         $this->imagePath   = null;
         $this->blogId      = null;
         $this->status      = 'draft';
         $this->currentImage = null;
+        $this->email       = null;
+        $this->facebook    = null;
+        $this->instagram       = null;
+        $this->linkedin    = null;
+        $this->youtube       = null;
+        $this->twitter    = null;
+        $this->position   = null;
     }
         public function render()
     {
-        return view('livewire.team.backen-team-modal');
+        return view('livewire.team.backend-team-modal');
     }
 
 

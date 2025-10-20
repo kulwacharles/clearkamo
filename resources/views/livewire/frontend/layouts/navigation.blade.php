@@ -6,7 +6,7 @@
         <div class="widget">
             <div class="th-widget-about">
                 <div class="about-logo">
-                    <a href="index-2.html">
+                    <a wire:navigate href="/">
                         <img src="assets/img/ProjectClear.png" alt="ProjectClear-Logo">
                     </a>
                 </div>
@@ -129,9 +129,14 @@
     <div class="th-menu-area text-center">
         <button class="th-menu-toggle"><i class="fal fa-times"></i></button>
         <div class="mobile-logo">
-            <a href="index.html">
+            <a wire:navigate href="/">
+                @if($logo)
+                <img src="{{ url('/storage/'.$logo) }}" alt="ProjectClear-Logo">
+                
+                @else
                 <!-- <img src="assets/img/ProjectClear-Logo.png" alt="assets/img/ProjectClear-Logo"> -->
                 <img src="assets/img/clearkamo.png" alt="ProjectClear-Logo">
+                @endif
             </a>
         </div>
         <div class="th-mobile-menu">
@@ -209,7 +214,13 @@
                     <div class="row align-items-center justify-content-between">
                         <div class="col-auto">
                             <div class="header-logo">
-                                <a href="/"><img src="assets/img/clearkamo.png" alt="Konsal"></a>
+                                @if($logo)
+                                <img src="{{ url('/storage/'.$logo) }}" alt="ProjectClear-Logo">
+                                
+                                @else
+                                <!-- <img src="assets/img/ProjectClear-Logo.png" alt="assets/img/ProjectClear-Logo"> -->
+                                <img src="assets/img/clearkamo.png" alt="ProjectClear-Logo">
+                                @endif
                             </div>
                         </div>
                         <div class="col-auto me-xl-auto">

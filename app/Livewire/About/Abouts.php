@@ -10,8 +10,8 @@ class Abouts extends Component
 {
     use WithFileUploads;
 
-    public $title, $description, $years_of_experience, $image, $image2,$image3;
-    public $id, $imagePath, $image2Path,$image3Path, $about1, $about2,$about3;
+    public $title, $description, $years_of_experience, $image, $image2,$image3,$logo;
+    public $id, $imagePath, $image2Path,$image3Path, $about1, $about2,$about3,$about4,$logoPath;
 
     protected $rules = [
         'title' => 'required|min:3|max:255',
@@ -20,6 +20,7 @@ class Abouts extends Component
         'image' => 'nullable|image|max:2048',
         'image2' => 'nullable|image|max:2048',
         'image3' => 'nullable|image|max:2048',
+        'logo'   => 'nullable|image|max:2048',
     ];
 
     protected $messages = [
@@ -32,6 +33,7 @@ class Abouts extends Component
         'image.image' => 'The Image must be a valid image.',
         'image2.image' => 'The Image must be a valid image.',
         'image3.image' => 'The Image must be a valid image.',
+        'logo.image'  => "Logo must be a valid format"
     ];
 
     public function mount()
@@ -45,7 +47,8 @@ class Abouts extends Component
             $this->about1 = $about->image;
             $this->about2 = $about->image2;
             $this->about3 = $about->image3;
-
+            $this->about4 = $about->logo;
+            
             // Push initial description into CKEditor
             $this->dispatch('load-ckeditor-data', $this->description);
         }
@@ -88,8 +91,18 @@ class Abouts extends Component
         } else {
             $this->image3Path = $this->about3;
         }
-
-        About::updateOrCreate(
+        //logo
+        if ($this->logo) {
+            $extension = $this->logo->getClientOriginalExtension();
+            $filename = 'about_us_logo.' . $extension;
+            $this->logoPath = 'about/' . $filename;
+            $this->logo->storePubliclyAs('about', $filename, 'public');
+           
+        } else {
+            $this->logoPath = $this->about4;
+        }
+   //dd($this->logoPath);
+        $here=About::updateOrCreate(
             ['id' => $this->id],
             [
                 'title' => $this->title,
@@ -97,10 +110,11 @@ class Abouts extends Component
                 'image' => $this->imagePath,
                 'image2' => $this->image2Path,
                 'image3' => $this->image3Path,
+                'logo' => $this->logoPath,
                 'description' => $this->description,
             ]
         );
-
+        //dd($here);
         session()->flash('message', $this->id ? 'About Updated Successfully.' : 'About Created Successfully.');
 
         // Reload CKEditor with updated description

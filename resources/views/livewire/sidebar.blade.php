@@ -1,14 +1,19 @@
 <nav class="sidebar">
     <div class="logo d-flex justify-content-between">
+        @if($logo)
+        <a class="large_logo" href="{{ url('/admin/about') }}"><img src="{{ url('/storage/'.$logo) }}" alt=""></a>
+        <a class="small_logo" href="{{ url('/admin/about') }}"><img src="{{ url('/storage/'.$logo) }}" alt=""></a>
+        @else
         <a class="large_logo" href="index-2.html"><img src="{{asset('img/logo.png')}}" alt=""></a>
         <a class="small_logo" href="index-2.html"><img src="{{asset('img/mini_logo.png')}}" alt=""></a>
+        @endif
         <div class="sidebar_close_icon d-lg-none">
             <i class="ti-close"></i>
         </div>
     </div>
     <ul id="sidebar_menu">
         <li class="active">
-            <a wire:navigate href="/admin/sliders"  aria-expanded="false">
+            <a  href="{{url('/admin/sliders')}}"  aria-expanded="false">
                 <div class="nav_icon_small">
                     <img src="{{asset('img/menu-icon/dashboard.svg')}}" alt="">
                 </div>
@@ -18,7 +23,7 @@
             </a>
         </li>
         <li class="">
-            <a wire:navigate href="/admin/about-us"  aria-expanded="false">
+            <a wire:navigate href="{{url('/admin/about-us')}}"  aria-expanded="false">
                 <div class="nav_icon_small">
                     <img src="{{asset('img/menu-icon/2.svg')}}" alt="">
                 </div>
@@ -29,7 +34,7 @@
 
         </li>
         <li class="">
-            <a wire:navigate  href="/admin/blog-posts" aria-expanded="false">
+            <a wire:navigate  href="{{url('/admin/blog-posts')}}" aria-expanded="false">
               <div class="nav_icon_small">
                   <img src="{{asset('img/menu-icon/11.svg')}}" alt="">
               </div>
@@ -39,7 +44,7 @@
             </a>
         </li>
         <li class="">
-            <a wire:navigate  href="/admin/publications" aria-expanded="false">
+            <a wire:navigate  href="{{url('/admin/publications')}}" aria-expanded="false">
               <div class="nav_icon_small">
                   <img src="{{asset('img/menu-icon/15.svg')}}" alt="">
               </div>
@@ -49,7 +54,7 @@
             </a>
         </li>
         <li class="">
-            <a wire:navigate  href="/admin/projects" aria-expanded="false">
+            <a wire:navigate  href="{{url('/admin/projects')}}" aria-expanded="false">
               <div class="nav_icon_small">
                   <img src="{{asset('img/menu-icon/6.svg')}}" alt="">
               </div>
@@ -59,7 +64,7 @@
             </a>
         </li>
         <li class="">
-            <a wire:navigate  href="/admin/services" aria-expanded="false">
+            <a wire:navigate  href="{{url('/admin/services')}}" aria-expanded="false">
               <div class="nav_icon_small">
                   <img src="{{asset('img/menu-icon/7.svg')}}" alt="">
               </div>
@@ -69,7 +74,7 @@
             </a>
         </li>
         <li class="">
-            <a wire:navigate  href="/admin/vacancies" aria-expanded="false">
+            <a wire:navigate  href="{{url('/admin/vacancies')}}" aria-expanded="false">
               <div class="nav_icon_small">
                   <img src="{{asset('img/menu-icon/7.svg')}}" alt="">
               </div>
@@ -79,7 +84,7 @@
             </a>
         </li>
         <li class="">
-            <a wire:navigate  href="/admin/team" aria-expanded="false">
+            <a wire:navigate  href="{{url('/admin/team')}}" aria-expanded="false">
               <div class="nav_icon_small">
                   <img src="{{asset('img/menu-icon/7.svg')}}" alt="">
               </div>

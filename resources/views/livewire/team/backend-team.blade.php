@@ -64,8 +64,8 @@
                                     <table class="table lms_table_active3">
                                         <thead>
                                             <tr>
-                                                <th scope="col">Title</th>
-                                                <th scope="col">Category</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Position</th>
                                                 <th scope="col">Image</th> 
                                                 <th scope="col">Status</th>
                                                 <th scope="col">Actions</th>
@@ -75,8 +75,8 @@
                                             @if($blogs != null)
                                             @foreach ($blogs as $blog)
                                                 <tr>
-                                                    <th scope="row"><a href="#" class="question_content">{{ $blog->title }}</a></th>
-                                                    <td>{{ $blog->category }}</td>
+                                                    <th scope="row"><a href="#" class="question_content">{{ $blog->salute }} . {{ $blog->name }}</a></th>
+                                                    <td>{{ $blog->position }}</td>
                                                     <td>
                                                         @if($blog->image)
                                                             <img class="img" src="{{ asset('storage/'.$blog->image) }}" width="100px" height="100px" style="object-fit: cover;">
@@ -121,7 +121,7 @@
     <div>
         
         @push('modals')
-            @livewire('blog.backend-blog-modal')
+            @livewire('team.backend-team-modal')
         @endpush
     </div>
     <script>

@@ -39,7 +39,7 @@
                                          @error('description') <span class="text-red-500">{{ $message }}</span> @enderror
                                     </div>
                              <div class="row mb-3">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     @if ($image)
                                         {{-- Show preview of new upload --}}
                                         <img class="img img-responsive mb-2" src="{{ $image->temporaryUrl() }}" height="200px">
@@ -52,8 +52,7 @@
                                     <input type="file" class="form-control" wire:model="image">
                                     @error('image') <span class="text-red-500">{{ $message }}</span> @enderror
                                 </div>
-
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     @if ($image2)
                                         <img class="img img-responsive mb-2" src="{{ $image2->temporaryUrl() }}" height="200px">
                                     @elseif ($about2)
@@ -64,7 +63,9 @@
                                     <input type="file" class="form-control" wire:model="image2">
                                     @error('image2') <span class="text-red-500">{{ $message }}</span> @enderror
                                 </div>
-                                <div class="col-md-4">
+                             </div>
+                             <div class="row mb-3">
+                                <div class="col-md-6">
                                     @if ($image3)
                                         <img class="img img-responsive mb-2" src="{{ $image3->temporaryUrl() }}" height="200px">
                                     @elseif ($about3)
@@ -74,6 +75,17 @@
                                     <label class="form-label">Image 3</label>
                                     <input type="file" class="form-control" wire:model="image3">
                                     @error('image3') <span class="text-red-500">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    @if ($logo)
+                                        <img class="img img-responsive mb-2" src="{{ $logo->temporaryUrl() }}" height="200px">
+                                    @elseif ($about4)
+                                        <img class="img img-responsive mb-2" src="{{ url('/storage/'.$about4) }}" height="200px" width="100%">
+                                    @endif
+                                    <br>
+                                    <label class="form-label">Logo</label>
+                                    <input type="file" class="form-control" wire:model="logo">
+                                    @error('logo') <span class="text-red-500">{{ $message }}</span> @enderror
                                 </div>
                                 
                             </div>
