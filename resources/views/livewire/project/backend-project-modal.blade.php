@@ -31,8 +31,10 @@
                                 <label>Project Category</label>
                                 <select class="form-control" wire:model="category" required>
                                     <option value="">Please Select Category</option>
-                                    <option value="News">News</option>
-                                    <option value="Announcement">Announcement</option>
+                                    <option value="BCC Experience and Expertise">BCC Experience and Expertise</option>
+                                    <option value="Information & Communication">Information & Communication</option>
+                                    <option value="Infrustructure Development">Infrustructure Development</option>
+                                    <option value="Institutional Development">Institutional Development</option>
                                 </select>
                                 @error('category') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
@@ -129,8 +131,10 @@
                                 <label>Post Category</label>
                                 <select class="form-control" wire:model="category" required>
                                     <option value="">Please Select Category</option>
-                                    <option value="News">News</option>
-                                    <option value="Announcement">Announcement</option>
+                                    <option value="BCC Experience and Expertise">BCC Experience and Expertise</option>
+                                    <option value="Information & Communication">Information & Communication</option>
+                                    <option value="Infrustructure Development">Infrustructure Development</option>
+                                    <option value="Institutional Development">Institutional Development</option>
                                 </select>
                                 @error('category') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>

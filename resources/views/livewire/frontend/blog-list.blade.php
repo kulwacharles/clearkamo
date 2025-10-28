@@ -32,21 +32,21 @@
                         <div class="blog-content">
                             <div class="blog-meta">
                                 <a class="author" href="blog.html">
-                                    <i class="far fa-user"></i>By Konsal
+                                    <i class="far fa-user"></i>Post By Admin
                                 </a>
                                  <a href="blog.html">
-                                    <i class="fa-light fa-calendar-days"></i>{{$blog->created_at}}
+                                    <i class="fa-light fa-calendar-days"></i>{{$blog->updated_at->format('d F, Y')}}
                                 </a>
                                
                              </div>
                             <h2 class="blog-title">
-                                <a href="blog-details.html">{{$blog->title}}</a>
+                                <a wire:navigate href="/news-and-updates/details/{{ $blog->id }}">{{$blog->title}}</a>
                             </h2>
                             <p class="blog-text">
                                {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($blog->description)), 350, '...') }}
 
                             </p>
-                            <a href="blog-details.html" class="th-btn">Read More
+                            <a wire:navigate href="/news-and-updates/details/{{ $blog->id }}" class="th-btn">Read More
                                 <div class="icon">
                                     <i class="fa-solid fa-arrow-up-right ms-3"></i>
                                 </div>
@@ -122,57 +122,31 @@
                             
                             <h3 class="widget_title">Recent Posts</h3>
                             <div class="recent-post-wrap">
-                                <div class="recent-post">
-                                    <div class="media-img">
-                                        <a href="blog-details.html">
-                                            <img src="assets/img/blog/recent-post-1-1.jpg" alt="Blog Image">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="recent-post-meta">
-                                            <a href="blog.html">
-                                                <i class="fa-light fa-calendar-days"></i>
-                                                21 June, 2024
+                                @if($recents)
+                                    @foreach ($recents as $recent)
+                                    <div class="recent-post">
+                                        <div class="media-img">
+                                            <a href="blog-details.html">
+                                                <img src="{{ asset('storage/'.$recent->image) }}" alt="Blog Image">
                                             </a>
                                         </div>
-                                        <h4 class="post-title">
-                                            <a class="text-inherit" href="blog-details.html">Guiding Businesses to Success</a>
-                                        </h4>
-                                    </div>
-                                </div>
-                                <div class="recent-post">
-                                    <div class="media-img">
-                                        <a href="blog-details.html">
-                                            <img src="assets/img/blog/recent-post-1-2.jpg" alt="Blog Image">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="recent-post-meta">
-                                            <a href="blog.html">
-                                                <i class="fa-light fa-calendar-days"></i>22 June, 2024
-                                            </a>
+                                        <div class="media-body">
+                                            <div class="recent-post-meta">
+                                                <a href="blog.html">
+                                                    <i class="fa-light fa-calendar-days"></i>
+                                                   {{$recent->created_at->format('d F, Y')}}
+                                                </a>
+                                            </div>
+                                            <h4 class="post-title">
+                                                <a wire:navigate class="text-inherit" href="/news-and-updates/details/{{ $recent->id }}">Guiding Businesses to Success</a>
+                                            </h4>
                                         </div>
-                                        <h4 class="post-title">
-                                            <a class="text-inherit" href="blog-details.html">Fueling Your Business Forward</a>
-                                        </h4>
-                                    </div>
-                                </div>
-                                <div class="recent-post">
-                                    <div class="media-img">
-                                        <a href="blog-details.html">
-                                            <img src="assets/img/blog/recent-post-1-3.jpg" alt="Blog Image">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="recent-post-meta">
-                                            <a href="blog.html"><i class="fa-light fa-calendar-days"></i>23 June, 2024
-                                            </a>
-                                        </div>
-                                        <h4 class="post-title">
-                                            <a class="text-inherit" href="blog-details.html">Improve Your Health By Organic Eating</a>
-                                        </h4>
-                                    </div>
-                                </div>
+                                    </div>  
+                                    @endforeach
+                               @else
+                                    No Published Post
+                               @endif
+                               
                             </div>
                         </div>
 

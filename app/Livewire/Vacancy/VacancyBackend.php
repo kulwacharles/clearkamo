@@ -14,6 +14,7 @@ class VacancyBackend extends Component
     }
 
     public function mount(){
+        abort_unless(auth()->check(), 401);
         $this->blogs=Vacancy::all();
     }
 

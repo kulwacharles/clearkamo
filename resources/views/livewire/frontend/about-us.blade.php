@@ -32,7 +32,7 @@
                     <div class="img2"><img src="{{ url('/storage/'.$about2) }}" alt="Image">
                     </div>
                     <div class="about-since-wrap jump">
-                        <div class="about-since">Since 1990</div>
+                        <div class="about-since">Since {{date('Y')-$years_of_experience}}</div>
                     </div>
                 </div>
             </div>

@@ -13,6 +13,7 @@ class BackendBlog extends Component
         return view('livewire.blog.backend-blog')->layout("components.layouts.app");
     }
     public function mount(){
+        abort_unless(auth()->check(), 401);
         $this->blogs=Blog::all();
     }
 

@@ -7,15 +7,14 @@ use Livewire\WithFileUploads;
 use App\Models\Slider;
 class Sliders extends Component
 {
-     public $slides;
-
-     public function render()
+    public $blogs;
+    public function render()
     {
-        
         return view('livewire.slider.sliders')->layout("components.layouts.app");
     }
     public function mount(){
-        $this->slides=Slider::all();
+        abort_unless(auth()->check(), 401);
+        $this->blogs=Slider::all();
     }
 
 }

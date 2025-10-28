@@ -8,10 +8,10 @@
         </div>
         <div class="container">
             <div class="breadcumb-content">
-                <h1 class="breadcumb-title">Our Publications</h1>
+                <h1 class="breadcumb-title">Our Services</h1>
                 <ul class="breadcumb-menu">
                     <li><a wire:navigate href="/">Home</a></li>
-                    <li>Publications</li>
+                    <li>Services</li>
                 </ul>
             </div>
         </div>
@@ -20,49 +20,7 @@
     <section class="th-blog-wrapper space-top space-extra-bottom">
         <div class="container">
             <div class="row gx-40">
-                 @if($publications)
-                <div class="col-xxl-8 col-lg-7">
-                     @foreach ($publications as $publication)
-                    <div class="th-blog blog-single has-post-thumbnail">
-                        <div class="blog-img">
-                            <a href="blog-details.html">
-                                <img src="{{ asset('storage/'.$publication->image) }}" alt="Blog Image">
-                            </a>
-                        </div>
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <a class="author" href="blog.html">
-                                    <i class="far fa-user"></i>Publicated by Admin
-                                </a>
-                                 <a href="blog.html">
-                                    <i class="fa-light fa-calendar-days"></i>{{$publication->created_at->format('d F, Y')}}
-                                </a>
-                               
-                             </div>
-                            <h2 class="blog-title">
-                                <a href="/publication/details/{{ $publication->id }}">{{$publication->title}}</a>
-                            </h2>
-                            <p class="blog-text">
-                                 {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($publication->description)), 350, '...') }}
-                            </p>
-                            <a href="/publication/details/{{ $publication->id }}" class="th-btn">Read More
-                                <div class="icon">
-                                    <i class="fa-solid fa-arrow-up-right ms-3"></i>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    @endforeach
-                    <div class="th-pagination">
-                        {{ $publications->links() }}
-                    </div>
-                </div>
-                @else
-                <div class="col-xxl-8 col-lg-7">
-                    There is no Publications
-                </div>
-                @endif
-                <div class="col-xxl-4 col-lg-5">
+                                <div class="col-xxl-4 col-lg-5">
                     <aside class="sidebar-area">
                         {{-- <div class="widget widget_search">
                             <form class="search-form">
@@ -98,6 +56,49 @@
 
                     </aside>
                 </div>
+                 @if($services)
+                <div class="col-xxl-8 col-lg-7">
+                     @foreach ($services as $service)
+                    <div class="th-blog blog-single has-post-thumbnail">
+                        <div class="blog-img">
+                            <a href="blog-details.html">
+                                <img src="{{ asset('storage/'.$service->image) }}" alt="Blog Image">
+                            </a>
+                        </div>
+                        <div class="blog-content">
+                            {{-- <div class="blog-meta">
+                                <a class="author" href="blog.html">
+                                    <i class="far fa-user"></i>Publicated by Admin
+                                </a>
+                                 <a href="blog.html">
+                                    <i class="fa-light fa-calendar-days"></i>{{$service->created_at->format('d F, Y')}}
+                                </a>
+                               
+                             </div> --}}
+                            <h2 class="blog-title">
+                                <a href="/service/details/{{ $service->id }}">{{$service->title}}</a>
+                            </h2>
+                            <p class="blog-text">
+                                 {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($service->description)), 350, '...') }}
+                            </p>
+                            <a href="/service/details/{{ $service->id }}" class="th-btn">Read More
+                                <div class="icon">
+                                    <i class="fa-solid fa-arrow-up-right ms-3"></i>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    @endforeach
+                    <div class="th-pagination">
+                        {{ $services->links() }}
+                    </div>
+                </div>
+                @else
+                <div class="col-xxl-8 col-lg-7">
+                    There is no Publications
+                </div>
+                @endif
+
             </div>
         </div>
     </section>

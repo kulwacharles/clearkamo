@@ -170,7 +170,11 @@
                                         <div class="profile_info_details">
                                             <a href="#">My Profile </a>
                                             <a href="#">Settings</a>
-                                            <a href="#">Log Out </a>
+                                            
+                                            <form action="{{ route('logout') }}" method="POST">
+                                                @csrf
+                                               <button type="submit" class="dropdown-item">Logout</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

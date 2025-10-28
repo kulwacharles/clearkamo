@@ -13,6 +13,7 @@ class BackendService extends Component
         return view('livewire.service.backend-service')->layout("components.layouts.app");
     }
     public function mount(){
+        abort_unless(auth()->check(), 401);
         $this->services=Service::all();
     }
 

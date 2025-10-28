@@ -11,8 +11,11 @@ class BlogList extends Component
     use WithPagination;
     public function render()
     {
-        $blogs=Blog::where('status','published')->paginate(8);
-        return view('livewire.frontend.blog-list',['blogs'=>$blogs])->layout("components.layouts.frontend");
+        $recents=Blog::where('status','published')->orderBy('id','desc')->latest()
+    ->take(5)
+    ->get();
+        $blogs=Blog::where('status','published')->orderBy('id','desc')->paginate(2);
+        return view('livewire.frontend.blog-list',['blogs'=>$blogs,'recents'=>$recents])->layout("components.layouts.frontend");
     }
     public function paginationView()
     {

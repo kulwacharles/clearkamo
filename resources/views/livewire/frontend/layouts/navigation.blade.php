@@ -145,14 +145,16 @@
                     <a wire:navigate  href="/">Home</a>
                 </li>
                 <li>
-                    <a wire:navigate  href="/about">About Us</a>
+                    <a wire:navigate  href="/about-us">About Us</a>
                 </li>
                 <li >
                     <a wire:navigate  href="/services">Services</a>
                 </li>
- 
                 <li >
-                    <a wire:navigate  href="/new-and-updates">News & Updates</a>
+                    <a wire:navigate  href="/projects">Projects</a>
+                </li>
+                <li >
+                    <a wire:navigate  href="/news-and-updates">News & Updates</a>
                 </li>
                  <li>
                     <a wire:navigate  href="/publications">Publications</a>
@@ -160,6 +162,9 @@
                 </li>
                 <li>
                     <a wire:navigate  href="/contact-us">Contact Us</a>
+                </li>
+                <li >
+                    <a wire:navigate href="/vacancies">Vacancies</a>
                 </li>
             </ul>
         </div>
@@ -214,6 +219,7 @@
                     <div class="row align-items-center justify-content-between">
                         <div class="col-auto">
                             <div class="header-logo">
+                                <a wire:navigate href="/">
                                 @if($logo)
                                 <img src="{{ url('/storage/'.$logo) }}" alt="ProjectClear-Logo">
                                 
@@ -221,6 +227,7 @@
                                 <!-- <img src="assets/img/ProjectClear-Logo.png" alt="assets/img/ProjectClear-Logo"> -->
                                 <img src="assets/img/clearkamo.png" alt="ProjectClear-Logo">
                                 @endif
+                                </a>
                             </div>
                         </div>
                         <div class="col-auto me-xl-auto">
@@ -234,20 +241,26 @@
                                         <a wire:navigate href="/about-us">About Us</a>
                                     </li>
                                     <li >
-                                        <a href="#">Services</a>
-                                        
-                                    </li>
-                                  
-                                    <li >
-                                        <a wire:navigate href="news-and-update">News & Updates</a>
+                                        <a wire:navigate href="/services">Services</a>
                                         
                                     </li>
                                     <li >
-                                        <a wire:navigate href="publications">Publications</a>
+                                        <a wire:navigate href="/projects">Projects</a>
+                                        
                                     </li>
-                                    <li>
+                                    <li >
+                                        <a wire:navigate href="/news-and-updates">News & Updates</a>
+                                        
+                                    </li>
+                                    <li >
+                                        <a wire:navigate href="/publications">Publications</a>
+                                    </li>
+                                    <li >
+                                        <a wire:navigate href="/vacancies">Vacancies</a>
+                                    </li>
+                                    {{-- <li>
                                         <a wire:navigate  href="/contact-us">Contact Us</a>
-                                    </li>
+                                    </li> --}}
                                 </ul>
                             </nav>
                             <div class="header-button d-flex d-lg-none">
@@ -262,7 +275,7 @@
                                      <button type="button" class="simple-icon sideMenuInfo"><i class="fa-solid fa-bars"></i>
                                     </button>
                                     <div class="d-xxl-block d-none">
-                                        <a href="contact.html" class="th-btn">
+                                        <a wire:navigate href="/contact-us" class="th-btn">
                                             Contact us <span class="icon"><i class="fa-solid fa-arrow-up-right ms-3"></i></span>
                                         </a>
                                     </div>

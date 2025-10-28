@@ -38,6 +38,7 @@ class Abouts extends Component
 
     public function mount()
     {
+        abort_unless(auth()->check(), 401);
         $about = About::first();
         if ($about) {
             $this->id = $about->id;
@@ -53,7 +54,7 @@ class Abouts extends Component
             $this->dispatch('load-ckeditor-data', $this->description);
         }
     }
-
+    
     public function render()
     {
         return view('livewire.about.abouts');

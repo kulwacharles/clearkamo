@@ -13,6 +13,7 @@ class BackendTeam extends Component
     }
 
     public function mount(){
+        abort_unless(auth()->check(), 401);
         $this->blogs=Team::all();
     }
 }
