@@ -8,10 +8,7 @@ use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
 class VacancyBackendModal extends Component
 {
-    public function render()
-    {
-        return view('livewire.vacancy.vacancy-backend-modal');
-    }
+
 
     use WithFileUploads;
 
@@ -49,6 +46,10 @@ class VacancyBackendModal extends Component
         'status.in'            => 'The selected Status is invalid.',
     ];
 
+    public function render()
+    {
+        return view('livewire.vacancy.vacancy-backend-modal');
+    }
     public function store()
     {
         $this->validate();

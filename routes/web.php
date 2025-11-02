@@ -23,6 +23,7 @@ use App\Livewire\Publication\BackendPublications;
 use App\Livewire\Project\BackendProject;
 use App\Livewire\Service\BackendService;
 use App\Livewire\Team\BackendTeam;
+use App\Livewire\Testimony\TestimonyBackend;
 use App\Livewire\Vacancy\VacancyBackend;
 
 
@@ -44,6 +45,7 @@ Route::middleware(['auth'])->prefix('/admin')->group(function () {
     Route::get('services',BackendService::class)->name('services');
     Route::get('vacancies',VacancyBackend::class)->name('admin.vacancies');
     Route::get('team',BackendTeam::class)->name('admin.team');
+    Route::get('testimony',TestimonyBackend::class)->name('admin.testimony');
     Route::post('/logout', function () {
         Auth::logout();
         return redirect('/');

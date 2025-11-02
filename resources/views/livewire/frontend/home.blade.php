@@ -438,295 +438,7 @@
                         @endforeach
                         
                     @else
-                        <div class="swiper-slide">
-                            <div class="th-team team-card style4">
-                                <div class="img-wrap">
-                                    <div class="team-img">
-                                        <img src="assets/img/team/team_4_1.png" alt="Team">
-                                    </div>
-                                    <div class="team-social-hover">
-                                        <a href="#" class="team-social-hover_btn">
-                                            <i class="far fa-plus"></i>
-                                        </a>
-                                        <div class="th-social">
-                                            <a target="_blank" href="https://vimeo.com/">
-                                                <i class="fab fa-vimeo-v"></i>
-                                            </a>
-                                            <a target="_blank" href="https://linkedin.com/">
-                                                <i class="fab fa-linkedin-in"></i>
-                                            </a>
-                                            <a target="_blank" href="https://twitter.com/">
-                                                <i class="fab fa-twitter"></i>
-                                            </a>
-                                            <a target="_blank" href="https://facebook.com/">
-                                                <i class="fab fa-facebook-f"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="team-card-content">
-                                    <div class="team-card-bg" data-bg-src="assets/img/bg/team_card_bg_4.jpg"></div>
-                                    <h3 class="box-title">
-                                        <a href="team-details.html">Leslie Alexander</a>
-                                    </h3>
-                                    <span class="team-desig">Founder & CEO</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="th-team team-card style4">
-                                <div class="img-wrap">
-                                    <div class="team-img">
-                                        <img src="assets/img/team/team_4_2.png" alt="Team">
-                                    </div>
-                                    <div class="team-social-hover">
-                                        <a href="#" class="team-social-hover_btn">
-                                            <i class="far fa-plus"></i>
-                                        </a>
-                                        <div class="th-social">
-                                            <a target="_blank" href="https://vimeo.com/">
-                                                <i class="fab fa-vimeo-v"></i>
-                                            </a> 
-                                            <a target="_blank" href="https://linkedin.com/">
-                                                <i class="fab fa-linkedin-in"></i>
-                                            </a> 
-                                            <a target="_blank" href="https://twitter.com/">
-                                                <i class="fab fa-twitter"></i>
-                                            </a> 
-                                            <a target="_blank" href="https://facebook.com/">
-                                                <i class="fab fa-facebook-f"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="team-card-content">
-                                    <div class="team-card-bg" data-bg-src="assets/img/bg/team_card_bg_4.jpg"></div>
-                                    <h3 class="box-title">
-                                        <a href="team-details.html">Jenny Wilson</a>
-                                    </h3>
-                                    <span class="team-desig">Senior Manager</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="th-team team-card style4">
-                                <div class="img-wrap">
-                                    <div class="team-img">
-                                        <img src="assets/img/team/team_4_3.png" alt="Team">
-                                    </div>
-                                    <div class="team-social-hover">
-                                        <a href="#" class="team-social-hover_btn">
-                                            <i class="far fa-plus"></i>
-                                        </a>
-                                        <div class="th-social">
-                                            <a target="_blank" href="https://vimeo.com/">
-                                                <i class="fab fa-vimeo-v"></i>
-                                            </a>
-                                            <a target="_blank" href="https://linkedin.com/">
-                                                <i class="fab fa-linkedin-in"></i>
-                                            </a>
-                                            <a target="_blank" href="https://twitter.com/">
-                                                <i class="fab fa-twitter"></i>
-                                            </a>
-                                            <a target="_blank" href="https://facebook.com/">
-                                                <i class="fab fa-facebook-f"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="team-card-content">
-                                    <div class="team-card-bg" data-bg-src="assets/img/bg/team_card_bg_4.jpg"></div>
-                                    <h3 class="box-title">
-                                        <a href="team-details.html">Kristin Watson</a>
-                                    </h3>
-                                    <span class="team-desig">Junior Manager</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="th-team team-card style4">
-                                <div class="img-wrap">
-                                    <div class="team-img">
-                                        <img src="assets/img/team/team_4_4.png" alt="Team">
-                                    </div>
-                                    <div class="team-social-hover">
-                                        <a href="#" class="team-social-hover_btn">
-                                            <i class="far fa-plus"></i>
-                                        </a>
-                                        <div class="th-social">
-                                            <a target="_blank" href="https://vimeo.com/">
-                                                <i class="fab fa-vimeo-v"></i>
-                                            </a>
-                                            <a target="_blank" href="https://linkedin.com/">
-                                                <i class="fab fa-linkedin-in"></i>
-                                            </a>
-                                            <a target="_blank" href="https://twitter.com/">
-                                                <i class="fab fa-twitter"></i>
-                                            </a>
-                                            <a target="_blank" href="https://facebook.com/">
-                                                <i class="fab fa-facebook-f"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="team-card-content">
-                                    <div class="team-card-bg" data-bg-src="assets/img/bg/team_card_bg_4.jpg">
-                                    </div>
-                                    <h3 class="box-title">
-                                        <a href="team-details.html">Ralph Edwards</a>
-                                    </h3>
-                                    <span class="team-desig">Senior Worker</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="th-team team-card style4">
-                                <div class="img-wrap">
-                                    <div class="team-img">
-                                        <img src="assets/img/team/team_4_1.png" alt="Team">
-                                    </div>
-                                    <div class="team-social-hover">
-                                        <a href="#" class="team-social-hover_btn">
-                                            <i class="far fa-plus"></i>
-                                        </a>
-                                        <div class="th-social">
-                                            <a target="_blank" href="https://vimeo.com/">
-                                                <i class="fab fa-vimeo-v"></i>
-                                            </a> 
-                                            <a target="_blank" href="https://linkedin.com/">
-                                                <i class="fab fa-linkedin-in"></i>
-                                            </a>
-                                            <a target="_blank" href="https://twitter.com/">
-                                                <i class="fab fa-twitter"></i>
-                                            </a>
-                                            <a target="_blank" href="https://facebook.com/">
-                                                <i class="fab fa-facebook-f"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="team-card-content">
-                                    <div class="team-card-bg" data-bg-src="assets/img/bg/team_card_bg_4.jpg">
-
-                                    </div>
-                                    <h3 class="box-title">
-                                        <a href="team-details.html">Leslie Alexander</a>
-                                    </h3>
-                                    <span class="team-desig">Founder & CEO</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="th-team team-card style4">
-                                <div class="img-wrap">
-                                    <div class="team-img">
-                                        <img src="assets/img/team/team_4_2.png" alt="Team">
-                                    </div>
-                                    <div class="team-social-hover">
-                                        <a href="#" class="team-social-hover_btn">
-                                            <i class="far fa-plus"></i>
-                                        </a>
-                                        <div class="th-social">
-                                            <a target="_blank" href="https://vimeo.com/">
-                                                <i class="fab fa-vimeo-v"></i>
-                                            </a>
-                                            <a target="_blank" href="https://linkedin.com/">
-                                                <i class="fab fa-linkedin-in"></i>
-                                            </a>
-                                            <a target="_blank" href="https://twitter.com/">
-                                                <i class="fab fa-twitter"></i>
-                                            </a>
-                                            <a target="_blank" href="https://facebook.com/">
-                                                <i class="fab fa-facebook-f"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="team-card-content">
-                                    <div class="team-card-bg" data-bg-src="assets/img/bg/team_card_bg_4.jpg">
-
-                                    </div>
-                                    <h3 class="box-title">
-                                        <a href="team-details.html">Jenny Wilson</a>
-                                    </h3>
-                                    <span class="team-desig">Senior Manager</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="th-team team-card style4">
-                                <div class="img-wrap">
-                                    <div class="team-img">
-                                        <img src="assets/img/team/team_4_3.png" alt="Team">
-                                    </div>
-                                    <div class="team-social-hover">
-                                        <a href="#" class="team-social-hover_btn">
-                                            <i class="far fa-plus"></i>
-                                        </a>
-                                        <div class="th-social">
-                                            <a target="_blank" href="https://vimeo.com/">
-                                                <i class="fab fa-vimeo-v"></i>
-                                            </a>
-                                            <a target="_blank" href="https://linkedin.com/">
-                                                <i class="fab fa-linkedin-in"></i>
-                                            </a>
-                                            <a target="_blank" href="https://twitter.com/">
-                                                <i class="fab fa-twitter"></i>
-                                            </a>
-                                            <a target="_blank" href="https://facebook.com/">
-                                                <i class="fab fa-facebook-f"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="team-card-content">
-                                    <div class="team-card-bg" data-bg-src="assets/img/bg/team_card_bg_4.jpg">
-
-                                    </div>
-                                    <h3 class="box-title">
-                                        <a href="team-details.html">Kristin Watson</a>
-                                    </h3>
-                                    <span class="team-desig">Junior Manager</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="th-team team-card style4">
-                                <div class="img-wrap">
-                                    <div class="team-img">
-                                        <img src="assets/img/team/team_4_4.png" alt="Team">
-                                    </div>
-                                    <div class="team-social-hover">
-                                        <a href="#" class="team-social-hover_btn">
-                                            <i class="far fa-plus"></i>
-                                        </a>
-                                        <div class="th-social">
-                                            <a target="_blank" href="https://vimeo.com/">
-                                                <i class="fab fa-vimeo-v"></i>
-                                            </a>
-                                            <a target="_blank" href="https://linkedin.com/">
-                                                <i class="fab fa-linkedin-in"></i>
-                                            </a>
-                                            <a target="_blank" href="https://twitter.com/">
-                                                <i class="fab fa-twitter"></i>
-                                            </a>
-                                            <a target="_blank" href="https://facebook.com/">
-                                                <i class="fab fa-facebook-f"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="team-card-content">
-                                    <div class="team-card-bg" data-bg-src="assets/img/bg/team_card_bg_4.jpg">
-
-                                    </div>
-                                    <h3 class="box-title">
-                                        <a href="team-details.html">Ralph Edwards</a>
-                                    </h3>
-                                    <span class="team-desig">Senior Worker</span>
-                                </div>
-                            </div>
-                        </div>
+                    There is no Team members
                     @endif
                 </div>
             </div>
@@ -798,54 +510,50 @@
         </div>
     </div>
 </div>
-<section class="why-sec4">
-    <div class="shape-mockup why-bg-shape4-1 bg-smoke d-xl-block d-none" data-top="0" data-right="0" data-bg-src="assets/img/bg/why_bg_4_1.png">
-
-    </div>
-    <div class="container">
-        <div class="why-wrap4">
-            <div class="why-img-box3 mb-xl-0 mb-50">
-                <img src="assets/img/normal/why_4_1.png" alt="Why"> 
-                <a href="https://www.youtube.com/watch?v=_sI_Ps7JSEk" class="play-btn style4 popup-video">
-                    <i class="fa-sharp fa-solid fa-play"></i>
-                </a>
-            </div>
-            <div class="title-area mb-0">
-                <span class="sub-title">
-                    <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">WHY CHOOSE US
-                </span>
-                <h2 class="sec-title">Elevate Your Business Elevate Your Life</h2>
-                <p class="sec-text mt-30">Business consulting involves providing expert advice guidance man or organizations to help them improve their performance, operations, and profitability plan typically includes an executive summary</p>
-                <div class="progress-grid-wrap mt-40">
-                    <div class="feature-circle">
-                        <div class="progressbar">
-                            <div class="circle" data-percent="65">
-                                <div class="circle-num">65%</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="progress-wrap-content">
-                        <h3 class="box-title">Talent Thrive HR Solutions</h3>
-                        <p class="text">Business consulting involves providing expert advice to businesses to help them improve</p>
-                    </div>
+<div class="client-area-1" data-bg-src="{{asset('assets/img/bg/team_bg_3_1.png')}}" data-overlay="black" data-opacity="9">
+    <div class="container-fluid p-0">
+        <div class="swiper th-slider client-slider1" data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"400":{"slidesPerView":"2"},"768":{"slidesPerView":"3"},"992":{"slidesPerView":"4"},"1200":{"slidesPerView":"6"}}, "spaceBetween": "0", "loop": "true"}'>
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <a href="#" class="client-card"><img src="{{asset('assets/img/client/client1-1.svg')}}" alt="Image"></a>
                 </div>
-                <div class="progress-grid-wrap">
-                    <div class="feature-circle">
-                        <div class="progressbar">
-                            <div class="circle" data-percent="46">
-                                <div class="circle-num">46%</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="progress-wrap-content">
-                        <h3 class="box-title">Growth Forge Consulting</h3>
-                        <p class="text">Market research helps businesses understand their target audience, competition, industry trends</p>
-                    </div>
+                <div class="swiper-slide">
+                    <a href="#" class="client-card"><img src="{{asset('assets/img/client/client1-2.svg')}}" alt="Image"></a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#" class="client-card"><img src="{{asset('assets/img/client/client1-3.svg')}}" alt="Image"></a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#" class="client-card"><img src="{{asset('assets/img/client/client1-4.svg')}}" alt="Image"></a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#" class="client-card"><img src="{{asset('assets/img/client/client1-5.svg')}}" alt="Image"></a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#" class="client-card"><img src="{{asset('assets/img/client/client1-6.svg')}}" alt="Image"></a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#" class="client-card"><img src="{{asset('assets/img/client/client1-1.svg')}}" alt="Image"></a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#" class="client-card"><img src="{{asset('assets/img/client/client1-2.svg')}}" alt="Image"></a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#" class="client-card"><img src="{{asset('assets/img/client/client1-3.svg')}}" alt="Image"></a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#" class="client-card"><img src="{{asset('assets/img/client/client1-4.svg')}}" alt="Image"></a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#" class="client-card"><img src="{{asset('assets/img/client/client1-5.svg')}}" alt="Image"></a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="#" class="client-card"><img src="{{asset('assets/img/client/client1-6.svg')}}" alt="Image"></a>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
 <section class="overflow-hidden space-top">
     <div class="container">
         <div class="title-area text-center">
@@ -858,162 +566,41 @@
         <div class="slider-area testi-grid-area">
             <div class="swiper th-slider" id="testiSlide1" data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"1"},"768":{"slidesPerView":"1"},"992":{"slidesPerView":"2"},"1356":{"slidesPerView":"3"}}}'>
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="testi-card-3">
-                            <div class="testi-card-thumb">
-                                <img class="avatar" src="assets/img/testimonial/testi_3_1.png" alt="img">
-                                <div class="quote-icon">
-                                    <img src="assets/img/icon/quote2.svg" alt="icon">
-                                </div>
-                            </div>
-                            <div class="testi-card-details">
-                                <p class="testi-card_text">Successful project management requires clear goals, effective planning communication skilled team members, regular monitoring, and adaptability to changes. It's also important to manage resources efficiently and stay within budget and timeline</p>
-                                <div class="testi-card_profile">
-                                    <div class="testi-card_content">
-                                        <h3 class="testi-card_name">Brooklyn Simmons</h3>
-                                        <span class="testi-card_desig">UI/UX Designer</span>
+                    @if($testimonies)
+                        @foreach ($testimonies as $testimony)
+                            <div class="swiper-slide">
+                                <div class="testi-card-3">
+                                    <div class="testi-card-thumb">
+                                        <img class="avatar" src="{{ asset('storage/'.$testimony->image) }}" alt="img">
+                                        <div class="quote-icon">
+                                            <img src="assets/img/icon/quote2.svg" alt="icon">
+                                        </div>
+                                    </div>
+                                    <div class="testi-card-details">
+                                        <p class="testi-card_text">
+                                            {!! $testimony->description !!}
+                                        </p>
+                                        <div class="testi-card_profile">
+                                            <div class="testi-card_content">
+                                                <h3 class="testi-card_name">{{$testimony->name}}</h3>
+                                                <span class="testi-card_desig">{{$testimony->position}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="testi-card_review">
+                                            <i class="fa-sharp fa-solid fa-star"></i>
+                                            <i class="fa-sharp fa-solid fa-star"></i>
+                                            <i class="fa-sharp fa-solid fa-star"></i>
+                                            <i class="fa-sharp fa-solid fa-star"></i>
+                                            <i class="fa-sharp fa-solid fa-star"></i>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="testi-card_review">
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="testi-card-3">
-                            <div class="testi-card-thumb">
-                                <img class="avatar" src="assets/img/testimonial/testi_3_2.png" alt="img">
-                                <div class="quote-icon">
-                                    <img src="assets/img/icon/quote2.svg" alt="icon">
-                                </div>
-                            </div>
-                            <div class="testi-card-details">
-                                <p class="testi-card_text">A business plan is a written document that outlines a company's goals and the strategy for achieving them. It's crucial as it provides a roadmap for the business, helps in obtaining funding, and serves as a reference point for decision-making.</p>
-                                <div class="testi-card_profile">
-                                    <div class="testi-card_content">
-                                        <h3 class="testi-card_name">Leslie Alexander</h3>
-                                        <span class="testi-card_desig">Software Development</span>
-                                    </div>
-                                </div>
-                                <div class="testi-card_review">
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="testi-card-3">
-                            <div class="testi-card-thumb">
-                                <img class="avatar" src="assets/img/testimonial/testi_3_3.png" alt="img">
-                                <div class="quote-icon">
-                                    <img src="assets/img/icon/quote2.svg" alt="icon">
-                                </div>
-                            </div>
-                            <div class="testi-card-details">
-                                <p class="testi-card_text">Market research helps businesses understand their target audience, identify competition, and evaluate market trends. It provides valuable insights for making informed decisions about products, services, and marketing strategies. crowdfunding, and traditional</p>
-                                <div class="testi-card_profile">
-                                    <div class="testi-card_content">
-                                        <h3 class="testi-card_name">Savannah Nguyen</h3>
-                                        <span class="testi-card_desig">E-commerce Solutions</span>
-                                    </div>
-                                </div>
-                                <div class="testi-card_review">
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="testi-card-3">
-                            <div class="testi-card-thumb">
-                                <img class="avatar" src="assets/img/testimonial/testi_3_1.png" alt="img">
-                                <div class="quote-icon">
-                                    <img src="assets/img/icon/quote2.svg" alt="icon">
-                                </div>
-                            </div>
-                            <div class="testi-card-details">
-                                <p class="testi-card_text">Successful project management requires clear goals, effective planning communication skilled team members, regular monitoring, and adaptability to changes. It's also important to manage resources efficiently and stay within budget and timeline</p>
-                                <div class="testi-card_profile">
-                                    <div class="testi-card_content">
-                                        <h3 class="testi-card_name">Brooklyn Simmons</h3>
-                                        <span class="testi-card_desig">UI/UX Designer</span>
-                                    </div>
-                                </div>
-                                <div class="testi-card_review">
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="testi-card-3">
-                            <div class="testi-card-thumb">
-                                <img class="avatar" src="assets/img/testimonial/testi_3_2.png" alt="img">
-                                <div class="quote-icon">
-                                    <img src="assets/img/icon/quote2.svg" alt="icon">
-                                </div>
-                            </div>
-                            <div class="testi-card-details">
-                                <p class="testi-card_text">A business plan is a written document that outlines a company's goals and the strategy for achieving them. It's crucial as it provides a roadmap for the business, helps in obtaining funding, and serves as a reference point for decision-making.</p>
-                                <div class="testi-card_profile">
-                                    <div class="testi-card_content">
-                                        <h3 class="testi-card_name">Leslie Alexander</h3>
-                                        <span class="testi-card_desig">Software Development</span>
-                                    </div>
-                                </div>
-                                <div class="testi-card_review">
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="testi-card-3">
-                            <div class="testi-card-thumb">
-                                <img class="avatar" src="assets/img/testimonial/testi_3_3.png" alt="img">
-                                <div class="quote-icon">
-                                    <img src="assets/img/icon/quote2.svg" alt="icon">
-                                </div>
-                            </div>
-                            <div class="testi-card-details">
-                                <p class="testi-card_text">Market research helps businesses understand their target audience, identify competition, and evaluate market trends. It provides valuable insights for making informed decisions about products, services, and marketing strategies. crowdfunding, and traditional</p>
-                                <div class="testi-card_profile">
-                                    <div class="testi-card_content">
-                                        <h3 class="testi-card_name">Savannah Nguyen</h3>
-                                        <span class="testi-card_desig">E-commerce Solutions</span>
-                                    </div>
-                                </div>
-                                <div class="testi-card_review">
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                    <i class="fa-sharp fa-solid fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        @endforeach
+                            
+                    @else
+                    N
+                    @endif
                 </div>
                 <div class="slider-pagination">
 
@@ -1049,162 +636,39 @@
             <div class="slider-area">
                 <div class="swiper th-slider has-shadow" id="blogSlider3" data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"1"},"768":{"slidesPerView":"2"},"992":{"slidesPerView":"2"},"1200":{"slidesPerView":"3"}}}'>
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="blog-card style3">
-                                
-                                <div class="blog-img">
-                                    <a href="blog-details.html">
-                                        <img src="assets/img/blog/blog_3_1.jpg" alt="blog image">
-                                    </a>
-                                </div>
-                                <div class="blog-content">
-                                    <div class="blog-meta">
-                                        <a href="blog.html">
-                                            <i class="fa-light fa-calendar-days"></i>12 April 2024
-                                        </a> 
-                                        <a href="blog-details.html">
-                                            <i class="far fa-comments"></i>2 Comments
-                                        </a>
-                                    </div>
-                                    <h3 class="box-title">
-                                        <a href="blog-details.html">Business consulting involves providing expert advice</a>
-                                    </h3>
-                                    <p class="blog-text">This can include areas like strategy, operations in marketing, finance, and more business</p>
-                                    <a href="blog-details.html" class="link-btn style2">
-                                        <i class="fas fa-plus-circle me-1"></i>Read More
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="blog-card style3">
-                                <div class="blog-img">
-                                    <a href="blog-details.html">
-                                        <img src="assets/img/blog/blog_3_2.jpg" alt="blog image">
-                                    </a>
-                                </div>
-                                <div class="blog-content">
-                                    <div class="blog-meta">
-                                        <a href="blog.html">
-                                            <i class="fa-light fa-calendar-days"></i>16 March 2024
-                                        </a>
-                                        <a href="blog-details.html">
-                                            <i class="far fa-comments"></i>3 Comments
-                                        </a>
-                                    </div>
-                                    <h3 class="box-title">
-                                        <a href="blog-details.html">Common financial strategies for businesses budgeting</a>
-                                    </h3>
-                                    <p class="blog-text">Business consulting services can benefit your is company by providing specialized</p>
-                                    <a href="blog-details.html" class="link-btn style2">
-                                        <i class="fas fa-plus-circle me-1"></i>Read More
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="blog-card style3">
-                                <div class="blog-img">
-                                    <a href="blog-details.html">
-                                        <img src="assets/img/blog/blog_3_3.jpg" alt="blog image">
-                                    </a>
-                                </div>
-                                <div class="blog-content">
-                                    <div class="blog-meta">
-                                        <a href="blog.html">
-                                            <i class="fa-light fa-calendar-days">
-
-                                            </i>17 June 2024</a>
-                                            <a href="blog-details.html">
-                                                <i class="far fa-comments"></i>2 Comments
-                                            </a>
-                                        </div>
-                                        <h3 class="box-title">
-                                            <a href="blog-details.html">Improving satisfaction and retention involves offering</a>
-                                        </h3>
-                                        <p class="blog-text">Some projects may be short-term, lasting a few weeks, while others may be long-term</p>
-                                        <a href="blog-details.html" class="link-btn style2"><i class="fas fa-plus-circle me-1"></i>Read More</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="blog-card style3">
-                                    <div class="blog-img">
-                                        <a href="blog-details.html">
-                                            <img src="assets/img/blog/blog_3_1.jpg" alt="blog image">
-                                        </a>
-                                    </div>
-                                    <div class="blog-content">
-                                        <div class="blog-meta">
-                                            <a href="blog.html">
-                                                <i class="fa-light fa-calendar-days"></i>12 April 2024
-                                            </a> 
-                                            <a href="blog-details.html"><i class="far fa-comments"></i>4 Comments</a>
-                                        </div>
-                                        <h3 class="box-title">
-                                            <a href="blog-details.html">Business consulting involves providing expert advice</a>
-                                        </h3>
-                                        <p class="blog-text">This can include areas like strategy, operations in marketing, finance, and more business</p>
-                                        <a href="blog-details.html" class="link-btn style2">
-                                            <i class="fas fa-plus-circle me-1"></i>Read More
-                                        </a>
-                                        </div>
-                                    </div>
-                                </div>
+                        @if($blogs)
+                            @foreach ($blogs as $blog)
                                 <div class="swiper-slide">
                                     <div class="blog-card style3">
+                                        
                                         <div class="blog-img">
-                                            <a href="blog-details.html">
-                                                <img src="assets/img/blog/blog_3_2.jpg" alt="blog image">
+                                            <a wire:navigate href="/news-and-updates/details/{{ $blog->id }}">
+                                                <img src="{{ asset('storage/'.$blog->image) }}" alt="blog image">
                                             </a>
                                         </div>
                                         <div class="blog-content">
                                             <div class="blog-meta">
-                                                <a href="blog.html">
-                                                    <i class="fa-light fa-calendar-days"></i>16 March 2024
-                                                </a>
-                                                <a href="blog-details.html">
-                                                    <i class="far fa-comments"></i>2 Comments
-                                                </a>
-                                            </div>
-                                            <h3 class="box-title">
-                                                <a href="blog-details.html">Common financial strategies for businesses budgeting</a>
-                                            </h3>
-                                            <p class="blog-text">Business consulting services can benefit your is company by providing specialized</p>
-                                            <a href="blog-details.html" class="link-btn style2">
-                                                <i class="fas fa-plus-circle me-1"></i>Read More
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="blog-card style3">
-                                        <div class="blog-img">
-                                            <a href="blog-details.html">
-                                                <img src="assets/img/blog/blog_3_3.jpg" alt="blog image">
-                                            </a>
-                                        </div>
-                                        <div class="blog-content">
-                                            <div class="blog-meta">
-                                                <a href="blog.html">
-                                                    <i class="fa-light fa-calendar-days"></i>17 June 2024
+                                                <a wire:navigate href="/news-and-updates/details/{{ $blog->id }}">
+                                                    <i class="fa-light fa-calendar-days"></i>12 April 2024
                                                 </a> 
-                                                <a href="blog-details.html">
-                                                    <i class="far fa-comments"></i>3 Comments
-                                                </a>
+
                                             </div>
                                             <h3 class="box-title">
-                                                <a href="blog-details.html">Improving satisfaction and retention involves offering</a>
+                                                <a wire:navigate href="/news-and-updates/details/{{ $blog->id }}">{{$blog->title}}</a>
                                             </h3>
-                                            <p class="blog-text">Some projects may be short-term, lasting a few weeks, while others may be long-term</p>
-                                            <a href="blog-details.html" class="link-btn style2">
+                                            <p class="blog-text">
+                                                {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($blog->description)), 120, '...') }}
+                                            </p>
+                                            <a wire:navigate href="/news-and-updates/details/{{ $blog->id }}" class="link-btn style2">
                                                 <i class="fas fa-plus-circle me-1"></i>Read More
                                             </a>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            @endforeach
+                        @else
+                        There is no post yet
+                        @endif
                     </div>
                 </div>
 </section>

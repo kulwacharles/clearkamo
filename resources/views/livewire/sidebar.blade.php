@@ -93,5 +93,15 @@
               </div>
             </a>
         </li>
+         <li class="">
+            <a wire:navigate  href="{{url('/admin/testimony')}}" aria-expanded="false">
+              <div class="nav_icon_small">
+                  <img src="{{asset('img/menu-icon/7.svg')}}" alt="">
+              </div>
+              <div class="nav_title">
+                  <span>Testimony</span>
+              </div>
+            </a>
+        </li>
       </ul>
 </nav>

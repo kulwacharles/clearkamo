@@ -4,11 +4,13 @@ namespace App\Livewire\Frontend;
 use App\Models\About;
 use App\Models\Slider;
 use App\Models\Team;
+use App\Models\Testimony;
+use App\Models\Blog;
 use Livewire\Component;
 
 class Home extends Component
 {
-        public $title, $description, $years_of_experience, $image, $image2;
+        public $title, $description, $years_of_experience, $image, $image2,$testimonies,$blogs;
         public $id, $imagePath, $image2Path, $about1, $about2;
         public $slides=null;
         public $teams;
@@ -16,6 +18,8 @@ class Home extends Component
     {
         $this->slides=Slider::where("status","active")->get();
         $about = About::first();
+        $this->testimonies=Testimony::where('status','published')->get();
+        $this->blogs=Blog::where('status','published')->orderBy('id','desc')->latest()->take(5)->get();
         if ($about) {
             $this->id = $about->id;
             $this->title = $about->title;
