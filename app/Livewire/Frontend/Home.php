@@ -6,20 +6,26 @@ use App\Models\Slider;
 use App\Models\Team;
 use App\Models\Testimony;
 use App\Models\Blog;
+use App\Models\Client;
+use App\Models\Service;
 use Livewire\Component;
 
 class Home extends Component
 {
-        public $title, $description, $years_of_experience, $image, $image2,$testimonies,$blogs;
+        public $title, $description, $years_of_experience, $image, $image2,$testimonies,$blogs,$services,$clients;
         public $id, $imagePath, $image2Path, $about1, $about2;
         public $slides=null;
         public $teams;
+
         public function mount()
     {
+        $this->services=Service::where("status","published")->get();
+        $this->clients=Client::where("status","published")->get();
         $this->slides=Slider::where("status","active")->get();
         $about = About::first();
         $this->testimonies=Testimony::where('status','published')->get();
         $this->blogs=Blog::where('status','published')->orderBy('id','desc')->latest()->take(5)->get();
+        $this->teams=Team::where('status',"published")->get();
         if ($about) {
             $this->id = $about->id;
             $this->title = $about->title;
@@ -31,7 +37,7 @@ class Home extends Component
             // Push initial description into CKEditor
             //$this->dispatch('load-ckeditor-data', $this->description);
         }
-        $this->teams=Team::where('status',"published")->get();
+        
     }
     public function render()
     {

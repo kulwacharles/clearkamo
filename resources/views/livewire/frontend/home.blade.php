@@ -159,108 +159,37 @@
             </div>
         </div>
         <div class="row gy-30 gx-30 justify-content-center">
-            <div class="col-xl-3 col-md-6">
-                <div class="service-card4">
-                    <div class="service-card-thumb">
-                        <img src="assets/img/service/service_card_4_1.png" alt="img">
-                        <div class="service-card-icon">
-                            <img src="assets/img/icon/service_card_4-1.svg" alt="Icon">
+            @if($services)
+                @foreach ($services as $key => $service)
+                   <div class="col-xl-3 col-md-6">
+                    <div class="service-card4">
+                        <div class="service-card-thumb">
+                            <img src="{{ url('/storage/'.$service->image) }}" alt="img" style="width: 400px;height:250px">
+                            {{-- <div class="service-card-icon">
+                                <img src="assets/img/icon/service_card_4-1.svg" alt="Icon">
+                            </div> --}}
                         </div>
-                    </div>
-                    <div class="box-content">
-                        <h3 class="box-title">
-                            <a href="service-details.html">Research & Situation Analysis</a>
-                        </h3>
-                        <p class="box-text">
-                            Project CLEAR balances analytics with implementation through multi-disciplinary inputs to change the paradigm of organizational and international development. Contrasting with traditional rigid implementation frameworks, we take an adaptive approach to projects which enables us to achieve results far closer to the anticipated outcomes. We do this by focusing on:
-                        </p>
-                        <div class="btn-wrap">
-                            <a href="service-details.html" class="link-btn style2">
-                                <i class="fas fa-plus-circle me-1"></i>Read More
-                            </a>
-                            <div class="service-card-num">
-                                <span>01</span>
+                        <div class="box-content">
+                            <h3 class="box-title">
+                                <a href="service-details.html">{{ $service->title }}</a>
+                            </h3>
+                            <p class="box-text">
+                                {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($service->description)), 160, '...') }}
+                            </p>
+                            <div class="btn-wrap">
+                                <a  href="/service/details/{{ $service->id }}" class="link-btn style2">
+                                    <i class="fas fa-plus-circle me-1"></i>Read More
+                                </a>
+                                <div class="service-card-num">
+                                    <span>{{ str_pad($key+1, 2, "0", STR_PAD_LEFT) }}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-                <div class="service-card4">
-                    <div class="service-card-thumb">
-                        <img src="assets/img/service/service_card_4_2.png" alt="img">
-                        <div class="service-card-icon">
-                            <img src="assets/img/icon/service_card_4-2.svg" alt="Icon">
-                        </div>
-                    </div>
-                    <div class="box-content">
-                        <h3 class="box-title">
-                            <a href="service-details.html">
-							Insight & Concept Generation and Testing.
-                        </a>
-                        </h3>
-                        <p class="box-text">We utilize evidence and expert and beneficiary consultations to find insights and ideas to solve problems and build consensus in multi-stakeholder settings.</p>
-                        <div class="btn-wrap">
-                            <a href="service-details.html" class="link-btn style2">
-                                <i class="fas fa-plus-circle me-1"></i>Read More
-                            </a>
-                            <div class="service-card-num">
-                                <span>02</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-                <div class="service-card4">
-                    <div class="service-card-thumb">
-                        <img src="assets/img/service/service_card_4_3.png" alt="img">
-                        <div class="service-card-icon">
-                            <img src="assets/img/icon/service_card_4-3.svg" alt="Icon">
-                        </div>
-                    </div>
-                    <div class="box-content">
-                        <h3 class="box-title">
-                            <a href="service-details.html">Your Bridge to Excellence</a>
-                        </h3>
-                        <p class="box-text">
-                            We support initiative design and restructuring and support delivery of projects through multiple channels and efficient project management processes tailored to context.
-                        </p>
-                        <div class="btn-wrap">
-                            <a href="service-details.html" class="link-btn style2">
-                                <i class="fas fa-plus-circle me-1"></i>Read More
-                            </a>
-                            <div class="service-card-num"><span>03</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-                <div class="service-card4">
-                    <div class="service-card-thumb">
-                        <img src="assets/img/service/service_card_4_3.png" alt="img">
-                        <div class="service-card-icon">
-                            <img src="assets/img/icon/service_card_4-3.svg" alt="Icon">
-                        </div>
-                    </div>
-                    <div class="box-content">
-                        <h3 class="box-title">
-                            <a href="service-details.html">Your Bridge to Excellence</a>
-                        </h3>
-                        <p class="box-text">
-                            We develop results frameworks, monitoring, and evaluation systems based to client needs to ensure value for money, learning, informed decision and adaptive programming
-                        </p>
-                        <div class="btn-wrap">
-                            <a href="service-details.html" class="link-btn style2">
-                                <i class="fas fa-plus-circle me-1"></i>Read More
-                            </a>
-                            <div class="service-card-num"><span>04</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    </div> 
+                @endforeach
+                
+            @endif
         </div>
     </div>
 </section>
@@ -514,42 +443,17 @@
     <div class="container-fluid p-0">
         <div class="swiper th-slider client-slider1" data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"400":{"slidesPerView":"2"},"768":{"slidesPerView":"3"},"992":{"slidesPerView":"4"},"1200":{"slidesPerView":"6"}}, "spaceBetween": "0", "loop": "true"}'>
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <a href="#" class="client-card"><img src="{{asset('assets/img/client/client1-1.svg')}}" alt="Image"></a>
-                </div>
-                <div class="swiper-slide">
-                    <a href="#" class="client-card"><img src="{{asset('assets/img/client/client1-2.svg')}}" alt="Image"></a>
-                </div>
-                <div class="swiper-slide">
-                    <a href="#" class="client-card"><img src="{{asset('assets/img/client/client1-3.svg')}}" alt="Image"></a>
-                </div>
-                <div class="swiper-slide">
-                    <a href="#" class="client-card"><img src="{{asset('assets/img/client/client1-4.svg')}}" alt="Image"></a>
-                </div>
-                <div class="swiper-slide">
-                    <a href="#" class="client-card"><img src="{{asset('assets/img/client/client1-5.svg')}}" alt="Image"></a>
-                </div>
-                <div class="swiper-slide">
-                    <a href="#" class="client-card"><img src="{{asset('assets/img/client/client1-6.svg')}}" alt="Image"></a>
-                </div>
-                <div class="swiper-slide">
-                    <a href="#" class="client-card"><img src="{{asset('assets/img/client/client1-1.svg')}}" alt="Image"></a>
-                </div>
-                <div class="swiper-slide">
-                    <a href="#" class="client-card"><img src="{{asset('assets/img/client/client1-2.svg')}}" alt="Image"></a>
-                </div>
-                <div class="swiper-slide">
-                    <a href="#" class="client-card"><img src="{{asset('assets/img/client/client1-3.svg')}}" alt="Image"></a>
-                </div>
-                <div class="swiper-slide">
-                    <a href="#" class="client-card"><img src="{{asset('assets/img/client/client1-4.svg')}}" alt="Image"></a>
-                </div>
-                <div class="swiper-slide">
-                    <a href="#" class="client-card"><img src="{{asset('assets/img/client/client1-5.svg')}}" alt="Image"></a>
-                </div>
-                <div class="swiper-slide">
-                    <a href="#" class="client-card"><img src="{{asset('assets/img/client/client1-6.svg')}}" alt="Image"></a>
-                </div>
+                @if($clients)
+                    @foreach ($clients as $client)
+                        <div class="swiper-slide">
+                             <a href="#" class="client-card"><img src="{{ asset('storage/'.$client->image) }}" alt="Image"></a>
+                        </div>
+                    @endforeach
+                @else
+                        <div class="swiper-slide">
+                            <a href="#" class="client-card"><img src="{{asset('assets/img/client/client1-1.svg')}}" alt="Image"></a>
+                        </div>
+                @endif
             </div>
         </div>
     </div>
