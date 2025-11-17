@@ -116,8 +116,8 @@
                     <div class="row gy-2 align-items-center">
                         <div class="col-lg-6">
                             <p class="copyright-text">
-                                <i class="fal fa-copyright"></i> 2024 All Rights Reserved By 
-                                <a href="index-2.html">Konsal</a>
+                                <i class="fal fa-copyright"></i> 2025 All Rights Reserved By 
+                                <a href="index-2.html">ClearKamo</a>
                             </p>
                         </div>
                         <div class="col-lg-6 text-center text-lg-end">
