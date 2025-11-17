@@ -55,7 +55,7 @@
                 <h5 class="cta-subtitle">WE ARE HERE</h5>
                 <h4 class="cta-title">Tell us about your business we are ready to solve.</h4>
             </div>
-            <a href="blog-details.html" class="th-btn style7">Read More
+            <a wire:navigate href="/contact-us" class="th-btn style7">Read More
                 <div class="icon"><i class="fa-solid fa-arrow-up-right ms-3"></i>
                 </div>
             </a>

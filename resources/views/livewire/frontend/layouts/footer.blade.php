@@ -5,31 +5,39 @@
                     <div class="col-md-6 col-xl-auto">
                         <div class="widget footer-widget">
                             <div class="th-widget-about">
-                                <div class="about-logo">
-                                    <a href="index-2.html">
-                                        <img src="{{asset('assets/img/ProjectClear.png')}}" alt="ProjectClear-Logo">
-                                    </a>
-                                </div>
+                                @if($logo)
+                                  <div class="about-logo">
+                                        <a wire:navigate href="/">
+                                            <img src="{{ url('/storage/'.$logo) }}" alt="ProjectClear-Logo">
+                                        </a>
+                                    </div>
+                                @else
+                                    <div class="about-logo">
+                                        <a wire:navigate href="/">
+                                            <img src="{{asset('assets/img/ProjectClear.png')}}" alt="ProjectClear-Logo">
+                                        </a>
+                                    </div>
+                                @endif
                                 <p class="about-text">Consulting services can provide valuable insights, strategic guidance, pecialized</p>
                                 <div class="info-box">
                                     <div class="info-box_icon"><i class="far fa-phone"></i>
                                     </div>
                                     <p class="info-box_text">
-                                        <a href="tel:+11278956825" class="info-box_link">+112 (789) 568 25</a>
+                                        <a href="tel:+11278956825" class="info-box_link">{{ $contact->phone }}</a>
                                     </p>
                                 </div>
                                 <div class="info-box">
                                     <div class="info-box_icon"><i class="far fa-envelope-open"></i>
                                     </div>
                                     <p class="info-box_text">
-                                        <a href="mailto:help@gmail.com" class="info-box_link">help@gmail.com</a>
+                                        <a href="mailto:{{ $contact->email }}" class="info-box_link">{{ $contact->email }}</a>
                                     </p>
                                 </div>
                                 <div class="info-box">
                                     <div class="info-box_icon">
                                         <i class="far fa-location-dot"></i>
                                     </div>
-                                    <p class="info-box_text">1901 Shiloh, Hawaii 81063</p>
+                                    <p class="info-box_text">{{ $contact->physical_address }}</p>
                                 </div>
                             </div>
                         </div>
@@ -39,66 +47,64 @@
                             <h3 class="widget_title">Our Services</h3>
                             <div class="menu-all-pages-container">
                                 <ul class="menu">
-                                    <li><a href="contact.html">Nexus Legal Advisors</a></li>
-                                    <li><a href="contact.html">Elevate HR Partners</a></li>
-                                    <li><a href="contact.html">Prime Peak Financial</a></li>
-                                    <li><a href="contact.html">Nexus Legal Advisors</a></li>
-                                    <li><a href="contact.html">Spark Tech IT Solutions</a></li>
+                                    @foreach ($services as $service)
+                                        <li><a wire:navigate href="/service/details/{{ $service->id }}">{{ $service->title }}</a></li>                                
+                                    @endforeach
+                                    
+
                                 </ul>
-                            </div>
-                        </div>
-                    </div><div class="col-md-6 col-xl-auto">
-                        <div class="widget footer-widget">
-                            <h3 class="widget_title">Recent Posts</h3>
-                            <div class="recent-post-wrap">
-                                <div class="recent-post">
-                                    <div class="media-img">
-                                        <a href="blog-details.html">
-                                            <img src="{{asset('assets/img/blog/recent-post-1-1.jpg')}}" alt="Blog Image">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="recent-post-meta">
-                                            <a href="blog.html"><i class="fal fa-calendar-days"></i>21 June, 2024</a>
-                                        </div>
-                                        <h4 class="post-title">
-                                            <a class="text-inherit" href="blog-details.html">Guiding Businesses to Success</a>
-                                        </h4>
-                                    </div>
-                                </div>
-                                <div class="recent-post">
-                                    <div class="media-img">
-                                        <a href="blog-details.html"><img src="{{asset('assets/img/blog/recent-post-1-2.jpg')}}" alt="Blog Image"></a>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="recent-post-meta">
-                                            <a href="blog.html"><i class="fal fa-calendar-days"></i>22 June, 2024</a>
-                                        </div>
-                                        <h4 class="post-title"><a class="text-inherit" href="blog-details.html">Fueling Your Business Forward</a></h4>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-xl-auto">
-                        <div class="widget newsletter-widget footer-widget">
-                            <h3 class="widget_title">Subscribe Now</h3>
-                            <form class="newsletter-form">
-                                <div class="form-group">
-                                    <input class="form-control" type="email" placeholder="Email Address" required=""> 
-                                    <button type="submit" class="th-btn"><i class="far fa-paper-plane"></i> Subscribe</button>
-                                </div>
-                                <div class="check-group">
-                                    <input type="checkbox" id="privacyPolicy">
-                                     <label for="privacyPolicy">I agree to the privacy policy</label>
-                                </div>
-                            </form>
-                            <div class="th-social style2">
-                                    <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
-                                     <a href="https://www.twitter.com/"><i class="fab fa-twitter"></i></a> 
-                                     <a href="https://www.linkedin.com/"><i class="fab fa-linkedin-in"></i></a> 
-                                     <a href="https://www.behance.com/"><i class="fab fa-behance"></i></a>
-                                      <a href="https://www.vimeo.com/"><i class="fab fa-vimeo-v"></i></a>
+                        <div class="widget footer-widget">
+                            <h3 class="widget_title">Recent Posts</h3>
+                            <div class="recent-post-wrap">
+                                @if($blogs)
+                                    @foreach ($blogs as $blog)
+                                        <div class="recent-post">
+                                            <div class="media-img">
+                                                <a wire:navigate href="/news-and-updates/details/{{ $blog->id }}"><img src="{{ asset('storage/'.$blog->image) }}" alt="Blog Image"></a>
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="recent-post-meta">
+                                                    <a wire:navigate href="/news-and-updates/details/{{ $blog->id }}"><i class="fal fa-calendar-days"></i>{{$blog->updated_at->format('d F, Y')}}</a>
+                                                </div>
+                                                <h4 class="post-title"><a class="text-inherit" wire:navigate href="/news-and-updates/details/{{ $blog->id }}">{{$blog->title}}</a></h4>
+                                            </div>
+                                        </div>
+                                     @endforeach
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-auto">
+                        <div class="widget widget_nav_menu footer-widget">
+                            <h3 class="widget_title">Useful Links</h3>
+                            <div class="menu-all-pages-container">
+                                <ul class="menu">
+                                    <li>
+                                         <a href="http://www.tanzania.go.tz/">Government of Tanzania</a>
+                                    </li> 
+                                    <li>
+                                         <a href="http://www.moh.go.tz/en/">Ministry of Health</a>
+                                    </li>                               
+                                    <li>
+                                        <a href="http://www.maji.go.tz/">Ministry of Water</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://dhis.moh.go.tz/dhis-web-commons/security/login.action">Tanzania HMIS</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://nyumbanichoo.com/">Nyumba ni Choo</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://innovexdc.com/">Innovex</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.gov.uk/world/organisations/dfid-tanzania">DFID Tanzania</a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>

@@ -76,12 +76,12 @@
                                
                              </div> --}}
                             <h2 class="blog-title">
-                                <a href="/service/details/{{ $service->id }}">{{$service->title}}</a>
+                                <a wire:navigate href="/service/details/{{ $service->id }}">{{$service->title}}</a>
                             </h2>
                             <p class="blog-text">
                                  {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($service->description)), 350, '...') }}
                             </p>
-                            <a href="/service/details/{{ $service->id }}" class="th-btn">Read More
+                            <a wire:navigate href="/service/details/{{ $service->id }}" class="th-btn">Read More
                                 <div class="icon">
                                     <i class="fa-solid fa-arrow-up-right ms-3"></i>
                                 </div>

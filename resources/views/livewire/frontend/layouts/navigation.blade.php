@@ -18,7 +18,7 @@
                         <i class="far fa-phone"></i>
                     </div>
                     <p class="info-box_text">
-                        <a href="tel:+11278956825" class="info-box_link">+112 (789) 568 25</a>
+                        <a href="tel:{{ $contact->phone }}" class="info-box_link">{{ $contact->phone }}</a>
                     </p>
                 </div>
                 <div class="info-box">
@@ -177,28 +177,15 @@
                 <div class="col-auto d-none d-lg-block">
                     <div class="header-links">
                         <ul class="header-left-wrap">
-                            <li><i class="fa-regular fa-phone"></i><a href="tel:11278956825">+255 (789) 568 25</a></li>
-                            <li><i class="fa-regular fa-envelope-open"></i><a href="mailto:">info@projectclear.com</a></li>
+                            <li><i class="fa-regular fa-phone"></i><a href="tel:{{ $contact->phone }}">{{ $contact->phone }}</a></li>
+                            <li><i class="fa-regular fa-envelope-open"></i><a href="mailto:{{ $contact->email }}">{{ $contact->email }}</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-auto">
                     <div class="header-links">
                         <ul class="header-right-wrap">
-                            <li>
-                                <div class="dropdown-link">
-                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-light fa-globe"></i> English</a>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
-                                        <li><a href="#">German</a>
-                                             <a href="#">French</a> 
-                                             <a href="#">Italian</a> 
-                                             <a href="#">Latvian</a> 
-                                             <a href="#">Spanish</a> 
-                                             <a href="#">Greek</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
+         
                                 <li>
                                     <div class="social-links">
                                         <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a> 

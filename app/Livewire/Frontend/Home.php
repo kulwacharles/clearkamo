@@ -21,7 +21,7 @@ class Home extends Component
     {
         $this->services=Service::where("status","published")->get();
         $this->clients=Client::where("status","published")->get();
-        $this->slides=Slider::where("status","active")->get();
+        $this->slides=Slider::where("status","published")->get();
         $about = About::first();
         $this->testimonies=Testimony::where('status','published')->get();
         $this->blogs=Blog::where('status','published')->orderBy('id','desc')->latest()->take(5)->get();

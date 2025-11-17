@@ -47,11 +47,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xxl-3 col-md-3 col-lg-3">
+                <div class="col-xxl-4 col-md-4 col-lg-4">
                     <aside class="sidebar-area">
 
                         <div class="widget">
-                            <h3 class="widget_title">Recent Posts</h3>
+                            <h3 class="widget_title">Recent Publications</h3>
                             <div class="recent-post-wrap">
                                 <div class="recent-post">
                                     <div class="media-img">
@@ -101,6 +101,28 @@
                                             <a class="text-inherit" href="blog-details.html">Improve Your Health By Organic Eating</a>
                                         </h4>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xl-auto">
+                                <div class="widget newsletter-widget footer-widget">
+                                    <h3 class="widget_title">Subscribe Now</h3>
+                                    <form class="newsletter-form">
+                                        <div class="form-group">
+                                            <input class="form-control" type="email" placeholder="Email Address" required=""> 
+                                            <button type="submit" class="th-btn"><i class="far fa-paper-plane"></i> Subscribe</button>
+                                        </div>
+                                        <div class="check-group">
+                                            <input type="checkbox" id="privacyPolicy">
+                                            <label for="privacyPolicy">I agree to the privacy policy</label>
+                                        </div>
+                                    </form>
+                                    {{-- <div class="th-social style2">
+                                            <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                                            <a href="https://www.twitter.com/"><i class="fab fa-twitter"></i></a> 
+                                            <a href="https://www.linkedin.com/"><i class="fab fa-linkedin-in"></i></a> 
+                                            <a href="https://www.behance.com/"><i class="fab fa-behance"></i></a>
+                                            <a href="https://www.vimeo.com/"><i class="fab fa-vimeo-v"></i></a>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>

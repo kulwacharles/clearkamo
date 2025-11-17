@@ -11,6 +11,7 @@ use App\Livewire\Frontend\BlogList;
 use App\Livewire\Frontend\Publications;
 use App\Livewire\Blog\BackendBlog;
 use App\Livewire\Client\ClientBackend;
+use App\Livewire\Contact\BackendContacts;
 use App\Livewire\Frontend\BlogDetails;
 use App\Livewire\Frontend\ProjectDetails;
 use App\Livewire\Frontend\Projects;
@@ -26,7 +27,7 @@ use App\Livewire\Service\BackendService;
 use App\Livewire\Team\BackendTeam;
 use App\Livewire\Testimony\TestimonyBackend;
 use App\Livewire\Vacancy\VacancyBackend;
-
+use App\Models\Blog;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -48,6 +49,7 @@ Route::middleware(['auth'])->prefix('/admin')->group(function () {
     Route::get('team',BackendTeam::class)->name('admin.team');
     Route::get('testimony',TestimonyBackend::class)->name('admin.testimony');
     Route::get('client',ClientBackend::class)->name('admin.client');
+    Route::get('contacts',BackendContacts::class)->name('admin.contacts');
     Route::post('/logout', function () {
         Auth::logout();
         return redirect('/');

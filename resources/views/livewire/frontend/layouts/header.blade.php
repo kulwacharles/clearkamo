@@ -5,8 +5,8 @@
                 <div class="col-auto d-none d-lg-block">
                     <div class="header-links">
                         <ul class="header-left-wrap">
-                            <li><i class="fa-regular fa-phone"></i><a href="tel:11278956825">+255 (789) 568 25</a></li>
-                            <li><i class="fa-regular fa-envelope-open"></i><a href="mailto:">info@projectclear.com</a></li>
+                            <li><i class="fa-regular fa-phone"></i><a href="tel:11278956825">{{ $contact->phone }}</a></li>
+                            <li><i class="fa-regular fa-envelope-open"></i><a href="mailto:">{{ $contact->email }}</a></li>
                         </ul>
                     </div>
                 </div>

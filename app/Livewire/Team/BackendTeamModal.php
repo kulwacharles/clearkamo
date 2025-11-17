@@ -171,7 +171,7 @@ class BackendTeamModal extends Component
     // Handle delete event from blog list
     public function deleteBlog($blogId)
     {
-        $blog = Blog::findOrFail($blogId);
+        $blog = Team::findOrFail($blogId);
         
         // Delete image if exists
         if ($blog->image && Storage::disk('public')->exists($blog->image)) {

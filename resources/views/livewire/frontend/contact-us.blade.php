@@ -26,8 +26,8 @@
                         <div class="media-body">
                             <h3 class="box-title h5">General Enquires</h3>
                             <p class="box-text">
-                                Phone: <a href="tel:+25578956825">+255 (789) 568 25</a> 
-                                & Email: <a href="mailto:help@gmail.com">info@projectclear.com</a>
+                                Phone: <a href="tel:+{{ $contact->phone }}">{{$contact->phone}}</a> 
+                                & Email: <a href="mailto:{{ $contact->email }}">{{ $contact->email }}</a>
                             </p>
                         </div>
                     </div>
@@ -36,8 +36,7 @@
                         <div class="media-body">
                             <h3 class="box-title h5">Post Address</h3>
                             <p class="box-text">
-                                Plot # 7, Block B Ununio Area, Kinondoni Municipality
-                                Dar es Salaam, Tanzania.
+                               {{ $contact->physical_address }}
                             </p>
                         </div>
                     </div>
@@ -94,9 +93,10 @@
                 </div>
                 <div class="container-fluid p-0">
                     <div class="contact-map style2">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4359.386937896962!2d39.183116784614896!3d-6.635879814028553!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x185c57007f39fa7b%3A0x60c1a396253b9b78!2sProject%20CLEAR!5e0!3m2!1sen!2stz!4v1755325855725!5m2!1sen!2stz" allowfullscreen="" loading="lazy">
+                        {{-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4359.386937896962!2d39.183116784614896!3d-6.635879814028553!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x185c57007f39fa7b%3A0x60c1a396253b9b78!2sProject%20CLEAR!5e0!3m2!1sen!2stz!4v1755325855725!5m2!1sen!2stz" allowfullscreen="" loading="lazy">
 
-                        </iframe>
+                        </iframe> --}}
+                        {!! $contact->map !!}
                     </div>
                 </div>
             </div>
