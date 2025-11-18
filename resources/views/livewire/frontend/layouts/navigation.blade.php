@@ -7,7 +7,7 @@
             <div class="th-widget-about">
                 <div class="about-logo">
                     <a wire:navigate href="/">
-                        <img src="assets/img/ProjectClear.png" alt="ProjectClear-Logo">
+                        <img src="{{ url('/storage/'.$logo) }}" alt="ProjectClear-Logo">
                     </a>
                 </div>
                 <p class="about-text">Consulting services can provide valuable insights, strategic guidance, pecialized
@@ -26,68 +26,38 @@
                         <i class="far fa-envelope-open"></i>
                     </div>
                     <p class="info-box_text">
-                        <a href="mailto:help@gmail.com" class="info-box_link">help@gmail.com</a>
+                        <a href="mailto:{{ $contact->email }}" class="info-box_link">{{ $contact->email }}</a>
                     </p>
                 </div>
                 <div class="info-box">
                     <div class="info-box_icon">
                         <i class="far fa-location-dot"></i>
                     </div>
-                    <p class="info-box_text">1901 Shiloh, Hawaii 81063</p>
+                    <p class="info-box_text">{{ $contact->physical_address }}</p>
                 </div>
             </div>
         </div>
         <div class="widget">
-            <h3 class="widget_title">Recent Posts</h3>
+            <h3 class="widget_title">Recent News & Updates</h3>
             <div class="recent-post-wrap">
-                <div class="recent-post">
-                    <div class="media-img"><a href="blog-details.html">
-                        <img src="assets/img/blog/recent-post-1-1.jpg" alt="Blog Image">
-                    </a>
-                </div>
-                <div class="media-body">
-                    <div class="recent-post-meta">
-                        <a href="blog.html">
-                            <i class="fa-light fa-calendar-days">
-
-                            </i>21 June, 2024
-                        </a>
-                    </div>
-                    <h4 class="post-title">
-                        <a class="text-inherit" href="blog-details.html">Guiding Businesses to Success</a>
-                    </h4>
-                </div>
-            </div>
-            <div class="recent-post"><div class="media-img">
-                <a href="blog-details.html">
-                    <img src="assets/img/blog/recent-post-1-2.jpg" alt="Blog Image">
-                </a>
-            </div>
-            <div class="media-body">
-                <div class="recent-post-meta">
-                    <a href="blog.html">
-                        <i class="fa-light fa-calendar-days"></i>22 June, 2024
-                    </a>
-                </div>
-                <h4 class="post-title">
-                    <a class="text-inherit" href="blog-details.html">Fueling Your Business Forward</a>
-                </h4>
-            </div>
-        </div>
-        <div class="recent-post">
-            <div class="media-img">
-                <a href="blog-details.html">
-                    <img src="assets/img/blog/recent-post-1-3.jpg" alt="Blog Image">
-                </a>
-            </div>
-            <div class="media-body">
-                <div class="recent-post-meta">
-                    <a href="blog.html"><i class="fa-light fa-calendar-days"></i>23 June, 2024</a>
-                </div>
-                <h4 class="post-title"><a class="text-inherit" href="blog-details.html">Improve Your Health By Organic Eating</a>
-                </h4>
-            </div>
-        </div>
+                 @if($blogs)
+                    @foreach ($blogs as $blog)
+                        <div class="recent-post">
+                            <div class="media-img">
+                                <a wire:navigate href="/news-and-updates/details/{{ $blog->id }}">
+                                    <img src="{{ asset('storage/'.$blog->image) }}" alt="Blog Image">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <div class="recent-post-meta">
+                                    <a  wire:navigate href="/news-and-updates/details/{{ $blog->id }}"><i class="fa-light fa-calendar-days"></i>{{$blog->updated_at->format('d F, Y')}}</a>
+                                </div>
+                                <h4 class="post-title"><a class="text-inherit"  wire:navigate href="/news-and-updates/details/{{ $blog->id }}">{{$blog->title}}</a>
+                                </h4>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
     </div>
 </div>
 <div class="widget newsletter-widget">
