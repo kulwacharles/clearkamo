@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Konsal - Corporate Business & Consulting HTML Template - Home Four</title>
-    <meta name="author" content="Konsal"><meta name="description" content="Konsal - Corporate Business & Consulting HTML Template"><meta name="keywords" content="Konsal - Corporate Business & Consulting HTML Template">
+    <title>ClearKamo </title>
+    <meta name="author" content="Konsal"><meta name="description" content="ClearKamo"><meta name="keywords" content="ClearKamo">
     <meta name="robots" content="INDEX,FOLLOW">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="57x57" href="{{asset('assets/img/favicons/apple-icon-57x57.png')}}">
+    {{-- <link rel="apple-touch-icon" sizes="57x57" href="{{asset('assets/img/favicons/apple-icon-57x57.png')}}">
     <link rel="apple-touch-icon" sizes="60x60" href="{{asset('assets/img/favicons/apple-icon-60x60.png')}}">
     <link rel="apple-touch-icon" sizes="72x72" href="{{asset('assets/img/favicons/apple-icon-72x72.png')}}">
     <link rel="apple-touch-icon" sizes="76x76" href="{{asset('assets/img/favicons/apple-icon-76x76.png')}}">
@@ -20,7 +20,13 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/img/favicons/favicon-32x32.png')}}">
     <link rel="icon" type="image/png" sizes="96x96" href="{{asset('assets/img/favicons/favicon-96x96.png')}}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/img/favicons/favicon-16x16.png')}}">
-    <link rel="manifest" href="{{asset('assets/img/favicons/manifest.json')}}">
+    <link rel="manifest" href="{{asset('assets/img/favicons/manifest.json')}}"> --}}
+   
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/img/favicons/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/img/favicons/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/img/favicons/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{asset('assets/img/favicons/site.webmanifest')}}">
+
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="{{asset('assets/img/favicons/ms-icon-144x144.png')}}"><meta name="theme-color" content="#ffffff">
     <link rel="preconnect" href="https://fonts.googleapis.com/">
@@ -29,6 +35,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/app.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/fontawesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+
      @livewireStyles
 </head>
 <body>
