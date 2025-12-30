@@ -7,8 +7,8 @@ use App\Models\Team;
 class TeamDetails extends Component
 {
     public $member,$teams;
-    public function mount($id){
-        $this->member=Team::find($id);
+    public function mount($slug){
+        $this->member=Team::whereSlug($slug)->first();
         //dd($id);
     }
     public function render()

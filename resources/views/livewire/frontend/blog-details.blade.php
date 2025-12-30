@@ -57,16 +57,16 @@
                                     @foreach ($others as $other)
                                         <div class="recent-post">
                                         <div class="media-img">
-                                            <a wire:navigate href="/news-and-updates/details/{{ $other->id }}">
+                                            <a wire:navigate href="/news-and-updates/details/{{ $other->slug }}">
                                                 <img src="{{ asset('storage/'.$other->image) }}" alt="Blog Image">
                                             </a>
                                         </div>
                                         <div class="media-body">
                                             <div class="recent-post-meta">
-                                                <a wire:navigate href="news-and-updates/details/{{ $other->id }}"><i class="fa-light fa-calendar-days"></i>{{ $other->updated_at->format('d F, Y') }}</a>
+                                                <a wire:navigate href="news-and-updates/details/{{ $other->slug }}"><i class="fa-light fa-calendar-days"></i>{{ $other->updated_at->format('d F, Y') }}</a>
                                             </div>
                                             <h4 class="post-title">
-                                                <a wire:navigate class="text-inherit" href="/news-and-updates/details/{{ $other->id }}">{{ $other->title }}g</a>
+                                                <a wire:navigate class="text-inherit" href="/news-and-updates/details/{{ $other->slug }}">{{ $other->title }}g</a>
                                             </h4>
                                         </div>
                                     </div>

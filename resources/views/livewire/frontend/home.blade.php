@@ -28,7 +28,7 @@
                                                 </i>
                                             </p>
                                             <div class="btn-group" data-ani="slideinup" data-ani-delay="0.7s">
-                                                <a href="contact.html" class="th-btn style3">
+                                                <a href="/contact-us" class="th-btn style3">
                                                     GET START
                                                     <div class="icon">
                                                         <i class="fa-solid fa-arrow-up-right ms-3">
@@ -135,6 +135,82 @@
         </div>
     </div>
 </div>
+<section class="">
+    <div class="container">
+        <div class="title-area text-center">
+            <span class="sub-title">
+                <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
+                Our Focus Areas
+                <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
+            </span>
+            <p>
+                Project CLEAR balances analytics with implementation through multi-disciplinary inputs to change the paradigm of organizational and international development. Contrasting with traditional rigid implementation frameworks, we take an adaptive approach to projects which enables us to achieve results far closer to the anticipated outcomes. We do this by focusing on:
+            </p>
+            <div class="checklist style3">
+                <ul>
+                    <li>
+                        <i class="fas fa-square-check"></i> <b>Design</b> services include data generation through inquiry, insight generation through data science, and developing and testing solutions.
+                    </li>
+                    <li>
+                        <i class="fas fa-square-check"></i> <b>Delivery</b> services includes implementation of solutions, monitoring, adapting, and evaluating.
+                    </li>
+                    
+                </ul>
+             </div>
+        </div>
+        <div class="row gy-4 justify-content-center">
+            <div class="col-xl-3 col-md-6">
+                <div class="process-card">
+                    <p class="box-number">01</p>
+                    <div class="box-content">
+                        <div class="box-icon">
+                            <img src="assets/img/icon/process_card_1_4.svg" alt="icon">
+                        </div>
+                        <h3 class="box-title">Research & Situation Analysis </h3>
+                        <p class="box-text">We work with clients to zero in the problems to be addressed. We have an array of tools and methods to gather data from multiple sources, clarify context and assemble evidence to inform solutions.</p><br>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="process-card">
+                    <p class="box-number">02</p>
+                    <div class="box-content">
+                        <div class="box-icon">
+                            <img src="assets/img/icon/process_card_1_2.svg" alt="icon">
+                        </div>
+                        <h3 class="box-title">Insight & Concept Generation and Testing. </h3>
+                        <p class="box-text">We utilize evidence and expert and beneficiary consultations to find insights and ideas to solve problems and build consensus in multi-stakeholder settings.</p><br><br>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="process-card">
+                    <p class="box-number">03</p>
+                    <div class="box-content">
+                        <div class="box-icon">
+                            <img src="assets/img/icon/process_card_1_3.svg" alt="icon">
+                        </div>
+                        <h3 class="box-title">Implementation Planning and Delivery Support </h3>
+                        <p class="box-text">We support initiative design and restructuring and support delivery of projects through multiple channels and efficient project management processes tailored to context.</p>
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="process-card">
+                    <p class="box-number">04</p>
+                    <div class="box-content">
+                        <div class="box-icon">
+                            <img src="assets/img/icon/process_card_1_1.svg" alt="icon">
+                        </div>
+                        <h3 class="box-title">Results Frameworks, Monitoring, and Evaluation </h3>
+                        <p class="box-text">We develop results frameworks, monitoring, and evaluation systems based to client needs to ensure value for money, learning, informed decision and adaptive programming.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <section class="space overflow-hidden bg-smoke2" id="service-sec">
     <div class="shape-mockup moving" data-top="0" data-left="0">
         <img src="assets/img/shape/service-bg-shape4-1.png" alt="shape">
@@ -171,13 +247,13 @@
                         </div>
                         <div class="box-content">
                             <h3 class="box-title">
-                                <a href="service-details.html">{{ $service->title }}</a>
+                                <a wire:navigate href="/service/details/{{ $service->slug }}">{{ $service->title }}</a>
                             </h3>
                             <p class="box-text">
                                 {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($service->description)), 160, '...') }}
                             </p>
                             <div class="btn-wrap">
-                                <a  href="/service/details/{{ $service->id }}" class="link-btn style2">
+                                <a  wire:navigate href="/service/details/{{ $service->slug }}" class="link-btn style2">
                                     <i class="fas fa-plus-circle me-1"></i>Read More
                                 </a>
                                 <div class="service-card-num">
@@ -358,7 +434,7 @@
                                     <div class="team-card-content">
                                         <div class="team-card-bg" data-bg-src="assets/img/bg/team_card_bg_4.jpg"></div>
                                         <h3 class="box-title">
-                                            <a wire:navigate href="/team-details/{{ $team->id }}">{{$team->name}}</a>
+                                            <a wire:navigate href="/team-details/{{ $team->slug }}">{{$team->name}}</a>
                                         </h3>
                                         <span class="team-desig">{{$team->position}}</span>
                                     </div>
@@ -546,24 +622,24 @@
                                     <div class="blog-card style3">
                                         
                                         <div class="blog-img">
-                                            <a wire:navigate href="/news-and-updates/details/{{ $blog->id }}">
+                                            <a  href="/news-and-updates/details/{{ $blog->slug }}">
                                                 <img src="{{ asset('storage/'.$blog->image) }}" alt="blog image">
                                             </a>
                                         </div>
                                         <div class="blog-content">
                                             <div class="blog-meta">
-                                                <a wire:navigate href="/news-and-updates/details/{{ $blog->id }}">
+                                                <a  href="/news-and-updates/details/{{ $blog->slug }}">
                                                     <i class="fa-light fa-calendar-days"></i>12 April 2024
                                                 </a> 
 
                                             </div>
                                             <h3 class="box-title">
-                                                <a wire:navigate href="/news-and-updates/details/{{ $blog->id }}">{{$blog->title}}</a>
+                                                <a  href="/news-and-updates/details/{{ $blog->slug }}">{{$blog->title}}</a>
                                             </h3>
                                             <p class="blog-text">
                                                 {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($blog->description)), 120, '...') }}
                                             </p>
-                                            <a wire:navigate href="/news-and-updates/details/{{ $blog->id }}" class="link-btn style2">
+                                            <a href="/news-and-updates/details/{{ $blog->slug }}" class="link-btn style2">
                                                 <i class="fas fa-plus-circle me-1"></i>Read More
                                             </a>
                                         </div>

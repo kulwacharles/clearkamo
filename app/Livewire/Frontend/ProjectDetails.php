@@ -7,8 +7,8 @@ use App\Models\Project;
 class ProjectDetails extends Component
 {
      public $project,$teams;
-    public function mount($id){
-        $this->project=Project::find($id);
+    public function mount($slug){
+        $this->project=Project::whereSlug($slug)->first();
         //dd($id);
     }
     public function render()

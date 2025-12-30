@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('publications', function (Blueprint $table) {
             $table->id();
-             $table->integer('category_id');
+            $table->integer('category_id');
             $table->string('title');
+            $table->string('slug')->unique();
             $table->longText('description')->nullable();
             $table->string('image');
             $table->string('status')->default('active');

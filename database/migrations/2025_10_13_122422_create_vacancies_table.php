@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('contract');
             $table->string('title');
+            $table->string('slug')->unique();
             $table->longText('description')->nullable();
             $table->string('image');
             $table->date('post_date');

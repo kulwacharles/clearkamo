@@ -7,9 +7,9 @@ use App\Models\Blog;
 class BlogDetails extends Component
 {
     public $blog,$others,$teams;
-    public function mount($id){
+    public function mount($slug){
         
-        $this->blog=Blog::find($id);
+        $this->blog=Blog::whereSlug($slug)->first();
         $this->others=Blog::where('status','published')->where('id','!=',$this->blog->id)->orderBy('id','desc')->latest()
     ->take(5)
     ->get();;

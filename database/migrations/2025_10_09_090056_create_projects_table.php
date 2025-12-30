@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('category');
             $table->string('project_name');
+            $table->string('slug')->unique();
             $table->longText('description')->nullable();
             $table->string('image');
             $table->date('start_date');

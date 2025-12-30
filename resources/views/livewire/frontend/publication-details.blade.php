@@ -9,7 +9,7 @@
                 <div class="breadcumb-content">
                     <h1 class="breadcumb-title">Publication Details</h1>
                     <ul class="breadcumb-menu">
-                        <li><a href="index-2.html">Home</a></li>
+                        <li><a wire:navigate href="/">Home</a></li>
                         <li>Publication Details</li>
                     </ul>
                 </div>
@@ -18,7 +18,7 @@
     <section class="th-blog-wrapper blog-details space-top space-extra2-bottom">
         <div class="container">
             <div class="row gx-10">
-                <div class="col-xxl-8 col-md-8 col-lg-8">
+                <div class="col-xxl-8 col-md-12 col-lg-8">
                     <div class="th-blog blog-single">
                         <div class="blog-img">
                             <img src="{{ asset('storage/'.$publication->image) }}" alt="Blog Image">
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xxl-4 col-md-4 col-lg-4">
+                <div class="col-xxl-4 col-md-12 col-lg-4">
                     <aside class="sidebar-area">
 
                         <div class="widget">

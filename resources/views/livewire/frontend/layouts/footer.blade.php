@@ -117,20 +117,20 @@
                         <div class="col-lg-6">
                             <p class="copyright-text">
                                 <i class="fal fa-copyright"></i> 2025 All Rights Reserved By 
-                                <a href="index-2.html">ClearKamo</a>
+                                <a wire:navigate href="/">ClearKamo</a>
                             </p>
                         </div>
                         <div class="col-lg-6 text-center text-lg-end">
                             <div class="footer-links">
                                 <ul>
                                     <li>
-                                        <a href="about.html">Privacy Policy</a>
+                                        <a href="#">Privacy Policy</a>
                                     </li>
                                     <li>
-                                        <a href="about.html">Terms & Condition</a>
+                                        <a href="#">Terms & Condition</a>
                                     </li>
                                     <li>
-                                        <a href="about.html">Support policy</a>
+                                        <a href="#">Support policy</a>
                                     </li>
                                 </ul>
                             </div>

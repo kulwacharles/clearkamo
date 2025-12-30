@@ -7,8 +7,8 @@ use App\Models\Service;
 class ServiceDetails extends Component
 {
     public $service,$teams;
-    public function mount($id){
-        $this->service=Service::find($id);
+    public function mount($slug){
+        $this->service=Service::whereSlug($slug)->first();
         //dd($id);
     }
     public function render()

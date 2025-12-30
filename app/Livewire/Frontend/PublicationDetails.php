@@ -7,8 +7,8 @@ use App\Models\Publication;
 class PublicationDetails extends Component
 {
     public $publication,$teams;
-    public function mount($id){
-        $this->publication=Publication::find($id);
+    public function mount($slug){
+        $this->publication=Publication::whereSlug($slug)->first();
         //dd($id);
     }
     public function render()

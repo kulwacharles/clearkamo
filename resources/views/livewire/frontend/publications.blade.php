@@ -25,7 +25,7 @@
                      @foreach ($publications as $publication)
                     <div class="th-blog blog-single has-post-thumbnail">
                         <div class="blog-img">
-                            <a href="blog-details.html">
+                            <a wire:navigate href="/publication/details/{{ $publication->slug }}">
                                 <img src="{{ asset('storage/'.$publication->image) }}" alt="Blog Image">
                             </a>
                         </div>
@@ -40,12 +40,12 @@
                                
                              </div>
                             <h2 class="blog-title">
-                                <a href="/publication/details/{{ $publication->id }}">{{$publication->title}}</a>
+                                <a wire:navigate href="/publication/details/{{ $publication->slug }}">{{$publication->title}}</a>
                             </h2>
                             <p class="blog-text">
                                  {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($publication->description)), 350, '...') }}
                             </p>
-                            <a href="/publication/details/{{ $publication->id }}" class="th-btn">Read More
+                            <a wire:navigate href="/publication/details/{{ $publication->slug }}" class="th-btn">Read More
                                 <div class="icon">
                                     <i class="fa-solid fa-arrow-up-right ms-3"></i>
                                 </div>
