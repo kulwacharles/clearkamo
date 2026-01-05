@@ -41,10 +41,10 @@ Route::middleware('guest')->group(function () {
 Route::middleware(['auth'])->prefix('/admin')->group(function () {
     Route::get('sliders',Sliders::class)->name('sliders');
     Route::get('about-us',Abouts::class)->name('admin.about');
-    Route::get('blog-posts',BackendBlog::class)->name('blogs');
-    Route::get('publications',BackendPublications::class)->name('publications');
-    Route::get('projects',BackendProject::class)->name('projects');
-    Route::get('services',BackendService::class)->name('services');
+    Route::get('blog-posts',BackendBlog::class)->name('admin.blogs');
+    Route::get('publications',BackendPublications::class)->name('admin.publications');
+    Route::get('projects',BackendProject::class)->name('admin.projects');
+    Route::get('services',BackendService::class)->name('admin.services');
     Route::get('vacancies',VacancyBackend::class)->name('admin.vacancies');
     Route::get('team',BackendTeam::class)->name('admin.team');
     Route::get('testimony',TestimonyBackend::class)->name('admin.testimony');
