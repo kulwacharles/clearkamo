@@ -107,9 +107,9 @@
                     </div>
                     <div class="col-md-6">
                         <div class="year-counter style2">
-                            <div class="icon">
+                            {{-- <div class="icon">
                                 <img src="assets/img/icon/about_counter_icon_1.svg" alt="img">
-                            </div>
+                            </div> --}}
                             <div class="year-counter_number">
                                 <span class="counter-number">25</span>
                             </div>
@@ -185,7 +185,7 @@
                             <img src="assets/img/icon/process_card_1_2.svg" alt="icon">
                         </div>
                         <h3 class="box-title">Insight & Concept Generation and Testing. </h3>
-                        <p class="box-text">We utilize evidence and expert and beneficiary consultations to find insights and ideas to solve problems and build consensus in multi-stakeholder settings.</p><br><br>
+                        <p class="box-text">We utilize evidence and expert and beneficiary consultations to find insights and ideas to solve problems and build consensus in multi-stakeholder settings.</p><br>
                     </div>
                 </div>
             </div>
