@@ -11,12 +11,12 @@ class BackendProjectModal extends Component
 {
     use WithFileUploads;
 
-    public $title, $category, $description, $image, $imagePath, $blogId,$startDate,$endDate,$amountFunded;
+    public $title, $category, $description, $image, $imagePath, $blogId,$startDate,$endDate,$amountFunded,$keywords;
     public $status = 'draft';
     public $currentImage;
     
     // View modal properties
-    public $viewTitle, $viewCategory, $viewDescription, $viewStatus, $viewImage,$viewstartDate,$viewendDate,$viewamountFunded;
+    public $viewTitle, $viewCategory, $viewDescription, $viewStatus, $viewImage,$viewstartDate,$viewendDate,$viewamountFunded,$viewKeywords;
 
     protected $rules = [
         'title'=> 'required|min:3|max:255',
@@ -72,6 +72,7 @@ class BackendProjectModal extends Component
         $blog->amount_funded = $this->amountFunded;
         $blog->image       = $imagePath;
         $blog->status      = $this->status;
+        $blog->keywords    = $this->keywords;
 
         $result = $blog->save();
         
@@ -98,6 +99,7 @@ class BackendProjectModal extends Component
         $this->startDate = $blog->start_date;
         $this->endDate   = $blog->end_date;
         $this->amountFunded = $blog->amount_funded;
+        $this->keywords = $blog->keywords;
         $this->dispatch('set-ckeditor-content', content: $blog->description);
         $this->dispatch('open-modal', 'editBlogModal');
     }
@@ -132,6 +134,7 @@ class BackendProjectModal extends Component
         $blog->start_date  = $this->startDate;
         $blog->end_date    = $this->endDate;
         $blog->amount_funded = $this->amountFunded;
+        $blog->keywords    = $this->keywords;
         $result = $blog->save();
         
         if($result){
@@ -155,6 +158,7 @@ class BackendProjectModal extends Component
         $this->viewstartDate = $blog->start_date;
         $this->viewendDate = $blog->end_date;
         $this->viewamountFunded = $blog->amount_funded;
+        $this->viewKeywords = $blog->keywords;
         $this->dispatch('open-modal', 'viewBlogModal');
     }
 
@@ -187,6 +191,7 @@ class BackendProjectModal extends Component
         $this->startDate   = null;
         $this->endDate      = null;
         $this->amountFunded = null;
+        $this->keywords    = null;
     }
 
     public function render()

@@ -9,13 +9,15 @@ use App\Models\Blog;
 use App\Models\Client;
 use App\Models\Service;
 use Livewire\Component;
+use Illuminate\Support\Str;
 
 class Home extends Component
 {
-        public $title, $description, $years_of_experience, $image, $image2,$testimonies,$blogs,$services,$clients;
+        public $title, $description,$seodescription, $years_of_experience, $image, $image2,$testimonies,$blogs,$services,$clients;
         public $id, $imagePath, $image2Path, $about1, $about2;
         public $slides=null;
-        public $teams;
+        public $teams,$keywords;
+        
 
         public function mount()
     {
@@ -33,7 +35,8 @@ class Home extends Component
             $this->years_of_experience = $about->ex_years;
             $this->about1 = $about->image;
             $this->about2 = $about->image2;
-
+            $this->keywords = $about->keywords;
+            $this->seodescription=Str::limit($this->description, 350, '...');
             // Push initial description into CKEditor
             //$this->dispatch('load-ckeditor-data', $this->description);
         }
@@ -41,6 +44,6 @@ class Home extends Component
     }
     public function render()
     {
-        return view('livewire.frontend.home')->layout("components.layouts.frontend");
+        return view('livewire.frontend.home')->layout("components.layouts.frontend", ["title"=>$this->title,"description"=>Str::limit(html_entity_decode(strip_tags($this->description)), 350, '...'),"keywords"=>$this->keywords,"image"=>$this->image]);
     }
 }

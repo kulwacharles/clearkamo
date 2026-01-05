@@ -1,3 +1,4 @@
+
 <div>
      <div class="breadcumb-wrapper" data-bg-src="{{asset('assets/img/bg/breadcumb-bg.jpg')}}">
         <div class="breadcumb-shape1">
@@ -52,7 +53,7 @@
                                         <span class="left-angle-shape"></span> 
                                         <span class="right-angle-shape"></span>
                                         <h3 class="project-title">
-                                            <a wire:navigate href="/project-details/{{ $project->id }}">{{ $project->title }}</a>
+                                            <a wire:navigate href="/project-details/{{ $project->slug }}">{{ $project->title }}</a>
                                         </h3>
                                         <p class="project-subtitle">{{$project->category}}</p>
                                     </div>

@@ -11,12 +11,12 @@ class BackendTeamModal extends Component
 {
     use WithFileUploads;
 
-    public $name, $salute, $description, $image, $imagePath, $blogId,$email,$linkedin,$instagram,$twitter,$facebook,$youtube,$position;
+    public $name, $salute, $description, $image, $imagePath, $blogId,$email,$linkedin,$instagram,$twitter,$facebook,$youtube,$position,$keywords;
     public $status = 'draft';
     public $currentImage;
     
     // View modal properties
-    public $viewName, $viewCategory, $viewDescription, $viewStatus, $viewImage,$viewRmail,$viewLinkedin,$viewInstagram,$viewTwitter,$viewFacebook,$viewYoutube,$viewPosition;
+    public $viewName, $viewCategory, $viewDescription, $viewStatus, $viewImage,$viewEmail,$viewLinkedin,$viewInstagram,$viewTwitter,$viewFacebook,$viewYoutube,$viewPosition,$viewKeywords;
 
     protected $rules = [
         'name'       => 'required|min:3|max:255',
@@ -70,6 +70,7 @@ class BackendTeamModal extends Component
         $blog->position    = $this->position;
         $blog->image       = $imagePath;
         $blog->status      = $this->status;
+        $blog->keywords    = $this->keywords;
 
         $result = $blog->save();
         
@@ -100,6 +101,7 @@ class BackendTeamModal extends Component
         $this->position = $blog->position ;
         $this->linkedin = $blog->linkedin;
         $this->email = $blog->email;
+        $this->keywords = $blog->keywords;
         $this->dispatch('set-ckeditor-content', content: $blog->description);
         $this->dispatch('open-modal', 'editBlogModal');
     }
@@ -138,6 +140,7 @@ class BackendTeamModal extends Component
         $blog->position    = $this->position;
         $blog->image       = $imagePath;
         $blog->status      = $this->status;
+        $blog->keywords    = $this->keywords;
 
         $result = $blog->save();
         
@@ -165,6 +168,8 @@ class BackendTeamModal extends Component
         $this->viewTwitter = $blog->twitter ;
         $this->viewPosition = $blog->position ;
         $this->viewLinkedin = $blog->linkedin;
+        $this->viewEmail = $blog->email;
+        $this->viewKeywords = $blog->keywords;
         $this->dispatch('open-modal', 'viewBlogModal');
     }
 
@@ -201,6 +206,7 @@ class BackendTeamModal extends Component
         $this->youtube       = null;
         $this->twitter    = null;
         $this->position   = null;
+        $this->keywords    = null;
     }
         public function render()
     {

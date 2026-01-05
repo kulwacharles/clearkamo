@@ -57,11 +57,11 @@
                             </button>
                         </div>
 
-                        <div class="text-center mt-3">
+                        {{-- <div class="text-center mt-3">
                             <a href="{{ route('register') }}" class="text-decoration-none">
                                 Don't have an account? Register here
                             </a>
-                        </div>
+                        </div> --}}
                     </form>
                 </div>
             </div>

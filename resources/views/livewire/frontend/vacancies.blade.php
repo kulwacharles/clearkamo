@@ -1,3 +1,4 @@
+
 <div>
     <div class="breadcumb-wrapper" data-bg-src="assets/img/bg/breadcumb-bg.jpg">
         <div class="breadcumb-shape1">
@@ -31,21 +32,21 @@
                         </div>
                         <div class="blog-content">
                             <div class="blog-meta">
-                                <a class="author" href="blog.html">
+                                <a class="author" href="/vacancy/details/{{ $vacancie->slug }}">
                                     <i class="far fa-user"></i>Publicated by Admin
                                 </a>
-                                 <a href="blog.html">
+                                 <a href="/vacancy/details/{{ $vacancie->slug }}">
                                     <i class="fa-light fa-calendar-days"></i>{{$vacancie->created_at->format('d F, Y')}}
                                 </a>
                                
                              </div>
                             <h2 class="blog-title">
-                                <a href="/vacancy/details/{{ $vacancie->id }}">{{$vacancie->title}}</a>
+                                <a href="/vacancy/details/{{ $vacancie->slug }}">{{$vacancie->title}}</a>
                             </h2>
                             <p class="blog-text">
                                  {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($vacancie->description)), 350, '...') }}
                             </p>
-                            <a href="/vacancy/details/{{ $vacancie->id }}" class="th-btn">Read More
+                            <a href="/vacancy/details/{{ $vacancie->slug }}" class="th-btn">Read More
                                 <div class="icon">
                                     <i class="fa-solid fa-arrow-up-right ms-3"></i>
                                 </div>

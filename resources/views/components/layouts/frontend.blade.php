@@ -3,8 +3,17 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>ClearKamo </title>
-    <meta name="author" content="Konsal"><meta name="description" content="ClearKamo"><meta name="keywords" content="ClearKamo">
+      <title>{{ $title ?? 'ClearKamo' }}</title>
+    <meta name="author" content="ClearKamo">
+    <meta name="description" content="{{ $description ?? 'ClearKamo' }}">
+    <meta name="keywords" content="{{ $keywords ?? 'clearkamo, project clear' }}">
+        
+    <meta property="og:title" content="{{ $title ?? 'ClearKamo' }}">
+    <meta property="og:description" content="{{ $description ?? 'ClearKamo' }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="{{ asset('storage/'.$image ?? 'assets/img/og-image.jpg') }}">
+  
     <meta name="robots" content="INDEX,FOLLOW">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
     {{-- <link rel="apple-touch-icon" sizes="57x57" href="{{asset('assets/img/favicons/apple-icon-57x57.png')}}">

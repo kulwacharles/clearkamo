@@ -12,5 +12,8 @@ class About extends Model
         'ex_years',
         'image',
         'image2',
+        'image3',
+        'keywords',
+        'logo',
     ];
 }

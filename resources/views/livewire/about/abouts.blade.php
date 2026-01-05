@@ -31,6 +31,14 @@
                                             @error('years_of_experience') <span class="text-red-500">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
+                                     <div class="mb-3" >
+                                        <label class="form-label" for="inputAddress">Keywords</label>
+                                         <textarea name="keywords"  wire:model.lazy="keywords" class="form-control">
+                                            {?? $keywords ??}
+                                         </textarea>
+                                      
+                                         @error('keywords') <span class="text-red-500">{{ $message }}</span> @enderror
+                                    </div>
                                     <div class="mb-3" wire:ignore>
                                         <label class="form-label" for="inputAddress">Descriptions</label>
                                          <textarea name="description" id="description" wire:model.defer="description">

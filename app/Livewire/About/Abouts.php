@@ -10,7 +10,7 @@ class Abouts extends Component
 {
     use WithFileUploads;
 
-    public $title, $description, $years_of_experience, $image, $image2,$image3,$logo;
+    public $title, $description, $years_of_experience, $image, $image2,$image3,$logo,$keywords;
     public $id, $imagePath, $image2Path,$image3Path, $about1, $about2,$about3,$about4,$logoPath;
 
     protected $rules = [
@@ -21,6 +21,7 @@ class Abouts extends Component
         'image2' => 'nullable|image|max:2048',
         'image3' => 'nullable|image|max:2048',
         'logo'   => 'nullable|image|max:2048',
+        'keywords' => 'required|string',
     ];
 
     protected $messages = [
@@ -33,7 +34,9 @@ class Abouts extends Component
         'image.image' => 'The Image must be a valid image.',
         'image2.image' => 'The Image must be a valid image.',
         'image3.image' => 'The Image must be a valid image.',
-        'logo.image'  => "Logo must be a valid format"
+        'logo.image'  => "Logo must be a valid format",
+        'keywords.required' => "Keywords are required",
+        'keywords.string' => "Keywords must be a string.",
     ];
 
     public function mount()
@@ -49,7 +52,7 @@ class Abouts extends Component
             $this->about2 = $about->image2;
             $this->about3 = $about->image3;
             $this->about4 = $about->logo;
-            
+            $this->keywords=$about->keywords;
             // Push initial description into CKEditor
             $this->dispatch('load-ckeditor-data', $this->description);
         }
@@ -103,6 +106,7 @@ class Abouts extends Component
             $this->logoPath = $this->about4;
         }
    //dd($this->logoPath);
+        //dd($this->keywords);
         $here=About::updateOrCreate(
             ['id' => $this->id],
             [
@@ -113,6 +117,7 @@ class Abouts extends Component
                 'image3' => $this->image3Path,
                 'logo' => $this->logoPath,
                 'description' => $this->description,
+                'keywords'=>$this->keywords
             ]
         );
         //dd($here);

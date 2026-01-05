@@ -11,12 +11,12 @@ class PublicationsModal extends Component
 {
     use WithFileUploads;
 
-    public $title, $category, $description, $image, $imagePath, $pubId,$published_date;
+    public $title, $category, $description, $image, $imagePath, $pubId,$published_date,$keywords;
     public $status = 'draft';
     public $currentImage;
     
     // View modal properties
-    public $viewTitle, $viewCategory, $viewDescription, $viewStatus, $viewImage,$viewPublishedDate;
+    public $viewTitle, $viewCategory, $viewDescription, $viewStatus, $viewImage,$viewPublishedDate,$viewKeywords;
 
     protected $rules = [
         'title'       => 'required|min:3|max:255',
@@ -65,7 +65,8 @@ class PublicationsModal extends Component
         $pub->description = $this->description;
         $pub->image       = $imagePath;
         $pub->status      = $this->status;
-
+        $pub->published_date = $this->published_date;
+        $pub->keywords    = $this->keywords;
         $result = $pub->save();
         
         if($result){
@@ -89,6 +90,7 @@ class PublicationsModal extends Component
         $this->status = $pub->status;
         $this->currentImage = $pub->image;
         $this->published_date = $pub->published_date;
+        $this->keywords = $pub->keywords;
         $this->dispatch('set-ckeditor-content', content: $pub->description);
         $this->dispatch('open-modal', 'editPubModal');
     }
@@ -121,6 +123,7 @@ class PublicationsModal extends Component
         $pub->published_date = $this->published_date;
         $pub->image       = $imagePath;
         $pub->status      = $this->status;
+        $pub->keywords    = $this->keywords;
 
         $result = $pub->save();
         
@@ -143,6 +146,7 @@ class PublicationsModal extends Component
         $this->viewStatus = $pub->status;
         $this->viewImage = $pub->image;
         $this->viewPublishedDate = $pub->published_date;
+        $this->viewKeywords = $pub->keywords;
         $this->dispatch('open-modal', 'viewPubModal');
     }
 
@@ -172,6 +176,8 @@ class PublicationsModal extends Component
         $this->pubId      = null;
         $this->status      = 'draft';
         $this->currentImage = null;
+        $this->published_date = null;
+        $this->keywords    = null;
     }
 
     public function render()

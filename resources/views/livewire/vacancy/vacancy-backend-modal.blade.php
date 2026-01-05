@@ -91,7 +91,11 @@
                                 @error('status') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
-
+                         <div class="mb-3" wire:ignore>
+                            <label>Keywords</label>
+                            <textarea class="form-control" wire:model.defer="keywords"></textarea>
+                            @error('keywords') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
                         <div class="mb-3" wire:ignore>
                             <label>Description</label>
                             <textarea id="description"></textarea>
@@ -215,6 +219,11 @@
                                 </select>
                                 @error('status') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
+                        </div>
+                         <div class="mb-3" wire:ignore>
+                            <label>Keywords</label>
+                            <textarea class="form-control" wire:model.defer="keywords"></textarea>
+                            @error('keywords') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="mb-3" wire:ignore>
                             <label>Description</label>
@@ -347,6 +356,12 @@
                                     No Due Date
                                 @endif
                             </p>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">Keywords</label>
+                        <div class="blog-content-preview border rounded p-3 ">
+                            {!! $viewKeywords ?? 'No keywords' !!}
                         </div>
                     </div>
                     <div class="mb-3">

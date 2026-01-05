@@ -1,3 +1,4 @@
+
 <div>
     <div class="breadcumb-wrapper" data-bg-src="assets/img/bg/breadcumb-bg.jpg">
         <div class="breadcumb-shape1">
@@ -76,12 +77,12 @@
                                
                              </div> --}}
                             <h2 class="blog-title">
-                                <a wire:navigate href="/service/details/{{ $service->id }}">{{$service->title}}</a>
+                                <a wire:navigate href="/service/details/{{ $service->slug }}">{{$service->title}}</a>
                             </h2>
                             <p class="blog-text">
                                  {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($service->description)), 350, '...') }}
                             </p>
-                            <a wire:navigate href="/service/details/{{ $service->id }}" class="th-btn">Read More
+                            <a wire:navigate href="/service/details/{{ $service->slug }}" class="th-btn">Read More
                                 <div class="icon">
                                     <i class="fa-solid fa-arrow-up-right ms-3"></i>
                                 </div>

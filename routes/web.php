@@ -36,7 +36,7 @@ use App\Models\Blog;
 //Auth::routes();
 Route::middleware('guest')->group(function () {
     Route::get('/admin/login', Login::class)->name('login');
-    Route::get('/admin/register', Register::class)->name('register');
+    //Route::get('/admin/register', Register::class)->name('register');
 });
 Route::middleware(['auth'])->prefix('/admin')->group(function () {
     Route::get('sliders',Sliders::class)->name('sliders');

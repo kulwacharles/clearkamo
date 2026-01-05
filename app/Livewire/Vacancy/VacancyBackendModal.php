@@ -12,12 +12,12 @@ class VacancyBackendModal extends Component
 
     use WithFileUploads;
 
-    public $title, $category, $description, $image, $imagePath, $blogId, $PostDate,$DueDate,$Positions,$Department,$ReportTo,$contract;
+    public $title, $category, $description, $image, $imagePath, $blogId, $PostDate,$DueDate,$Positions,$Department,$ReportTo,$contract,$keywords;
     public $status = 'draft';
     public $currentImage;
     
     // View modal properties
-    public $viewTitle, $viewContract, $viewDescription, $viewStatus, $viewImage,$viewPostDate,$viewDueDate,$viewPositions,$viewDepartment,$viewReportTo;
+    public $viewTitle, $viewContract, $viewDescription, $viewStatus, $viewImage,$viewPostDate,$viewDueDate,$viewPositions,$viewDepartment,$viewReportTo,$viewKeywords;
 
     protected $rules = [
         'title'       => 'required|min:3|max:255',
@@ -79,7 +79,8 @@ class VacancyBackendModal extends Component
         $blog->due_date    = $this->DueDate;
         $blog->positions   = $this->Positions;
         $blog->report_to   = $this->ReportTo;
-        $blog->department  = $this->Department; 
+        $blog->department  = $this->Department;
+        $blog->keywords    = $this->keywords;
         $result = $blog->save();
         
         if($result){
@@ -107,6 +108,7 @@ class VacancyBackendModal extends Component
         $this->Positions = $blog->positions;
         $this->ReportTo = $blog->report_to;
         $this->Department=$blog->department;
+        $this->keywords = $blog->keywords;
         $this->dispatch('set-ckeditor-content', content: $blog->description);
         $this->dispatch('open-modal', 'editBlogModal');
     }
@@ -143,6 +145,7 @@ class VacancyBackendModal extends Component
         $blog->positions   = $this->Positions;
         $blog->report_to   = $this->ReportTo;
         $blog->department  = $this->Department;
+        $blog->keywords    = $this->keywords;
         $result = $blog->save();
         
         if($result){
@@ -168,6 +171,7 @@ class VacancyBackendModal extends Component
         $this->viewPostDate = $blog->post_date;
         $this->viewPositions = $blog->positions;
         $this->viewImage = $blog->image;
+        $this->viewKeywords = $blog->keywords;
         
         $this->dispatch('open-modal', 'viewBlogModal');
     }
@@ -203,6 +207,7 @@ class VacancyBackendModal extends Component
         $this->Department=null;
         $this->Positions = null;
         $this->ReportTo = null;
+        $this->keywords    = null;
     }
 
 

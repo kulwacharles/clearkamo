@@ -1,3 +1,4 @@
+
 <div>
     <div class="breadcumb-wrapper" data-bg-src="assets/img/bg/breadcumb-bg.jpg">
         <div class="breadcumb-shape1">
@@ -31,10 +32,10 @@
                         </div>
                         <div class="blog-content">
                             <div class="blog-meta">
-                                <a class="author" href="blog.html">
+                                <a class="author" href="/news-and-updates/details/{{ $blog->slug }}">
                                     <i class="far fa-user"></i>Post By Admin
                                 </a>
-                                 <a href="blog.html">
+                                 <a href="/news-and-updates/details/{{ $blog->slug }}">
                                     <i class="fa-light fa-calendar-days"></i>{{$blog->updated_at->format('d F, Y')}}
                                 </a>
                                

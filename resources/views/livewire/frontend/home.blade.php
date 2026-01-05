@@ -1,5 +1,11 @@
+{{-- @section('title',$title)
+@section('description',$seodescription)
+@section('keywords',$keywords) --}}
 <div>
+    
+
     <div class="th-hero-wrapper hero-4" id="hero" data-bg-src="assets/img/hero/hero_bg_4_1.jpg">
+       
     <div class="swiper th-slider" id="heroSlider4" data-slider-options='{"effect":"fade"}'>
         <div class="swiper-wrapper">
             @if($slides !=null)
@@ -227,7 +233,7 @@
                 <div class="title-area text-center">
                     <span class="sub-title">
                         <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
-                        Our Area of Focus
+                        Our Services
                         <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
                     </span>
                     <h2 class="sec-title">Beyond Boundaries Into Success</h2>

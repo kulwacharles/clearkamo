@@ -11,12 +11,12 @@ class BackendBlogModal extends Component
 {
     use WithFileUploads;
 
-    public $title, $category, $description, $image, $imagePath, $blogId;
+    public $title, $category, $description, $image, $imagePath, $blogId,$keywords;
     public $status = 'draft';
     public $currentImage;
     
     // View modal properties
-    public $viewTitle, $viewCategory, $viewDescription, $viewStatus, $viewImage;
+    public $viewTitle, $viewCategory, $viewDescription, $viewStatus, $viewImage, $viewKeywords;
 
     protected $rules = [
         'title'       => 'required|min:3|max:255',
@@ -63,6 +63,7 @@ class BackendBlogModal extends Component
         $blog->description = $this->description;
         $blog->image       = $imagePath;
         $blog->status      = $this->status;
+        $blog->keywords    = $this->keywords;
 
         $result = $blog->save();
         
@@ -86,7 +87,7 @@ class BackendBlogModal extends Component
         $this->description = $blog->description;
         $this->status = $blog->status;
         $this->currentImage = $blog->image;
-        
+        $this->keywords = $blog->keywords;
         $this->dispatch('set-ckeditor-content', content: $blog->description);
         $this->dispatch('open-modal', 'editBlogModal');
     }
@@ -118,7 +119,7 @@ class BackendBlogModal extends Component
         $blog->description = $this->description;
         $blog->image       = $imagePath;
         $blog->status      = $this->status;
-
+        $blog->keywords    = $this->keywords;
         $result = $blog->save();
         
         if($result){
@@ -139,7 +140,7 @@ class BackendBlogModal extends Component
         $this->viewDescription = $blog->description;
         $this->viewStatus = $blog->status;
         $this->viewImage = $blog->image;
-        
+        $this->viewKeywords = $blog->keywords;
         $this->dispatch('open-modal', 'viewBlogModal');
     }
 
@@ -169,6 +170,7 @@ class BackendBlogModal extends Component
         $this->blogId      = null;
         $this->status      = 'draft';
         $this->currentImage = null;
+        $this->keywords    = null;
     }
 
     public function render()
