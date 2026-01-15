@@ -10,7 +10,7 @@
                         <img src="{{ url('/storage/'.$logo) }}" alt="ProjectClear-Logo">
                     </a>
                 </div>
-                <p class="about-text">Consulting services can provide valuable insights, strategic guidance, pecialized
+                <p class="about-text">Consulting services can provide valuable insights, strategic guidance, specialized
 
                 </p>
                 <div class="info-box">
@@ -216,6 +216,9 @@
                                     <li >
                                         <a wire:navigate href="/vacancies">Vacancies</a>
                                     </li>
+                                    <li>
+                                        <a wire:navigate  href="/contact-us">Contact Us</a>
+                                    </li>  
                                     {{-- <li>
                                         <a wire:navigate  href="/contact-us">Contact Us</a>
                                     </li> --}}
@@ -226,7 +229,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="col-auto d-none d-xl-block">
+                        {{-- <div class="col-auto d-none d-xl-block">
                             <div class="header-button">
                                 <button type="button" class="simple-icon searchBoxToggler"><i class="far fa-search"></i>
                                 </button> 
@@ -238,7 +241,7 @@
                                         </a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

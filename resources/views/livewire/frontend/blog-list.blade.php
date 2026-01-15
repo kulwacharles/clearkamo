@@ -127,7 +127,7 @@
                                     @foreach ($recents as $recent)
                                     <div class="recent-post">
                                         <div class="media-img">
-                                            <a wire:navigate href="/news-and-updates/details/{{ $recent->id }}">
+                                            <a wire:navigate href="/news-and-updates/details/{{ $recent->slug }}">
                                                 <img src="{{ asset('storage/'.$recent->image) }}" alt="Blog Image">
                                             </a>
                                         </div>
@@ -139,7 +139,7 @@
                                                 </a>
                                             </div>
                                             <h4 class="post-title">
-                                                <a wire:navigate class="text-inherit" href="/news-and-updates/details/{{ $recent->id }}">{{ $recent->title }}</a>
+                                                <a wire:navigate class="text-inherit" href="/news-and-updates/details/{{ $recent->slug }}">{{ $recent->title }}</a>
                                             </h4>
                                         </div>
                                     </div>  

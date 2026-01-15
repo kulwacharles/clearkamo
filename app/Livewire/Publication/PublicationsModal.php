@@ -182,6 +182,6 @@ class PublicationsModal extends Component
 
     public function render()
     {
-        return view('livewire.publication.Publications-modal');
+        return view('livewire.publication.publications-modal');
     }
 }
