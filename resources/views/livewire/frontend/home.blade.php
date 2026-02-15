@@ -2,146 +2,101 @@
 @section('description',$seodescription)
 @section('keywords',$keywords) --}}
 <div>
-    
-
-    <div class="th-hero-wrapper hero-4" id="hero" data-bg-src="assets/img/hero/hero_bg_4_1.jpg">
-       
-    <div class="swiper th-slider" id="heroSlider4" data-slider-options='{"effect":"fade"}'>
-        <div class="swiper-wrapper">
-            @if($slides !=null)
-                @foreach ($slides as $slide)
-                    <div class="swiper-slide">
-                        <div class="hero-inner">
-                            <div class="hero-img">
-                                <img src="{{ url('/storage/'.$slide->image) }}" alt="Image">
+    @if($about)
+    <div class="space" id="about-sec" style="overflow: visible;">
+        <div class="container" style="overflow: visible;">
+            <div class="row align-items-center" style="overflow: visible;">
+                <div class="col-xl-6 mb-50 mb-xl-0" style="overflow: visible;">
+                    <div class="img-box4 position-relative" style="overflow: visible;">
+                        <div class="img1">
+                            <img src="{{ asset('storage/'.$about->image) }}" alt="About" class="img-fluid rounded-3 shadow-lg border-4 border-white">
+                        </div>
+                        <div class="img2 jump-reverse position-absolute" style="top: 20%; left: 70%; transform: translate(-10%, -15%); width: 90%; z-index: 2;">
+                            <img src="{{ asset('storage/'.$about->image2) }}" alt="About" class="img-fluid rounded-3 shadow-lg border-4 border-white">
+                        </div>
+                        <!-- Decorative Elements -->
+                        <div class="shape-mockup jump d-none d-xl-block position-absolute" style="top: 0px; left: -50px; z-index: 1;">
+                            <div class="border-primary border-4" style="height: 180px; width: 3px;"></div>
+                            <div class="bg-primary rounded-circle mx-auto" style="width: 12px; height: 12px; margin-top: 10px;"></div>
+                            <div class="border-primary border-4" style="height: 180px; width: 3px;"></div>
+                        </div>
+                        <div class="shape-mockup jump-reverse d-none d-xl-block position-absolute" style="top: 20%; right: -100px; z-index: 3;">
+                            <div class="d-flex flex-wrap" style="width: 60px;">
+                                @for ($i = 0; $i < 24; $i++)
+                                    <div class="bg-primary rounded-circle m-1" style="width: 4px; height: 4px;"></div>
+                                @endfor
                             </div>
-                            <div class="container">
-                                <div class="row justify-content-end">
-                                    <div class="col-lg-6">
-                                        <div class="hero-style4">
-                                            <span class="sub-title" data-ani="slideinup" data-ani-delay="0.2s">
-                                                {{ $slide->group }}
-                                            </span>
-                                            <h1 class="hero-title">
-                                                <span class="title1" data-ani="slideinup" data-ani-delay="0.4s">
-                                                    {{ $slide->title }}
-                                                </span> 
-                                              
-                                            </h1>
-                                            <p class="hero-text text-white" data-ani="slideinup" data-ani-delay="0.6s">
-                                                <i style="color:white">
-                                                    {!! $slide->description !!}
-                                                </i>
-                                            </p>
-                                            <div class="btn-group" data-ani="slideinup" data-ani-delay="0.7s">
-                                                <a href="/contact-us" class="th-btn style3">
-                                                    GET START
-                                                    <div class="icon">
-                                                        <i class="fa-solid fa-arrow-up-right ms-3">
-
-                                                        </i>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="title-area mb-30">
+                        <span class="sub-title text-primary">
+                            <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
+                            WHO WE ARE
+                            <img class="ms-1" src="assets/img/theme-img/title_icon.svg" alt="img">
+                        </span>
+                        <h3 class="sec-title">{{ $about->title }}</h3>
+                        <p class="sec-text">{!! $about->description !!}</p>
+                    </div>
+                    <div class="row gy-40">
+                        <div class="col-lg-8">
+                            <div class="mission-vision-core-values" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); padding: 30px; border-radius: 15px; border-left: 4px solid #3b82f6;">
+                                <div class="mb-4">
+                                    <h4 class="text-primary mb-3" style="font-weight: 600; font-size: 1.1rem;">
+                                        <i class="fas fa-bullseye me-2"></i>Mission
+                                    </h4>
+                                    <p style="color: #64748b; line-height: 1.6; margin-bottom: 0;">To apply decision science and systems design to help organizations define long-term strategies and translate them into clear, executable decisions that deliver reliable results under real-world conditions.</p>
+                                </div>
+                                <div class="mb-4">
+                                    <h4 class="text-primary mb-3" style="font-weight: 600; font-size: 1.1rem;">
+                                        <i class="fas fa-eye me-2"></i>Vision
+                                    </h4>
+                                    <p style="color: #64748b; line-height: 1.6; margin-bottom: 0;">To be partner of choice for organizations seeking dependable execution and sustained results.</p>
+                                </div>
+                                <div>
+                                    <h4 class="text-primary mb-3" style="font-weight: 600; font-size: 1.1rem;">
+                                        <i class="fas fa-gem me-2"></i>Core Values
+                                    </h4>
+                                    <p style="color: #64748b; line-height: 1.6; margin-bottom: 0;">Community/Customer-centred; Local relevance with global reach; Evidence-based practice; Accountable results; Responsible innovation.</p>
                                 </div>
                             </div>
-                            <div class="hero-shape1">
-                                <img src="assets/img/hero/hero_bg_shape4_1.jpg" alt="img">
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="year-counter style2" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); padding: 40px 30px; border-radius: 15px; text-align: center; color: white;">
+                                <div class="year-counter_number">
+                                    <span class="counter-number" style="font-size: 3rem; font-weight: 700; color: white;">{{ $about->ex_years ?? 25 }}</span>
+                                </div>
+                                <p class="year-counter_text" style="color: white; margin: 0; font-size: 1.1rem;">Years Of Experience</p>
                             </div>
                         </div>
-                    </div>                    
-                @endforeach
-
-            @endif
-        </div>
-        <div class="icon-box">
-            <button data-slider-prev="#heroSlider4" class="slider-arrow default">
-                <i class="far fa-arrow-left"></i>
-            </button> 
-            <button data-slider-next="#heroSlider4" class="slider-arrow default">
-                <i class="far fa-arrow-right"></i>
-            </button>
-        </div>
-    </div>
-</div>
-<div class="overflow-hidden space" id="about-sec">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-xl-6 mb-50 mb-xl-0">
-                <div class="img-box4">
-                    <div class="img1">
-                        <img src="assets/img/normal/about_4_1.png" alt="About">
                     </div>
-                    <div class="img2 jump-reverse">
-                        <img src="assets/img/normal/about_shape4_1.png" alt="img">
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-6">
-                <div class="title-area mb-30">
-                    <span class="sub-title">
-                        <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
-                        WHO WE ARE
-                        <img class="ms-1" src="assets/img/theme-img/title_icon.svg" alt="img">
-                    </span>
-                    <h3 class="sec-title">AN IMPACT DRIVEN BUSINESS </h3>
-                    <p class="sec-text">Founded in 2017, PCL is headquartered in Dar es Salaam, Tanzania, with an office in London, UK. Drawing on the expertise of a network of multidisciplinary partners and advisors, PCL explores needs and wants to derive insights and effect large scale change with measurable impact and maximum efficiency. Its management team has decades of experience, working with large private, government and non-government organisations like the World Bank, WaterAid, CIDRZ, Unilever, Tanzanian and Zambian national governments, across five continents.</p>
-                </div>
-                <div class="row gy-40">
-                    <div class="col-md-6">
-                        <div class="checklist style3">
-                            <ul>
-                                <li>
-                                    <i class="fas fa-square-check"></i> Catalyzing Growth, Together
-                                </li>
-                                <li>
-                                    <i class="fas fa-square-check"></i> Driving Excellence Every Day
-                                </li>
-                                <li>
-                                    <i class="fas fa-square-check"></i> Innovate. Implement. Inspire
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="year-counter style2">
-                            {{-- <div class="icon">
-                                <img src="assets/img/icon/about_counter_icon_1.svg" alt="img">
-                            </div> --}}
-                            <div class="year-counter_number">
-                                <span class="counter-number">25</span>
+                    <div class="btn-wrap style2 mt-50">
+                        <div class="about-grid style2">
+                            <div class="thumb">
+                                <img class="about-grid_thumb" src="assets/img/normal/client-group-1.png" alt="about">
                             </div>
-                            <p class="year-counter_text">Year Of Experience</p>
+                            <div class="details">
+                                <p class="about-grid_number">
+                                    <span class="counter-number">1500</span>+
+                                </p>
+                                <p class="about-grid_text">Active Reviews</p>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="btn-wrap style2 mt-50">
-                    <div class="about-grid style2">
-                        <div class="thumb">
-                            <img class="about-grid_thumb" src="assets/img/normal/client-group-1.png" alt="about">
-                        </div>
-                        <div class="details">
-                            <p class="about-grid_number">
-                                <span class="counter-number">1500</span>+
-                            </p>
-                            <p class="about-grid_text">Active Reviews</p>
-                        </div>
-                    </div>
-                    <a href="about.html" class="th-btn">Read More
-                        <div class="icon">
-                            <i class="fa-solid fa-arrow-up-right ms-3">
+                        <a href="about.html" class="th-btn btn-primary">Read More
+                            <div class="icon">
+                                <i class="fa-solid fa-arrow-up-right ms-3">
 
-                            </i>
-                        </div>
-                    </a>
+                                </i>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<section class="">
+    @endif
+<section class="space-top space-bottom" id="focus-sec">
     <div class="container">
         <div class="title-area text-center">
             <span class="sub-title">
@@ -150,73 +105,251 @@
                 <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
             </span>
             <p>
-                Project CLEAR balances analytics with implementation through multi-disciplinary inputs to change the paradigm of organizational and international development. Contrasting with traditional rigid implementation frameworks, we take an adaptive approach to projects which enables us to achieve results far closer to the anticipated outcomes. We do this by focusing on:
+                At CLEARKAMO, we focus on strengthening execution performance in complex systems. We help organizations move from strategic intent to reliable, measurable results by designing decision environments that support consistent follow-through.
             </p>
-            <div class="checklist style3">
-                <ul>
-                    <li>
-                        <i class="fas fa-square-check"></i> <b>Design</b> services include data generation through inquiry, insight generation through data science, and developing and testing solutions.
-                    </li>
-                    <li>
-                        <i class="fas fa-square-check"></i> <b>Delivery</b> services includes implementation of solutions, monitoring, adapting, and evaluating.
-                    </li>
-                    
-                </ul>
-             </div>
         </div>
-        <div class="row gy-4 justify-content-center">
-            <div class="col-xl-3 col-md-6">
-                <div class="process-card">
+        <div class="focus-areas-container" style="position: relative;">
+        <div class="focus-areas-scroll" style="overflow-x: auto; padding: 20px 60px;">
+            <div class="d-flex flex-row" style="gap: 20px; min-width: max-content;">
+                <div class="process-card" style="height: auto; min-height: 280px; width: 320px; flex-shrink: 0; cursor: pointer; text-align: left;" onclick="toggleCard(this)">
                     <p class="box-number">01</p>
                     <div class="box-content">
                         <div class="box-icon">
                             <img src="assets/img/icon/process_card_1_4.svg" alt="icon">
                         </div>
-                        <h3 class="box-title">Research & Situation Analysis </h3>
-                        <p class="box-text">We work with clients to zero in the problems to be addressed. We have an array of tools and methods to gather data from multiple sources, clarify context and assemble evidence to inform solutions.</p><br>
+                        <h3 class="box-title">Execution Performance & Delivery Reliability</h3>
+                        <div class="box-text" style="margin-bottom: 15px;">
+                            <p style="margin-bottom: 10px;">Strategies often fail not because they are wrong, but because execution breaks down. We strengthen the systems, management routines, and decision clarity required to ensure strategies perform under real-world conditions.</p>
+                            <div class="expandable-content" style="display: none;">
+                                <p style="margin-bottom: 5px;"><strong>We focus on:</strong></p>
+                                <ul class="box-list" style="margin: 0; padding-left: 20px;">
+                                    <li style="margin-bottom: 5px;">Reducing variance in delivery performance</li>
+                                    <li style="margin-bottom: 5px;">Improving value for money</li>
+                                    <li style="margin-bottom: 5px;">Protecting results during scale</li>
+                                    <li style="margin-bottom: 0;">Strengthening coordination across actors</li>
+                                </ul>
+                            </div>
+                            <button class="expand-btn" style="color: #3b82f6; font-weight: 600; border: none; background: none; padding: 5px 0; cursor: pointer;">
+                                <span class="expand-text">Read More</span> <i class="fas fa-chevron-down ms-1"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-                <div class="process-card">
+                <div class="process-card" style="height: auto; min-height: 280px; width: 320px; flex-shrink: 0; cursor: pointer; text-align: left;" onclick="toggleCard(this)">
                     <p class="box-number">02</p>
                     <div class="box-content">
                         <div class="box-icon">
                             <img src="assets/img/icon/process_card_1_2.svg" alt="icon">
                         </div>
-                        <h3 class="box-title">Insight & Concept Generation and Testing. </h3>
-                        <p class="box-text">We utilize evidence and expert and beneficiary consultations to find insights and ideas to solve problems and build consensus in multi-stakeholder settings.</p><br>
+                        <h3 class="box-title">Agency & Decision Environment Design</h3>
+                        <div class="box-text" style="margin-bottom: 15px;">
+                            <p style="margin-bottom: 10px;">We operationalize the "agency" side of human capital — motivation, perseverance, follow-through, and management quality.</p>
+                            <div class="expandable-content" style="display: none;">
+                                <p style="margin-bottom: 5px;"><strong>Through diagnostics and systems redesign, we:</strong></p>
+                                <ul class="box-list" style="margin: 0; padding-left: 20px;">
+                                    <li style="margin-bottom: 5px;">Map critical decision points across delivery chains</li>
+                                    <li style="margin-bottom: 5px;">Align incentives and governance structures</li>
+                                    <li style="margin-bottom: 5px;">Simplify workflows and user journeys</li>
+                                    <li style="margin-bottom: 5px;">Install lightweight management routines</li>
+                                    <li style="margin-bottom: 5px;">Design practical execution telemetry</li>
+                                </ul>
+                                <p style="margin-bottom: 0; margin-top: 10px;">This ensures people can consistently apply their skills and deliver results.</p>
+                            </div>
+                            <button class="expand-btn" style="color: #3b82f6; font-weight: 600; border: none; background: none; padding: 5px 0; cursor: pointer;">
+                                <span class="expand-text">Read More</span> <i class="fas fa-chevron-down ms-1"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-                <div class="process-card">
+                <div class="process-card" style="height: auto; min-height: 280px; width: 320px; flex-shrink: 0; cursor: pointer; text-align: left;" onclick="toggleCard(this)">
                     <p class="box-number">03</p>
                     <div class="box-content">
                         <div class="box-icon">
                             <img src="assets/img/icon/process_card_1_3.svg" alt="icon">
                         </div>
-                        <h3 class="box-title">Implementation Planning and Delivery Support </h3>
-                        <p class="box-text">We support initiative design and restructuring and support delivery of projects through multiple channels and efficient project management processes tailored to context.</p>
-                        <br>
+                        <h3 class="box-title">Think–Do Integrated Strategy Architecture</h3>
+                        <div class="box-text" style="margin-bottom: 15px;">
+                            <p style="margin-bottom: 10px;">We operate through an integrated Think–Do model for execution-ready strategies.</p>
+                            <div class="expandable-content" style="display: none;">
+                                <p style="margin-bottom: 5px;"><strong>THINK: Agency & Systems Design</strong></p>
+                                <p style="margin-bottom: 5px;">We design execution-ready strategies by:</p>
+                                <ul class="box-list" style="margin: 0; padding-left: 20px;">
+                                    <li style="margin-bottom: 5px;">Conducting stakeholder and decision diagnostics</li>
+                                    <li style="margin-bottom: 5px;">Identifying bottlenecks and system frictions</li>
+                                    <li style="margin-bottom: 5px;">Redesigning governance and accountability structures</li>
+                                    <li style="margin-bottom: 5px;">Validating feasibility before scale</li>
+                                </ul>
+                                <p style="margin-bottom: 5px; margin-top: 10px;"><strong>DO: Implementation Support</strong></p>
+                                <p style="margin-bottom: 5px;">We protect results during rollout through:</p>
+                                <ul class="box-list" style="margin: 0; padding-left: 20px;">
+                                    <li style="margin-bottom: 5px;">Delivery stabilization frameworks</li>
+                                    <li style="margin-bottom: 5px;">Adaptive management support</li>
+                                    <li style="margin-bottom: 5px;">Partner coordination mechanisms</li>
+                                    <li style="margin-bottom: 0;">Rapid bottleneck resolution</li>
+                                </ul>
+                                <p style="margin-bottom: 0; margin-top: 10px;">Strategy and execution are treated as one continuum.</p>
+                            </div>
+                            <button class="expand-btn" style="color: #3b82f6; font-weight: 600; border: none; background: none; padding: 5px 0; cursor: pointer;">
+                                <span class="expand-text">Read More</span> <i class="fas fa-chevron-down ms-1"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-                <div class="process-card">
+                <div class="process-card" style="height: auto; min-height: 280px; width: 320px; flex-shrink: 0; cursor: pointer; text-align: left;" onclick="toggleCard(this)">
                     <p class="box-number">04</p>
                     <div class="box-content">
                         <div class="box-icon">
                             <img src="assets/img/icon/process_card_1_1.svg" alt="icon">
                         </div>
-                        <h3 class="box-title">Results Frameworks, Monitoring, and Evaluation </h3>
-                        <p class="box-text">We develop results frameworks, monitoring, and evaluation systems based to client needs to ensure value for money, learning, informed decision and adaptive programming.</p>
+                        <h3 class="box-title">Behavioural & Choice Architecture at Scale</h3>
+                        <div class="box-text" style="margin-bottom: 15px;">
+                            <p style="margin-bottom: 10px;">We apply decision science and behavioural design to improve follow-through in large systems.</p>
+                            <div class="expandable-content" style="display: none;">
+                                <p style="margin-bottom: 5px;"><strong>Our behavioural work includes:</strong></p>
+                                <ul class="box-list" style="margin: 0; padding-left: 20px;">
+                                    <li style="margin-bottom: 5px;">Identity-driven nudges</li>
+                                    <li style="margin-bottom: 5px;">Social norm activation</li>
+                                    <li style="margin-bottom: 5px;">Incentive framing</li>
+                                    <li style="margin-bottom: 5px;">Emotionally intelligent communication platforms</li>
+                                    <li style="margin-bottom: 0;">Behaviour adoption models that scale nationally</li>
+                                </ul>
+                                <p style="margin-bottom: 0; margin-top: 10px;">We focus on turning awareness into sustained action.</p>
+                            </div>
+                            <button class="expand-btn" style="color: #3b82f6; font-weight: 600; border: none; background: none; padding: 5px 0; cursor: pointer;">
+                                <span class="expand-text">Read More</span> <i class="fas fa-chevron-down ms-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="process-card" style="height: auto; min-height: 280px; width: 320px; flex-shrink: 0; cursor: pointer; text-align: left;" onclick="toggleCard(this)">
+                    <p class="box-number">05</p>
+                    <div class="box-content">
+                        <div class="box-icon">
+                            <img src="assets/img/icon/process_card_1_4.svg" alt="icon">
+                        </div>
+                        <h3 class="box-title">High-Execution-Risk Sectors</h3>
+                        <div class="box-text" style="margin-bottom: 15px;">
+                            <p style="margin-bottom: 10px;">We work primarily in sectors where delivery complexity is high and accountability for results is increasing.</p>
+                            <div class="expandable-content" style="display: none;">
+                                <p style="margin-bottom: 5px;"><strong>Key sectors include:</strong></p>
+                                <ul class="box-list" style="margin: 0; padding-left: 20px;">
+                                    <li style="margin-bottom: 5px;">WASH Systems Strengthening</li>
+                                    <li style="margin-bottom: 5px;">Public Health & Behaviour Change</li>
+                                    <li style="margin-bottom: 5px;">Emergency Risk Communication</li>
+                                    <li style="margin-bottom: 5px;">Sanitation Marketing & Access</li>
+                                    <li style="margin-bottom: 5px;">Menstrual Health Innovation</li>
+                                    <li style="margin-bottom: 5px;">Youth Health & Vaccination Uptake</li>
+                                    <li style="margin-bottom: 5px;">Sector Coordination & Governance Reform</li>
+                                    <li style="margin-bottom: 0;">Women's Enterprise & Economic Empowerment</li>
+                                </ul>
+                            </div>
+                            <button class="expand-btn" style="color: #3b82f6; font-weight: 600; border: none; background: none; padding: 5px 0; cursor: pointer;">
+                                <span class="expand-text">Read More</span> <i class="fas fa-chevron-down ms-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="process-card" style="height: auto; min-height: 280px; width: 320px; flex-shrink: 0; cursor: pointer; text-align: left;" onclick="toggleCard(this)">
+                    <p class="box-number">06</p>
+                    <div class="box-content">
+                        <div class="box-icon">
+                            <img src="assets/img/icon/process_card_1_2.svg" alt="icon">
+                        </div>
+                        <h3 class="box-title">Government & Multi-Actor Delivery Systems</h3>
+                        <div class="box-text" style="margin-bottom: 15px;">
+                            <p style="margin-bottom: 10px;">We specialize in strengthening coordination, accountability, and execution reliability across fragmented systems.</p>
+                            <div class="expandable-content" style="display: none;">
+                                <p style="margin-bottom: 5px;"><strong>Our primary partners include:</strong></p>
+                                <ul class="box-list" style="margin: 0; padding-left: 20px;">
+                                    <li style="margin-bottom: 5px;">National and sub-national governments</li>
+                                    <li style="margin-bottom: 5px;">Multilateral agencies</li>
+                                    <li style="margin-bottom: 5px;">Development partners</li>
+                                    <li style="margin-bottom: 5px;">NGOs</li>
+                                    <li style="margin-bottom: 0;">Corporates operating in complex delivery environments</li>
+                                </ul>
+                            </div>
+                            <button class="expand-btn" style="color: #3b82f6; font-weight: 600; border: none; background: none; padding: 5px 0; cursor: pointer;">
+                                <span class="expand-text">Read More</span> <i class="fas fa-chevron-down ms-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="process-card" style="height: auto; min-height: 280px; width: 320px; flex-shrink: 0; cursor: pointer; text-align: left;" onclick="toggleCard(this)">
+                    <p class="box-number">07</p>
+                    <div class="box-content">
+                        <div class="box-icon">
+                            <img src="assets/img/icon/process_card_1_3.svg" alt="icon">
+                        </div>
+                        <h3 class="box-title">Execution Risk Management & Adaptive Delivery</h3>
+                        <div class="box-text" style="margin-bottom: 15px;">
+                            <p style="margin-bottom: 10px;">We manage execution risk through early diagnostics and continuous adaptation.</p>
+                            <div class="expandable-content" style="display: none;">
+                                <p style="margin-bottom: 5px;"><strong>Our approach includes:</strong></p>
+                                <ul class="box-list" style="margin: 0; padding-left: 20px;">
+                                    <li style="margin-bottom: 5px;">Early diagnostics</li>
+                                    <li style="margin-bottom: 5px;">Staged validation before rollout</li>
+                                    <li style="margin-bottom: 5px;">Continuous adaptation</li>
+                                    <li style="margin-bottom: 5px;">Rapid learning cycles</li>
+                                    <li style="margin-bottom: 0;">Clear escalation pathways</li>
+                                </ul>
+                                <p style="margin-bottom: 0; margin-top: 10px;">This ensures strategies remain resilient under real-world constraints.</p>
+                            </div>
+                            <button class="expand-btn" style="color: #3b82f6; font-weight: 600; border: none; background: none; padding: 5px 0; cursor: pointer;">
+                                <span class="expand-text">Read More</span> <i class="fas fa-chevron-down ms-1"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Navigation Arrows -->
+        <button class="scroll-arrow scroll-left" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: #3b82f6; color: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center;" onclick="scrollFocusAreas('left')">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="scroll-arrow scroll-right" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: #3b82f6; color: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center;" onclick="scrollFocusAreas('right')">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
     </div>
 </section>
+
+<script>
+function toggleCard(card) {
+    const expandableContent = card.querySelector('.expandable-content');
+    const expandBtn = card.querySelector('.expand-btn');
+    const expandText = card.querySelector('.expand-text');
+    const chevron = card.querySelector('.fa-chevron-down');
+    
+    if (expandableContent.style.display === 'none') {
+        expandableContent.style.display = 'block';
+        expandText.textContent = 'Read Less';
+        chevron.classList.remove('fa-chevron-down');
+        chevron.classList.add('fa-chevron-up');
+    } else {
+        expandableContent.style.display = 'none';
+        expandText.textContent = 'Read More';
+        chevron.classList.remove('fa-chevron-up');
+        chevron.classList.add('fa-chevron-down');
+    }
+}
+
+function scrollFocusAreas(direction) {
+    const scrollContainer = document.querySelector('.focus-areas-scroll');
+    const scrollAmount = 340; // Card width + gap
+    
+    if (direction === 'left') {
+        scrollContainer.scrollBy({
+            left: -scrollAmount,
+            behavior: 'smooth'
+        });
+    } else {
+        scrollContainer.scrollBy({
+            left: scrollAmount,
+            behavior: 'smooth'
+        });
+    }
+}
+</script>
 <section class="space overflow-hidden bg-smoke2" id="service-sec">
     <div class="shape-mockup moving" data-top="0" data-left="0">
         <img src="assets/img/shape/service-bg-shape4-1.png" alt="shape">
@@ -659,4 +792,5 @@
                 </div>
 </section>
 
+</div>
 </div>

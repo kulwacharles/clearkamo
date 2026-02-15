@@ -10,9 +10,10 @@ class Navigation extends Component
 {
     public $logo,$contact,$blogs;
     public function mount(){
-        $this->logo=About::first()->logo;
-        $this->contact=Contact::first();
-          $this->blogs=Blog::where('status','published')->orderBy('id','desc')->latest()
+        $about = About::first();
+        $this->logo = $about ? $about->logo : null;
+        $this->contact = Contact::first();
+          $this->blogs = Blog::where('status','published')->orderBy('id','desc')->latest()
     ->take(4)->get();
     }
     public function render()

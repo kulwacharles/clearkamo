@@ -7,9 +7,13 @@ use App\Models\Service;
 use Illuminate\Support\Str;
 class ServiceDetails extends Component
 {
-    public $service,$teams;
+    public $service,$teams,$otherServices;
     public function mount($slug){
-        $this->service=Service::whereSlug($slug)->first();
+        $this->service = Service::whereSlug($slug)->where('status', 'published')->first();
+        $this->otherServices = Service::where('id', '!=', $this->service->id)
+                                 ->where('status', 'published')
+                                 ->take(3)
+                                 ->get();
         //dd($id);
     }
     public function render()

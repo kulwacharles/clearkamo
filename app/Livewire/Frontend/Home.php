@@ -44,6 +44,15 @@ class Home extends Component
     }
     public function render()
     {
-        return view('livewire.frontend.home')->layout("components.layouts.frontend", ["title"=>$this->title,"description"=>Str::limit(html_entity_decode(strip_tags($this->description)), 350, '...'),"keywords"=>$this->keywords,"image"=>$this->image]);
+        $about = About::first();
+        return view('livewire.frontend.home', [
+            'about' => $about,
+            'services' => $this->services,
+            'clients' => $this->clients,
+            'slides' => $this->slides,
+            'testimonies' => $this->testimonies,
+            'blogs' => $this->blogs,
+            'teams' => $this->teams
+        ])->layout("components.layouts.frontend", ["title"=>$this->title,"description"=>Str::limit(html_entity_decode(strip_tags($this->description)), 350, '...'),"keywords"=>$this->keywords,"image"=>$this->image]);
     }
 }

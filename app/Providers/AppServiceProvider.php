@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use Livewire\Livewire;
+use App\Livewire\Frontend\WhoWeAreComponent;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,5 +24,6 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         View::addNamespace('layouts', resource_path('views/components/layouts'));
+        Livewire::component('frontend.who-we-are', WhoWeAreComponent::class);
     }
 }

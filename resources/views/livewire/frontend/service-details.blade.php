@@ -1,4 +1,3 @@
-
 <div>
        <div class="breadcumb-wrapper" data-bg-src="{{asset('assets/img/bg/breadcumb-bg.jpg')}}">
             <div class="breadcumb-shape1"><img src="{{asset('assets/img/shape/breadcrumb-shape1.svg')}}" alt="img">
@@ -54,55 +53,28 @@
                         <div class="widget">
                             <h3 class="widget_title">Other Services</h3>
                             <div class="recent-post-wrap">
+                                @foreach($otherServices as $otherService)
                                 <div class="recent-post">
                                     <div class="media-img">
-                                        <a href="blog-details.html">
-                                            <img src="{{asset('assets/img/blog/recent-post-1-1.jpg')}}" alt="Blog Image">
+                                        <a wire:navigate href="/service/details/{{ $otherService->slug }}">
+                                            <img src="{{ asset('storage/'.$otherService->image) }}" alt="{{ $otherService->title }}">
                                         </a>
                                     </div>
                                     <div class="media-body">
                                         <div class="recent-post-meta">
-                                            <a href="blog.html"><i class="fa-light fa-calendar-days"></i>21 June, 2024</a>
-                                        </div>
-                                        <h4 class="post-title">
-                                            <a class="text-inherit" href="blog-details.html">Guiding Businesses to Success</a>
-                                        </h4>
-                                    </div>
-                                </div>
-                                <div class="recent-post">
-                                    <div class="media-img">
-                                        <a href="blog-details.html">
-                                            <img src="{{asset('assets/img/blog/recent-post-1-2.jpg')}}" alt="Blog Image">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="recent-post-meta">
-                                            <a href="blog.html">
-                                                <i class="fa-light fa-calendar-days"></i>22 June, 2024
+                                            <a href="/service/details/{{ $otherService->slug }}">
+                                                <i class="fa-light fa-calendar-days"></i>
+                                                {{ $otherService->updated_at->format('d F, Y') }}
                                             </a>
                                         </div>
                                         <h4 class="post-title">
-                                            <a class="text-inherit" href="blog-details.html">
-                                                Fueling Your Business Forward
+                                            <a class="text-inherit" wire:navigate href="/service/details/{{ $otherService->slug }}">
+                                                {{ $otherService->title }}
                                             </a>
                                         </h4>
                                     </div>
                                 </div>
-                                <div class="recent-post">
-                                    <div class="media-img">
-                                        <a href="blog-details.html">
-                                            <img src="{{asset('assets/img/blog/recent-post-1-3.jpg')}}" alt="Blog Image">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="recent-post-meta">
-                                            <a href="blog.html"><i class="fa-light fa-calendar-days"></i>23 June, 2024</a>
-                                        </div>
-                                        <h4 class="post-title">
-                                            <a class="text-inherit" href="blog-details.html">Improve Your Health By Organic Eating</a>
-                                        </h4>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                       </aside>
