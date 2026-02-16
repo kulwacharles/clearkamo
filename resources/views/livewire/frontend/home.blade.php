@@ -2,6 +2,79 @@
 @section('description',$seodescription)
 @section('keywords',$keywords) --}}
 <div>
+    <!-- Hero Slider Section -->
+    @if($slides && $slides->count() > 0)
+    <section class="hero-slider-section" style="position: relative; overflow: hidden; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <!-- Animated Background Elements -->
+        <div class="slider-bg-animation" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
+            <div class="floating-shapes">
+                <div class="shape shape-1" style="position: absolute; width: 80px; height: 80px; background: rgba(255,255,255,0.1); border-radius: 50%; top: 10%; left: 10%; animation: float 6s ease-in-out infinite;"></div>
+                <div class="shape shape-2" style="position: absolute; width: 120px; height: 120px; background: rgba(255,255,255,0.05); border-radius: 50%; top: 60%; right: 15%; animation: float 8s ease-in-out infinite reverse;"></div>
+                <div class="shape shape-3" style="position: absolute; width: 60px; height: 60px; background: rgba(255,255,255,0.08); border-radius: 50%; bottom: 20%; left: 20%; animation: float 7s ease-in-out infinite 2s;"></div>
+                <div class="shape shape-4" style="position: absolute; width: 100px; height: 100px; background: rgba(255,255,255,0.06); border-radius: 50%; top: 30%; right: 30%; animation: float 9s ease-in-out infinite 1s;"></div>
+            </div>
+        </div>
+        
+        <div class="slider-wrapper" style="position: relative; height: 600px; z-index: 2;">
+            <div id="mainSlider" class="main-slider">
+                @foreach($slides as $index => $slide)
+                    <div class="slider-slide" style="position: relative; height: 600px; background-size: cover; background-position: center;">
+                        @if($slide->image)
+                            <div class="slider-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('{{ asset('storage/'.$slide->image) }}'); background-size: cover; background-position: center; background-blend-mode: overlay; background-color: rgba(0,0,0,0.4);"></div>
+                            <!-- Gradient Overlay -->
+                            <div class="gradient-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(59,130,246,0.3) 0%, rgba(147,51,234,0.2) 50%, rgba(0,0,0,0.5) 100%);"></div>
+                        @endif
+                        <div class="slider-content" style="position: relative; z-index: 2; height: 100%; display: flex; align-items: center; justify-content: center;">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-8 mx-auto text-center">
+                                        <div class="slider-text" style="color: white; animation: fadeInUp 1.2s ease-out;">
+                                            @if($slide->group)
+                                                <div class="slider-meta" style="margin-bottom: 25px;">
+                                                    <span class="slider-category" style="display: inline-block; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); color: white; padding: 12px 30px; border-radius: 30px; font-size: 0.85rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 8px 25px rgba(59,130,246,0.3); transform: translateY(0); transition: all 0.3s ease;">
+                                                        {{ $slide->group }}
+                                                    </span>
+                                                </div>
+                                            @endif
+                                            <h1 class="slider-title" style="font-size: 3.5rem; font-weight: 800; margin-bottom: 25px; text-shadow: 3px 3px 6px rgba(0,0,0,0.6); line-height: 1.2; letter-spacing: -1px;">
+                                                {{ $slide->title }}
+                                            </h1>
+                                            <div class="slider-description" style="font-size: 1.3rem; line-height: 1.7; max-width: 650px; margin: 0 auto 35px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); font-weight: 300;">
+                                                {!! Str::limit(strip_tags($slide->description), 180, '...') !!}
+                                            </div>
+                                            <div class="slider-cta" style="margin-top: 30px;">
+                                                <button class="slider-btn" style="display: inline-block; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); color: white; padding: 15px 40px; border-radius: 50px; font-size: 1rem; font-weight: 600; border: none; cursor: pointer; box-shadow: 0 10px 30px rgba(59,130,246,0.4); transform: translateY(0); transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;">
+                                                    Learn More
+                                                    <i class="fas fa-arrow-right ms-2"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            
+            <!-- Enhanced Navigation -->
+            <button id="sliderPrev" class="slider-nav-btn slider-prev" style="position: absolute; left: 40px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.95); color: #333; border: none; width: 60px; height: 60px; border-radius: 50%; cursor: pointer; z-index: 10; transition: all 0.4s ease; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 25px rgba(0,0,0,0.2); backdrop-filter: blur(10px);">
+                <i class="fas fa-chevron-left" style="font-size: 20px;"></i>
+            </button>
+            <button id="sliderNext" class="slider-nav-btn slider-next" style="position: absolute; right: 40px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.95); color: #333; border: none; width: 60px; height: 60px; border-radius: 50%; cursor: pointer; z-index: 10; transition: all 0.4s ease; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 25px rgba(0,0,0,0.2); backdrop-filter: blur(10px);">
+                <i class="fas fa-chevron-right" style="font-size: 20px;"></i>
+            </button>
+            
+            <!-- Enhanced Indicators -->
+            <div class="slider-indicators" style="position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; gap: 15px; padding: 15px 25px; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 50px;">
+                @foreach($slides as $index => $slide)
+                    <button class="slider-indicator" data-slide="{{ $index }}" style="width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; background: transparent; cursor: pointer; transition: all 0.4s ease; position: relative;"></button>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
+    
     @if($about)
     <div class="space" id="about-sec" style="overflow: visible;">
         <div class="container" style="overflow: visible;">
@@ -115,7 +188,7 @@
                     <p class="box-number">01</p>
                     <div class="box-content">
                         <div class="box-icon">
-                            <img src="assets/img/icon/process_card_1_4.svg" alt="icon">
+                            <i class="fas fa-tasks" style="font-size: 48px; color: #3b82f6;"></i>
                         </div>
                         <h3 class="box-title">Execution Performance & Delivery Reliability</h3>
                         <div class="box-text" style="margin-bottom: 15px;">
@@ -139,7 +212,7 @@
                     <p class="box-number">02</p>
                     <div class="box-content">
                         <div class="box-icon">
-                            <img src="assets/img/icon/process_card_1_2.svg" alt="icon">
+                            <i class="fas fa-brain" style="font-size: 48px; color: #3b82f6;"></i>
                         </div>
                         <h3 class="box-title">Agency & Decision Environment Design</h3>
                         <div class="box-text" style="margin-bottom: 15px;">
@@ -165,7 +238,7 @@
                     <p class="box-number">03</p>
                     <div class="box-content">
                         <div class="box-icon">
-                            <img src="assets/img/icon/process_card_1_3.svg" alt="icon">
+                            <i class="fas fa-lightbulb" style="font-size: 48px; color: #3b82f6;"></i>
                         </div>
                         <h3 class="box-title">Think–Do Integrated Strategy Architecture</h3>
                         <div class="box-text" style="margin-bottom: 15px;">
@@ -199,7 +272,7 @@
                     <p class="box-number">04</p>
                     <div class="box-content">
                         <div class="box-icon">
-                            <img src="assets/img/icon/process_card_1_1.svg" alt="icon">
+                            <i class="fas fa-users-cog" style="font-size: 48px; color: #3b82f6;"></i>
                         </div>
                         <h3 class="box-title">Behavioural & Choice Architecture at Scale</h3>
                         <div class="box-text" style="margin-bottom: 15px;">
@@ -225,7 +298,7 @@
                     <p class="box-number">05</p>
                     <div class="box-content">
                         <div class="box-icon">
-                            <img src="assets/img/icon/process_card_1_4.svg" alt="icon">
+                            <i class="fas fa-exclamation-triangle" style="font-size: 48px; color: #3b82f6;"></i>
                         </div>
                         <h3 class="box-title">High-Execution-Risk Sectors</h3>
                         <div class="box-text" style="margin-bottom: 15px;">
@@ -253,7 +326,7 @@
                     <p class="box-number">06</p>
                     <div class="box-content">
                         <div class="box-icon">
-                            <img src="assets/img/icon/process_card_1_2.svg" alt="icon">
+                            <i class="fas fa-handshake" style="font-size: 48px; color: #3b82f6;"></i>
                         </div>
                         <h3 class="box-title">Government & Multi-Actor Delivery Systems</h3>
                         <div class="box-text" style="margin-bottom: 15px;">
@@ -278,7 +351,7 @@
                     <p class="box-number">07</p>
                     <div class="box-content">
                         <div class="box-icon">
-                            <img src="assets/img/icon/process_card_1_3.svg" alt="icon">
+                            <i class="fas fa-shield-alt" style="font-size: 48px; color: #3b82f6;"></i>
                         </div>
                         <h3 class="box-title">Execution Risk Management & Adaptive Delivery</h3>
                         <div class="box-text" style="margin-bottom: 15px;">
@@ -794,3 +867,308 @@ function scrollFocusAreas(direction) {
 
 </div>
 </div>
+
+<!-- Hero Slider JavaScript -->
+@if($slides && $slides->count() > 0)
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const mainSlider = document.getElementById('mainSlider');
+    const slides = mainSlider.querySelectorAll('.slider-slide');
+    const prevBtn = document.getElementById('sliderPrev');
+    const nextBtn = document.getElementById('sliderNext');
+    const indicators = document.querySelectorAll('.slider-indicator');
+    
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+    let isAnimating = false;
+    let autoPlayInterval;
+    
+    // Initialize slider
+    function initSlider() {
+        showSlide(0);
+        updateIndicators();
+        startAutoPlay();
+    }
+    
+    // Show specific slide with stunning effects
+    function showSlide(index) {
+        if (isAnimating) return;
+        isAnimating = true;
+        
+        // Hide all slides with fade out
+        slides.forEach((slide, i) => {
+            slide.style.opacity = '0';
+            slide.style.transform = 'scale(0.9)';
+            slide.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+        });
+        
+        // Show current slide with dramatic entrance
+        setTimeout(() => {
+            slides[index].style.opacity = '1';
+            slides[index].style.transform = 'scale(1)';
+            slides[index].style.filter = 'brightness(1.1) contrast(1.1)';
+            
+            // Animate content elements
+            const content = slides[index].querySelector('.slider-text');
+            if (content) {
+                content.style.animation = 'none';
+                setTimeout(() => {
+                    content.style.animation = 'slideInUp 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards';
+                }, 100);
+            }
+        }, 300);
+        
+        currentSlide = index;
+        updateIndicators();
+        
+        setTimeout(() => {
+            isAnimating = false;
+        }, 900);
+    }
+    
+    // Update indicators with enhanced effects
+    function updateIndicators() {
+        indicators.forEach((indicator, index) => {
+            if (index === currentSlide) {
+                indicator.style.background = 'white';
+                indicator.style.transform = 'scale(1.5)';
+                indicator.style.boxShadow = '0 0 20px rgba(255,255,255,0.8)';
+                indicator.style.width = '16px';
+                indicator.style.height = '16px';
+            } else {
+                indicator.style.background = 'transparent';
+                indicator.style.transform = 'scale(1)';
+                indicator.style.boxShadow = 'none';
+                indicator.style.width = '14px';
+                indicator.style.height = '14px';
+            }
+        });
+    }
+    
+    // Next slide
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        showSlide(currentSlide);
+    }
+    
+    // Previous slide
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        showSlide(currentSlide);
+    }
+    
+    // Auto-play functionality
+    function startAutoPlay() {
+        autoPlayInterval = setInterval(() => {
+            if (!isAnimating) {
+                nextSlide();
+            }
+        }, 6000);
+    }
+    
+    function stopAutoPlay() {
+        clearInterval(autoPlayInterval);
+    }
+    
+    // Enhanced event listeners
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function() {
+            stopAutoPlay();
+            prevSlide();
+            setTimeout(startAutoPlay, 8000);
+        });
+        
+        prevBtn.addEventListener('mouseenter', function() {
+            this.style.background = 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)';
+            this.style.color = 'white';
+            this.style.transform = 'translateY(-50%) scale(1.15) rotate(-5deg)';
+            this.style.boxShadow = '0 15px 35px rgba(59,130,246,0.4)';
+        });
+        
+        prevBtn.addEventListener('mouseleave', function() {
+            this.style.background = 'rgba(255,255,255,0.95)';
+            this.style.color = '#333';
+            this.style.transform = 'translateY(-50%) scale(1)';
+            this.style.boxShadow = '0 8px 25px rgba(0,0,0,0.2)';
+        });
+    }
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function() {
+            stopAutoPlay();
+            nextSlide();
+            setTimeout(startAutoPlay, 8000);
+        });
+        
+        nextBtn.addEventListener('mouseenter', function() {
+            this.style.background = 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)';
+            this.style.color = 'white';
+            this.style.transform = 'translateY(-50%) scale(1.15) rotate(5deg)';
+            this.style.boxShadow = '0 15px 35px rgba(59,130,246,0.4)';
+        });
+        
+        nextBtn.addEventListener('mouseleave', function() {
+            this.style.background = 'rgba(255,255,255,0.95)';
+            this.style.color = '#333';
+            this.style.transform = 'translateY(-50%) scale(1)';
+            this.style.boxShadow = '0 8px 25px rgba(0,0,0,0.2)';
+        });
+    }
+    
+    // Enhanced indicator clicks
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', function() {
+            stopAutoPlay();
+            showSlide(index);
+            setTimeout(startAutoPlay, 8000);
+        });
+        
+        indicator.addEventListener('mouseenter', function() {
+            if (index !== currentSlide) {
+                this.style.background = 'rgba(255,255,255,0.5)';
+                this.style.transform = 'scale(1.3)';
+            }
+        });
+        
+        indicator.addEventListener('mouseleave', function() {
+            if (index !== currentSlide) {
+                this.style.background = 'transparent';
+                this.style.transform = 'scale(1)';
+            }
+        });
+    });
+    
+    // Pause on hover, resume on leave
+    mainSlider.addEventListener('mouseenter', stopAutoPlay);
+    mainSlider.addEventListener('mouseleave', startAutoPlay);
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') {
+            stopAutoPlay();
+            prevSlide();
+            setTimeout(startAutoPlay, 8000);
+        } else if (e.key === 'ArrowRight') {
+            stopAutoPlay();
+            nextSlide();
+            setTimeout(startAutoPlay, 8000);
+        }
+    });
+    
+    // Touch/swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    mainSlider.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+    
+    mainSlider.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+    
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+            stopAutoPlay();
+            if (diff > 0) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+            setTimeout(startAutoPlay, 8000);
+        }
+    }
+    
+    // Initialize
+    initSlider();
+    
+    // Add stunning CSS animations
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        @keyframes slideInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(80px) scale(0.7);
+            }
+            50% {
+                opacity: 0.8;
+                transform: translateY(20px) scale(1.05);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-20px) rotate(120deg);
+            }
+            66% {
+                transform: translateY(20px) rotate(240deg);
+            }
+        }
+        
+        .slider-slide {
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .slider-nav-btn {
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .slider-nav-btn:hover {
+            transform: translateY(-50%) scale(1.15);
+        }
+        
+        .slider-indicator {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .slider-indicator:hover {
+            transform: scale(1.4);
+        }
+        
+        .slider-btn {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .slider-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(59,130,246,0.5);
+        }
+        
+        .slider-category {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .slider-category:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(59,130,246,0.4);
+        }
+    `;
+    document.head.appendChild(style);
+});
+</script>
+@endif
