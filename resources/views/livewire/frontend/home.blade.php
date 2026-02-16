@@ -24,29 +24,16 @@
                             <!-- Gradient Overlay -->
                             <div class="gradient-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(59,130,246,0.3) 0%, rgba(147,51,234,0.2) 50%, rgba(0,0,0,0.5) 100%);"></div>
                         @endif
-                        <div class="slider-content" style="position: relative; z-index: 2; height: 100%; display: flex; align-items: center; justify-content: center;">
+                        <div class="slider-content" style="position: relative; z-index: 2; height: 100%; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 120px;">
                             <div class="container">
                                 <div class="row">
                                     <div class="col-lg-8 mx-auto text-center">
                                         <div class="slider-text" style="color: white; animation: fadeInUp 1.2s ease-out;">
-                                            @if($slide->group)
-                                                <div class="slider-meta" style="margin-bottom: 25px;">
-                                                    <span class="slider-category" style="display: inline-block; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); color: white; padding: 12px 30px; border-radius: 30px; font-size: 0.85rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 8px 25px rgba(59,130,246,0.3); transform: translateY(0); transition: all 0.3s ease;">
-                                                        {{ $slide->group }}
-                                                    </span>
-                                                </div>
-                                            @endif
-                                            <h1 class="slider-title" style="font-size: 3.5rem; font-weight: 800; margin-bottom: 25px; text-shadow: 3px 3px 6px rgba(0,0,0,0.6); line-height: 1.2; letter-spacing: -1px;">
-                                                {{ $slide->title }}
-                                            </h1>
-                                            <div class="slider-description" style="font-size: 1.3rem; line-height: 1.7; max-width: 650px; margin: 0 auto 35px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); font-weight: 300;">
-                                                {!! Str::limit(strip_tags($slide->description), 180, '...') !!}
-                                            </div>
                                             <div class="slider-cta" style="margin-top: 30px;">
-                                                <button class="slider-btn" style="display: inline-block; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); color: white; padding: 15px 40px; border-radius: 50px; font-size: 1rem; font-weight: 600; border: none; cursor: pointer; box-shadow: 0 10px 30px rgba(59,130,246,0.4); transform: translateY(0); transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;">
-                                                    Learn More
+                                                <a href="{{ route('services') }}" class="slider-btn" style="display: inline-block; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); color: white; padding: 15px 40px; border-radius: 50px; font-size: 1rem; font-weight: 600; text-decoration: none; box-shadow: 0 10px 30px rgba(59,130,246,0.4); transform: translateY(0); transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;">
+                                                    Explore Our Services
                                                     <i class="fas fa-arrow-right ms-2"></i>
-                                                </button>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
