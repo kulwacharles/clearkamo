@@ -113,16 +113,19 @@
     (function() {
         'use strict';
         
+        // Initialize slider immediately and also wait for DOM ready
+        initSlider();
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', function() {
-                var style = document.createElement('style');
-                style.innerHTML = `
-                    /* Add your styles here */
-                `;
-                document.head.appendChild(style);
+            document.addEventListener('DOMContentLoaded', initSlider);
+        }
+        
+        // Also initialize after Livewire updates
+        if (typeof Livewire !== 'undefined') {
+            Livewire.hook('component.initialized', component => {
+                if (component.name === 'home') {
+                    setTimeout(initSlider, 100);
+                }
             });
-        } else {
-            initSlider();
         }
         
         function initSlider() {
