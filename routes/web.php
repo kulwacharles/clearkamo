@@ -27,6 +27,7 @@ use App\Livewire\Service\BackendService;
 use App\Livewire\Team\BackendTeam;
 use App\Livewire\Testimony\TestimonyBackend;
 use App\Livewire\Vacancy\VacancyBackend;
+use App\Livewire\AdminChat;
 use App\Models\Blog;
 
 // Route::get('/', function () {
@@ -50,6 +51,7 @@ Route::middleware(['auth'])->prefix('/admin')->group(function () {
     Route::get('testimony',TestimonyBackend::class)->name('admin.testimony');
     Route::get('client',ClientBackend::class)->name('admin.client');
     Route::get('contacts',BackendContacts::class)->name('admin.contacts');
+    Route::get('chat',AdminChat::class)->name('admin.chat');
     Route::post('/logout', function () {
         Auth::logout();
         return redirect('/');

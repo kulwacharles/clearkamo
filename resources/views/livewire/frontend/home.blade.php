@@ -1154,8 +1154,117 @@ document.addEventListener('DOMContentLoaded', function() {
             transform: translateY(-2px);
             box-shadow: 0 12px 30px rgba(59,130,246,0.4);
         }
+        
+        .slider-indicator.active {
+            background: white !important;
+            transform: scale(1.2) !important;
+            box-shadow: 0 0 10px rgba(255,255,255,0.8) !important;
+        }
     `;
     document.head.appendChild(style);
+
+// Simple test to verify JavaScript is working
+console.log('JavaScript is running!');
+
+// Very Simple Slider Implementation
+window.addEventListener('load', function() {
+    console.log('Starting simple slider...');
+    
+    var currentSlide = 0;
+    var slides = document.querySelectorAll('.slider-slide');
+    var indicators = document.querySelectorAll('.slider-indicator');
+    var prevBtn = document.getElementById('sliderPrev');
+    var nextBtn = document.getElementById('sliderNext');
+    
+    console.log('Found slides:', slides.length);
+    console.log('Found indicators:', indicators.length);
+    console.log('Prev button:', prevBtn);
+    console.log('Next button:', nextBtn);
+    
+    // Debug: Show initial state
+    if (slides.length > 0) {
+        console.log('First slide display:', slides[0].style.display);
+        console.log('First slide HTML:', slides[0].outerHTML.substring(0, 100) + '...');
+    }
+    
+    if (indicators.length > 0) {
+        console.log('First indicator background:', indicators[0].style.background);
+    }
+    
+    if (slides.length === 0) {
+        console.log('No slides found');
+        return;
+    }
+    
+    // Hide all slides except first
+    for (var i = 0; i < slides.length; i++) {
+        slides[i].style.display = i === 0 ? 'block' : 'none';
+    }
+    
+    // Set first indicator as active
+    if (indicators[0]) {
+        indicators[0].style.background = 'white';
+    }
+    
+    function showSlide(index) {
+        console.log('Showing slide:', index);
+        
+        // Hide current slide
+        slides[currentSlide].style.display = 'none';
+        
+        // Update current indicator
+        indicators[currentSlide].style.background = 'transparent';
+        
+        // Show new slide
+        currentSlide = index;
+        slides[currentSlide].style.display = 'block';
+        
+        // Update new indicator
+        indicators[currentSlide].style.background = 'white';
+    }
+    
+    function nextSlide() {
+        var next = (currentSlide + 1) % slides.length;
+        showSlide(next);
+    }
+    
+    function prevSlide() {
+        var prev = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(prev);
+    }
+    
+    // Button events
+    if (nextBtn) {
+        nextBtn.onclick = function() {
+            console.log('Next clicked');
+            nextSlide();
+        };
+    }
+    
+    if (prevBtn) {
+        prevBtn.onclick = function() {
+            console.log('Prev clicked');
+            prevSlide();
+        };
+    }
+    
+    // Indicator events
+    for (var j = 0; j < indicators.length; j++) {
+        indicators[j].onclick = function(index) {
+            return function() {
+                console.log('Indicator clicked:', index);
+                showSlide(index);
+            };
+        }(j);
+    }
+    
+    // Auto-slide every 4 seconds
+    setInterval(function() {
+        console.log('Auto-sliding');
+        nextSlide();
+    }, 4000);
+    
+    console.log('Simple slider initialized');
 });
 </script>
 @endif
