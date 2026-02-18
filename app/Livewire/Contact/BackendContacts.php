@@ -42,15 +42,16 @@ class BackendContacts extends Component
         abort_unless(auth()->check(), 401);
         $contact = Contact::first();
         if ($contact) {
+               $this->id = $contact->id;
                $this->map=$contact->map;
                $this->phone=$contact->phone;
                $this->youtube=$contact->youtube;
                $this->instagram=$contact->instagram;
                $this->facebook=$contact->facebook;
-               $this->twitter=$contact->twitter;
+               $this->twitter=$contact->twitter; // Fixed: using correct 'twitter'
                $this->linkedin=$contact->linkedin;
                $this->email=$contact->email;
-               $this->extraInfo=$contact->extraInfo;
+               $this->extraInfo=$contact->extra_1; // Using 'extra_1' as in database
                $this->physicalAddress=$contact->physical_address;
             
       
@@ -67,16 +68,14 @@ class BackendContacts extends Component
                 'youtube'     => $this->youtube,
                 'instagram'   => $this->instagram,
                 'facebook'    => $this->facebook,
-                'twitter'    => $this->twitter,
+                'twitter'    => $this->twitter, // Fixed: using correct 'twitter'
                 'linkedin'   => $this->linkedin,
                 'email'    => $this->email,
-                'extraInfo'    => $this->extraInfo,
+                'extra_1'    => $this->extraInfo, // Using 'extra_1' as in database
                 'physical_address'=>$this->physicalAddress
             ]
         );
-        //dd($here);
-        session()->flash('message', $this->id ? 'About Updated Successfully.' : 'About Created Successfully.');
-
+        session()->flash('message', $this->id ? 'Contact Updated Successfully.' : 'Contact Created Successfully.');
 
     }
     // public function resetAll()

@@ -7,17 +7,17 @@ use App\Models\WhoWeAre;
 
 class WhoWeAreComponent extends Component
 {
-    public $content;
+    public $whoWeAre;
 
     public function mount()
     {
-        $this->content = WhoWeAre::first();
+        $this->whoWeAre = WhoWeAre::first();
     }
 
     public function render()
     {
         return view('livewire.frontend.who-we-are', [
-            'whoWeAre' => $this->content,
+            'whoWeAre' => $this->whoWeAre,
         ]);
     }
 }

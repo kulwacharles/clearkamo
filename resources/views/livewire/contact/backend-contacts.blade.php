@@ -38,7 +38,7 @@
                             <div class="col-md-6">
                                 <label>Linkedin</label>
                                 <input type="text" class="form-control" wire:model="linkedin">
-                                @error('linkendin') <span class="text-danger">{{ $message }}</span> @enderror
+                                @error('linkedin') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             
                         </div>
