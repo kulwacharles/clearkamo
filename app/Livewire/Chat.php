@@ -16,12 +16,6 @@ class Chat extends Component
     public $sessionId;
     public $hasUserInfo = false;
 
-    protected $rules = [
-        'userName' => 'required|min:2|max:50',
-        'userEmail' => 'required|email',
-        'newMessage' => 'required|min:1|max:1000'
-    ];
-
     public function mount()
     {
         $this->sessionId = Session::getId();
@@ -41,9 +35,11 @@ class Chat extends Component
     {
         $userMessage = ChatMessage::where('session_id', $this->sessionId)
             ->where('sender_type', 'user')
+            ->whereNotNull('name')
+            ->whereNotNull('email')
             ->first();
 
-        if ($userMessage && $userMessage->name && $userMessage->email) {
+        if ($userMessage) {
             $this->userName = $userMessage->name;
             $this->userEmail = $userMessage->email;
             $this->hasUserInfo = true;
@@ -54,22 +50,26 @@ class Chat extends Component
     {
         $this->validate([
             'userName' => 'required|min:2|max:50',
-            'userEmail' => 'required|email'
+            'userEmail' => 'required|email',
         ]);
 
         $this->hasUserInfo = true;
+
         $this->dispatch('userInfoSaved');
     }
 
     public function sendMessage()
     {
+        // Prevent sending message if user info not saved
         if (!$this->hasUserInfo) {
-            $this->saveUserInfo();
+            return;
         }
 
-        $this->validate(['newMessage' => 'required|min:1|max:1000']);
+        $this->validate([
+            'newMessage' => 'required|min:1|max:1000'
+        ]);
 
-        $message = ChatMessage::create([
+        ChatMessage::create([
             'name' => $this->userName,
             'email' => $this->userEmail,
             'message' => $this->newMessage,
@@ -80,10 +80,9 @@ class Chat extends Component
 
         $this->newMessage = '';
         $this->loadMessages();
-        
+
         $this->dispatch('messageSent');
-        $this->dispatch('refreshAdminChat'); // Notify admin of new message
-        $this->dispatch('echo-notification'); // Real-time notification
+        $this->dispatch('refreshAdminChat');
     }
 
     public function toggleChat()

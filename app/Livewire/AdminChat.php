@@ -12,6 +12,7 @@ class AdminChat extends Component
     public $selectedSession = null;
     public $sessions = [];
     public $unreadCount = 0;
+    public $activeUser = [];
 
     protected $rules = [
         'newMessage' => 'required|min:1|max:1000'
@@ -63,6 +64,19 @@ class AdminChat extends Component
     public function selectSession($sessionId)
     {
         $this->selectedSession = $sessionId;
+        
+        // Get active user info
+        $session = ChatMessage::where('session_id', $sessionId)
+            ->where('sender_type', 'user')
+            ->first();
+            
+        if ($session) {
+            $this->activeUser = [
+                'name' => $session->name ?: 'Guest User',
+                'email' => $session->email ?: 'guest@example.com'
+            ];
+        }
+        
         $this->loadMessages();
         
         // Mark messages as read
