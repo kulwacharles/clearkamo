@@ -76,7 +76,7 @@
                                             @foreach ($pubs as $pub)
                                                 <tr>
                                                     <th scope="row"><a href="#" class="question_content">{{ $pub->title }}</a></th>
-                                                    <td>{{ $pub->category }}</td>
+                                                    <td>{{ $pub->publication_category ?? $pub->category ?? $pub->category_id }}</td>
                                                     <td>
                                                         @if($pub->image)
                                                             <img class="img" src="{{ asset('storage/'.$pub->image) }}" width="100px" height="100px" style="object-fit: cover;">

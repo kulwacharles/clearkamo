@@ -6,6 +6,8 @@ use Livewire\Component;
 use App\Models\Publication;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Schema;
+use Throwable;
 
 class PublicationsModal extends Component
 {
@@ -18,63 +20,64 @@ class PublicationsModal extends Component
     // View modal properties
     public $viewTitle, $viewCategory, $viewDescription, $viewStatus, $viewImage,$viewPublishedDate,$viewKeywords;
 
-    protected $rules = [
-        'title'       => 'required|min:3|max:255',
-        'published_date' => 'required|min:3|max:255',
-        'category'    => 'required|min:3|max:255',
-        'description' => 'required|min:10',
-        'image'       => 'nullable|image|max:2048',
-        'status'      => 'required|in:published,draft,archived',
-    ];
-
     protected $messages = [
         'title.required'       => 'The Title is required.',
         'title.min'            => 'The Title must be at least 3 characters.',
         'category.required'    => 'The Category is required.',
         'description.required' => 'The Description is required.',
         'description.min'      => 'The Description must be at least 10 characters.',
+        'image.required'       => 'The Image is required.',
         'image.image'          => 'The Image must be valid.',
         'image.max'            => 'The Image may not be greater than 2MB.',
         'status.required'      => 'The Status is required.',
         'status.in'            => 'The selected Status is invalid.',
-        'published_date'       => 'Publish date required'
+        'published_date.required' => 'Publish date required',
     ];
+
+    protected function rules()
+    {
+        return [
+            'title'       => 'required|min:3|max:255',
+            'published_date' => 'required|date',
+            'category'    => 'required|min:3|max:255',
+            'description' => 'required|min:10',
+            'image'       => $this->pubId ? 'nullable|image|max:2048' : 'required|image|max:2048',
+            'status'      => 'required|in:published,draft,archived',
+        ];
+    }
 
     public function store()
     {
         $this->validate();
 
-        $imagePath = null;
+        try {
+            $imagePath = null;
 
-        // Handle image upload
-        if ($this->image) {
-            $last = Publication::latest()->first();
-            $newId = $last ? $last->id + 1 : 1;
+            // Handle image upload
+            if ($this->image) {
+                $last = Publication::latest()->first();
+                $newId = $last ? $last->id + 1 : 1;
 
-            $extension = $this->image->getClientOriginalExtension();
-            $filename  = 'clear_Kamo_' . $newId . '.' . $extension;
-            $imagePath = 'publications/' . $filename;
+                $extension = $this->image->getClientOriginalExtension();
+                $filename  = 'clear_Kamo_' . $newId . '.' . $extension;
+                $imagePath = 'publications/' . $filename;
 
-            $this->image->storePubliclyAs('publications', $filename, 'public');
-        }
+                $this->image->storePubliclyAs('publications', $filename, 'public');
+            }
 
-        // Create blog post
-        $pub = new Publication;          
-        $pub->title       = $this->title;
-        $pub->publication_category    = $this->category;
-        $pub->description = $this->description;
-        $pub->image       = $imagePath;
-        $pub->status      = $this->status;
-        $pub->published_date = $this->published_date;
-        $pub->keywords    = $this->keywords;
-        $result = $pub->save();
-        
-        if($result){
-            session()->flash('message', 'Blog Post saved successfully.'); 
-            $this->resetAll();
-            $this->dispatch('reset-ckeditor');
-            $this->dispatch('close-modal', 'addBlogModal');
-            $this->dispatch('pub-updated');
+            $pub = new Publication;
+            $this->applyPublicationData($pub, $imagePath);
+
+            if($pub->save()){
+                session()->flash('message', 'Publication Post saved successfully.'); 
+                $this->resetAll();
+                $this->dispatch('reset-ckeditor');
+                $this->dispatch('close-modal', 'addBlogModal');
+                $this->dispatch('pub-updated');
+            }
+        } catch (Throwable $e) {
+            report($e);
+            session()->flash('message', 'Failed to save publication. Please check all required fields and try again.');
         }
     }
 
@@ -85,7 +88,7 @@ class PublicationsModal extends Component
         
         $this->pubId = $pub->id;
         $this->title = $pub->title;
-        $this->category = $pub->publication_category;
+        $this->category = $pub->publication_category ?? $pub->category ?? (string) ($pub->category_id ?? '');
         $this->description = $pub->description;
         $this->status = $pub->status;
         $this->currentImage = $pub->image;
@@ -99,39 +102,35 @@ class PublicationsModal extends Component
     {
         $this->validate();
 
-        $pub = Publication::findOrFail($this->pubId);
-        $imagePath = $pub->image;
+        try {
+            $pub = Publication::findOrFail($this->pubId);
+            $imagePath = $pub->image;
 
-        // Handle image upload if new image is provided
-        if ($this->image) {
-            // Delete old image if exists
-            if ($pub->image && Storage::disk('public')->exists($pub->image)) {
-                Storage::disk('public')->delete($pub->image);
+            // Handle image upload if new image is provided
+            if ($this->image) {
+                // Delete old image if exists
+                if ($pub->image && Storage::disk('public')->exists($pub->image)) {
+                    Storage::disk('public')->delete($pub->image);
+                }
+
+                $extension = $this->image->getClientOriginalExtension();
+                $filename  = 'clear_Kamo_' . $pub->id . '.' . $extension;
+                $imagePath = 'publications/' . $filename;
+
+                $this->image->storePubliclyAs('publications', $filename, 'public');
             }
 
-            $extension = $this->image->getClientOriginalExtension();
-            $filename  = 'clear_Kamo_' . $pub->id . '.' . $extension;
-            $imagePath = 'publications/' . $filename;
+            $this->applyPublicationData($pub, $imagePath);
 
-            $this->image->storePubliclyAs('publications', $filename, 'public');
-        }
-
-        // Update blog post
-        $pub->title       = $this->title;
-        $pub->publication_category    = $this->category;
-        $pub->description = $this->description;
-        $pub->published_date = $this->published_date;
-        $pub->image       = $imagePath;
-        $pub->status      = $this->status;
-        $pub->keywords    = $this->keywords;
-
-        $result = $pub->save();
-        
-        if($result){
-            session()->flash('message', 'Publication Post updated successfully.'); 
-            $this->resetAll();
-            $this->dispatch('close-modal', 'editPubModal');
-            $this->dispatch('pub-updated');
+            if($pub->save()){
+                session()->flash('message', 'Publication Post updated successfully.'); 
+                $this->resetAll();
+                $this->dispatch('close-modal', 'editPubModal');
+                $this->dispatch('pub-updated');
+            }
+        } catch (Throwable $e) {
+            report($e);
+            session()->flash('message', 'Failed to update publication. Please review form values and try again.');
         }
     }
 
@@ -141,7 +140,7 @@ class PublicationsModal extends Component
         $pub = Publication::findOrFail($pubId);
         
         $this->viewTitle = $pub->title;
-        $this->viewCategory = $pub->publication_category;
+        $this->viewCategory = $pub->publication_category ?? $pub->category ?? (string) ($pub->category_id ?? 'N/A');
         $this->viewDescription = $pub->description;
         $this->viewStatus = $pub->status;
         $this->viewImage = $pub->image;
@@ -183,5 +182,36 @@ class PublicationsModal extends Component
     public function render()
     {
         return view('livewire.publication.publications-modal');
+    }
+
+    private function applyPublicationData(Publication $pub, ?string $imagePath): void
+    {
+        $pub->title = $this->title;
+        $pub->description = $this->description;
+        $pub->image = $imagePath;
+
+        if (Schema::hasColumn('publications', 'publication_category')) {
+            $pub->publication_category = $this->category;
+        }
+
+        if (Schema::hasColumn('publications', 'category')) {
+            $pub->category = $this->category;
+        }
+
+        if (Schema::hasColumn('publications', 'category_id')) {
+            $pub->category_id = is_numeric($this->category) ? (int) $this->category : 1;
+        }
+
+        if (Schema::hasColumn('publications', 'published_date')) {
+            $pub->published_date = $this->published_date;
+        }
+
+        if (Schema::hasColumn('publications', 'keywords')) {
+            $pub->keywords = $this->keywords;
+        }
+
+        if (Schema::hasColumn('publications', 'status')) {
+            $pub->status = $this->status;
+        }
     }
 }

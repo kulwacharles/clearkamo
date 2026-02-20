@@ -52,79 +52,31 @@
                     <aside class="sidebar-area">
 
                         <div class="widget">
-                            <h3 class="widget_title">Recent Publications</h3>
+                            <h3 class="widget_title">Other Publications</h3>
                             <div class="recent-post-wrap">
-                                <div class="recent-post">
-                                    <div class="media-img">
-                                        <a href="blog-details.html">
-                                            <img src="{{asset('assets/img/blog/recent-post-1-1.jpg')}}" alt="Blog Image">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="recent-post-meta">
-                                            <a href="blog.html"><i class="fa-light fa-calendar-days"></i>21 June, 2024</a>
-                                        </div>
-                                        <h4 class="post-title">
-                                            <a class="text-inherit" href="blog-details.html">Guiding Businesses to Success</a>
-                                        </h4>
-                                    </div>
-                                </div>
-                                <div class="recent-post">
-                                    <div class="media-img">
-                                        <a href="blog-details.html">
-                                            <img src="{{asset('assets/img/blog/recent-post-1-2.jpg')}}" alt="Blog Image">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="recent-post-meta">
-                                            <a href="blog.html">
-                                                <i class="fa-light fa-calendar-days"></i>22 June, 2024
+                                @forelse($otherPublications as $otherPublication)
+                                    <div class="recent-post">
+                                        <div class="media-img">
+                                            <a wire:navigate href="/publication/details/{{ $otherPublication->slug }}">
+                                                <img src="{{ asset('storage/'.$otherPublication->image) }}" alt="{{ $otherPublication->title }}">
                                             </a>
                                         </div>
-                                        <h4 class="post-title">
-                                            <a class="text-inherit" href="blog-details.html">
-                                                Fueling Your Business Forward
-                                            </a>
-                                        </h4>
-                                    </div>
-                                </div>
-                                <div class="recent-post">
-                                    <div class="media-img">
-                                        <a href="blog-details.html">
-                                            <img src="{{asset('assets/img/blog/recent-post-1-3.jpg')}}" alt="Blog Image">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="recent-post-meta">
-                                            <a href="blog.html"><i class="fa-light fa-calendar-days"></i>23 June, 2024</a>
+                                        <div class="media-body">
+                                            <div class="recent-post-meta">
+                                                <a wire:navigate href="/publication/details/{{ $otherPublication->slug }}">
+                                                    <i class="fa-light fa-calendar-days"></i>{{ $otherPublication->updated_at->format('d F, Y') }}
+                                                </a>
+                                            </div>
+                                            <h4 class="post-title">
+                                                <a class="text-inherit" wire:navigate href="/publication/details/{{ $otherPublication->slug }}">
+                                                    {{ $otherPublication->title }}
+                                                </a>
+                                            </h4>
                                         </div>
-                                        <h4 class="post-title">
-                                            <a class="text-inherit" href="blog-details.html">Improve Your Health By Organic Eating</a>
-                                        </h4>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-xl-auto">
-                                <div class="widget newsletter-widget footer-widget">
-                                    <h3 class="widget_title">Subscribe Now</h3>
-                                    <form class="newsletter-form">
-                                        <div class="form-group">
-                                            <input class="form-control" type="email" placeholder="Email Address" required=""> 
-                                            <button type="submit" class="th-btn"><i class="far fa-paper-plane"></i> Subscribe</button>
-                                        </div>
-                                        <div class="check-group">
-                                            <input type="checkbox" id="privacyPolicy">
-                                            <label for="privacyPolicy">I agree to the privacy policy</label>
-                                        </div>
-                                    </form>
-                                    {{-- <div class="th-social style2">
-                                            <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
-                                            <a href="https://www.twitter.com/"><i class="fab fa-twitter"></i></a> 
-                                            <a href="https://www.linkedin.com/"><i class="fab fa-linkedin-in"></i></a> 
-                                            <a href="https://www.behance.com/"><i class="fab fa-behance"></i></a>
-                                            <a href="https://www.vimeo.com/"><i class="fab fa-vimeo-v"></i></a>
-                                    </div> --}}
-                                </div>
+                                @empty
+                                    <p class="mb-0">No other publications found.</p>
+                                @endforelse
                             </div>
                         </div>
                       </aside>

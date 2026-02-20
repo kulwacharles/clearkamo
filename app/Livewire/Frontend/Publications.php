@@ -9,7 +9,8 @@ use App\Models\About;
 class Publications extends Component
 {
     use WithPagination;
-               public $title, $description, $years_of_experience, $image, $image2,$keywords,$logo;
+    public $title, $description, $years_of_experience, $image, $image2, $keywords, $logo;
+    public $otherPublications = [];
     public $id, $imagePath, $image2Path, $about1, $about2,$about3;
         public function mount()
     {
@@ -30,7 +31,12 @@ class Publications extends Component
     }
     public function render()
     {
-        $publications=Publication::where('status','published')->paginate(8);
+        $publications = Publication::where('status', 'published')->paginate(8);
+        $this->otherPublications = Publication::where('status', 'published')
+            ->latest('updated_at')
+            ->take(6)
+            ->get();
+
         return view('livewire.frontend.publications',['publications'=>$publications])->layout("components.layouts.frontend", ["title"=>"Our Publications","description"=>"Latest publications","keywords"=>"ClearKamo Publications, publications, clearkamo publications","image"=>$this->logo]);
     }
         public function paginationView()

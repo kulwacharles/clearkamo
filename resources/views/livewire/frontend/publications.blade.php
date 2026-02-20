@@ -72,27 +72,20 @@
                             </form>
                         </div> --}}
                          <div class="widget widget_categories">
-                            <h3 class="widget_title">Publication Categories</h3>
+                            <h3 class="widget_title">Other Publications</h3>
                             <ul>
-                                <li>
-                                    <a href="blog.html">Compliance Audits</a> 
-                                    <span>(8)</span>
-                                </li>
-                                <li>
-                                    <a href="blog.html">Employee Relations</a> <span>(10)</span>
-                                </li>
-                                <li>
-                                    <a href="blog.html">HR Consulting</a> <span>(12)</span>
-                                </li>
-                                <li>
-                                    <a href="blog.html">Legal Contract</a> <span>(6)</span>
-                                </li>
-                                <li>
-                                    <a href="blog.html">Small Business HR</a> <span>(8)</span>
-                                </li>
-                                <li>
-                                    <a href="blog.html">Business Management</a> <span>(11)</span>
-                                </li>
+                                @forelse($otherPublications as $otherPublication)
+                                    <li>
+                                        <a wire:navigate href="/publication/details/{{ $otherPublication->slug }}">
+                                            {{ \Illuminate\Support\Str::limit($otherPublication->title, 36) }}
+                                        </a>
+                                        <span>{{ $otherPublication->updated_at->format('d M') }}</span>
+                                    </li>
+                                @empty
+                                    <li>
+                                        <span>No publications available.</span>
+                                    </li>
+                                @endforelse
                             </ul>
                          </div>
                          <div class="col-md-6 col-xl-auto">

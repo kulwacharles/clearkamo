@@ -11,7 +11,7 @@ class BackendContacts extends Component
 {
           use WithFileUploads;
 
-    public $phone, $map, $physicalAddress, $blogId,$email,$linkedin,$instagram,$twitter,$facebook,$youtube,$extraInfo,$id;
+    public $phone, $map, $physicalAddress, $blogId, $email, $linkedin, $instagram, $twitter, $facebook, $youtube, $extraInfo, $contactId;
    
     
     // View modal properties
@@ -42,7 +42,7 @@ class BackendContacts extends Component
         abort_unless(auth()->check(), 401);
         $contact = Contact::first();
         if ($contact) {
-               $this->id = $contact->id;
+               $this->contactId = $contact->id;
                $this->map=$contact->map;
                $this->phone=$contact->phone;
                $this->youtube=$contact->youtube;
@@ -60,22 +60,29 @@ class BackendContacts extends Component
     public function update()
     {
         $this->validate();
-    Contact::updateOrCreate(
-            ['id' => $this->id],
-            [
-                'map'=> $this->map,
-                'phone'      => $this->phone,
-                'youtube'     => $this->youtube,
-                'instagram'   => $this->instagram,
-                'facebook'    => $this->facebook,
-                'twitter'    => $this->twitter, // Fixed: using correct 'twitter'
-                'linkedin'   => $this->linkedin,
-                'email'    => $this->email,
-                'extra_1'    => $this->extraInfo, // Using 'extra_1' as in database
-                'physical_address'=>$this->physicalAddress
-            ]
-        );
-        session()->flash('message', $this->id ? 'Contact Updated Successfully.' : 'Contact Created Successfully.');
+        $exists = (bool) $this->contactId;
+
+        $payload = [
+            'map' => $this->map,
+            'phone' => $this->phone,
+            'youtube' => $this->youtube,
+            'instagram' => $this->instagram,
+            'facebook' => $this->facebook,
+            'twitter' => $this->twitter,
+            'linkedin' => $this->linkedin,
+            'email' => $this->email,
+            'extra_1' => $this->extraInfo,
+            'physical_address' => $this->physicalAddress,
+        ];
+
+        if ($this->contactId) {
+            Contact::where('id', $this->contactId)->update($payload);
+        } else {
+            $contact = Contact::create($payload);
+            $this->contactId = $contact->id;
+        }
+
+        session()->flash('message', $exists ? 'Contact Updated Successfully.' : 'Contact Created Successfully.');
 
     }
     // public function resetAll()

@@ -7,10 +7,16 @@ use App\Models\Publication;
 use Illuminate\Support\Str;
 class PublicationDetails extends Component
 {
-    public $publication,$teams;
+    public $publication, $teams, $otherPublications;
+
     public function mount($slug){
-        $this->publication=Publication::whereSlug($slug)->first();
-        //dd($id);
+        $this->publication = Publication::whereSlug($slug)->firstOrFail();
+
+        $this->otherPublications = Publication::where('id', '!=', $this->publication->id)
+            ->where('status', 'published')
+            ->latest('updated_at')
+            ->take(3)
+            ->get();
     }
     public function render()
     {
