@@ -624,6 +624,49 @@
         </div>
     </section>
 
+    @if($teams && $teams->count() > 0)
+    <section class="space-top" id="team-sec">
+        <div class="container">
+            <div class="title-area text-center">
+                <span class="sub-title">
+                    <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">OUR TEAM
+                    <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
+                </span>
+                <h2 class="sec-title">Meet Our Team</h2>
+            </div>
+            <div class="row gy-30">
+                @foreach($teams as $team)
+                    <div class="col-xl-3 col-lg-4 col-md-6">
+                        <div class="team-card p-3 h-100" style="border: 1px solid #e5e7eb; border-radius: 14px; background: #fff; box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);">
+                            <a wire:navigate href="{{ route('team-details', ['slug' => $team->slug ?: $team->id]) }}" class="d-block">
+                                <img
+                                    src="{{ asset('storage/'.$team->image) }}"
+                                    alt="{{ $team->name }}"
+                                    style="width: 100%; height: 260px; object-fit: cover; border-radius: 10px;"
+                                >
+                            </a>
+                            <div class="pt-3">
+                                <h3 class="h5 mb-1">
+                                    <a wire:navigate href="{{ route('team-details', ['slug' => $team->slug ?: $team->id]) }}" style="color: #0f172a; text-decoration: none;">
+                                        {{ $team->name }}
+                                    </a>
+                                </h3>
+                                <p class="mb-2" style="color: #2563eb; font-weight: 600;">{{ $team->position }}</p>
+                                <p class="mb-3" style="color: #64748b;">
+                                    {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($team->description)), 110, '...') }}
+                                </p>
+                                <a wire:navigate href="{{ route('team-details', ['slug' => $team->slug ?: $team->id]) }}" class="link-btn style2">
+                                    <i class="fas fa-plus-circle me-1"></i>View Profile
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
+
     <section class="overflow-hidden space-top">
     <div class="container">
         <div class="title-area text-center">

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin;
 
+use App\Models\SearchQuery;
 use App\Models\WebsiteVisit;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -19,6 +20,8 @@ class Dashboard extends Component
     public int $avgDailyVisits = 0;
     public int $newVisitors = 0;
     public int $returningVisitors = 0;
+    public int $totalSearches = 0;
+    public int $uniqueSearchTerms = 0;
 
     public array $trendLabels = [];
     public array $trendValues = [];
@@ -29,6 +32,10 @@ class Dashboard extends Component
     public array $deviceValues = [];
     public array $referrerLabels = [];
     public array $referrerValues = [];
+    public array $searchTrendLabels = [];
+    public array $searchTrendValues = [];
+    public array $topSearchTerms = [];
+    public array $recentSearches = [];
 
     public function mount(): void
     {
@@ -166,6 +173,60 @@ class Dashboard extends Component
             $this->trendValues = $trendRows->pluck('total')->map(fn ($v) => (int) $v)->toArray();
         }
 
+        $searchQuery = SearchQuery::query()
+            ->whereBetween('day', [$this->dateFrom, $this->dateTo]);
+
+        $this->totalSearches = (clone $searchQuery)->count();
+        $this->uniqueSearchTerms = (clone $searchQuery)->distinct('normalized_term')->count('normalized_term');
+
+        $this->topSearchTerms = (clone $searchQuery)
+            ->select('normalized_term', DB::raw('MIN(term) as term'), DB::raw('COUNT(*) as total'))
+            ->groupBy('normalized_term')
+            ->orderByDesc('total')
+            ->limit(10)
+            ->get()
+            ->toArray();
+
+        $this->recentSearches = SearchQuery::query()
+            ->whereBetween('day', [$this->dateFrom, $this->dateTo])
+            ->orderByDesc('searched_at')
+            ->limit(12)
+            ->get(['term', 'path', 'searched_at', 'source', 'ip_address'])
+            ->map(function ($search) {
+                return [
+                    'term' => $search->term,
+                    'path' => $search->path,
+                    'searched_at' => optional($search->searched_at)->format('Y-m-d H:i'),
+                    'source' => $search->source,
+                    'ip_address' => $search->ip_address,
+                ];
+            })
+            ->toArray();
+
+        if ($this->groupBy === 'month') {
+            $searchTrendRows = (clone $searchQuery)
+                ->select('month_key', DB::raw('COUNT(*) as total'))
+                ->groupBy('month_key')
+                ->orderBy('month_key')
+                ->get();
+
+            $this->searchTrendLabels = $searchTrendRows->pluck('month_key')->toArray();
+            $this->searchTrendValues = $searchTrendRows->pluck('total')->map(fn ($v) => (int) $v)->toArray();
+        } else {
+            $searchTrendRows = (clone $searchQuery)
+                ->select('day', DB::raw('COUNT(*) as total'))
+                ->groupBy('day')
+                ->orderBy('day')
+                ->get();
+
+            $this->searchTrendLabels = $searchTrendRows
+                ->pluck('day')
+                ->map(fn ($d) => Carbon::parse($d)->format('d M'))
+                ->toArray();
+
+            $this->searchTrendValues = $searchTrendRows->pluck('total')->map(fn ($v) => (int) $v)->toArray();
+        }
+
         $this->dispatch(
             'visitor-analytics-updated',
             trendLabels: $this->trendLabels,
@@ -175,7 +236,11 @@ class Dashboard extends Component
             deviceLabels: $this->deviceLabels,
             deviceValues: $this->deviceValues,
             referrerLabels: $this->referrerLabels,
-            referrerValues: $this->referrerValues
+            referrerValues: $this->referrerValues,
+            searchTrendLabels: $this->searchTrendLabels,
+            searchTrendValues: $this->searchTrendValues,
+            topSearchLabels: collect($this->topSearchTerms)->pluck('term')->toArray(),
+            topSearchValues: collect($this->topSearchTerms)->pluck('total')->map(fn ($v) => (int) $v)->toArray()
         );
     }
 

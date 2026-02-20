@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+
 class Project extends Model
 {
     protected static function boot()
@@ -11,13 +12,18 @@ class Project extends Model
         parent::boot();
 
         static::creating(function ($project) {
-            $project->slug = Str::slug($project->project_name);
+            $project->slug = Str::slug(self::nameForSlug($project));
         });
-                // When updating (only if title changed)
+
         static::updating(function ($project) {
-            if ($project->isDirty('title')) {
-                $project->slug = Str::slug($project->project_name);
+            if ($project->isDirty('title') || $project->isDirty('project_name')) {
+                $project->slug = Str::slug(self::nameForSlug($project));
             }
         });
+    }
+
+    private static function nameForSlug(self $project): string
+    {
+        return (string) ($project->title ?? $project->project_name ?? '');
     }
 }

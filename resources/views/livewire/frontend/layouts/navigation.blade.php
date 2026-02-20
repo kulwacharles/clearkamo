@@ -91,7 +91,7 @@
 <div class="popup-search-box d-none d-lg-block">
     <button class="searchClose"><i class="fal fa-times"></i>
     </button>
-    <form action="#"><input type="text" placeholder="What are you looking for?"> 
+    <form action="{{ route('search.results') }}" method="GET"><input type="text" name="q" placeholder="What are you looking for?"> 
         <button type="submit"><i class="fal fa-search"></i></button>
     </form>
 </div>
@@ -229,6 +229,16 @@
                                 </button>
                             </div>
                         </div>
+                        <div class="col-auto d-none d-xl-block">
+                            <div class="header-search-wrap">
+                                <button type="button" class="simple-icon header-search-trigger" id="header-search-trigger" aria-label="Open search">
+                                    <i class="far fa-search"></i>
+                                </button>
+                                <div class="header-search-popover" id="header-search-popover">
+                                    @livewire('frontend.search-box')
+                                </div>
+                            </div>
+                        </div>
                         {{-- <div class="col-auto d-none d-xl-block">
                             <div class="header-button">
                                 <button type="button" class="simple-icon searchBoxToggler"><i class="far fa-search"></i>
@@ -247,4 +257,86 @@
                 </div>
          </div>
 </header>
+<style>
+    .header-search-wrap {
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+        margin-left: 14px;
+    }
+
+    .header-search-trigger {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        border: 1px solid #dbe4ff;
+        background: #ffffff;
+        color: #1d4ed8;
+        transition: all .2s ease;
+    }
+
+    .header-search-trigger:hover {
+        background: #eef4ff;
+        border-color: #c7d7ff;
+    }
+
+    .header-search-popover {
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 0;
+        width: 390px;
+        max-width: min(390px, 72vw);
+        background: #ffffff;
+        border: 1px solid #dbe4ff;
+        border-radius: 14px;
+        box-shadow: 0 18px 38px rgba(15, 23, 42, 0.16);
+        padding: 10px;
+        display: none;
+        z-index: 1200;
+    }
+
+    .header-search-wrap.open .header-search-popover {
+        display: block;
+    }
+</style>
+<script>
+    (function () {
+        const bindHeaderSearch = () => {
+            const wrap = document.querySelector('.header-search-wrap');
+            const trigger = document.getElementById('header-search-trigger');
+
+            if (!wrap || !trigger) {
+                return;
+            }
+
+            trigger.onclick = function (e) {
+                e.preventDefault();
+                wrap.classList.toggle('open');
+            };
+        };
+
+        if (!window.__headerSearchBound) {
+            window.__headerSearchBound = true;
+
+            document.addEventListener('click', function (e) {
+                const wrap = document.querySelector('.header-search-wrap');
+                if (wrap && !wrap.contains(e.target)) {
+                    wrap.classList.remove('open');
+                }
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') {
+                    const wrap = document.querySelector('.header-search-wrap');
+                    if (wrap) {
+                        wrap.classList.remove('open');
+                    }
+                }
+            });
+        }
+
+        document.addEventListener('livewire:navigated', bindHeaderSearch);
+        bindHeaderSearch();
+    })();
+</script>
 </div>
