@@ -667,7 +667,7 @@
     </section>
     @endif
 
-    <section class="overflow-hidden space-top">
+    <section class="overflow-hidden space-top" id="testimonials">
     <div class="container">
         <div class="title-area text-center">
             <span class="sub-title">

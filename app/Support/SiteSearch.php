@@ -9,9 +9,11 @@ use App\Models\Project;
 use App\Models\Publication;
 use App\Models\Service;
 use App\Models\Team;
+use App\Models\Testimony;
 use App\Models\Vacancy;
 use App\Models\WhoWeAre;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
@@ -31,6 +33,7 @@ class SiteSearch
         $items = collect();
 
         $publishedOrActive = ['published', 'active'];
+        $like = DB::getDriverName() === 'pgsql' ? 'ilike' : 'like';
 
         $blogs = Blog::query()
             ->whereIn('status', $publishedOrActive)
@@ -117,16 +120,49 @@ class SiteSearch
         }
 
         $teams = Team::query()
-            ->where(function ($query) use ($q) {
-                $query->where('name', 'like', "%{$q}%")
-                    ->orWhere('description', 'like', "%{$q}%")
-                    ->orWhere('position', 'like', "%{$q}%");
+            ->when(Schema::hasColumn('teams', 'status'), function ($query) use ($publishedOrActive) {
+                $query->whereIn('status', $publishedOrActive);
+            })
+            ->where(function ($query) use ($q, $like) {
+                $query->where('name', $like, "%{$q}%")
+                    ->orWhere('description', $like, "%{$q}%")
+                    ->orWhere('position', $like, "%{$q}%");
+
+                if (Schema::hasColumn('teams', 'salute')) {
+                    $query->orWhere('salute', $like, "%{$q}%");
+                }
             })
             ->limit(10)
             ->get();
 
         foreach ($teams as $team) {
-            $items->push(self::item('Team', $team->name, (string) $team->description, url('/team-details/' . $team->slug), optional($team->updated_at)?->toDateString()));
+            $items->push(self::item(
+                'Team',
+                (string) $team->name,
+                (string) $team->description,
+                url('/team-details/' . ($team->slug ?: $team->id)),
+                optional($team->updated_at)?->toDateString()
+            ));
+        }
+
+        $testimonies = Testimony::query()
+            ->whereIn('status', $publishedOrActive)
+            ->where(function ($query) use ($q, $like) {
+                $query->where('name', $like, "%{$q}%")
+                    ->orWhere('position', $like, "%{$q}%")
+                    ->orWhere('description', $like, "%{$q}%");
+            })
+            ->limit(12)
+            ->get();
+
+        foreach ($testimonies as $testimony) {
+            $items->push(self::item(
+                'Testimonial',
+                (string) $testimony->name,
+                (string) $testimony->description,
+                url('/?testimonial=' . $testimony->id . '#testimonials'),
+                optional($testimony->updated_at)?->toDateString()
+            ));
         }
 
         $about = About::query()->first();
@@ -149,7 +185,7 @@ class SiteSearch
         }
 
         return $items
-            ->unique(fn ($item) => $item['url'])
+            ->unique(fn ($item) => $item['type'] . '|' . $item['url'] . '|' . Str::lower($item['title']))
             ->sortByDesc(fn ($item) => self::score($q, $item['title'], $item['snippet']))
             ->take($limit)
             ->values()

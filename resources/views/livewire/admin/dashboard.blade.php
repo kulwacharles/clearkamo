@@ -8,6 +8,14 @@
             box-shadow: var(--admin-shadow);
             height: 100%;
         }
+        .visitor-dashboard .metric-soft-blue { background: rgba(59, 130, 246, .08); border-color: rgba(59, 130, 246, .28); }
+        .visitor-dashboard .metric-soft-emerald { background: rgba(16, 185, 129, .08); border-color: rgba(16, 185, 129, .28); }
+        .visitor-dashboard .metric-soft-violet { background: rgba(139, 92, 246, .08); border-color: rgba(139, 92, 246, .28); }
+        .visitor-dashboard .metric-soft-amber { background: rgba(245, 158, 11, .10); border-color: rgba(245, 158, 11, .30); }
+        .visitor-dashboard .metric-soft-cyan { background: rgba(6, 182, 212, .08); border-color: rgba(6, 182, 212, .28); }
+        .visitor-dashboard .metric-soft-rose { background: rgba(244, 63, 94, .08); border-color: rgba(244, 63, 94, .28); }
+        .visitor-dashboard .metric-soft-indigo { background: rgba(99, 102, 241, .08); border-color: rgba(99, 102, 241, .28); }
+        .visitor-dashboard .metric-soft-slate { background: rgba(71, 85, 105, .10); border-color: rgba(71, 85, 105, .30); }
         .visitor-dashboard .metric-label {
             font-size: 12px;
             color: var(--admin-muted);
@@ -81,49 +89,49 @@
 
         <div class="row mb_30">
             <div class="col-md-6 col-xl-2 mb-3">
-                <div class="metric-card">
+                <div class="metric-card metric-soft-blue">
                     <div class="metric-label">Total Visits</div>
                     <p class="metric-value">{{ number_format($totalVisits) }}</p>
                 </div>
             </div>
             <div class="col-md-6 col-xl-2 mb-3">
-                <div class="metric-card">
+                <div class="metric-card metric-soft-emerald">
                     <div class="metric-label">Unique Visitors</div>
                     <p class="metric-value">{{ number_format($uniqueVisitors) }}</p>
                 </div>
             </div>
             <div class="col-md-6 col-xl-2 mb-3">
-                <div class="metric-card">
+                <div class="metric-card metric-soft-violet">
                     <div class="metric-label">Unique Pages</div>
                     <p class="metric-value">{{ number_format($uniquePages) }}</p>
                 </div>
             </div>
             <div class="col-md-6 col-xl-2 mb-3">
-                <div class="metric-card">
+                <div class="metric-card metric-soft-amber">
                     <div class="metric-label">Avg Daily Visits</div>
                     <p class="metric-value">{{ number_format($avgDailyVisits) }}</p>
                 </div>
             </div>
             <div class="col-md-6 col-xl-2 mb-3">
-                <div class="metric-card">
+                <div class="metric-card metric-soft-cyan">
                     <div class="metric-label">New Visitors</div>
                     <p class="metric-value">{{ number_format($newVisitors) }}</p>
                 </div>
             </div>
             <div class="col-md-6 col-xl-2 mb-3">
-                <div class="metric-card">
+                <div class="metric-card metric-soft-rose">
                     <div class="metric-label">Returning</div>
                     <p class="metric-value">{{ number_format($returningVisitors) }}</p>
                 </div>
             </div>
             <div class="col-md-6 col-xl-3 mb-3">
-                <div class="metric-card">
+                <div class="metric-card metric-soft-indigo">
                     <div class="metric-label">Total Searches</div>
                     <p class="metric-value">{{ number_format($totalSearches) }}</p>
                 </div>
             </div>
             <div class="col-md-6 col-xl-3 mb-3">
-                <div class="metric-card">
+                <div class="metric-card metric-soft-slate">
                     <div class="metric-label">Unique Search Terms</div>
                     <p class="metric-value">{{ number_format($uniqueSearchTerms) }}</p>
                 </div>
