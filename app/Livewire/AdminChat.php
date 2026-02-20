@@ -4,6 +4,8 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\ChatMessage;
+use App\Events\ChatMessageBroadcasted;
+use Throwable;
 
 class AdminChat extends Component
 {
@@ -104,14 +106,11 @@ class AdminChat extends Component
         $this->validate(['newMessage' => 'required|min:1|max:1000']);
 
         if ($this->selectedSession) {
-            $session = ChatMessage::where('session_id', $this->selectedSession)
-                ->where('sender_type', 'user')
-                ->first();
-
-            ChatMessage::create([
+            $sentMessage = $this->newMessage;
+            $message = ChatMessage::create([
                 'name' => 'Support Team',
                 'email' => 'support@example.com',
-                'message' => $this->newMessage,
+                'message' => $sentMessage,
                 'sender_type' => 'admin',
                 'session_id' => $this->selectedSession,
                 'is_read' => true
@@ -120,11 +119,13 @@ class AdminChat extends Component
             $this->newMessage = '';
             $this->loadMessages();
             $this->loadSessions();
+            $this->loadUnreadCount();
+            $this->broadcastMessage($message);
             
             // Dispatch event to frontend user
             $this->dispatch('newAdminMessage', [
                 'sessionId' => $this->selectedSession,
-                'message' => $this->newMessage
+                'message' => $sentMessage
             ]);
         }
     }
@@ -152,7 +153,8 @@ class AdminChat extends Component
     {
         return [
             'echo-notification' => 'notifyNewMessage',
-            'refreshAdminChat' => 'refreshChatData'
+            'refreshAdminChat' => 'refreshChatData',
+            'refreshAdminInbox' => 'refreshChatData',
         ];
     }
 
@@ -171,6 +173,15 @@ class AdminChat extends Component
         $this->loadUnreadCount();
         if ($this->selectedSession) {
             $this->loadMessages();
+        }
+    }
+
+    private function broadcastMessage(ChatMessage $message): void
+    {
+        try {
+            broadcast(new ChatMessageBroadcasted($message))->toOthers();
+        } catch (Throwable $e) {
+            report($e);
         }
     }
 }

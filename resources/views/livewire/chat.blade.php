@@ -48,7 +48,7 @@
             @else
 
                 <!-- Messages -->
-                <div id="chatMessages" class="chat-messages">
+                <div id="chatMessages" class="chat-messages" wire:poll.3s="refreshMessages">
                     @forelse($messages as $message)
                         @if($message['sender_type'] === 'user')
                             <div class="msg-row user">
@@ -255,5 +255,35 @@
             margin-top: 50%;
         }
     </style>
+
+    @if(config('broadcasting.connections.pusher.key'))
+        <script src="https://js.pusher.com/8.4.0/pusher.min.js"></script>
+        <script>
+            document.addEventListener('livewire:initialized', () => {
+                const channelName = 'chat.session.{{ $sessionId }}';
+                const listenerKey = '__chatRealtimeBound_' + channelName;
+
+                if (window[listenerKey]) {
+                    return;
+                }
+
+                window[listenerKey] = true;
+
+                if (!window.__ckPusher) {
+                    window.__ckPusher = new Pusher('{{ config('broadcasting.connections.pusher.key') }}', {
+                        cluster: '{{ config('broadcasting.connections.pusher.options.cluster', 'mt1') }}',
+                        forceTLS: '{{ config('broadcasting.connections.pusher.options.useTLS', true) ? 'true' : 'false' }}' === 'true',
+                    });
+                }
+
+                const channel = window.__ckPusher.subscribe(channelName);
+                channel.bind('chat.message.sent', (eventData) => {
+                    if (eventData && eventData.session_id === '{{ $sessionId }}') {
+                        Livewire.dispatch('refreshUserChat');
+                    }
+                });
+            });
+        </script>
+    @endif
 
 </div>

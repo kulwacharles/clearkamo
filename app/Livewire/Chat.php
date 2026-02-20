@@ -4,6 +4,8 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\ChatMessage;
+use App\Events\ChatMessageBroadcasted;
+use Throwable;
 use Illuminate\Support\Facades\Session;
 
 class Chat extends Component
@@ -69,7 +71,7 @@ class Chat extends Component
             'newMessage' => 'required|min:1|max:1000'
         ]);
 
-        ChatMessage::create([
+        $message = ChatMessage::create([
             'name' => $this->userName,
             'email' => $this->userEmail,
             'message' => $this->newMessage,
@@ -81,6 +83,7 @@ class Chat extends Component
         $this->newMessage = '';
         $this->loadMessages();
 
+        $this->broadcastMessage($message);
         $this->dispatch('messageSent');
         $this->dispatch('refreshAdminChat');
     }
@@ -93,5 +96,26 @@ class Chat extends Component
     public function render()
     {
         return view('livewire.chat');
+    }
+
+    public function refreshMessages()
+    {
+        $this->loadMessages();
+    }
+
+    public function getListeners()
+    {
+        return [
+            'refreshUserChat' => 'refreshMessages',
+        ];
+    }
+
+    private function broadcastMessage(ChatMessage $message): void
+    {
+        try {
+            broadcast(new ChatMessageBroadcasted($message))->toOthers();
+        } catch (Throwable $e) {
+            report($e);
+        }
     }
 }
