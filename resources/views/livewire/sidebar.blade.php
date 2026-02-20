@@ -3,10 +3,20 @@
         <i class="ti-close"></i>
     </div>
     <ul id="sidebar_menu">
-        <li class="active">
-            <a  href="{{url('/admin/sliders')}}"  aria-expanded="false">
+        <li class="">
+            <a wire:navigate href="{{ url('/admin/dashboard') }}" aria-expanded="false">
                 <div class="nav_icon_small">
                     <img src="{{asset('img/menu-icon/dashboard.svg')}}" alt="">
+                </div>
+                <div class="nav_title">
+                    <span>Dashboard</span>
+                </div>
+            </a>
+        </li>
+        <li class="">
+            <a wire:navigate href="{{url('/admin/sliders')}}" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{{asset('img/menu-icon/21.svg')}}" alt="">
                 </div>
                 <div class="nav_title">
                     <span>Sliders </span>

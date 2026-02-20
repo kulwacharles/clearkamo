@@ -28,6 +28,7 @@ use App\Livewire\Team\BackendTeam;
 use App\Livewire\Testimony\TestimonyBackend;
 use App\Livewire\Vacancy\VacancyBackend;
 use App\Livewire\AdminChat;
+use App\Livewire\Admin\Dashboard as AdminDashboard;
 use App\Models\Blog;
 use App\Models\ChatMessage;
 
@@ -41,6 +42,7 @@ Route::middleware('guest')->group(function () {
     //Route::get('/admin/register', Register::class)->name('register');
 });
 Route::middleware(['auth'])->prefix('/admin')->group(function () {
+    Route::get('dashboard', AdminDashboard::class)->name('admin.dashboard');
     Route::get('sliders',Sliders::class)->name('sliders');
     Route::get('about-us',Abouts::class)->name('admin.about');
     Route::get('blog-posts',BackendBlog::class)->name('admin.blogs');

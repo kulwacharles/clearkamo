@@ -412,6 +412,7 @@
 
             $routeName = request()->route()?->getName();
             $adminRouteLabels = [
+                'admin.dashboard' => 'Dashboard',
                 'sliders' => 'Sliders',
                 'admin.about' => 'About Us',
                 'admin.blogs' => 'News & Updates',
