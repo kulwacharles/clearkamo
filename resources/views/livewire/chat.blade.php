@@ -254,6 +254,48 @@
             color: #888;
             margin-top: 50%;
         }
+
+        html[data-admin-theme='dark'] .chat-container {
+            background: #0f1522;
+            border: 1px solid #233149;
+        }
+
+        html[data-admin-theme='dark'] .chat-header {
+            background: #0f1522;
+            border-bottom-color: #233149;
+        }
+
+        html[data-admin-theme='dark'] .chat-header h3,
+        html[data-admin-theme='dark'] .chat-onboard h4 {
+            color: #eaf0ff;
+        }
+
+        html[data-admin-theme='dark'] .chat-header span,
+        html[data-admin-theme='dark'] .chat-onboard p,
+        html[data-admin-theme='dark'] .empty {
+            color: #a4b3c8;
+        }
+
+        html[data-admin-theme='dark'] .chat-messages {
+            background: #0b1220;
+        }
+
+        html[data-admin-theme='dark'] .msg.support {
+            background: #1b263b;
+            color: #eaf0ff;
+        }
+
+        html[data-admin-theme='dark'] .chat-onboard input,
+        html[data-admin-theme='dark'] .chat-input-area input {
+            background: #0b1220;
+            color: #eaf0ff;
+            border-color: #233149;
+        }
+
+        html[data-admin-theme='dark'] .chat-input-area {
+            border-top-color: #233149;
+            background: #0f1522;
+        }
     </style>
 
     @if(config('broadcasting.connections.pusher.key'))

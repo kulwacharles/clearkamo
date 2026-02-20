@@ -12,6 +12,18 @@
             --ac-danger: #ef4444;
         }
 
+        html[data-admin-theme='dark'] .admin-chat-ui {
+            --ac-border: #243247;
+            --ac-text: #eaf0ff;
+            --ac-muted: #a4b3c8;
+            --ac-bg: #0b1220;
+            --ac-white: #0f1522;
+            --ac-primary: #3b82f6;
+            --ac-primary-dark: #2563eb;
+            --ac-success: #22c55e;
+            --ac-danger: #ef4444;
+        }
+
         .admin-chat-ui {
             background: var(--ac-bg);
             border: 1px solid var(--ac-border);
@@ -40,7 +52,7 @@
             margin: 0;
             font-size: 24px;
             font-weight: 700;
-            color: #1d2736;
+            color: var(--ac-text);
         }
 
         .admin-chat-ui .ac-subtitle {
@@ -54,8 +66,8 @@
             align-items: center;
             gap: 8px;
             align-self: center;
-            background: #e8f1ff;
-            color: #1d4ed8;
+            background: rgba(59, 130, 246, .16);
+            color: #8cb8ff;
             border-radius: 999px;
             padding: 7px 12px;
             font-size: 13px;
@@ -94,7 +106,7 @@
             text-transform: uppercase;
             letter-spacing: .4px;
             font-weight: 700;
-            color: #334155;
+            color: var(--ac-text);
         }
 
         .admin-chat-ui .ac-panel-meta {
@@ -111,7 +123,7 @@
         .admin-chat-ui .ac-session-item {
             width: 100%;
             border: 0;
-            border-bottom: 1px solid #f1f5f9;
+            border-bottom: 1px solid var(--ac-border);
             background: transparent;
             text-align: left;
             padding: 12px 14px;
@@ -120,11 +132,11 @@
         }
 
         .admin-chat-ui .ac-session-item:hover {
-            background: #f8fbff;
+            background: rgba(59, 130, 246, .08);
         }
 
         .admin-chat-ui .ac-session-item.is-active {
-            background: #eaf3ff;
+            background: rgba(59, 130, 246, .14);
         }
 
         .admin-chat-ui .ac-session-row {
@@ -142,8 +154,8 @@
             justify-content: center;
             font-weight: 700;
             font-size: 13px;
-            color: #1d4ed8;
-            background: #dbeafe;
+            color: #9dc2ff;
+            background: rgba(59, 130, 246, .16);
             flex-shrink: 0;
         }
 
@@ -171,26 +183,26 @@
         .admin-chat-ui .ac-name {
             font-size: 14px;
             font-weight: 600;
-            color: #0f172a;
+            color: var(--ac-text);
             max-width: 170px;
         }
 
         .admin-chat-ui .ac-time {
             font-size: 11px;
-            color: #94a3b8;
+            color: var(--ac-muted);
             flex-shrink: 0;
         }
 
         .admin-chat-ui .ac-email {
             margin-top: 2px;
             font-size: 12px;
-            color: #64748b;
+            color: var(--ac-muted);
         }
 
         .admin-chat-ui .ac-preview {
             margin-top: 3px;
             font-size: 13px;
-            color: #475569;
+            color: var(--ac-muted);
         }
 
         .admin-chat-ui .ac-unread {
@@ -238,7 +250,7 @@
         .admin-chat-ui .ac-messages {
             height: 460px;
             overflow-y: auto;
-            background: #f8fafc;
+            background: var(--ac-bg);
             padding: 14px;
         }
 
@@ -265,9 +277,9 @@
         }
 
         .admin-chat-ui .ac-bubble.user {
-            background: #ffffff;
+            background: var(--ac-white);
             border: 1px solid var(--ac-border);
-            color: #1e293b;
+            color: var(--ac-text);
         }
 
         .admin-chat-ui .ac-bubble.admin {
@@ -284,7 +296,7 @@
 
         .admin-chat-ui .ac-input-wrap {
             border-top: 1px solid var(--ac-border);
-            background: #fff;
+            background: var(--ac-white);
             padding: 12px;
         }
 
@@ -298,8 +310,8 @@
             min-height: 44px;
             border: 1px solid #d5dee8 !important;
             border-radius: 10px !important;
-            background: #fff !important;
-            color: #0f172a !important;
+            background: var(--ac-bg) !important;
+            color: var(--ac-text) !important;
             padding: 0 12px !important;
             font-size: 14px;
             outline: none;
@@ -335,7 +347,7 @@
             text-align: center;
             color: var(--ac-muted);
             padding: 16px;
-            background: #f8fafc;
+            background: var(--ac-bg);
         }
 
         .admin-chat-ui .ac-error {
@@ -345,7 +357,7 @@
         }
 
         .admin-chat-ui .ac-empty-page {
-            background: #fff;
+            background: var(--ac-white);
             border: 1px solid var(--ac-border);
             border-radius: 12px;
             padding: 40px 16px;

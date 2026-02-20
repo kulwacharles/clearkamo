@@ -29,6 +29,7 @@ use App\Livewire\Testimony\TestimonyBackend;
 use App\Livewire\Vacancy\VacancyBackend;
 use App\Livewire\AdminChat;
 use App\Models\Blog;
+use App\Models\ChatMessage;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -51,6 +52,30 @@ Route::middleware(['auth'])->prefix('/admin')->group(function () {
     Route::get('testimony',TestimonyBackend::class)->name('admin.testimony');
     Route::get('client',ClientBackend::class)->name('admin.client');
     Route::get('contacts',BackendContacts::class)->name('admin.contacts');
+    Route::get('chat/realtime', function () {
+        $latestUserMessage = ChatMessage::where('sender_type', 'user')
+            ->latest('id')
+            ->first();
+
+        $unreadChats = ChatMessage::where('sender_type', 'user')
+            ->where('is_read', false)
+            ->distinct('session_id')
+            ->count('session_id');
+
+        $unreadMessages = ChatMessage::where('sender_type', 'user')
+            ->where('is_read', false)
+            ->count();
+
+        return response()->json([
+            'unread_chats' => $unreadChats,
+            'unread_messages' => $unreadMessages,
+            'latest_user_message_id' => $latestUserMessage?->id,
+            'latest_user_name' => $latestUserMessage?->name ?: 'Guest User',
+            'latest_user_message' => $latestUserMessage?->message ?: '',
+            'latest_user_session_id' => $latestUserMessage?->session_id,
+        ]);
+    })->name('admin.chat.realtime');
+
     Route::get('chat',AdminChat::class)->name('admin.chat');
     Route::post('/logout', function () {
         Auth::logout();

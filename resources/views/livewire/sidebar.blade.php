@@ -1,15 +1,6 @@
 <nav class="sidebar">
-    <div class="logo d-flex justify-content-between">
-        @if($logo)
-        <a class="large_logo" href="{{ url('/admin/about') }}"><img src="{{ url('/storage/'.$logo) }}" alt=""></a>
-        <a class="small_logo" href="{{ url('/admin/about') }}"><img src="{{ url('/storage/'.$logo) }}" alt=""></a>
-        @else
-        <a class="large_logo" href="index-2.html"><img src="{{asset('img/logo.png')}}" alt=""></a>
-        <a class="small_logo" href="index-2.html"><img src="{{asset('img/mini_logo.png')}}" alt=""></a>
-        @endif
-        <div class="sidebar_close_icon d-lg-none">
-            <i class="ti-close"></i>
-        </div>
+    <div class="sidebar_close_icon d-lg-none">
+        <i class="ti-close"></i>
     </div>
     <ul id="sidebar_menu">
         <li class="active">
@@ -66,7 +57,7 @@
         <li class="">
             <a wire:navigate  href="{{url('/admin/services')}}" aria-expanded="false">
               <div class="nav_icon_small">
-                  <img src="{{asset('img/menu-icon/7.svg')}}" alt="">
+                  <img src="{{asset('img/menu-icon/3.svg')}}" alt="Services icon">
               </div>
               <div class="nav_title">
                   <span>Services</span>
@@ -76,7 +67,7 @@
         <li class="">
             <a wire:navigate  href="{{url('/admin/vacancies')}}" aria-expanded="false">
               <div class="nav_icon_small">
-                  <img src="{{asset('img/menu-icon/7.svg')}}" alt="">
+                  <img src="{{asset('img/menu-icon/17.svg')}}" alt="Vacancies icon">
               </div>
               <div class="nav_title">
                   <span>Vacancies</span>
@@ -86,7 +77,7 @@
         <li class="">
             <a wire:navigate  href="{{url('/admin/team')}}" aria-expanded="false">
               <div class="nav_icon_small">
-                  <img src="{{asset('img/menu-icon/7.svg')}}" alt="">
+                  <img src="{{asset('img/menu-icon/14.svg')}}" alt="Team icon">
               </div>
               <div class="nav_title">
                   <span>Team</span>
@@ -96,7 +87,7 @@
          <li class="">
             <a wire:navigate  href="{{url('/admin/testimony')}}" aria-expanded="false">
               <div class="nav_icon_small">
-                  <img src="{{asset('img/menu-icon/7.svg')}}" alt="">
+                  <img src="{{asset('img/menu-icon/10.svg')}}" alt="Testimony icon">
               </div>
               <div class="nav_title">
                   <span>Testimony</span>
