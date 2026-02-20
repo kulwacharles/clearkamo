@@ -24,29 +24,30 @@
                  @if($vacancies)
                 <div class="col-xxl-8 col-lg-7">
                      @foreach ($vacancies as $vacancie)
-                    <div class="th-blog blog-single has-post-thumbnail">
-                        <div class="blog-img">
-                            <a href="blog-details.html">
-                                <img src="{{ asset('storage/'.$vacancie->image) }}" alt="Blog Image">
+                    <div class="service-card-horizontal d-flex align-items-stretch mb-4" style="border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                        <div class="service-image-wrapper" style="width: 260px; min-width: 260px; overflow: hidden;">
+                            <a wire:navigate href="/vacancy/details/{{ $vacancie->slug }}" class="d-block h-100">
+                                <img src="{{ asset('storage/'.$vacancie->image) }}" alt="{{ $vacancie->title }}" class="w-100 h-100" style="object-fit: cover;">
                             </a>
                         </div>
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <a class="author" href="/vacancy/details/{{ $vacancie->slug }}">
-                                    <i class="far fa-user"></i>Publicated by Admin
-                                </a>
-                                 <a href="/vacancy/details/{{ $vacancie->slug }}">
-                                    <i class="fa-light fa-calendar-days"></i>{{$vacancie->created_at->format('d F, Y')}}
-                                </a>
-                               
-                             </div>
-                            <h2 class="blog-title">
-                                <a href="/vacancy/details/{{ $vacancie->slug }}">{{$vacancie->title}}</a>
-                            </h2>
-                            <p class="blog-text">
-                                 {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($vacancie->description)), 350, '...') }}
-                            </p>
-                            <a href="/vacancy/details/{{ $vacancie->slug }}" class="th-btn">Read More
+                        <div class="service-content flex-grow-1 p-4 d-flex flex-column justify-content-between">
+                            <div>
+                                <div class="blog-meta mb-2">
+                                    <a class="author" wire:navigate href="/vacancy/details/{{ $vacancie->slug }}">
+                                        <i class="far fa-user"></i>Publicated by Admin
+                                    </a>
+                                    <a wire:navigate href="/vacancy/details/{{ $vacancie->slug }}">
+                                        <i class="fa-light fa-calendar-days"></i>{{ $vacancie->created_at->format('d F, Y') }}
+                                    </a>
+                                </div>
+                                <h2 class="blog-title mb-3">
+                                    <a wire:navigate href="/vacancy/details/{{ $vacancie->slug }}">{{ $vacancie->title }}</a>
+                                </h2>
+                                <p class="blog-text mb-3">
+                                     {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($vacancie->description)), 240, '...') }}
+                                </p>
+                            </div>
+                            <a wire:navigate href="/vacancy/details/{{ $vacancie->slug }}" class="th-btn">Read More
                                 <div class="icon">
                                     <i class="fa-solid fa-arrow-up-right ms-3"></i>
                                 </div>
@@ -72,27 +73,22 @@
                             </form>
                         </div> --}}
                          <div class="widget widget_categories">
-                            <h3 class="widget_title">Post Categories</h3>
+                            <h3 class="widget_title">Contract Type</h3>
                             <ul>
                                 <li>
-                                    <a href="blog.html">Compliance Audits</a> 
-                                    <span>(8)</span>
+                                    <a href="#" wire:click.prevent="setContractFilter('all')" class="{{ $selectedContract === 'all' ? 'fw-bold' : '' }}">
+                                        All Contracts
+                                    </a>
+                                    <span>({{ $contractTypes->sum('total') }})</span>
                                 </li>
-                                <li>
-                                    <a href="blog.html">Employee Relations</a> <span>(10)</span>
-                                </li>
-                                <li>
-                                    <a href="blog.html">HR Consulting</a> <span>(12)</span>
-                                </li>
-                                <li>
-                                    <a href="blog.html">Legal Contract</a> <span>(6)</span>
-                                </li>
-                                <li>
-                                    <a href="blog.html">Small Business HR</a> <span>(8)</span>
-                                </li>
-                                <li>
-                                    <a href="blog.html">Business Management</a> <span>(11)</span>
-                                </li>
+                                @foreach($contractTypes as $contractType)
+                                    <li>
+                                        <a href="#" wire:click.prevent="setContractFilter('{{ $contractType->contract }}')" class="{{ $selectedContract === $contractType->contract ? 'fw-bold' : '' }}">
+                                            {{ $contractType->contract }}
+                                        </a>
+                                        <span>({{ $contractType->total }})</span>
+                                    </li>
+                                @endforeach
                             </ul>
                          </div>
                         

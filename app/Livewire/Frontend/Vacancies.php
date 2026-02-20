@@ -10,9 +10,15 @@ class Vacancies extends Component
 {
 
     use WithPagination;
-               public $title, $description, $years_of_experience, $image, $image2,$keywords,$logo;
-    public $id, $imagePath, $image2Path, $about1, $about2,$about3;
-        public function mount()
+    public $title, $description, $years_of_experience, $image, $image2, $keywords, $logo;
+    public $id, $imagePath, $image2Path, $about1, $about2, $about3;
+    public $selectedContract = 'all';
+
+    protected $queryString = [
+        'selectedContract' => ['except' => 'all'],
+    ];
+
+    public function mount()
     {
         $about = About::first();
         if ($about) {
@@ -29,12 +35,36 @@ class Vacancies extends Component
             //$this->dispatch('load-ckeditor-data', $this->description);
         }
     }
+
+    public function setContractFilter($contract)
+    {
+        $this->selectedContract = $contract ?: 'all';
+        $this->resetPage();
+    }
+
     public function render()
     {
-        $vacancies=Vacancy::where('status','published')->orderBy('created_at','desc')->paginate(8);
-        return view('livewire.frontend.vacancies',['vacancies'=>$vacancies])->layout("components.layouts.frontend", ["title"=>"Vacancies","description"=>"ClearKamo Vacancies","keywords"=>"Vacancies, clearkamo vacancies,projects, mtu ni afya","image"=>$this->logo]);
+        $baseQuery = Vacancy::where('status', 'published');
+
+        if ($this->selectedContract !== 'all') {
+            $baseQuery->where('contract', $this->selectedContract);
+        }
+
+        $vacancies = $baseQuery->orderBy('created_at', 'desc')->paginate(8);
+
+        $contractTypes = Vacancy::where('status', 'published')
+            ->selectRaw('contract, COUNT(*) as total')
+            ->groupBy('contract')
+            ->orderBy('contract')
+            ->get();
+
+        return view('livewire.frontend.vacancies', [
+            'vacancies' => $vacancies,
+            'contractTypes' => $contractTypes,
+        ])->layout("components.layouts.frontend", ["title"=>"Vacancies","description"=>"ClearKamo Vacancies","keywords"=>"Vacancies, clearkamo vacancies,projects, mtu ni afya","image"=>$this->logo]);
     }
-        public function paginationView()
+
+    public function paginationView()
     {
         return 'vendor.pagination.default';
     }
