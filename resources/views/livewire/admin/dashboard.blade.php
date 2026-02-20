@@ -80,28 +80,40 @@
         </div>
 
         <div class="row mb_30">
-            <div class="col-md-6 col-xl-3 mb-3">
+            <div class="col-md-6 col-xl-2 mb-3">
                 <div class="metric-card">
                     <div class="metric-label">Total Visits</div>
                     <p class="metric-value">{{ number_format($totalVisits) }}</p>
                 </div>
             </div>
-            <div class="col-md-6 col-xl-3 mb-3">
+            <div class="col-md-6 col-xl-2 mb-3">
                 <div class="metric-card">
                     <div class="metric-label">Unique Visitors</div>
                     <p class="metric-value">{{ number_format($uniqueVisitors) }}</p>
                 </div>
             </div>
-            <div class="col-md-6 col-xl-3 mb-3">
+            <div class="col-md-6 col-xl-2 mb-3">
                 <div class="metric-card">
                     <div class="metric-label">Unique Pages</div>
                     <p class="metric-value">{{ number_format($uniquePages) }}</p>
                 </div>
             </div>
-            <div class="col-md-6 col-xl-3 mb-3">
+            <div class="col-md-6 col-xl-2 mb-3">
                 <div class="metric-card">
                     <div class="metric-label">Avg Daily Visits</div>
                     <p class="metric-value">{{ number_format($avgDailyVisits) }}</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-2 mb-3">
+                <div class="metric-card">
+                    <div class="metric-label">New Visitors</div>
+                    <p class="metric-value">{{ number_format($newVisitors) }}</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-2 mb-3">
+                <div class="metric-card">
+                    <div class="metric-label">Returning</div>
+                    <p class="metric-value">{{ number_format($returningVisitors) }}</p>
                 </div>
             </div>
         </div>
@@ -117,6 +129,36 @@
             </div>
 
             <div class="col-xl-4 mb_30">
+                <div class="panel">
+                    <h4 class="panel-title">Device Split</h4>
+                    <div style="height: 340px;">
+                        <canvas id="visitorDeviceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-8 mb_30">
+                <div class="panel">
+                    <h4 class="panel-title">Hourly Traffic</h4>
+                    <div style="height: 320px;">
+                        <canvas id="visitorHourlyChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 mb_30">
+                <div class="panel">
+                    <h4 class="panel-title">Top Referrers</h4>
+                    <div style="height: 320px;">
+                        <canvas id="visitorReferrerChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 mb_30">
                 <div class="panel">
                     <h4 class="panel-title">Top Pages</h4>
                     <div class="table-responsive">
@@ -148,18 +190,21 @@
 
     <script>
         (function () {
-            let chart;
+            let trendChart;
+            let hourlyChart;
+            let deviceChart;
+            let referrerChart;
 
-            const buildChart = (labels, values) => {
+            const buildTrendChart = (labels, values) => {
                 const el = document.getElementById('visitorTrendChart');
                 if (!el || typeof Chart === 'undefined') return;
 
                 const ctx = el.getContext('2d');
-                if (chart) {
-                    chart.destroy();
+                if (trendChart) {
+                    trendChart.destroy();
                 }
 
-                chart = new Chart(ctx, {
+                trendChart = new Chart(ctx, {
                     type: 'line',
                     data: {
                         labels: labels || [],
@@ -187,12 +232,103 @@
                 });
             };
 
-            document.addEventListener('livewire:initialized', () => {
-                buildChart(@json($trendLabels), @json($trendValues));
+            const buildHourlyChart = (labels, values) => {
+                const el = document.getElementById('visitorHourlyChart');
+                if (!el || typeof Chart === 'undefined') return;
 
-                Livewire.on('visitor-trend-updated', (event) => {
+                const ctx = el.getContext('2d');
+                if (hourlyChart) hourlyChart.destroy();
+
+                hourlyChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels || [],
+                        datasets: [{
+                            label: 'Visits',
+                            data: values || [],
+                            backgroundColor: 'rgba(96,165,250,0.7)',
+                            borderColor: '#60a5fa',
+                            borderWidth: 1,
+                        }],
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { beginAtZero: true, ticks: { precision: 0 } },
+                        },
+                    },
+                });
+            };
+
+            const buildDeviceChart = (labels, values) => {
+                const el = document.getElementById('visitorDeviceChart');
+                if (!el || typeof Chart === 'undefined') return;
+
+                const ctx = el.getContext('2d');
+                if (deviceChart) deviceChart.destroy();
+
+                deviceChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: labels || [],
+                        datasets: [{
+                            data: values || [],
+                            backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#ef4444'],
+                        }],
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { position: 'bottom' } },
+                    },
+                });
+            };
+
+            const buildReferrerChart = (labels, values) => {
+                const el = document.getElementById('visitorReferrerChart');
+                if (!el || typeof Chart === 'undefined') return;
+
+                const ctx = el.getContext('2d');
+                if (referrerChart) referrerChart.destroy();
+
+                referrerChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels || [],
+                        datasets: [{
+                            label: 'Visits',
+                            data: values || [],
+                            backgroundColor: 'rgba(59,130,246,0.7)',
+                            borderColor: '#3b82f6',
+                            borderWidth: 1,
+                        }],
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            x: { beginAtZero: true, ticks: { precision: 0 } },
+                        },
+                    },
+                });
+            };
+
+            document.addEventListener('livewire:initialized', () => {
+                buildTrendChart(@json($trendLabels), @json($trendValues));
+                buildHourlyChart(@json($hourlyLabels), @json($hourlyValues));
+                buildDeviceChart(@json($deviceLabels), @json($deviceValues));
+                buildReferrerChart(@json($referrerLabels), @json($referrerValues));
+
+                Livewire.on('visitor-analytics-updated', (event) => {
                     const payload = Array.isArray(event) ? event[0] : event;
-                    buildChart(payload?.labels || [], payload?.values || []);
+                    buildTrendChart(payload?.trendLabels || [], payload?.trendValues || []);
+                    buildHourlyChart(payload?.hourlyLabels || [], payload?.hourlyValues || []);
+                    buildDeviceChart(payload?.deviceLabels || [], payload?.deviceValues || []);
+                    buildReferrerChart(payload?.referrerLabels || [], payload?.referrerValues || []);
                 });
             });
         })();
