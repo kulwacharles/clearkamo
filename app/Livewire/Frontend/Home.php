@@ -22,7 +22,7 @@ class Home extends Component
         public function mount()
     {
         $this->services=Service::where("status","published")->get();
-        $this->clients=Client::where("status","published")->get();
+        $this->clients=Client::whereIn("status", ["published", "active"])->latest()->get();
         $this->slides=Slider::where("status","published")->get();
         $about = About::first();
         $this->testimonies=Testimony::where('status','published')->get();

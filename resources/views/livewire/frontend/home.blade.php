@@ -564,6 +564,169 @@
         </div>
     </section>
 
+    @if($clients && $clients->count() > 0)
+    <section class="space-top space-bottom" id="clients-sec" style="background: #f8fafc;">
+        <div class="container">
+            <div class="title-area text-center">
+                <span class="sub-title">
+                    <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">OUR CLIENTS
+                    <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
+                </span>
+                <h2 class="sec-title">Trusted By Leading Organizations</h2>
+                <p class="mx-auto" style="max-width: 760px;">
+                    We partner with institutions and businesses to deliver practical, measurable impact.
+                </p>
+            </div>
+
+            @php
+                $scrollDuration = max(18, $clients->count() * 4);
+            @endphp
+            <div class="clients-marquee" style="--clients-scroll-duration: {{ $scrollDuration }}s;">
+                <div class="clients-track">
+                    @foreach($clients as $client)
+                        <a
+                            href="{{ $client->url }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="client-card d-flex flex-column justify-content-center align-items-center text-center"
+                        >
+                            <div class="client-logo-wrap">
+                                <img
+                                    src="{{ asset('storage/'.$client->image) }}"
+                                    alt="{{ $client->name }}"
+                                    class="client-logo"
+                                >
+                            </div>
+                            <h3 class="client-name">{{ $client->name }}</h3>
+                        </a>
+                    @endforeach
+
+                    @foreach($clients as $client)
+                        <a
+                            href="{{ $client->url }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-hidden="true"
+                            tabindex="-1"
+                            class="client-card d-flex flex-column justify-content-center align-items-center text-center"
+                        >
+                            <div class="client-logo-wrap">
+                                <img
+                                    src="{{ asset('storage/'.$client->image) }}"
+                                    alt="{{ $client->name }}"
+                                    class="client-logo"
+                                >
+                            </div>
+                            <h3 class="client-name">{{ $client->name }}</h3>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
+        <style>
+            #clients-sec .clients-marquee {
+                position: relative;
+                overflow: hidden;
+                width: 100%;
+                padding: 10px 0;
+            }
+
+            #clients-sec .clients-marquee::before,
+            #clients-sec .clients-marquee::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                width: 90px;
+                height: 100%;
+                z-index: 2;
+                pointer-events: none;
+            }
+
+            #clients-sec .clients-marquee::before {
+                left: 0;
+                background: linear-gradient(to right, #f8fafc 35%, rgba(248, 250, 252, 0));
+            }
+
+            #clients-sec .clients-marquee::after {
+                right: 0;
+                background: linear-gradient(to left, #f8fafc 35%, rgba(248, 250, 252, 0));
+            }
+
+            #clients-sec .clients-track {
+                display: flex;
+                align-items: stretch;
+                gap: 20px;
+                width: max-content;
+                animation: clients-scroll var(--clients-scroll-duration) linear infinite;
+            }
+
+            #clients-sec .client-card {
+                background: #ffffff;
+                border: 1px solid #e2e8f0;
+                border-radius: 16px;
+                padding: 24px 20px;
+                text-decoration: none;
+                box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+                transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+                flex: 0 0 230px;
+                min-height: 170px;
+            }
+
+            #clients-sec .client-card:hover {
+                transform: translateY(-6px);
+                border-color: rgba(3, 164, 252, 0.45);
+                box-shadow: 0 18px 30px rgba(3, 164, 252, 0.2);
+            }
+
+            #clients-sec .client-logo-wrap {
+                width: 100%;
+                height: 96px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 14px;
+            }
+
+            #clients-sec .client-logo {
+                max-width: 170px;
+                max-height: 86px;
+                width: auto;
+                height: auto;
+                object-fit: contain;
+                filter: grayscale(1);
+                transition: filter .2s ease, transform .2s ease;
+            }
+
+            #clients-sec .client-card:hover .client-logo {
+                filter: grayscale(0);
+                transform: scale(1.04);
+            }
+
+            #clients-sec .client-name {
+                margin: 0;
+                font-size: 1rem;
+                line-height: 1.4;
+                color: #0f172a;
+                font-weight: 600;
+            }
+
+            #clients-sec .clients-marquee:hover .clients-track {
+                animation-play-state: paused;
+            }
+
+            @keyframes clients-scroll {
+                from {
+                    transform: translateX(0);
+                }
+                to {
+                    transform: translateX(calc(-50% - 10px));
+                }
+            }
+        </style>
+    </section>
+    @endif
+
     @if($teams && $teams->count() > 0)
     <section class="space-top" id="team-sec">
         <div class="container">
