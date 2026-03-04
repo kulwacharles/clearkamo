@@ -22,9 +22,11 @@ use App\Livewire\Frontend\TeamDetails;
 use App\Livewire\Frontend\Vacancies;
 use App\Livewire\Frontend\VacancyDetails;
 use App\Livewire\Frontend\SearchResults;
+use App\Livewire\Frontend\BusinessInquiry as FrontendBusinessInquiry;
 use App\Livewire\Publication\BackendPublications;
 use App\Livewire\Project\BackendProject;
 use App\Livewire\Service\BackendService;
+use App\Livewire\Admin\BusinessInquiries as AdminBusinessInquiries;
 use App\Livewire\Team\BackendTeam;
 use App\Livewire\Testimony\TestimonyBackend;
 use App\Livewire\Vacancy\VacancyBackend;
@@ -55,6 +57,7 @@ Route::middleware(['auth'])->prefix('/admin')->group(function () {
     Route::get('testimony',TestimonyBackend::class)->name('admin.testimony');
     Route::get('client',ClientBackend::class)->name('admin.client');
     Route::get('contacts',BackendContacts::class)->name('admin.contacts');
+    Route::get('business-inquiries', AdminBusinessInquiries::class)->name('admin.business-inquiries');
     Route::get('chat/realtime', function () {
         $latestUserMessage = ChatMessage::where('sender_type', 'user')
             ->latest('id')
@@ -102,3 +105,4 @@ Route::get('/project-details/{slug}',ProjectDetails::class)->name('project');
 Route::get('vacancies',Vacancies::class)->name('vacancies');
 Route::get('vacancy/details/{slug}',VacancyDetails::class)->name('vacancy.details');
 Route::get('/search', SearchResults::class)->name('search.results');
+Route::get('/business-inquiry', FrontendBusinessInquiry::class)->name('business-inquiry');

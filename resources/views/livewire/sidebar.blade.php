@@ -124,5 +124,15 @@
               </div>
             </a>
         </li>
+        <li class="">
+            <a wire:navigate href="{{ url('/admin/business-inquiries') }}" aria-expanded="false">
+              <div class="nav_icon_small">
+                  <img src="{{asset('img/menu-icon/11.svg')}}" alt="">
+              </div>
+              <div class="nav_title">
+                  <span>Business Inquiries</span>
+              </div>
+            </a>
+        </li>
       </ul>
 </nav>

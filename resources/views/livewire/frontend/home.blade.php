@@ -329,7 +329,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="btn-wrap style2 mt-50">
+                    {{-- <div class="btn-wrap style2 mt-50">
                         <div class="about-grid style2">
                             <div class="thumb">
                                 <img class="about-grid_thumb" src="assets/img/normal/client-group-1.png" alt="about">
@@ -346,7 +346,7 @@
                                 <i class="fa-solid fa-arrow-up-right ms-3"></i>
                             </div>
                         </a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

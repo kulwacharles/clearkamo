@@ -283,6 +283,22 @@
                 border-color: var(--admin-border) !important;
             }
 
+            body.admin-modern-ui .modal-dialog {
+                margin: 1rem auto;
+            }
+
+            body.admin-modern-ui .modal-content {
+                max-height: calc(100vh - 2rem);
+                display: flex;
+                flex-direction: column;
+            }
+
+            body.admin-modern-ui .modal-body {
+                overflow-y: auto !important;
+                max-height: calc(100vh - 220px);
+                -webkit-overflow-scrolling: touch;
+            }
+
             body.admin-modern-ui .table,
             body.admin-modern-ui .table td,
             body.admin-modern-ui .table th,
@@ -424,6 +440,7 @@
                 'admin.testimony' => 'Testimony',
                 'admin.client' => 'Clients',
                 'admin.contacts' => 'Contact Us',
+                'admin.business-inquiries' => 'Business Inquiries',
                 'admin.chat' => 'Chat Inbox',
             ];
 
