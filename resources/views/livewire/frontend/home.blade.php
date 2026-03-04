@@ -694,12 +694,10 @@
                 width: auto;
                 height: auto;
                 object-fit: contain;
-                filter: grayscale(1);
-                transition: filter .2s ease, transform .2s ease;
+                transition: transform .2s ease;
             }
 
             #clients-sec .client-card:hover .client-logo {
-                filter: grayscale(0);
                 transform: scale(1.04);
             }
 
