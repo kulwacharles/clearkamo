@@ -39,6 +39,25 @@
     <link rel="stylesheet" href="{{asset('assets/css/app.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/fontawesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    <style>
+        :root {
+            --ck-brand-blue: #03A4FC;
+            --theme-color: #03A4FC;
+        }
+
+        .text-primary {
+            color: #03A4FC !important;
+        }
+
+        .bg-primary {
+            background-color: #03A4FC !important;
+        }
+
+        .fa-plus-circle,
+        .link-btn.style2 i {
+            color: #03A4FC !important;
+        }
+    </style>
 </head>
 <body>
     <div class="preloader">

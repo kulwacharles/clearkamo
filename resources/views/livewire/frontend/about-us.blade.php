@@ -169,14 +169,14 @@
         width: 58px;
         height: 58px;
         border-radius: 50%;
-        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        background: linear-gradient(135deg, #03A4FC 0%, #03A4FC 100%);
         color: #ffffff;
         font-size: 22px;
         box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
     }
 
     .approach-check-icon {
-        color: #2563eb;
+        color: #03A4FC;
     }
 </style>
 <section  id="service-sec" class="mt-50 mb-50">

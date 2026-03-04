@@ -33,7 +33,7 @@
                         <div class="th-blog blog-single mb-3" style="border:1px solid #e5e7eb;border-radius:12px;padding:18px;background:#fff;">
                             <div class="blog-content p-0">
                                 <div class="blog-meta mb-2">
-                                    <span class="badge" style="background:#e0ecff;color:#1d4ed8;border-radius:999px;padding:4px 10px;">{{ $result['type'] }}</span>
+                                    <span class="badge" style="background:rgba(3,164,252,0.15);color:#03A4FC;border-radius:999px;padding:4px 10px;">{{ $result['type'] }}</span>
                                     @if(!empty($result['updated_at']))
                                         <span><i class="fa-light fa-calendar-days"></i> {{ $result['updated_at'] }}</span>
                                     @endif

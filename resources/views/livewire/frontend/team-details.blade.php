@@ -75,7 +75,7 @@
                                             {{ $team->name }}
                                         </a>
                                     </h3>
-                                    <p class="mb-2" style="color:#2563eb;font-weight:600;">{{ $team->position }}</p>
+                                    <p class="mb-2" style="color:#03A4FC;font-weight:600;">{{ $team->position }}</p>
                                     <a wire:navigate href="{{ route('team-details', ['slug' => $team->slug ?: $team->id]) }}" class="link-btn style2">
                                         <i class="fas fa-plus-circle me-1"></i>View Profile
                                     </a>

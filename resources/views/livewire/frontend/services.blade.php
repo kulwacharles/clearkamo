@@ -37,7 +37,7 @@
                             <div>
                                 <h2 class="service-title mb-3" style="font-size: 1.5rem; font-weight: 600; color: #1f2937; line-height: 1.3;">
                                     <a wire:navigate href="/service/details/{{ $service->slug }}" style="color: inherit; text-decoration: none; transition: color 0.3s ease;"
-                                       onmouseover="this.style.color='#3b82f6';"
+                                       onmouseover="this.style.color='#03A4FC';"
                                        onmouseout="this.style.color='inherit';">{{ $service->title }}</a>
                                 </h2>
                                 <p class="service-description mb-4" style="font-size: 1rem; color: #6b7280; line-height: 1.6;">
@@ -45,9 +45,9 @@
                                 </p>
                             </div>
                             <div>
-                                <a wire:navigate href="/service/details/{{ $service->slug }}" class="th-btn style-primary" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border-radius: 8px; text-decoration: none; font-weight: 500; transition: all 0.3s ease;"
-                                   onmouseover="this.style.background='linear-gradient(135deg, #2563eb, #1d4ed8)'; this.style.transform='translateX(4px)';"
-                                   onmouseout="this.style.background='linear-gradient(135deg, #3b82f6, #2563eb)'; this.style.transform='translateX(0)';">
+                                <a wire:navigate href="/service/details/{{ $service->slug }}" class="th-btn style-primary" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: linear-gradient(135deg, #03A4FC, #03A4FC); color: white; border-radius: 8px; text-decoration: none; font-weight: 500; transition: all 0.3s ease;"
+                                   onmouseover="this.style.background='linear-gradient(135deg, #03A4FC, #03A4FC)'; this.style.transform='translateX(4px)';"
+                                   onmouseout="this.style.background='linear-gradient(135deg, #03A4FC, #03A4FC)'; this.style.transform='translateX(0)';">
                                     Read More
                                     <i class="fa-solid fa-arrow-up-right" style="font-size: 14px;"></i>
                                 </a>

@@ -4,7 +4,7 @@
 <div>
     <!-- Hero Slider Section -->
     @if($slides && $slides->count() > 0)
-    <section class="hero-slider-section" style="position: relative; overflow: hidden; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+    <section class="hero-slider-section" style="position: relative; overflow: hidden; background: linear-gradient(135deg, #03A4FC 0%, #03A4FC 100%);">
         <!-- Animated Background Elements -->
         <div class="slider-bg-animation" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
             <div class="floating-shapes">
@@ -22,7 +22,7 @@
                         @if($slide->image)
                             <div class="slider-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('{{ asset('storage/'.$slide->image) }}'); background-size: cover; background-position: center; background-blend-mode: overlay; background-color: rgba(0,0,0,0.4);"></div>
                             <!-- Gradient Overlay -->
-                            <div class="gradient-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(59,130,246,0.3) 0%, rgba(147,51,234,0.2) 50%, rgba(0,0,0,0.5) 100%);"></div>
+                            <div class="gradient-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(3,164,252,0.3) 0%, rgba(3,164,252,0.2) 50%, rgba(0,0,0,0.5) 100%);"></div>
                         @endif
                         <div class="slider-content" style="position: relative; z-index: 2; height: 100%; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 120px;">
                             <div class="container">
@@ -30,7 +30,7 @@
                                     <div class="col-lg-8 mx-auto text-center">
                                         <div class="slider-text" style="color: white; animation: fadeInUp 1.2s ease-out;">
                                             <div class="slider-cta" style="margin-top: 30px;">
-                                                <a href="{{ route('services') }}" class="slider-btn" style="display: inline-block; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); color: white; padding: 15px 40px; border-radius: 50px; font-size: 1rem; font-weight: 600; text-decoration: none; box-shadow: 0 10px 30px rgba(59,130,246,0.4); transform: translateY(0); transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;">
+                                                <a href="{{ route('services') }}" class="slider-btn" style="display: inline-block; background: linear-gradient(135deg, #03A4FC 0%, #03A4FC 100%); color: white; padding: 15px 40px; border-radius: 50px; font-size: 1rem; font-weight: 600; text-decoration: none; box-shadow: 0 10px 30px rgba(3,164,252,0.4); transform: translateY(0); transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;">
                                                     Explore Our Services
                                                     <i class="fas fa-arrow-right ms-2"></i>
                                                 </a>
@@ -98,14 +98,14 @@
         }
         
         .slider-nav-btn:hover {
-            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%) !important;
+            background: linear-gradient(135deg, #03A4FC 0%, #03A4FC 100%) !important;
             color: white !important;
             transform: translateY(-50%) scale(1.1);
         }
         
         .slider-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(59,130,246,0.6);
+            box-shadow: 0 15px 40px rgba(3,164,252,0.6);
         }
     </style>
 
@@ -299,7 +299,7 @@
                     </div>
                     <div class="row gy-40">
                         <div class="col-lg-8">
-                            <div class="mission-vision-core-values" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); padding: 30px; border-radius: 15px; border-left: 4px solid #3b82f6;">
+                            <div class="mission-vision-core-values" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); padding: 30px; border-radius: 15px; border-left: 4px solid #03A4FC;">
                                 <div class="mb-4">
                                     <h4 class="text-primary mb-3" style="font-weight: 600; font-size: 1.1rem;">
                                         <i class="fas fa-bullseye me-2"></i>Mission
@@ -321,7 +321,7 @@
                             </div>
                         </div>
                         <div class="col-lg-4">
-                            <div class="year-counter style2" style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); padding: 40px 30px; border-radius: 15px; text-align: center; color: white;">
+                            <div class="year-counter style2" style="background: linear-gradient(135deg, #03A4FC 0%, #03A4FC 100%); padding: 40px 30px; border-radius: 15px; text-align: center; color: white;">
                                 <div class="year-counter_number">
                                     <span class="counter-number" style="font-size: 3rem; font-weight: 700; color: white;">{{ $about->ex_years ?? 25 }}</span>
                                 </div>
@@ -372,7 +372,7 @@
                     <p class="box-number">01</p>
                     <div class="box-content">
                         <div class="box-icon">
-                            <i class="fas fa-tasks" style="font-size: 48px; color: #3b82f6;"></i>
+                            <i class="fas fa-tasks" style="font-size: 48px; color: #03A4FC;"></i>
                         </div>
                         <h3 class="box-title">Execution Performance & Delivery Reliability</h3>
                         <div class="box-text" style="margin-bottom: 15px;">
@@ -386,7 +386,7 @@
                                     <li style="margin-bottom: 0;">Strengthening coordination across actors</li>
                                 </ul>
                             </div>
-                            <button class="expand-btn" style="color: #3b82f6; font-weight: 600; border: none; background: none; padding: 5px 0; cursor: pointer;">
+                            <button class="expand-btn" style="color: #03A4FC; font-weight: 600; border: none; background: none; padding: 5px 0; cursor: pointer;">
                                 <span class="expand-text">Read More</span> <i class="fas fa-chevron-down ms-1"></i>
                             </button>
                         </div>
@@ -396,7 +396,7 @@
                     <p class="box-number">02</p>
                     <div class="box-content">
                         <div class="box-icon">
-                            <i class="fas fa-brain" style="font-size: 48px; color: #3b82f6;"></i>
+                            <i class="fas fa-brain" style="font-size: 48px; color: #03A4FC;"></i>
                         </div>
                         <h3 class="box-title">Agency & Decision Environment Design</h3>
                         <div class="box-text" style="margin-bottom: 15px;">
@@ -412,7 +412,7 @@
                                 </ul>
                                 <p style="margin-bottom: 0; margin-top: 10px;">This ensures people can consistently apply their skills and deliver results.</p>
                             </div>
-                            <button class="expand-btn" style="color: #3b82f6; font-weight: 600; border: none; background: none; padding: 5px 0; cursor: pointer;">
+                            <button class="expand-btn" style="color: #03A4FC; font-weight: 600; border: none; background: none; padding: 5px 0; cursor: pointer;">
                                 <span class="expand-text">Read More</span> <i class="fas fa-chevron-down ms-1"></i>
                             </button>
                         </div>
@@ -422,7 +422,7 @@
                     <p class="box-number">03</p>
                     <div class="box-content">
                         <div class="box-icon">
-                            <i class="fas fa-lightbulb" style="font-size: 48px; color: #3b82f6;"></i>
+                            <i class="fas fa-lightbulb" style="font-size: 48px; color: #03A4FC;"></i>
                         </div>
                         <h3 class="box-title">Think–Do Integrated Strategy Architecture</h3>
                         <div class="box-text" style="margin-bottom: 15px;">
@@ -446,7 +446,7 @@
                                 </ul>
                                 <p style="margin-bottom: 0; margin-top: 10px;">Strategy and execution are treated as one continuum.</p>
                             </div>
-                            <button class="expand-btn" style="color: #3b82f6; font-weight: 600; border: none; background: none; padding: 5px 0; cursor: pointer;">
+                            <button class="expand-btn" style="color: #03A4FC; font-weight: 600; border: none; background: none; padding: 5px 0; cursor: pointer;">
                                 <span class="expand-text">Read More</span> <i class="fas fa-chevron-down ms-1"></i>
                             </button>
                         </div>
@@ -456,7 +456,7 @@
                     <p class="box-number">04</p>
                     <div class="box-content">
                         <div class="box-icon">
-                            <i class="fas fa-users-cog" style="font-size: 48px; color: #3b82f6;"></i>
+                            <i class="fas fa-users-cog" style="font-size: 48px; color: #03A4FC;"></i>
                         </div>
                         <h3 class="box-title">Behavioural & Choice Architecture at Scale</h3>
                         <div class="box-text" style="margin-bottom: 15px;">
@@ -472,7 +472,7 @@
                                 </ul>
                                 <p style="margin-bottom: 0; margin-top: 10px;">We focus on turning awareness into sustained action.</p>
                             </div>
-                            <button class="expand-btn" style="color: #3b82f6; font-weight: 600; border: none; background: none; padding: 5px 0; cursor: pointer;">
+                            <button class="expand-btn" style="color: #03A4FC; font-weight: 600; border: none; background: none; padding: 5px 0; cursor: pointer;">
                                 <span class="expand-text">Read More</span> <i class="fas fa-chevron-down ms-1"></i>
                             </button>
                         </div>
@@ -482,7 +482,7 @@
                     <p class="box-number">05</p>
                     <div class="box-content">
                         <div class="box-icon">
-                            <i class="fas fa-exclamation-triangle" style="font-size: 48px; color: #3b82f6;"></i>
+                            <i class="fas fa-exclamation-triangle" style="font-size: 48px; color: #03A4FC;"></i>
                         </div>
                         <h3 class="box-title">High-Execution-Risk Sectors</h3>
                         <div class="box-text" style="margin-bottom: 15px;">
@@ -500,7 +500,7 @@
                                     <li style="margin-bottom: 0;">Women's Enterprise & Economic Empowerment</li>
                                 </ul>
                             </div>
-                            <button class="expand-btn" style="color: #3b82f6; font-weight: 600; border: none; background: none; padding: 5px 0; cursor: pointer;">
+                            <button class="expand-btn" style="color: #03A4FC; font-weight: 600; border: none; background: none; padding: 5px 0; cursor: pointer;">
                                 <span class="expand-text">Read More</span> <i class="fas fa-chevron-down ms-1"></i>
                             </button>
                         </div>
@@ -510,7 +510,7 @@
                     <p class="box-number">06</p>
                     <div class="box-content">
                         <div class="box-icon">
-                            <i class="fas fa-handshake" style="font-size: 48px; color: #3b82f6;"></i>
+                            <i class="fas fa-handshake" style="font-size: 48px; color: #03A4FC;"></i>
                         </div>
                         <h3 class="box-title">Government & Multi-Actor Delivery Systems</h3>
                         <div class="box-text" style="margin-bottom: 15px;">
@@ -525,7 +525,7 @@
                                     <li style="margin-bottom: 0;">Corporates operating in complex delivery environments</li>
                                 </ul>
                             </div>
-                            <button class="expand-btn" style="color: #3b82f6; font-weight: 600; border: none; background: none; padding: 5px 0; cursor: pointer;">
+                            <button class="expand-btn" style="color: #03A4FC; font-weight: 600; border: none; background: none; padding: 5px 0; cursor: pointer;">
                                 <span class="expand-text">Read More</span> <i class="fas fa-chevron-down ms-1"></i>
                             </button>
                         </div>
@@ -535,7 +535,7 @@
                     <p class="box-number">07</p>
                     <div class="box-content">
                         <div class="box-icon">
-                            <i class="fas fa-shield-alt" style="font-size: 48px; color: #3b82f6;"></i>
+                            <i class="fas fa-shield-alt" style="font-size: 48px; color: #03A4FC;"></i>
                         </div>
                         <h3 class="box-title">Execution Risk Management & Adaptive Delivery</h3>
                         <div class="box-text" style="margin-bottom: 15px;">
@@ -551,7 +551,7 @@
                                 </ul>
                                 <p style="margin-bottom: 0; margin-top: 10px;">This ensures strategies remain resilient under real-world constraints.</p>
                             </div>
-                            <button class="expand-btn" style="color: #3b82f6; font-weight: 600; border: none; background: none; padding: 5px 0; cursor: pointer;">
+                            <button class="expand-btn" style="color: #03A4FC; font-weight: 600; border: none; background: none; padding: 5px 0; cursor: pointer;">
                                 <span class="expand-text">Read More</span> <i class="fas fa-chevron-down ms-1"></i>
                             </button>
                         </div>
@@ -560,10 +560,10 @@
             </div>
         </div>
         <!-- Navigation Arrows -->
-        <button class="scroll-arrow scroll-left" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: #3b82f6; color: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center;" onclick="scrollFocusAreas('left')">
+        <button class="scroll-arrow scroll-left" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: #03A4FC; color: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center;" onclick="scrollFocusAreas('left')">
             <i class="fas fa-chevron-left"></i>
         </button>
-        <button class="scroll-arrow scroll-right" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: #3b82f6; color: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center;" onclick="scrollFocusAreas('right')">
+        <button class="scroll-arrow scroll-right" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: #03A4FC; color: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center;" onclick="scrollFocusAreas('right')">
             <i class="fas fa-chevron-right"></i>
         </button>
     </div>
@@ -651,7 +651,7 @@
                                         {{ $team->name }}
                                     </a>
                                 </h3>
-                                <p class="mb-2" style="color: #2563eb; font-weight: 600;">{{ $team->position }}</p>
+                                <p class="mb-2" style="color: #03A4FC; font-weight: 600;">{{ $team->position }}</p>
                                 <p class="mb-3" style="color: #64748b;">
                                     {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($team->description)), 110, '...') }}
                                 </p>

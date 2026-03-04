@@ -271,7 +271,7 @@
         border-radius: 12px;
         border: 1px solid #dbe4ff;
         background: #ffffff;
-        color: #1d4ed8;
+        color: #03A4FC;
         transition: all .2s ease;
     }
 
