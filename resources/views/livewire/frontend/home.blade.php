@@ -354,221 +354,161 @@
     @endif
 
     <section class="space-top space-bottom" id="focus-sec">
-    <div class="container">
-        <div class="title-area text-center">
-            <span class="sub-title">
-                <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
-                Our Focus Areas
-                <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
-            </span>
-            <p>
-                At CLEARKAMO, we focus on strengthening execution performance in complex systems. We help organizations move from strategic intent to reliable, measurable results by designing decision environments that support consistent follow-through.
-            </p>
-        </div>
-        <div class="focus-areas-container" style="position: relative;">
-        <div class="focus-areas-scroll" style="overflow-x: auto; padding: 20px 60px;">
-            <div class="d-flex flex-row" style="gap: 20px; min-width: max-content;">
-                <div class="process-card" style="height: auto; min-height: 280px; width: 320px; flex-shrink: 0; cursor: pointer; text-align: left;" onclick="toggleCard(this)">
-                    <p class="box-number">01</p>
-                    <div class="box-content">
-                        <div class="box-icon">
-                            <i class="fas fa-tasks" style="font-size: 48px; color: #03A4FC;"></i>
-                        </div>
-                        <h3 class="box-title">Execution Performance & Delivery Reliability</h3>
-                        <div class="box-text" style="margin-bottom: 15px;">
-                            <p style="margin-bottom: 10px;">Strategies often fail not because they are wrong, but because execution breaks down. We strengthen the systems, management routines, and decision clarity required to ensure strategies perform under real-world conditions.</p>
-                            <div class="expandable-content" style="display: none;">
-                                <p style="margin-bottom: 5px;"><strong>We focus on:</strong></p>
-                                <ul class="box-list" style="margin: 0; padding-left: 20px;">
-                                    <li style="margin-bottom: 5px;">Reducing variance in delivery performance</li>
-                                    <li style="margin-bottom: 5px;">Improving value for money</li>
-                                    <li style="margin-bottom: 5px;">Protecting results during scale</li>
-                                    <li style="margin-bottom: 0;">Strengthening coordination across actors</li>
-                                </ul>
+        <div class="container">
+            <div class="title-area text-center">
+                <span class="sub-title">
+                    <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
+                    Our Focus Areas
+                    <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
+                </span>
+                <p class="mx-auto" style="max-width: 980px;">
+                    At CLEARKAMO, we strengthen execution performance in complex systems and help organizations convert strategic intent into reliable, measurable results.
+                </p>
+            </div>
+
+            @php
+                $focusAreas = [
+                    [
+                        'icon' => 'fa-tasks',
+                        'title' => 'Execution Performance & Delivery Reliability',
+                        'summary' => 'We support organizations to improve delivery consistency and reduce execution breakdowns.',
+                        'details' => 'Our work focuses on practical routines, stronger coordination, and clear decision ownership for sustained implementation quality.',
+                    ],
+                    [
+                        'icon' => 'fa-brain',
+                        'title' => 'Agency & Decision Environment Design',
+                        'summary' => 'We improve follow-through by strengthening the environment in which decisions are made and acted on.',
+                        'details' => 'This includes aligning incentives, clarifying accountability, and removing operational friction points across teams.',
+                    ],
+                    [
+                        'icon' => 'fa-lightbulb',
+                        'title' => 'Think-Do Strategy Architecture',
+                        'summary' => 'We connect planning and implementation so strategies remain actionable under real-world constraints.',
+                        'details' => 'Our support combines strategy formulation with implementation enablement to protect outcomes during rollout.',
+                    ],
+                    [
+                        'icon' => 'fa-users-cog',
+                        'title' => 'Behavioural & Choice Architecture',
+                        'summary' => 'We apply behavioral insight to improve adoption, accountability, and sustained action.',
+                        'details' => 'Interventions are tailored to local context so behavior shifts are realistic, scalable, and measurable.',
+                    ],
+                    [
+                        'icon' => 'fa-exclamation-triangle',
+                        'title' => 'High-Execution-Risk Sectors',
+                        'summary' => 'We work in sectors where complexity is high and performance pressure is increasing.',
+                        'details' => 'Our experience includes public systems and multi-partner delivery settings that require disciplined execution.',
+                    ],
+                    [
+                        'icon' => 'fa-shield-alt',
+                        'title' => 'Execution Risk Management',
+                        'summary' => 'We help teams detect delivery risks early and adapt implementation before outcomes are affected.',
+                        'details' => 'This creates stronger resilience, better resource use, and improved reliability of results over time.',
+                    ],
+                ];
+            @endphp
+
+            <div class="row g-4">
+                @foreach($focusAreas as $index => $area)
+                    <div class="col-xl-4 col-md-6">
+                        <article class="focus-card h-100">
+                            <div class="focus-card-top">
+                                <span class="focus-card-number">{{ str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) }}</span>
+                                <span class="focus-card-icon">
+                                    <i class="fas {{ $area['icon'] }}"></i>
+                                </span>
                             </div>
-                            <button class="expand-btn" style="color: #03A4FC; font-weight: 600; border: none; background: none; padding: 5px 0; cursor: pointer;">
-                                <span class="expand-text">Read More</span> <i class="fas fa-chevron-down ms-1"></i>
-                            </button>
-                        </div>
+                            <h3 class="focus-card-title">{{ $area['title'] }}</h3>
+                            <p class="focus-card-summary">{{ $area['summary'] }}</p>
+                            <details class="focus-card-details">
+                                <summary>Read More</summary>
+                                <p>{{ $area['details'] }}</p>
+                            </details>
+                        </article>
                     </div>
-                </div>
-                <div class="process-card" style="height: auto; min-height: 280px; width: 320px; flex-shrink: 0; cursor: pointer; text-align: left;" onclick="toggleCard(this)">
-                    <p class="box-number">02</p>
-                    <div class="box-content">
-                        <div class="box-icon">
-                            <i class="fas fa-brain" style="font-size: 48px; color: #03A4FC;"></i>
-                        </div>
-                        <h3 class="box-title">Agency & Decision Environment Design</h3>
-                        <div class="box-text" style="margin-bottom: 15px;">
-                            <p style="margin-bottom: 10px;">We operationalize the "agency" side of human capital — motivation, perseverance, follow-through, and management quality.</p>
-                            <div class="expandable-content" style="display: none;">
-                                <p style="margin-bottom: 5px;"><strong>Through diagnostics and systems redesign, we:</strong></p>
-                                <ul class="box-list" style="margin: 0; padding-left: 20px;">
-                                    <li style="margin-bottom: 5px;">Map critical decision points across delivery chains</li>
-                                    <li style="margin-bottom: 5px;">Align incentives and governance structures</li>
-                                    <li style="margin-bottom: 5px;">Simplify workflows and user journeys</li>
-                                    <li style="margin-bottom: 5px;">Install lightweight management routines</li>
-                                    <li style="margin-bottom: 5px;">Design practical execution telemetry</li>
-                                </ul>
-                                <p style="margin-bottom: 0; margin-top: 10px;">This ensures people can consistently apply their skills and deliver results.</p>
-                            </div>
-                            <button class="expand-btn" style="color: #03A4FC; font-weight: 600; border: none; background: none; padding: 5px 0; cursor: pointer;">
-                                <span class="expand-text">Read More</span> <i class="fas fa-chevron-down ms-1"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="process-card" style="height: auto; min-height: 280px; width: 320px; flex-shrink: 0; cursor: pointer; text-align: left;" onclick="toggleCard(this)">
-                    <p class="box-number">03</p>
-                    <div class="box-content">
-                        <div class="box-icon">
-                            <i class="fas fa-lightbulb" style="font-size: 48px; color: #03A4FC;"></i>
-                        </div>
-                        <h3 class="box-title">Think–Do Integrated Strategy Architecture</h3>
-                        <div class="box-text" style="margin-bottom: 15px;">
-                            <p style="margin-bottom: 10px;">We operate through an integrated Think–Do model for execution-ready strategies.</p>
-                            <div class="expandable-content" style="display: none;">
-                                <p style="margin-bottom: 5px;"><strong>THINK: Agency & Systems Design</strong></p>
-                                <p style="margin-bottom: 5px;">We design execution-ready strategies by:</p>
-                                <ul class="box-list" style="margin: 0; padding-left: 20px;">
-                                    <li style="margin-bottom: 5px;">Conducting stakeholder and decision diagnostics</li>
-                                    <li style="margin-bottom: 5px;">Identifying bottlenecks and system frictions</li>
-                                    <li style="margin-bottom: 5px;">Redesigning governance and accountability structures</li>
-                                    <li style="margin-bottom: 5px;">Validating feasibility before scale</li>
-                                </ul>
-                                <p style="margin-bottom: 5px; margin-top: 10px;"><strong>DO: Implementation Support</strong></p>
-                                <p style="margin-bottom: 5px;">We protect results during rollout through:</p>
-                                <ul class="box-list" style="margin: 0; padding-left: 20px;">
-                                    <li style="margin-bottom: 5px;">Delivery stabilization frameworks</li>
-                                    <li style="margin-bottom: 5px;">Adaptive management support</li>
-                                    <li style="margin-bottom: 5px;">Partner coordination mechanisms</li>
-                                    <li style="margin-bottom: 0;">Rapid bottleneck resolution</li>
-                                </ul>
-                                <p style="margin-bottom: 0; margin-top: 10px;">Strategy and execution are treated as one continuum.</p>
-                            </div>
-                            <button class="expand-btn" style="color: #03A4FC; font-weight: 600; border: none; background: none; padding: 5px 0; cursor: pointer;">
-                                <span class="expand-text">Read More</span> <i class="fas fa-chevron-down ms-1"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="process-card" style="height: auto; min-height: 280px; width: 320px; flex-shrink: 0; cursor: pointer; text-align: left;" onclick="toggleCard(this)">
-                    <p class="box-number">04</p>
-                    <div class="box-content">
-                        <div class="box-icon">
-                            <i class="fas fa-users-cog" style="font-size: 48px; color: #03A4FC;"></i>
-                        </div>
-                        <h3 class="box-title">Behavioural & Choice Architecture at Scale</h3>
-                        <div class="box-text" style="margin-bottom: 15px;">
-                            <p style="margin-bottom: 10px;">We apply decision science and behavioural design to improve follow-through in large systems.</p>
-                            <div class="expandable-content" style="display: none;">
-                                <p style="margin-bottom: 5px;"><strong>Our behavioural work includes:</strong></p>
-                                <ul class="box-list" style="margin: 0; padding-left: 20px;">
-                                    <li style="margin-bottom: 5px;">Identity-driven nudges</li>
-                                    <li style="margin-bottom: 5px;">Social norm activation</li>
-                                    <li style="margin-bottom: 5px;">Incentive framing</li>
-                                    <li style="margin-bottom: 5px;">Emotionally intelligent communication platforms</li>
-                                    <li style="margin-bottom: 0;">Behaviour adoption models that scale nationally</li>
-                                </ul>
-                                <p style="margin-bottom: 0; margin-top: 10px;">We focus on turning awareness into sustained action.</p>
-                            </div>
-                            <button class="expand-btn" style="color: #03A4FC; font-weight: 600; border: none; background: none; padding: 5px 0; cursor: pointer;">
-                                <span class="expand-text">Read More</span> <i class="fas fa-chevron-down ms-1"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="process-card" style="height: auto; min-height: 280px; width: 320px; flex-shrink: 0; cursor: pointer; text-align: left;" onclick="toggleCard(this)">
-                    <p class="box-number">05</p>
-                    <div class="box-content">
-                        <div class="box-icon">
-                            <i class="fas fa-exclamation-triangle" style="font-size: 48px; color: #03A4FC;"></i>
-                        </div>
-                        <h3 class="box-title">High-Execution-Risk Sectors</h3>
-                        <div class="box-text" style="margin-bottom: 15px;">
-                            <p style="margin-bottom: 10px;">We work primarily in sectors where delivery complexity is high and accountability for results is increasing.</p>
-                            <div class="expandable-content" style="display: none;">
-                                <p style="margin-bottom: 5px;"><strong>Key sectors include:</strong></p>
-                                <ul class="box-list" style="margin: 0; padding-left: 20px;">
-                                    <li style="margin-bottom: 5px;">WASH Systems Strengthening</li>
-                                    <li style="margin-bottom: 5px;">Public Health & Behaviour Change</li>
-                                    <li style="margin-bottom: 5px;">Emergency Risk Communication</li>
-                                    <li style="margin-bottom: 5px;">Sanitation Marketing & Access</li>
-                                    <li style="margin-bottom: 5px;">Menstrual Health Innovation</li>
-                                    <li style="margin-bottom: 5px;">Youth Health & Vaccination Uptake</li>
-                                    <li style="margin-bottom: 5px;">Sector Coordination & Governance Reform</li>
-                                    <li style="margin-bottom: 0;">Women's Enterprise & Economic Empowerment</li>
-                                </ul>
-                            </div>
-                            <button class="expand-btn" style="color: #03A4FC; font-weight: 600; border: none; background: none; padding: 5px 0; cursor: pointer;">
-                                <span class="expand-text">Read More</span> <i class="fas fa-chevron-down ms-1"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="process-card" style="height: auto; min-height: 280px; width: 320px; flex-shrink: 0; cursor: pointer; text-align: left;" onclick="toggleCard(this)">
-                    <p class="box-number">06</p>
-                    <div class="box-content">
-                        <div class="box-icon">
-                            <i class="fas fa-handshake" style="font-size: 48px; color: #03A4FC;"></i>
-                        </div>
-                        <h3 class="box-title">Government & Multi-Actor Delivery Systems</h3>
-                        <div class="box-text" style="margin-bottom: 15px;">
-                            <p style="margin-bottom: 10px;">We specialize in strengthening coordination, accountability, and execution reliability across fragmented systems.</p>
-                            <div class="expandable-content" style="display: none;">
-                                <p style="margin-bottom: 5px;"><strong>Our primary partners include:</strong></p>
-                                <ul class="box-list" style="margin: 0; padding-left: 20px;">
-                                    <li style="margin-bottom: 5px;">National and sub-national governments</li>
-                                    <li style="margin-bottom: 5px;">Multilateral agencies</li>
-                                    <li style="margin-bottom: 5px;">Development partners</li>
-                                    <li style="margin-bottom: 5px;">NGOs</li>
-                                    <li style="margin-bottom: 0;">Corporates operating in complex delivery environments</li>
-                                </ul>
-                            </div>
-                            <button class="expand-btn" style="color: #03A4FC; font-weight: 600; border: none; background: none; padding: 5px 0; cursor: pointer;">
-                                <span class="expand-text">Read More</span> <i class="fas fa-chevron-down ms-1"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="process-card" style="height: auto; min-height: 280px; width: 320px; flex-shrink: 0; cursor: pointer; text-align: left;" onclick="toggleCard(this)">
-                    <p class="box-number">07</p>
-                    <div class="box-content">
-                        <div class="box-icon">
-                            <i class="fas fa-shield-alt" style="font-size: 48px; color: #03A4FC;"></i>
-                        </div>
-                        <h3 class="box-title">Execution Risk Management & Adaptive Delivery</h3>
-                        <div class="box-text" style="margin-bottom: 15px;">
-                            <p style="margin-bottom: 10px;">We manage execution risk through early diagnostics and continuous adaptation.</p>
-                            <div class="expandable-content" style="display: none;">
-                                <p style="margin-bottom: 5px;"><strong>Our approach includes:</strong></p>
-                                <ul class="box-list" style="margin: 0; padding-left: 20px;">
-                                    <li style="margin-bottom: 5px;">Early diagnostics</li>
-                                    <li style="margin-bottom: 5px;">Staged validation before rollout</li>
-                                    <li style="margin-bottom: 5px;">Continuous adaptation</li>
-                                    <li style="margin-bottom: 5px;">Rapid learning cycles</li>
-                                    <li style="margin-bottom: 0;">Clear escalation pathways</li>
-                                </ul>
-                                <p style="margin-bottom: 0; margin-top: 10px;">This ensures strategies remain resilient under real-world constraints.</p>
-                            </div>
-                            <button class="expand-btn" style="color: #03A4FC; font-weight: 600; border: none; background: none; padding: 5px 0; cursor: pointer;">
-                                <span class="expand-text">Read More</span> <i class="fas fa-chevron-down ms-1"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
-        <!-- Navigation Arrows -->
-        <button class="scroll-arrow scroll-left" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: #03A4FC; color: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center;" onclick="scrollFocusAreas('left')">
-            <i class="fas fa-chevron-left"></i>
-        </button>
-        <button class="scroll-arrow scroll-right" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: #03A4FC; color: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center;" onclick="scrollFocusAreas('right')">
-            <i class="fas fa-chevron-right"></i>
-        </button>
-    </div>
-    </div>
-</section>
+
+        <style>
+            #focus-sec .focus-card {
+                background: #ffffff;
+                border: 1px solid #e2e8f0;
+                border-radius: 16px;
+                padding: 22px;
+                box-shadow: 0 12px 26px rgba(15, 23, 42, 0.08);
+                transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+            }
+
+            #focus-sec .focus-card:hover {
+                transform: translateY(-4px);
+                border-color: rgba(3, 164, 252, 0.45);
+                box-shadow: 0 16px 30px rgba(3, 164, 252, 0.18);
+            }
+
+            #focus-sec .focus-card-top {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 14px;
+            }
+
+            #focus-sec .focus-card-number {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                border-radius: 10px;
+                font-size: 15px;
+                font-weight: 700;
+                color: #ffffff;
+                background: #03A4FC;
+            }
+
+            #focus-sec .focus-card-icon {
+                width: 44px;
+                height: 44px;
+                border-radius: 12px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                background: rgba(3, 164, 252, 0.13);
+                color: #03A4FC;
+                font-size: 20px;
+            }
+
+            #focus-sec .focus-card-title {
+                font-size: 1.5rem;
+                line-height: 1.25;
+                margin-bottom: 10px;
+                color: #0f172a;
+            }
+
+            #focus-sec .focus-card-summary {
+                color: #334155;
+                margin-bottom: 10px;
+            }
+
+            #focus-sec .focus-card-details summary {
+                cursor: pointer;
+                list-style: none;
+                font-weight: 600;
+                color: #03A4FC;
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+            }
+
+            #focus-sec .focus-card-details summary::-webkit-details-marker {
+                display: none;
+            }
+
+            #focus-sec .focus-card-details p {
+                margin-top: 10px;
+                color: #475569;
+            }
+        </style>
+    </section>
 
     <!-- Rest of your sections... I'll continue with the main ones -->
     <section class="space overflow-hidden bg-smoke2" id="service-sec">
@@ -723,45 +663,4 @@
     </div>
 </section>
 
-    <script>
-    function toggleCard(card) {
-        const expandableContent = card.querySelector('.expandable-content');
-        const expandBtn = card.querySelector('.expand-btn');
-        const expandText = card.querySelector('.expand-text');
-        const chevron = card.querySelector('.fa-chevron-down, .fa-chevron-up');
-        
-        if (expandableContent.style.display === 'none' || !expandableContent.style.display) {
-            expandableContent.style.display = 'block';
-            expandText.textContent = 'Read Less';
-            if (chevron) {
-                chevron.classList.remove('fa-chevron-down');
-                chevron.classList.add('fa-chevron-up');
-            }
-        } else {
-            expandableContent.style.display = 'none';
-            expandText.textContent = 'Read More';
-            if (chevron) {
-                chevron.classList.remove('fa-chevron-up');
-                chevron.classList.add('fa-chevron-down');
-            }
-        }
-    }
-
-    function scrollFocusAreas(direction) {
-        const scrollContainer = document.querySelector('.focus-areas-scroll');
-        const scrollAmount = 340;
-        
-        if (direction === 'left') {
-            scrollContainer.scrollBy({
-                left: -scrollAmount,
-                behavior: 'smooth'
-            });
-        } else {
-            scrollContainer.scrollBy({
-                left: scrollAmount,
-                behavior: 'smooth'
-            });
-        }
-    }
-    </script>
 </div>
