@@ -94,90 +94,58 @@
                 </div>
             </div>
             <div class="row gy-30 gx-30 justify-content-center">
-                  <div class="col-xl-6 col-md-6">
-                    <div class="service-card">
-                        <div class="box-img">
-                            <img src="{{asset('assets/img/bg/service_card_bg_1.jpg')}}" alt="Service">
-                        </div>
-                        <div class="service-card-icon">
-                            <div class="icon"><img src="{{asset('assets/img/icon/service_card_2.svg')}}" alt="Icon"></div>
-                            <div class="service-card-num"><span>01</span></div>
-                        </div>
-                       
-                        <div class="box-content">
-                            <h3 class="box-title"><a href="service-details.html">Life Changing Result</a></h3>
-                            <p class="box-text">Working in partnership with Tanzanian’s Ministry of Health, Project CLEAR designed, developed, and executed ‘Nyumba Ni Choo’, Tanzania’s national sanitation programme which has increased access to improved sanitation for millions of people between 2017 and 2022.</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-6 col-md-6">
-                    <div class="service-card">
-                         <div class="box-img"><img src="{{asset('assets/img/bg/service_card_bg_1.jpg')}}" alt="Service"></div>
-                         <div class="service-card-icon">
-                            <div class="icon"><img src="{{asset('assets/img/icon/service_card_1.svg')}}" alt="Icon"></div>
-                            <div class="service-card-num"><span>02</span></div>
-                         </div>
-                        <div class="box-content">
-                            <h3 class="box-title"><a href="service-details.html">Evidence Led</a></h3>
-                            <p class="box-text">Drawing on our diverse expertise and world class advisory network—which includes academics from the London School of Hygiene and Tropical Medicine—we design and deliver local and national initiatives that are changing the paradigm of international development..</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-md-6">
+                @php
+                    $coreValues = [
+                        [
+                            'title' => 'Community/Customer-centred',
+                            'description' => 'We design and deliver solutions around the lived realities of the people and organizations we serve.',
+                            'icon' => 'fa-users',
+                        ],
+                        [
+                            'title' => 'Local Relevance with Global Reach',
+                            'description' => 'We ground our work in local context while applying proven global standards and multidisciplinary expertise.',
+                            'icon' => 'fa-earth-africa',
+                        ],
+                        [
+                            'title' => 'Evidence-based Practice',
+                            'description' => 'We use data, diagnostics, and measurable signals to guide decisions and continuously improve outcomes.',
+                            'icon' => 'fa-chart-line',
+                        ],
+                        [
+                            'title' => 'Accountable Results',
+                            'description' => 'We focus on clear commitments, transparent delivery, and measurable impact from strategy to execution.',
+                            'icon' => 'fa-bullseye-arrow',
+                        ],
+                        [
+                            'title' => 'Responsible Innovation',
+                            'description' => 'We innovate pragmatically, balancing speed and creativity with ethics, quality, and long-term sustainability.',
+                            'icon' => 'fa-lightbulb-on',
+                        ],
+                    ];
+                @endphp
+
+                @foreach($coreValues as $index => $value)
+                    <div class="col-xl-4 col-md-6">
                         <div class="service-card">
-                            <div class="box-img"><img src="{{asset('assets/img/bg/service_card_bg_1.jpg')}}" alt="Service"></div>
+                            <div class="box-img">
+                                <img src="{{ asset('assets/img/bg/service_card_bg_1.jpg') }}" alt="Core Value">
+                            </div>
                             <div class="service-card-icon">
-                                <div class="icon"><img src="{{asset('assets/img/icon/service_card_3.svg')}}" alt="Icon"></div>
-                                <div class="service-card-num"><span>03</span></div>
+                                <div class="icon d-inline-flex align-items-center justify-content-center core-value-icon">
+                                    <i class="fa-solid {{ $value['icon'] }}"></i>
+                                </div>
+                                <div class="service-card-num"><span>{{ str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) }}</span></div>
                             </div>
                             <div class="box-content">
-                                <h3 class="box-title"><a href="service-details.html">Cost Efficient Delivery</a></h3>
-                                <p class="box-text">Our model, which combines data capture and multi-disciplinary expertise gets to the root of development challenges, effecting large scale change with measurable impact and maximum cost efficiency.</p>
-                              
+                                <h3 class="box-title">{{ $value['title'] }}</h3>
+                                <p class="box-text">{{ $value['description'] }}</p>
                             </div>
                         </div>
-                </div>
-                   <div class="col-xl-4 col-md-6">
-                <div class="service-card">
-                    <div class="box-img"><img src="{{asset('assets/img/bg/service_card_bg_1.jpg')}}" alt="Service"></div>
-                    <div class="service-card-icon">
-                        <div class="icon"><img src="{{asset('assets/img/icon/service_card_4.svg')}}" alt="Icon"></div>
-                        <div class="service-card-num"><span>04</span></div>
                     </div>
-                    <div class="box-content">
-                        <h3 class="box-title"><a href="service-details.html">Agile</a></h3>
-                        <p class="box-text">We use proprietary data and insights at all stages of a programme’s execution to constantly adapt and evolve, helping to de-risk the programme while delivering results closer to its anticipated outcome.</p>
-                       
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-md-6">
-                <div class="service-card">
-                    <div class="box-img">
-                        <img src="{{asset('assets/img/bg/service_card_bg_1.jpg')}}" alt="Service">
-                    </div>
-                    <div class="service-card-icon">
-                        <div class="icon">
-                            <img src="{{asset('assets/img/icon/service_card_5.svg')}}" alt="Icon">
-                        </div>
-                        <div class="service-card-num">
-                            <span>05</span>
-                        </div>
-                    </div>
-                    <div class="box-content">
-                        <h3 class="box-title"><a href="service-details.html">Replicable at Scale</a>
-                        </h3>
-                        <p class="box-text">We have an agile, asset-light business model, calling on the expertise of multidisciplinary partners from around the world, to effectively launch national development programmes at scale.</p>
-                       
-                    </div>
-                </div>
-            </div>
+                @endforeach
               
             
         
-         
             <!-- <div class="col-xl-4 col-md-6">
                 <div class="service-card">
                     <div class="box-img"><img src="{{asset('assets/img/bg/service_card_bg_1.jpg')}}" alt="Service"></div>
@@ -196,6 +164,21 @@
         </div>
     </div>
 </section>
+<style>
+    .core-value-icon {
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        color: #ffffff;
+        font-size: 22px;
+        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+    }
+
+    .approach-check-icon {
+        color: #2563eb;
+    }
+</style>
 <section  id="service-sec" class="mt-50 mb-50">
     <div class="container">
         <div class="row justify-content-between flex-row-reverse">
@@ -216,27 +199,31 @@
                         <img class="me-2" src="{{asset('assets/img/theme-img/title_icon.svg')}}" alt="shape">OUR APPROACH
                         <img class="ms-2" src="{{asset('assets/img/theme-img/title_icon.svg')}}" alt="shape">
                     </span>
-                    <h6 class="sec-title">We bring to light the solutions to specific problems</h6>
-                    <p class="sec-text">We’re in the business of change at a national scale. Our unique approach helps governments, corporates, and NGOs bridge the strategy-execution gap and achieve measurable impact against development challenges. From improving sanitation and hygiene to empowering women entrepreneurs, successful changemaking requires two things: robust foundations and adaptive delivery.</p>
+                    <h6 class="sec-title">A Disciplined, Results-Focused Approach</h6>
+                    <p class="sec-text">Our delivery model is intentionally high-level in public communication. We focus on outcomes, accountability, and sustained value while tailoring execution to each client context.</p>
                 </div>
                 <ul class="why-feature-list">
                     <li class="why-feature-list-wrap">
                         <div class="icon">
-                            <i class="fas fa-square-check"></i>
+                            <i class="fas fa-square-check approach-check-icon"></i>
                         </div>
                         <div class="why-feature-list-details">
-                            <h4 class="feature-title">Robust Foundations</h4>
-                            <p >By exploring individual needs, wants, and daily behaviours Project CLEAR gets to the root of development challenges. Using proprietary data, the expertise of our world-class advisory network, and careful analysis of local contexts, we put robust insights at the foundation of our campaign design and development.</p>
+                            <h4 class="feature-title">1. Context-Aligned Execution</h4>
+                            <p>Every engagement is adapted to client priorities, operating environment, and implementation realities.</p>
                         </div>
                     </li>
                     <li class="why-feature-list-wrap">
-                        <div class="icon"><i class="fas fa-square-check"></i></div>
+                        <div class="icon"><i class="fas fa-square-check approach-check-icon"></i></div>
                         <div class="why-feature-list-details">
-                            <h4 class="feature-title">Adaptive Delivery</h4>
-                            <p >Project CLEAR is driving a paradigm shift in the development sector by applying adaptive programming to the robust foundations we set at the start of our projects. What does this mean?<br>
-                                From the outset, we use all channels to achieve our development goals—from TV, radio, and social media, to sporting platforms, celebrity influencers, and political pledges. We then constantly collect data on the campaign through on-the-ground polling and local surveys, giving us a clear picture of what is working and how public perceptions have changed. From this, we’re able to evolve our tactics, maximizing the efficacy of our approach and reacting to shifts in both local and national contexts.
-                            <br>
-                                The result is measurable impact delivered with maximum cost efficiency, helping catalyze large-scale change with an optimized return on investment.</p>
+                            <h4 class="feature-title">2. Outcome and Accountability Focus</h4>
+                            <p>We prioritize clear targets, measurable progress, and responsible stewardship of resources.</p>
+                        </div>
+                    </li>
+                    <li class="why-feature-list-wrap">
+                        <div class="icon"><i class="fas fa-square-check approach-check-icon"></i></div>
+                        <div class="why-feature-list-details">
+                            <h4 class="feature-title">3. Continuous Improvement</h4>
+                            <p>We refine delivery as programs evolve to maintain quality, reduce risk, and protect long-term impact.</p>
                         </div>
                     </li>
            
