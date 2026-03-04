@@ -185,10 +185,10 @@
                 <div class="col-xxl-6 col-xl-5"><div class="why-img-box">
                         <div class="img1"><img src="{{asset('assets/img/normal/why_1_1.png')}}" alt="Why">
                         </div>
-                        <div class="about-grid jump">
+                        {{-- <div class="about-grid jump">
                             <img class="about-grid_thumb" src="{{asset('assets/img/normal/why_1_2.png')}}" alt="about">
                             <p class="about-grid_text">We have <span class="counter-number">2563</span>+ Global Active Clients</p>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
         <div class="col-xxl-6 col-xl-7">
