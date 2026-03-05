@@ -105,6 +105,6 @@ class Home extends Component
             return null;
         }
 
-        return "https://www.youtube.com/embed/{$videoId}?rel=0&modestbranding=1";
+        return "https://www.youtube.com/embed/{$videoId}?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1";
     }
 }
