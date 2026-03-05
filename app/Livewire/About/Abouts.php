@@ -10,7 +10,7 @@ class Abouts extends Component
 {
     use WithFileUploads;
 
-    public $title, $description, $years_of_experience, $image, $image2,$image3,$logo,$keywords;
+    public $title, $description, $years_of_experience, $image, $image2,$image3,$logo,$keywords,$youtube_url;
     public $id, $imagePath, $image2Path,$image3Path, $about1, $about2,$about3,$about4,$logoPath;
 
     protected $rules = [
@@ -22,6 +22,7 @@ class Abouts extends Component
         'image3' => 'nullable|image|max:2048',
         'logo'   => 'nullable|image|max:2048',
         'keywords' => 'required|string',
+        'youtube_url' => 'nullable|url|max:255',
     ];
 
     protected $messages = [
@@ -37,6 +38,7 @@ class Abouts extends Component
         'logo.image'  => "Logo must be a valid format",
         'keywords.required' => "Keywords are required",
         'keywords.string' => "Keywords must be a string.",
+        'youtube_url.url' => 'Please enter a valid YouTube URL.',
     ];
 
     public function mount()
@@ -53,6 +55,7 @@ class Abouts extends Component
             $this->about3 = $about->image3;
             $this->about4 = $about->logo;
             $this->keywords=$about->keywords;
+            $this->youtube_url = $about->youtube_url;
             // Push initial description into CKEditor
             $this->dispatch('load-ckeditor-data', $this->description);
         }
@@ -117,7 +120,8 @@ class Abouts extends Component
                 'image3' => $this->image3Path,
                 'logo' => $this->logoPath,
                 'description' => $this->description,
-                'keywords'=>$this->keywords
+                'keywords'=>$this->keywords,
+                'youtube_url' => $this->youtube_url,
             ]
         );
         //dd($here);

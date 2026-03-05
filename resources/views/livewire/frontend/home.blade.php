@@ -262,32 +262,42 @@
     @endif
     
     @if($about)
-    <div class="space" id="about-sec" style="overflow: visible;">
-        <div class="container" style="overflow: visible;">
-            <div class="row align-items-center" style="overflow: visible;">
-                <div class="col-xl-6 mb-50 mb-xl-0" style="overflow: visible;">
-                    <div class="img-box4 position-relative" style="overflow: visible;">
-                        <div class="img1">
-                            <img src="{{ asset('storage/'.$about->image) }}" alt="About" class="img-fluid rounded-3 shadow-lg border-4 border-white">
+    <div class="space" id="about-sec">
+        <div class="container">
+            <div class="row align-items-start gy-4">
+                <div class="col-xl-5 col-lg-6">
+                    <div class="about-media-stack">
+                        <div class="about-media-main">
+                            <img src="{{ asset('storage/'.$about->image) }}" alt="About us main image">
                         </div>
-                        <div class="img2 jump-reverse position-absolute" style="top: 20%; left: 70%; transform: translate(-10%, -15%); width: 90%; z-index: 2;">
-                            <img src="{{ asset('storage/'.$about->image2) }}" alt="About" class="img-fluid rounded-3 shadow-lg border-4 border-white">
-                        </div>
-                        <div class="shape-mockup jump d-none d-xl-block position-absolute" style="top: 0px; left: -50px; z-index: 1;">
-                            <div class="border-primary border-4" style="height: 180px; width: 3px;"></div>
-                            <div class="bg-primary rounded-circle mx-auto" style="width: 12px; height: 12px; margin-top: 10px;"></div>
-                            <div class="border-primary border-4" style="height: 180px; width: 3px;"></div>
-                        </div>
-                        <div class="shape-mockup jump-reverse d-none d-xl-block position-absolute" style="top: 20%; right: -100px; z-index: 3;">
-                            <div class="d-flex flex-wrap" style="width: 60px;">
-                                @for ($i = 0; $i < 24; $i++)
-                                    <div class="bg-primary rounded-circle m-1" style="width: 4px; height: 4px;"></div>
-                                @endfor
+                        @if(!empty($about->image2))
+                            <div class="about-media-secondary d-none d-lg-block">
+                                <img src="{{ asset('storage/'.$about->image2) }}" alt="About us supporting image">
                             </div>
+                        @endif
+                    </div>
+                    <div class="mission-vision-core-values about-mission-left" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); padding: 30px; border-radius: 15px; border-left: 4px solid #03A4FC;">
+                        <div class="mb-4">
+                            <h4 class="text-primary mb-3" style="font-weight: 600; font-size: 1.1rem;">
+                                <i class="fas fa-bullseye me-2"></i>Mission
+                            </h4>
+                            <p style="color: #64748b; line-height: 1.6; margin-bottom: 0;">To apply decision science and systems design to help organizations define long-term strategies and translate them into clear, executable decisions that deliver reliable results under real-world conditions.</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-primary mb-3" style="font-weight: 600; font-size: 1.1rem;">
+                                <i class="fas fa-eye me-2"></i>Vision
+                            </h4>
+                            <p style="color: #64748b; line-height: 1.6; margin-bottom: 0;">To be partner of choice for organizations seeking dependable execution and sustained results.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-primary mb-3" style="font-weight: 600; font-size: 1.1rem;">
+                                <i class="fas fa-gem me-2"></i>Core Values
+                            </h4>
+                            <p style="color: #64748b; line-height: 1.6; margin-bottom: 0;">Community/Customer-centred; Local relevance with global reach; Evidence-based practice; Accountable results; Responsible innovation.</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-6">
+                <div class="col-xl-7 col-lg-6">
                     <div class="title-area mb-30">
                         <span class="sub-title text-primary">
                             <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
@@ -299,29 +309,25 @@
                     </div>
                     <div class="row gy-40">
                         <div class="col-lg-8">
-                            <div class="mission-vision-core-values" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); padding: 30px; border-radius: 15px; border-left: 4px solid #03A4FC;">
-                                <div class="mb-4">
-                                    <h4 class="text-primary mb-3" style="font-weight: 600; font-size: 1.1rem;">
-                                        <i class="fas fa-bullseye me-2"></i>Mission
-                                    </h4>
-                                    <p style="color: #64748b; line-height: 1.6; margin-bottom: 0;">To apply decision science and systems design to help organizations define long-term strategies and translate them into clear, executable decisions that deliver reliable results under real-world conditions.</p>
+                            @if($aboutVideoEmbedUrl)
+                                <div class="about-video-wrap about-video-inline">
+                                    <iframe
+                                        src="{{ $aboutVideoEmbedUrl }}"
+                                        title="ClearKamo video"
+                                        loading="lazy"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        referrerpolicy="strict-origin-when-cross-origin"
+                                        allowfullscreen
+                                    ></iframe>
                                 </div>
-                                <div class="mb-4">
-                                    <h4 class="text-primary mb-3" style="font-weight: 600; font-size: 1.1rem;">
-                                        <i class="fas fa-eye me-2"></i>Vision
-                                    </h4>
-                                    <p style="color: #64748b; line-height: 1.6; margin-bottom: 0;">To be partner of choice for organizations seeking dependable execution and sustained results.</p>
+                            @else
+                                <div class="about-video-wrap about-video-inline about-video-placeholder d-flex align-items-center justify-content-center">
+                                    <span>Add YouTube URL in admin About Us to display video.</span>
                                 </div>
-                                <div>
-                                    <h4 class="text-primary mb-3" style="font-weight: 600; font-size: 1.1rem;">
-                                        <i class="fas fa-gem me-2"></i>Core Values
-                                    </h4>
-                                    <p style="color: #64748b; line-height: 1.6; margin-bottom: 0;">Community/Customer-centred; Local relevance with global reach; Evidence-based practice; Accountable results; Responsible innovation.</p>
-                                </div>
-                            </div>
+                            @endif
                         </div>
                         <div class="col-lg-4">
-                            <div class="year-counter style2" style="background: linear-gradient(135deg, #03A4FC 0%, #03A4FC 100%); padding: 40px 30px; border-radius: 15px; text-align: center; color: white;">
+                            <div class="year-counter style2 about-year-inline" style="background: linear-gradient(135deg, #03A4FC 0%, #03A4FC 100%); padding: 40px 30px; border-radius: 15px; text-align: center; color: white;">
                                 <div class="year-counter_number">
                                     <span class="counter-number" style="font-size: 3rem; font-weight: 700; color: white;">{{ $about->ex_years ?? 25 }}</span>
                                 </div>
@@ -350,6 +356,165 @@
                 </div>
             </div>
         </div>
+
+        <style>
+            #about-sec .about-media-stack {
+                position: relative;
+                max-width: 520px;
+                margin: 0 auto;
+                padding-bottom: 0;
+            }
+
+            #about-sec .about-media-main img {
+                width: 100%;
+                height: 380px;
+                object-fit: cover;
+                border-radius: 14px;
+                box-shadow: 0 16px 28px rgba(15, 23, 42, 0.14);
+            }
+
+            #about-sec .about-media-secondary {
+                position: absolute;
+                right: -20px;
+                bottom: 0;
+                width: 58%;
+                z-index: 2;
+                animation: aboutFloat 5s ease-in-out infinite;
+            }
+
+            #about-sec .about-media-secondary img {
+                width: 100%;
+                height: 180px;
+                object-fit: cover;
+                border-radius: 12px;
+                box-shadow: 0 12px 24px rgba(15, 23, 42, 0.16);
+                border: 4px solid #ffffff;
+            }
+
+            #about-sec .about-video-wrap {
+                width: 100%;
+                max-width: 520px;
+                margin: 16px auto 0;
+                aspect-ratio: 16 / 9;
+                border-radius: 14px;
+                overflow: hidden;
+                box-shadow: 0 14px 30px rgba(15, 23, 42, 0.16);
+                background: #0f172a;
+            }
+
+            #about-sec .about-video-wrap iframe {
+                width: 100%;
+                height: 100%;
+                border: 0;
+                display: block;
+            }
+
+            #about-sec .about-video-wrap.about-video-inline {
+                max-width: 100%;
+                margin: 0;
+                min-height: 260px;
+            }
+
+            #about-sec .about-mission-left {
+                max-width: 520px;
+                margin: 16px auto 0;
+            }
+
+            #about-sec .about-year-inline {
+                min-height: 220px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            #about-sec .about-video-placeholder {
+                color: #64748b;
+                font-size: 0.95rem;
+                text-align: center;
+                padding: 16px;
+                background: #f1f5f9;
+            }
+
+            @keyframes aboutFloat {
+                0%, 100% {
+                    transform: translateY(0);
+                }
+                50% {
+                    transform: translateY(-10px);
+                }
+            }
+
+            @media (max-width: 1199.98px) {
+                #about-sec .about-media-stack {
+                    max-width: 460px;
+                }
+
+                #about-sec .about-media-main img {
+                    height: 320px;
+                }
+
+                #about-sec .about-video-wrap {
+                    max-width: 460px;
+                }
+
+                #about-sec .about-mission-left {
+                    max-width: 460px;
+                }
+            }
+
+            @media (max-width: 991.98px) {
+                #about-sec .about-media-stack {
+                    max-width: 420px;
+                    padding-bottom: 0;
+                    margin-bottom: 8px;
+                }
+
+                #about-sec .about-media-main img {
+                    height: 260px;
+                }
+
+                #about-sec .about-video-wrap {
+                    max-width: 420px;
+                }
+
+                #about-sec .about-video-wrap.about-video-inline {
+                    margin-top: 6px;
+                    min-height: 0;
+                }
+
+                #about-sec .about-mission-left {
+                    max-width: 420px;
+                }
+
+                #about-sec .about-year-inline {
+                    min-height: 0;
+                }
+            }
+
+            @media (max-width: 575.98px) {
+                #about-sec .about-media-stack {
+                    max-width: 100%;
+                }
+
+                #about-sec .about-media-main img {
+                    height: 210px;
+                }
+
+                #about-sec .about-video-wrap {
+                    max-width: 100%;
+                    margin-top: 12px;
+                    border-radius: 12px;
+                }
+
+                #about-sec .about-video-wrap.about-video-inline {
+                    margin-top: 8px;
+                }
+
+                #about-sec .about-mission-left {
+                    max-width: 100%;
+                }
+            }
+        </style>
     </div>
     @endif
 

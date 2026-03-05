@@ -31,6 +31,19 @@
                                             @error('years_of_experience') <span class="text-red-500">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-12">
+                                            <label class="form-label">YouTube Video URL (Home Who We Are)</label>
+                                            <input
+                                                type="url"
+                                                class="form-control"
+                                                placeholder="https://www.youtube.com/watch?v=..."
+                                                wire:model.lazy="youtube_url"
+                                            >
+                                            <small class="text-muted">Accepted formats: youtube.com/watch?v=... or youtu.be/...</small>
+                                            @error('youtube_url') <span class="text-red-500">{{ $message }}</span> @enderror
+                                        </div>
+                                    </div>
                                      <div class="mb-3" >
                                         <label class="form-label" for="inputAddress">Keywords</label>
                                          <textarea name="keywords"  wire:model.lazy="keywords" class="form-control">

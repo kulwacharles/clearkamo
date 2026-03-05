@@ -14,6 +14,7 @@ class About extends Model
         'image2',
         'image3',
         'keywords',
+        'youtube_url',
         'logo',
     ];
 }

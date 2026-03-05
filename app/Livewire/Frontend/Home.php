@@ -17,6 +17,7 @@ class Home extends Component
         public $id, $imagePath, $image2Path, $about1, $about2;
         public $slides=null;
         public $teams,$keywords;
+        public $aboutVideoEmbedUrl = null;
         
 
         public function mount()
@@ -37,6 +38,7 @@ class Home extends Component
             $this->about2 = $about->image2;
             $this->keywords = $about->keywords;
             $this->seodescription=Str::limit($this->description, 350, '...');
+            $this->aboutVideoEmbedUrl = $this->toYouTubeEmbedUrl($about->youtube_url);
             // Push initial description into CKEditor
             //$this->dispatch('load-ckeditor-data', $this->description);
         }
@@ -52,7 +54,57 @@ class Home extends Component
             'slides' => $this->slides,
             'testimonies' => $this->testimonies,
             'blogs' => $this->blogs,
-            'teams' => $this->teams
+            'teams' => $this->teams,
+            'aboutVideoEmbedUrl' => $this->aboutVideoEmbedUrl,
         ])->layout("components.layouts.frontend", ["title"=>$this->title,"description"=>Str::limit(html_entity_decode(strip_tags($this->description)), 350, '...'),"keywords"=>$this->keywords,"image"=>$this->image]);
+    }
+
+    private function toYouTubeEmbedUrl(?string $url): ?string
+    {
+        if (!$url) {
+            return null;
+        }
+
+        $url = trim($url);
+        if ($url === '') {
+            return null;
+        }
+
+        $videoId = null;
+
+        if (preg_match('/^[A-Za-z0-9_-]{11}$/', $url)) {
+            $videoId = $url;
+        } else {
+            $parts = parse_url($url);
+            $host = strtolower($parts['host'] ?? '');
+            $path = trim($parts['path'] ?? '', '/');
+
+            if (str_contains($host, 'youtu.be')) {
+                $videoId = $path;
+            } elseif (str_contains($host, 'youtube.com') || str_contains($host, 'youtube-nocookie.com')) {
+                parse_str($parts['query'] ?? '', $query);
+
+                if (!empty($query['v'])) {
+                    $videoId = $query['v'];
+                } elseif (str_starts_with($path, 'embed/')) {
+                    $videoId = substr($path, 6);
+                } elseif (str_starts_with($path, 'shorts/')) {
+                    $videoId = substr($path, 7);
+                } elseif (str_starts_with($path, 'live/')) {
+                    $videoId = substr($path, 5);
+                }
+            }
+        }
+
+        if (!is_string($videoId)) {
+            return null;
+        }
+
+        $videoId = trim($videoId);
+        if (!preg_match('/^[A-Za-z0-9_-]{11}$/', $videoId)) {
+            return null;
+        }
+
+        return "https://www.youtube.com/embed/{$videoId}?rel=0&modestbranding=1";
     }
 }
