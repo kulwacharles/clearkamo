@@ -10,7 +10,7 @@
                 <div class="breadcumb-content">
                     <h1 class="breadcumb-title">{{$blog->title}}</h1>
                     <ul class="breadcumb-menu">
-                        <li><a wire:navigate href="/">Home</a></li>
+                        <li><a wire:navigate href="/">Home</a></li> 
                         <li>Blog Details</li>
                     </ul>
                 </div>

@@ -11,7 +11,7 @@
             <div class="breadcumb-content">
                 <h1 class="breadcumb-title">Portfolio</h1>
                 <ul class="breadcumb-menu">
-                    <li><a href="index-2.html">Home</a></li>
+<li><a wire:navigate href="/">Home</a></li>
                     <li>Portfolio</li>
                 </ul>
             </div>

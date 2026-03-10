@@ -8,7 +8,7 @@
             <div class="breadcumb-content">
                 <h1 class="breadcumb-title">Contact us</h1>
                 <ul class="breadcumb-menu">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a wire:navigate href="/">Home</a></li>
                     <li>Contact us</li>
                 </ul>
             </div>
