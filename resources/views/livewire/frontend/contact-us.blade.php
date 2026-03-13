@@ -45,7 +45,7 @@
                         <div class="box-icon"><i class="fa-light fa-clock"></i></div>
                         <div class="media-body">
                             <h3 class="box-title h5">Operation Hours</h3>
-                            <p class="box-text">Mon-Satday: 09.00 to 07.00 (Sunday: Closed)</p>
+                            <p class="box-text">Monday-Friday: 08.00 to 17.00</p>
                         </div>
                     </div>
                 </div>
