@@ -32,6 +32,7 @@ use App\Livewire\Testimony\TestimonyBackend;
 use App\Livewire\Vacancy\VacancyBackend;
 use App\Livewire\AdminChat;
 use App\Livewire\Admin\Dashboard as AdminDashboard;
+use App\Livewire\Admin\MaintenanceMode as AdminMaintenanceMode;
 use App\Models\Blog;
 use App\Models\ChatMessage;
 
@@ -58,6 +59,7 @@ Route::middleware(['auth'])->prefix('/admin')->group(function () {
     Route::get('client',ClientBackend::class)->name('admin.client');
     Route::get('contacts',BackendContacts::class)->name('admin.contacts');
     Route::get('business-inquiries', AdminBusinessInquiries::class)->name('admin.business-inquiries');
+    Route::get('maintenance', AdminMaintenanceMode::class)->name('admin.maintenance');
     Route::get('chat/realtime', function () {
         $latestUserMessage = ChatMessage::where('sender_type', 'user')
             ->latest('id')
@@ -90,19 +92,21 @@ Route::middleware(['auth'])->prefix('/admin')->group(function () {
 });
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/about-us', AboutUs::class,)->name('about-us');
-Route::get('/',Home::class)->name('home');
-Route::get('/contact-us',ContactUs::class)->name('contact-us');
-Route::get('/news-and-updates',BlogList::class)->name('news-and-update');
-Route::get('/publications',Publications::class)->name('publications');
-Route::get('/team-details/{slug}',TeamDetails::class)->name('team-details');
-Route::get('/news-and-updates/details/{slug}',BlogDetails::class)->name('news-and-updates.details');
-Route::get('publication/details/{slug}',PublicationDetails::class)->name('publication.details');
-Route::get('/services',Services::class)->name('services');
-Route::get('service/details/{slug}',ServiceDetails::class)->name('service.details');
-Route::get('/projects',Projects::class)->name('projects');
-Route::get('/project-details/{slug}',ProjectDetails::class)->name('project');
-Route::get('vacancies',Vacancies::class)->name('vacancies');
-Route::get('vacancy/details/{slug}',VacancyDetails::class)->name('vacancy.details');
-Route::get('/search', SearchResults::class)->name('search.results');
-Route::get('/business-inquiry', FrontendBusinessInquiry::class)->name('business-inquiry');
+Route::middleware('maintenance')->group(function () {
+    Route::get('/about-us', AboutUs::class,)->name('about-us');
+    Route::get('/',Home::class)->name('home');
+    Route::get('/contact-us',ContactUs::class)->name('contact-us');
+    Route::get('/news-and-updates',BlogList::class)->name('news-and-update');
+    Route::get('/publications',Publications::class)->name('publications');
+    Route::get('/team-details/{slug}',TeamDetails::class)->name('team-details');
+    Route::get('/news-and-updates/details/{slug}',BlogDetails::class)->name('news-and-updates.details');
+    Route::get('publication/details/{slug}',PublicationDetails::class)->name('publication.details');
+    Route::get('/services',Services::class)->name('services');
+    Route::get('service/details/{slug}',ServiceDetails::class)->name('service.details');
+    Route::get('/projects',Projects::class)->name('projects');
+    Route::get('/project-details/{slug}',ProjectDetails::class)->name('project');
+    Route::get('vacancies',Vacancies::class)->name('vacancies');
+    Route::get('vacancy/details/{slug}',VacancyDetails::class)->name('vacancy.details');
+    Route::get('/search', SearchResults::class)->name('search.results');
+    Route::get('/business-inquiry', FrontendBusinessInquiry::class)->name('business-inquiry');
+});
