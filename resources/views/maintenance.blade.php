@@ -86,7 +86,20 @@
             to   { opacity: 1; transform: translateY(0); }
         }
 
-        /* Wrench icon */
+        /* Official logo */
+        .logo-wrap {
+            margin: 0 auto 28px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .logo-wrap img {
+            max-width: 200px;
+            max-height: 90px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        /* Fallback wrench icon (shown only when no logo is available) */
         .icon-wrap {
             width: 96px; height: 96px;
             background: linear-gradient(135deg, var(--primary), #2b6cb0);
@@ -96,17 +109,6 @@
             box-shadow: 0 8px 24px rgba(26,60,110,.25);
         }
         .icon-wrap i { font-size: 42px; color: #fff; }
-
-        /* Logo text */
-        .brand {
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--primary);
-            opacity: .55;
-            margin-bottom: 10px;
-        }
 
         h1 {
             font-size: 2.4rem;
@@ -193,12 +195,18 @@
     <div class="particles" id="particles"></div>
 
     <!-- Main card -->
+    @php $about = \App\Models\About::first(); @endphp
     <div class="card">
-        <p class="brand">ClearKamo</p>
 
-        <div class="icon-wrap">
-            <i class="fas fa-tools"></i>
-        </div>
+        @if (!empty($about?->logo))
+            <div class="logo-wrap">
+                <img src="{{ url('/storage/' . $about->logo) }}" alt="ClearKamo Logo">
+            </div>
+        @else
+            <div class="icon-wrap">
+                <i class="fas fa-tools"></i>
+            </div>
+        @endif
 
         <h1>We'll be back <span>shortly!</span></h1>
 
