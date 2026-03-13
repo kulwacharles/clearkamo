@@ -27,6 +27,7 @@ use App\Livewire\Service\BackendService;
 use App\Livewire\Team\BackendTeam;
 use App\Livewire\Testimony\TestimonyBackend;
 use App\Livewire\Vacancy\VacancyBackend;
+use App\Livewire\Admin\MaintenanceMode;
 use App\Models\Blog;
 
 // Route::get('/', function () {
@@ -50,6 +51,7 @@ Route::middleware(['auth'])->prefix('/admin')->group(function () {
     Route::get('testimony',TestimonyBackend::class)->name('admin.testimony');
     Route::get('client',ClientBackend::class)->name('admin.client');
     Route::get('contacts',BackendContacts::class)->name('admin.contacts');
+    Route::get('maintenance',MaintenanceMode::class)->name('admin.maintenance');
     Route::post('/logout', function () {
         Auth::logout();
         return redirect('/');
@@ -57,17 +59,19 @@ Route::middleware(['auth'])->prefix('/admin')->group(function () {
 });
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/about-us', AboutUs::class,)->name('about-us');
-Route::get('/',Home::class)->name('home');
-Route::get('/contact-us',ContactUs::class)->name('contact-us');
-Route::get('/news-and-updates',BlogList::class)->name('news-and-update');
-Route::get('/publications',Publications::class)->name('publications');
-Route::get('/team-details/{slug}',TeamDetails::class)->name('team-details');
-Route::get('/news-and-updates/details/{slug}',BlogDetails::class)->name('news-and-updates.details');
-Route::get('publication/details/{slug}',PublicationDetails::class)->name('publication.details');
-Route::get('/services',Services::class)->name('services');
-Route::get('service/details/{slug}',ServiceDetails::class)->name('service.details');
-Route::get('/projects',Projects::class)->name('projects');
-Route::get('/project-details/{slug}',ProjectDetails::class)->name('project');
-Route::get('vacancies',Vacancies::class)->name('vacancies');
-Route::get('vacancy/details/{slug}',VacancyDetails::class)->name('vacancy.details');
+Route::middleware('maintenance')->group(function () {
+    Route::get('/about-us', AboutUs::class,)->name('about-us');
+    Route::get('/',Home::class)->name('home');
+    Route::get('/contact-us',ContactUs::class)->name('contact-us');
+    Route::get('/news-and-updates',BlogList::class)->name('news-and-update');
+    Route::get('/publications',Publications::class)->name('publications');
+    Route::get('/team-details/{slug}',TeamDetails::class)->name('team-details');
+    Route::get('/news-and-updates/details/{slug}',BlogDetails::class)->name('news-and-updates.details');
+    Route::get('publication/details/{slug}',PublicationDetails::class)->name('publication.details');
+    Route::get('/services',Services::class)->name('services');
+    Route::get('service/details/{slug}',ServiceDetails::class)->name('service.details');
+    Route::get('/projects',Projects::class)->name('projects');
+    Route::get('/project-details/{slug}',ProjectDetails::class)->name('project');
+    Route::get('vacancies',Vacancies::class)->name('vacancies');
+    Route::get('vacancy/details/{slug}',VacancyDetails::class)->name('vacancy.details');
+});
