@@ -69,10 +69,8 @@
                                     <div class="form-group col-md-12 style-white">
                                         <select name="subject" id="subject" class="form-select">
                                             <option value="" disabled="disabled" selected="selected" hidden>Select Service</option>
-                                            <option value="Web Development">Web Development</option>
-                                            <option value="Brand Marketing">Brand Marketing</option>
-                                            <option value="UI/UX Designing">UI/UX Designing</option>
-                                            <option value="Digital Marketing">Digital Marketing</option>
+                                            <option value="Web Development">Agency & Systems Design (THINK)</option>
+                                            <option value="Brand Marketing">Implementation Support (DO)</option>
                                         </select>
                                          <i class="fal fa-chevron-down"></i>
                                         </div>
