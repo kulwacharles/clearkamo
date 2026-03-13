@@ -20,7 +20,7 @@ class BackendTeamModal extends Component
 
     protected $rules = [
         'name'       => 'required|min:3|max:255',
-        'salute'    => 'required|min:3|max:255',
+        'salute'    => 'required|min:2|max:255',
         'description' => 'required|min:10',
         'image'       => 'nullable|image|max:2048',
         'status'      => 'required|in:published,draft,archived',
