@@ -223,8 +223,13 @@
         </div>
 
         <p class="back-link">
-            Are you an admin?
-            <a href="{{ route('login') }}">Sign in here</a>
+            @auth
+                You are logged in as admin. &nbsp;
+                <a href="{{ route('admin.dashboard') }}">Back to Admin Panel</a>
+            @else
+                Are you an admin?
+                <a href="{{ route('login') }}">Sign in here</a>
+            @endauth
         </p>
     </div>
 

@@ -69,6 +69,13 @@ class MaintenanceMode extends Component
 
     public function enableAll(): void
     {
+        // Activate the global kill-switch — this covers ALL frontend routes reliably,
+        // including any routes that are not individually listed in the DB.
+        MaintenanceRoute::updateOrCreate(
+            ['route_name' => '*'],
+            ['name' => 'Global Maintenance', 'path' => '*', 'is_active' => true, 'message' => $this->globalMessage ?: null]
+        );
+        // Also enable all per-route records so the per-route list shows correctly.
         MaintenanceRoute::where('route_name', '!=', '*')->update(['is_active' => true]);
         $this->loadRoutes();
         $this->dispatch('notify', type: 'warning', message: 'All routes set to maintenance mode.');
@@ -76,6 +83,8 @@ class MaintenanceMode extends Component
 
     public function disableAll(): void
     {
+        // Deactivate the global kill-switch AND all per-route records.
+        MaintenanceRoute::where('route_name', '*')->update(['is_active' => false]);
         MaintenanceRoute::where('route_name', '!=', '*')->update(['is_active' => false]);
         $this->loadRoutes();
         $this->dispatch('notify', type: 'success', message: 'All routes restored.');
