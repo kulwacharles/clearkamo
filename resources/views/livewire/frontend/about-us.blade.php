@@ -80,81 +80,165 @@
 </div>
 </div>
 
-   <section  id="service-sec" class="mt-50 mb-50">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-8">
-                <div class="title-area text-center">
-                     <span class="sub-title">
-                        <img class="me-2" src="{{asset('assets/img/theme-img/title_icon.svg')}}" alt="shape">OUR CORE VALUES
-                        <img class="ms-2" src="{{asset('assets/img/theme-img/title_icon.svg')}}" alt="shape">
-                    </span>
-                     <!-- <h3 class="sec-title">Our Core Values</h3> -->
-                    </div>
-                </div>
+    <section class="space-top space-bottom" id="core-values-sec">
+        <div class="container">
+            <div class="title-area text-center">
+                <span class="sub-title">
+                    <img class="me-2" src="{{ asset('assets/img/theme-img/title_icon.svg') }}" alt="shape">
+                    OUR CORE VALUES
+                    <img class="ms-2" src="{{ asset('assets/img/theme-img/title_icon.svg') }}" alt="shape">
+                </span>
             </div>
-            <div class="row gy-30 gx-30 justify-content-center">
-                @forelse($coreValues as $index => $value)
-                    <div class="col-xl-4 col-md-6">
-                        <div class="service-card">
-                            <div class="box-img">
-                                @if($value->image)
-                                    <img src="{{ asset('storage/'.$value->image) }}" alt="{{ $value->title }}">
-                                @else
-                                    <img src="{{ asset('assets/img/bg/service_card_bg_1.jpg') }}" alt="{{ $value->title }}">
-                                @endif
-                            </div>
-                            <div class="service-card-icon">
-                                <div class="icon d-inline-flex align-items-center justify-content-center core-value-icon">
-                                    <i class="fa-solid {{ $value->icon ?? 'fa-star' }}"></i>
-                                </div>
-                                <div class="service-card-num"><span>{{ str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) }}</span></div>
-                            </div>
-                            <div class="box-content">
-                                <h3 class="box-title">{{ $value->title }}</h3>
-                                <p class="box-text">{{ $value->summary }}</p>
-                            </div>
-                        </div>
-                    </div>
-                @empty
-                    <div class="col-12 text-center text-muted">No core values published yet.</div>
-                @endforelse
-              
-            
-        
-            <!-- <div class="col-xl-4 col-md-6">
-                <div class="service-card">
-                    <div class="box-img"><img src="{{asset('assets/img/bg/service_card_bg_1.jpg')}}" alt="Service"></div>
-                    <div class="service-card-icon">
-                        <div class="icon"><img src="{{asset('assets/img/icon/service_card_6.svg')}}" alt="Icon"></div>
-                        <div class="service-card-num"><span>06</span></div>
-                    </div>
-                    <div class="box-content"><h3 class="box-title"><a href="service-details.html">Prowess Peak Advisory</a></h3>
-                        <p class="box-text">Business consulting firms provide a range of services including strategic planning, financial analysis, market research</p>
-                        <a href="service-details.html" class="link-btn">Read More
-                            <div class="icon"><i class="fa-solid fa-arrow-up-right ms-3"></i></div>
-                        </a>
-                    </div>
-                </div>
-            </div> -->
-        </div>
-    </div>
-</section>
-<style>
-    .core-value-icon {
-        width: 58px;
-        height: 58px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #03A4FC 0%, #03A4FC 100%);
-        color: #ffffff;
-        font-size: 22px;
-        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
-    }
 
-    .approach-check-icon {
-        color: #03A4FC;
-    }
-</style>
+            @if($coreValues && $coreValues->count())
+            <div class="row g-4">
+                @foreach($coreValues as $index => $value)
+                    <div class="col-xl-4 col-md-6">
+                        <article class="cv-card h-100">
+                            @if($value->image)
+                                <div class="cv-card-img">
+                                    <img src="{{ asset('storage/'.$value->image) }}" alt="{{ $value->title }}">
+                                    <span class="cv-card-number-overlay">{{ str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) }}</span>
+                                </div>
+                            @else
+                                <div class="cv-card-top">
+                                    <span class="cv-card-number">{{ str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) }}</span>
+                                    <span class="cv-card-icon">
+                                        <i class="fas {{ $value->icon ?? 'fa-star' }}"></i>
+                                    </span>
+                                </div>
+                            @endif
+                            <h3 class="cv-card-title">{{ $value->title }}</h3>
+                            <p class="cv-card-summary">{{ $value->summary }}</p>
+                        </article>
+                    </div>
+                @endforeach
+            </div>
+            @else
+                <div class="col-12 text-center text-muted">No core values published yet.</div>
+            @endif
+        </div>
+
+        <style>
+            #core-values-sec .cv-card {
+                background: #ffffff;
+                border: 1px solid #e2e8f0;
+                border-radius: 16px;
+                overflow: hidden;
+                box-shadow: 0 12px 26px rgba(15, 23, 42, 0.08);
+                transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+                display: flex;
+                flex-direction: column;
+            }
+
+            #core-values-sec .cv-card:hover {
+                transform: translateY(-4px);
+                border-color: rgba(3, 164, 252, 0.45);
+                box-shadow: 0 16px 30px rgba(3, 164, 252, 0.18);
+            }
+
+            /* Photo banner */
+            #core-values-sec .cv-card-img {
+                position: relative;
+                width: 100%;
+                height: 200px;
+                overflow: hidden;
+            }
+
+            #core-values-sec .cv-card-img img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+
+            #core-values-sec .cv-card-number-overlay {
+                position: absolute;
+                top: 12px;
+                left: 12px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 36px;
+                height: 36px;
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: 700;
+                color: #ffffff;
+                background: #03A4FC;
+            }
+
+            /* Icon-only header (no image) */
+            #core-values-sec .cv-card-top {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 14px;
+                padding: 22px 22px 0;
+            }
+
+            #core-values-sec .cv-card-number {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                border-radius: 10px;
+                font-size: 15px;
+                font-weight: 700;
+                color: #ffffff;
+                background: #03A4FC;
+            }
+
+            #core-values-sec .cv-card-icon {
+                width: 44px;
+                height: 44px;
+                border-radius: 12px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                background: rgba(3, 164, 252, 0.13);
+                color: #03A4FC;
+                font-size: 20px;
+            }
+
+            #core-values-sec .cv-card-title {
+                font-size: 1.1rem;
+                line-height: 1.3;
+                margin-bottom: 10px;
+                color: #0f172a;
+                padding: 16px 22px 0;
+                font-weight: 700;
+            }
+
+            /* When there's no image the top-padding is already set by .cv-card-top */
+            #core-values-sec .cv-card:has(.cv-card-top) .cv-card-title {
+                padding-top: 0;
+            }
+
+            #core-values-sec .cv-card-summary {
+                color: #334155;
+                margin-bottom: 20px;
+                padding: 0 22px 22px;
+                flex-grow: 1;
+            }
+
+            @media (max-width: 575.98px) {
+                #core-values-sec .cv-card-img {
+                    height: 180px;
+                }
+                #core-values-sec .cv-card-title {
+                    font-size: 1rem;
+                }
+            }
+        </style>
+    </section>
+
+    <style>
+        .approach-check-icon {
+            color: #03A4FC;
+        }
+    </style>
 <section  id="service-sec" class="mt-50 mb-50">
     <div class="container">
         <div class="row justify-content-between flex-row-reverse">
