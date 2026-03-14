@@ -438,8 +438,8 @@
         <div class="container">
 
             {{-- ── Row 1: Image stack + WHO WE ARE title / description / video ── --}}
-            <div class="row align-items-center gy-5">
-                <div class="col-xl-5 col-lg-6">
+            <div class="row align-items-stretch gy-4">
+                <div class="col-xl-5 col-lg-6 d-flex">
                     <div class="about-media-stack">
                         <div class="about-media-main">
                             <img src="{{ asset('storage/'.$about->image) }}" alt="About ClearKamo">
@@ -449,6 +449,11 @@
                                 <img src="{{ asset('storage/'.$about->image2) }}" alt="ClearKamo team">
                             </div>
                         @endif
+                        {{-- Experience badge overlay --}}
+                        <div class="about-exp-badge">
+                            <span class="about-exp-num">{{ $about->ex_years ?? 25 }}+</span>
+                            <span class="about-exp-label">Years of<br>Experience</span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-xl-7 col-lg-6">
@@ -581,32 +586,80 @@
             /* Image stack */
             #about-sec .about-media-stack {
                 position: relative;
+                width: 100%;
                 max-width: 520px;
                 margin: 0 auto;
+<<<<<<< HEAD
                 padding-bottom: 10px;
+=======
+                display: flex;
+                flex-direction: column;
+                min-height: 380px;
+            }
+            #about-sec .col-xl-5.d-flex,
+            #about-sec .col-lg-6.d-flex {
+                flex-direction: column;
+            }
+            #about-sec .about-media-main {
+                flex: 1;
+                display: flex;
+>>>>>>> 4b246212baee9a8ac7a7901213174864ff568abf
             }
             #about-sec .about-media-main img {
                 width: 100%;
-                height: 420px;
+                height: 100%;
+                min-height: 340px;
                 object-fit: cover;
                 border-radius: 18px;
                 box-shadow: 0 20px 48px rgba(15, 23, 42, 0.16);
+                display: block;
             }
             #about-sec .about-media-secondary {
                 position: absolute;
                 right: -24px;
-                bottom: 0;
-                width: 55%;
+                bottom: 60px;
+                width: 52%;
                 z-index: 2;
                 animation: aboutFloat 5s ease-in-out infinite;
             }
             #about-sec .about-media-secondary img {
                 width: 100%;
-                height: 190px;
+                height: 160px;
                 object-fit: cover;
                 border-radius: 14px;
                 box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18);
                 border: 4px solid #fff;
+            }
+
+            /* Experience badge */
+            #about-sec .about-exp-badge {
+                position: absolute;
+                left: -14px;
+                bottom: 28px;
+                background: linear-gradient(135deg, #03A4FC 0%, #025ea8 100%);
+                color: #fff;
+                border-radius: 16px;
+                padding: 16px 22px;
+                box-shadow: 0 10px 32px rgba(3, 164, 252, 0.38);
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                z-index: 3;
+                min-width: 148px;
+            }
+            #about-sec .about-exp-num {
+                font-size: 2rem;
+                font-weight: 800;
+                line-height: 1;
+                white-space: nowrap;
+            }
+            #about-sec .about-exp-label {
+                font-size: 0.78rem;
+                font-weight: 600;
+                line-height: 1.35;
+                text-transform: uppercase;
+                letter-spacing: 0.04em;
+                opacity: 0.92;
             }
 
             /* Description text */
@@ -749,17 +802,26 @@
             /* ── Responsive ──────────────────────────────────────────────────── */
             @media (max-width: 1199.98px) {
                 #about-sec .about-media-stack  { max-width: 460px; }
-                #about-sec .about-media-main img { height: 360px; }
+                #about-sec .about-media-main img { min-height: 300px; }
             }
             @media (max-width: 991.98px) {
-                #about-sec .about-media-stack  { max-width: 100%; padding-bottom: 28px; }
-                #about-sec .about-media-main img { height: 280px; }
-                #about-sec .about-media-secondary { right: 0; bottom: 0; }
+                #about-sec .about-media-stack  { max-width: 100%; min-height: 280px; }
+                #about-sec .about-media-main img { min-height: 260px; }
+                #about-sec .about-media-secondary { right: 0; bottom: 60px; }
+                #about-sec .about-exp-badge { left: 12px; bottom: 20px; }
             }
             @media (max-width: 575.98px) {
+<<<<<<< HEAD
                 #about-sec { padding-top: 12px; padding-bottom: 12px; }
                 #about-sec .about-media-main img { height: 220px; }
                 #about-sec .about-mv-row { margin-top: 16px; }
+=======
+                #about-sec { padding-top: 52px; padding-bottom: 52px; }
+                #about-sec .about-media-main img { min-height: 210px; }
+                #about-sec .about-exp-badge { left: 8px; bottom: 14px; padding: 12px 16px; min-width: 120px; }
+                #about-sec .about-exp-num { font-size: 1.5rem; }
+                #about-sec .about-mv-row { margin-top: 40px; }
+>>>>>>> 4b246212baee9a8ac7a7901213174864ff568abf
                 #about-sec .about-cv-section { margin-top: 40px; }
                 #about-sec .about-mv-card,
                 #about-sec .about-cv-card { padding: 12px 8px; }
