@@ -4,12 +4,15 @@ namespace App\Livewire\Frontend;
 
 use Livewire\Component;
 use App\Models\About;
+use App\Models\CoreValue;
 use Illuminate\Support\Str;
 
 class AboutUs extends Component
 {
     public $title, $description, $years_of_experience, $image, $image2,$keywords,$logo;
     public $id, $imagePath, $image2Path, $about1, $about2,$about3;
+    public $coreValues = [];
+
         public function mount()
     {
         $about = About::first();
@@ -23,9 +26,11 @@ class AboutUs extends Component
             $this->about3 = $about->image3;
             $this->keywords=$about->keywords;
             $this->logo=$about->logo;
-            // Push initial description into CKEditor
-            //$this->dispatch('load-ckeditor-data', $this->description);
         }
+        $this->coreValues = CoreValue::where('status', 'published')
+            ->orderBy('sort_order')
+            ->orderBy('id')
+            ->get();
     }
     public function render()
     {

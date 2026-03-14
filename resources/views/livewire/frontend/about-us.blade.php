@@ -94,55 +94,31 @@
                 </div>
             </div>
             <div class="row gy-30 gx-30 justify-content-center">
-                @php
-                    $coreValues = [
-                        [
-                            'title' => 'Community/Customer-centred',
-                            'description' => 'We design and deliver solutions around the lived realities of the people and organizations we serve.',
-                            'icon' => 'fa-users',
-                        ],
-                        [
-                            'title' => 'Local Relevance with Global Reach',
-                            'description' => 'We ground our work in local context while applying proven global standards and multidisciplinary expertise.',
-                            'icon' => 'fa-earth-africa',
-                        ],
-                        [
-                            'title' => 'Evidence-based Practice',
-                            'description' => 'We use data, diagnostics, and measurable signals to guide decisions and continuously improve outcomes.',
-                            'icon' => 'fa-chart-line',
-                        ],
-                        [
-                            'title' => 'Accountable Results',
-                            'description' => 'We focus on clear commitments, transparent delivery, and measurable impact from strategy to execution.',
-                            'icon' => 'fa-bullseye-arrow',
-                        ],
-                        [
-                            'title' => 'Responsible Innovation',
-                            'description' => 'We innovate pragmatically, balancing speed and creativity with ethics, quality, and long-term sustainability.',
-                            'icon' => 'fa-lightbulb-on',
-                        ],
-                    ];
-                @endphp
-
-                @foreach($coreValues as $index => $value)
+                @forelse($coreValues as $index => $value)
                     <div class="col-xl-4 col-md-6">
                         <div class="service-card">
                             <div class="box-img">
-                                <img src="{{ asset('assets/img/bg/service_card_bg_1.jpg') }}" alt="Core Value">
+                                @if($value->image)
+                                    <img src="{{ asset('storage/'.$value->image) }}" alt="{{ $value->title }}">
+                                @else
+                                    <img src="{{ asset('assets/img/bg/service_card_bg_1.jpg') }}" alt="{{ $value->title }}">
+                                @endif
                             </div>
                             <div class="service-card-icon">
                                 <div class="icon d-inline-flex align-items-center justify-content-center core-value-icon">
-                                    <i class="fa-solid {{ $value['icon'] }}"></i>
+                                    <i class="fa-solid {{ $value->icon ?? 'fa-star' }}"></i>
                                 </div>
                                 <div class="service-card-num"><span>{{ str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) }}</span></div>
                             </div>
                             <div class="box-content">
-                                <h3 class="box-title">{{ $value['title'] }}</h3>
-                                <p class="box-text">{{ $value['description'] }}</p>
+                                <h3 class="box-title">{{ $value->title }}</h3>
+                                <p class="box-text">{{ $value->summary }}</p>
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <div class="col-12 text-center text-muted">No core values published yet.</div>
+                @endforelse
               
             
         
