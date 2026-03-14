@@ -436,247 +436,333 @@
     @if($about)
     <div class="space" id="about-sec">
         <div class="container">
-            <div class="row align-items-start gy-4">
+
+            {{-- ── Row 1: Image stack + WHO WE ARE title / description / video ── --}}
+            <div class="row align-items-center gy-5">
                 <div class="col-xl-5 col-lg-6">
                     <div class="about-media-stack">
                         <div class="about-media-main">
-                            <img src="{{ asset('storage/'.$about->image) }}" alt="About us main image">
+                            <img src="{{ asset('storage/'.$about->image) }}" alt="About ClearKamo">
                         </div>
                         @if(!empty($about->image2))
                             <div class="about-media-secondary d-none d-lg-block">
-                                <img src="{{ asset('storage/'.$about->image2) }}" alt="About us supporting image">
+                                <img src="{{ asset('storage/'.$about->image2) }}" alt="ClearKamo team">
                             </div>
                         @endif
                     </div>
-                    <div class="mission-vision-core-values about-mission-left" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); padding: 30px; border-radius: 15px; border-left: 4px solid #03A4FC;">
-                        <div class="mb-4">
-                            <h4 class="text-primary mb-3" style="font-weight: 600; font-size: 1.1rem;">
-                                <i class="fas fa-bullseye me-2"></i>Mission
-                            </h4>
-                            <p style="color: #64748b; line-height: 1.6; margin-bottom: 0;">To apply decision science and systems design to help organizations define long-term strategies and translate them into clear, executable decisions that deliver reliable results under real-world conditions.</p>
-                        </div>
-                        <div class="mb-4">
-                            <h4 class="text-primary mb-3" style="font-weight: 600; font-size: 1.1rem;">
-                                <i class="fas fa-eye me-2"></i>Vision
-                            </h4>
-                            <p style="color: #64748b; line-height: 1.6; margin-bottom: 0;">To be partner of choice for organizations seeking dependable execution and sustained results.</p>
-                        </div>
-                        <div>
-                            <h4 class="text-primary mb-3" style="font-weight: 600; font-size: 1.1rem;">
-                                <i class="fas fa-gem me-2"></i>Core Values
-                            </h4>
-                            <p style="color: #64748b; line-height: 1.6; margin-bottom: 0;">Community/Customer-centred; Local relevance with global reach; Evidence-based practice; Accountable results; Responsible innovation.</p>
-                        </div>
-                    </div>
                 </div>
                 <div class="col-xl-7 col-lg-6">
-                    <div class="title-area mb-30">
+                    <div class="title-area mb-4">
                         <span class="sub-title text-primary">
                             <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
                             WHO WE ARE
                             <img class="ms-1" src="assets/img/theme-img/title_icon.svg" alt="img">
                         </span>
                         <h3 class="sec-title">{{ $about->title }}</h3>
-                        <p class="sec-text">{!! $about->description !!}</p>
+                        <div class="sec-text about-description-text">{!! $about->description !!}</div>
                     </div>
-                    <div class="row gy-40">
-                        <div class="col-lg-12">
-                            @if($aboutVideoEmbedUrl)
-                                <div class="about-video-wrap about-video-inline">
-                                    <iframe
-                                        src="{{ $aboutVideoEmbedUrl }}"
-                                        title="ClearKamo video"
-                                        loading="lazy"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                        referrerpolicy="strict-origin-when-cross-origin"
-                                        allowfullscreen
-                                    ></iframe>
-                                </div>
-                            @else
-                                <div class="about-video-wrap about-video-inline about-video-placeholder d-flex align-items-center justify-content-center">
-                                    <span>Add YouTube URL in admin About Us to display video.</span>
-                                </div>
-                            @endif
+                    {{-- YouTube video --}}
+                    @if($aboutVideoEmbedUrl)
+                        <div class="about-video-wrap">
+                            <iframe
+                                src="{{ $aboutVideoEmbedUrl }}"
+                                title="ClearKamo video"
+                                loading="lazy"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin"
+                                allowfullscreen
+                            ></iframe>
                         </div>
-                    </div>
-                    {{-- <div class="btn-wrap style2 mt-50">
-                        <div class="about-grid style2">
-                            <div class="thumb">
-                                <img class="about-grid_thumb" src="assets/img/normal/client-group-1.png" alt="about">
-                            </div>
-                            <div class="details">
-                                <p class="about-grid_number">
-                                    <span class="counter-number">1500</span>+
-                                </p>
-                                <p class="about-grid_text">Active Reviews</p>
+                    @else
+                        <div class="about-video-wrap about-video-placeholder d-flex align-items-center justify-content-center">
+                            <div class="text-center">
+                                <i class="fas fa-play-circle about-video-placeholder-icon"></i>
+                                <p class="mt-3 mb-0">Add a YouTube URL in the admin <strong>About Us</strong> panel to display a video here.</p>
                             </div>
                         </div>
-                        <a href="about.html" class="th-btn btn-primary">Read More
-                            <div class="icon">
-                                <i class="fa-solid fa-arrow-up-right ms-3"></i>
-                            </div>
-                        </a>
-                    </div> --}}
+                    @endif
                 </div>
             </div>
+
+            {{-- ── Row 2: Mission & Vision cards ─────────────────────────────── --}}
+            <div class="row gy-4 about-mv-row">
+                <div class="col-md-6">
+                    <div class="about-mv-card">
+                        <div class="about-mv-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h4 class="about-mv-title">Our Mission</h4>
+                        <p class="about-mv-text">To apply decision science and systems design to help organizations define long-term strategies and translate them into clear, executable decisions that deliver reliable results under real-world conditions.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="about-mv-card about-mv-card--vision">
+                        <div class="about-mv-icon about-mv-icon--vision">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h4 class="about-mv-title">Our Vision</h4>
+                        <p class="about-mv-text">To be the partner of choice for organizations seeking dependable execution and sustained results across Africa and beyond.</p>
+                    </div>
+                </div>
+            </div>
+
+            {{-- ── Row 3: Core Values ──────────────────────────────────────────── --}}
+            <div class="about-cv-section">
+                <div class="text-center about-cv-header">
+                    <span class="sub-title text-primary">
+                        <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
+                        Our Core Values
+                        <img class="ms-1" src="assets/img/theme-img/title_icon.svg" alt="img">
+                    </span>
+                </div>
+                <div class="row gy-4 justify-content-center">
+                    @if($coreValues && $coreValues->count())
+                        @foreach($coreValues as $cv)
+                        <div class="col-xl-4 col-md-6">
+                            <div class="about-cv-card">
+                                <div class="about-cv-icon">
+                                    <i class="fas {{ $cv->icon ?? 'fa-star' }}"></i>
+                                </div>
+                                <h5 class="about-cv-title">{{ $cv->title }}</h5>
+                                <p class="about-cv-text">{{ $cv->summary }}</p>
+                            </div>
+                        </div>
+                        @endforeach
+                    @else
+                        <div class="col-xl-4 col-md-6">
+                            <div class="about-cv-card">
+                                <div class="about-cv-icon"><i class="fas fa-users"></i></div>
+                                <h5 class="about-cv-title">Community-Centred</h5>
+                                <p class="about-cv-text">We put community and customer needs at the heart of every solution we design and deliver.</p>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-md-6">
+                            <div class="about-cv-card">
+                                <div class="about-cv-icon"><i class="fas fa-microscope"></i></div>
+                                <h5 class="about-cv-title">Evidence-Based Practice</h5>
+                                <p class="about-cv-text">Our decisions and recommendations are grounded in data, research, and proven methodologies.</p>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-md-6">
+                            <div class="about-cv-card">
+                                <div class="about-cv-icon"><i class="fas fa-shield-alt"></i></div>
+                                <h5 class="about-cv-title">Accountable Results</h5>
+                                <p class="about-cv-text">We take full ownership of our commitments and measure success by tangible, lasting outcomes.</p>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-md-6">
+                            <div class="about-cv-card">
+                                <div class="about-cv-icon"><i class="fas fa-globe-africa"></i></div>
+                                <h5 class="about-cv-title">Local Relevance, Global Reach</h5>
+                                <p class="about-cv-text">We ground our work in African realities while applying internationally recognised standards of practice.</p>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-md-6">
+                            <div class="about-cv-card">
+                                <div class="about-cv-icon"><i class="fas fa-lightbulb"></i></div>
+                                <h5 class="about-cv-title">Responsible Innovation</h5>
+                                <p class="about-cv-text">We embrace creative solutions that are ethical, sustainable, and appropriate to context.</p>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+            </div>
+
         </div>
 
         <style>
+            /* ── About Section ───────────────────────────────────────────────── */
+            #about-sec {
+                background: #f8fafc;
+                padding-top: 80px;
+                padding-bottom: 80px;
+            }
+
+            /* Image stack */
             #about-sec .about-media-stack {
                 position: relative;
                 max-width: 520px;
                 margin: 0 auto;
-                padding-bottom: 0;
+                padding-bottom: 30px;
             }
-
             #about-sec .about-media-main img {
                 width: 100%;
-                height: 380px;
+                height: 420px;
                 object-fit: cover;
-                border-radius: 14px;
-                box-shadow: 0 16px 28px rgba(15, 23, 42, 0.14);
+                border-radius: 18px;
+                box-shadow: 0 20px 48px rgba(15, 23, 42, 0.16);
             }
-
             #about-sec .about-media-secondary {
                 position: absolute;
-                right: -20px;
+                right: -24px;
                 bottom: 0;
-                width: 58%;
+                width: 55%;
                 z-index: 2;
                 animation: aboutFloat 5s ease-in-out infinite;
             }
-
             #about-sec .about-media-secondary img {
                 width: 100%;
-                height: 180px;
+                height: 190px;
                 object-fit: cover;
-                border-radius: 12px;
-                box-shadow: 0 12px 24px rgba(15, 23, 42, 0.16);
-                border: 4px solid #ffffff;
+                border-radius: 14px;
+                box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18);
+                border: 4px solid #fff;
             }
 
+            /* Description text */
+            #about-sec .about-description-text {
+                color: #475569;
+                line-height: 1.8;
+                font-size: 1rem;
+            }
+            #about-sec .about-description-text p { margin-bottom: 0.6rem; }
+            #about-sec .about-description-text p:last-child { margin-bottom: 0; }
+
+            /* Video */
             #about-sec .about-video-wrap {
                 width: 100%;
-                max-width: 520px;
-                margin: 16px auto 0;
                 aspect-ratio: 16 / 9;
-                border-radius: 14px;
+                border-radius: 16px;
                 overflow: hidden;
-                box-shadow: 0 14px 30px rgba(15, 23, 42, 0.16);
+                box-shadow: 0 16px 44px rgba(15, 23, 42, 0.18);
                 background: #0f172a;
+                margin-top: 4px;
             }
-
             #about-sec .about-video-wrap iframe {
                 width: 100%;
                 height: 100%;
                 border: 0;
                 display: block;
             }
-
-            #about-sec .about-video-wrap.about-video-inline {
-                max-width: 100%;
-                margin: 0;
-                min-height: 260px;
-            }
-
-            #about-sec .about-mission-left {
-                max-width: 520px;
-                margin: 16px auto 0;
-            }
-
-            #about-sec .about-year-inline {
-                min-height: 220px;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-            }
-
             #about-sec .about-video-placeholder {
                 color: #64748b;
                 font-size: 0.95rem;
-                text-align: center;
-                padding: 16px;
-                background: #f1f5f9;
+                background: #e2e8f0;
+                min-height: 240px;
+                border-radius: 16px;
+            }
+            #about-sec .about-video-placeholder-icon {
+                font-size: 3.5rem;
+                color: #94a3b8;
+            }
+
+            /* ── Mission / Vision cards ──────────────────────────────────────── */
+            #about-sec .about-mv-row {
+                margin-top: 56px;
+            }
+            #about-sec .about-mv-card {
+                background: #fff;
+                border-radius: 18px;
+                padding: 38px 34px;
+                height: 100%;
+                box-shadow: 0 4px 28px rgba(15, 23, 42, 0.07);
+                border-top: 4px solid #03A4FC;
+                transition: transform 0.25s ease, box-shadow 0.25s ease;
+            }
+            #about-sec .about-mv-card--vision {
+                border-top-color: #0ea5e9;
+            }
+            #about-sec .about-mv-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 16px 40px rgba(3, 164, 252, 0.14);
+            }
+            #about-sec .about-mv-icon {
+                width: 58px;
+                height: 58px;
+                border-radius: 16px;
+                background: linear-gradient(135deg, #03A4FC, #025ea8);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 20px;
+                font-size: 1.45rem;
+                color: #fff;
+                box-shadow: 0 6px 18px rgba(3, 164, 252, 0.32);
+            }
+            #about-sec .about-mv-icon--vision {
+                background: linear-gradient(135deg, #0ea5e9, #0284c7);
+                box-shadow: 0 6px 18px rgba(14, 165, 233, 0.32);
+            }
+            #about-sec .about-mv-title {
+                font-size: 1.3rem;
+                font-weight: 700;
+                color: #0f172a;
+                margin-bottom: 14px;
+            }
+            #about-sec .about-mv-text {
+                color: #475569;
+                line-height: 1.8;
+                font-size: 0.97rem;
+                margin-bottom: 0;
+            }
+
+            /* ── Core Values ─────────────────────────────────────────────────── */
+            #about-sec .about-cv-section {
+                margin-top: 60px;
+            }
+            #about-sec .about-cv-header {
+                margin-bottom: 38px;
+            }
+            #about-sec .about-cv-card {
+                background: #fff;
+                border-radius: 18px;
+                padding: 32px 28px;
+                height: 100%;
+                box-shadow: 0 4px 24px rgba(15, 23, 42, 0.07);
+                border-top: 3px solid #03A4FC;
+                transition: transform 0.25s ease, box-shadow 0.25s ease;
+            }
+            #about-sec .about-cv-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 14px 36px rgba(3, 164, 252, 0.15);
+            }
+            #about-sec .about-cv-icon {
+                width: 54px;
+                height: 54px;
+                border-radius: 14px;
+                background: linear-gradient(135deg, rgba(3,164,252,0.12), rgba(3,164,252,0.22));
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 18px;
+                font-size: 1.35rem;
+                color: #03A4FC;
+            }
+            #about-sec .about-cv-title {
+                font-size: 1.08rem;
+                font-weight: 700;
+                color: #0f172a;
+                margin-bottom: 10px;
+            }
+            #about-sec .about-cv-text {
+                color: #475569;
+                line-height: 1.75;
+                font-size: 0.93rem;
+                margin-bottom: 0;
             }
 
             @keyframes aboutFloat {
-                0%, 100% {
-                    transform: translateY(0);
-                }
-                50% {
-                    transform: translateY(-10px);
-                }
+                0%, 100% { transform: translateY(0); }
+                50%       { transform: translateY(-10px); }
             }
 
+            /* ── Responsive ──────────────────────────────────────────────────── */
             @media (max-width: 1199.98px) {
-                #about-sec .about-media-stack {
-                    max-width: 460px;
-                }
-
-                #about-sec .about-media-main img {
-                    height: 320px;
-                }
-
-                #about-sec .about-video-wrap {
-                    max-width: 460px;
-                }
-
-                #about-sec .about-mission-left {
-                    max-width: 460px;
-                }
+                #about-sec .about-media-stack  { max-width: 460px; }
+                #about-sec .about-media-main img { height: 360px; }
             }
-
             @media (max-width: 991.98px) {
-                #about-sec .about-media-stack {
-                    max-width: 420px;
-                    padding-bottom: 0;
-                    margin-bottom: 8px;
-                }
-
-                #about-sec .about-media-main img {
-                    height: 260px;
-                }
-
-                #about-sec .about-video-wrap {
-                    max-width: 420px;
-                }
-
-                #about-sec .about-video-wrap.about-video-inline {
-                    margin-top: 6px;
-                    min-height: 0;
-                }
-
-                #about-sec .about-mission-left {
-                    max-width: 420px;
-                }
-
-                #about-sec .about-year-inline {
-                    min-height: 0;
-                }
+                #about-sec .about-media-stack  { max-width: 100%; padding-bottom: 28px; }
+                #about-sec .about-media-main img { height: 280px; }
+                #about-sec .about-media-secondary { right: 0; bottom: 0; }
             }
-
             @media (max-width: 575.98px) {
-                #about-sec .about-media-stack {
-                    max-width: 100%;
-                }
-
-                #about-sec .about-media-main img {
-                    height: 210px;
-                }
-
-                #about-sec .about-video-wrap {
-                    max-width: 100%;
-                    margin-top: 12px;
-                    border-radius: 12px;
-                }
-
-                #about-sec .about-video-wrap.about-video-inline {
-                    margin-top: 8px;
-                }
-
-                #about-sec .about-mission-left {
-                    max-width: 100%;
-                }
+                #about-sec { padding-top: 52px; padding-bottom: 52px; }
+                #about-sec .about-media-main img { height: 220px; }
+                #about-sec .about-mv-row { margin-top: 40px; }
+                #about-sec .about-cv-section { margin-top: 40px; }
+                #about-sec .about-mv-card,
+                #about-sec .about-cv-card { padding: 26px 22px; }
             }
         </style>
     </div>

@@ -8,6 +8,7 @@ use App\Models\Team;
 use App\Models\Testimony;
 use App\Models\Blog;
 use App\Models\Client;
+use App\Models\CoreValue;
 use App\Models\Project;
 use App\Models\Service;
 use Livewire\Component;
@@ -23,6 +24,7 @@ class Home extends Component
         public $focusAreas;
         public $projectsCount = 0;
         public $partnersCount = 0;
+        public $coreValues;
         
 
         public function mount()
@@ -32,6 +34,7 @@ class Home extends Component
         $this->slides=Slider::where("status","published")->get();
         $this->projectsCount = Project::where('status', 'published')->count();
         $this->partnersCount = Client::whereIn('status', ['published', 'active'])->count();
+        $this->coreValues = CoreValue::where('status', 'published')->orderBy('sort_order')->orderBy('id')->get();
         $about = About::first();
         $this->testimonies=Testimony::where('status','published')->get();
         $this->blogs=Blog::where('status','published')->orderBy('id','desc')->latest()->take(5)->get();
@@ -67,6 +70,7 @@ class Home extends Component
             'focusAreas' => $this->focusAreas,
             'projectsCount' => $this->projectsCount,
             'partnersCount' => $this->partnersCount,
+            'coreValues' => $this->coreValues,
         ])->layout("components.layouts.frontend", ["title"=>$this->title,"description"=>Str::limit(html_entity_decode(strip_tags($this->description)), 350, '...'),"keywords"=>$this->keywords,"image"=>$this->image]);
     }
 
