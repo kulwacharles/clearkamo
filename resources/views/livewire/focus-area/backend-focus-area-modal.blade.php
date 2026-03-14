@@ -41,8 +41,8 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Details <span class="text-muted">(optional, shown in "Read More")</span></label>
-                            <textarea class="form-control" wire:model="details" rows="3" placeholder="Extended explanation shown when the user expands the card."></textarea>
+                            <label class="form-label">Details <span class="text-muted">(optional)</span></label>
+                            <textarea class="form-control" wire:model="details" rows="3" placeholder="Additional details about this focus area."></textarea>
                             @error('details') <span class="text-danger small">{{ $message }}</span> @enderror
                         </div>
 

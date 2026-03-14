@@ -552,12 +552,6 @@
                             @endif
                             <h3 class="focus-card-title">{{ $area->title }}</h3>
                             <p class="focus-card-summary">{{ $area->summary }}</p>
-                            @if($area->details)
-                            <details class="focus-card-details">
-                                <summary>Read More</summary>
-                                <p>{{ $area->details }}</p>
-                            </details>
-                            @endif
                         </article>
                     </div>
                 @endforeach
@@ -664,33 +658,9 @@
 
             #focus-sec .focus-card-summary {
                 color: #334155;
-                margin-bottom: 10px;
-                padding: 0 22px;
+                margin-bottom: 20px;
+                padding: 0 22px 22px;
                 flex-grow: 1;
-            }
-
-            #focus-sec .focus-card-details {
-                padding: 0 22px 20px;
-                margin-top: auto;
-            }
-
-            #focus-sec .focus-card-details summary {
-                cursor: pointer;
-                list-style: none;
-                font-weight: 600;
-                color: #03A4FC;
-                display: inline-flex;
-                align-items: center;
-                gap: 6px;
-            }
-
-            #focus-sec .focus-card-details summary::-webkit-details-marker {
-                display: none;
-            }
-
-            #focus-sec .focus-card-details p {
-                margin-top: 10px;
-                color: #475569;
             }
 
             @media (max-width: 575.98px) {
