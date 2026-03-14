@@ -39,7 +39,7 @@
                                             Explore Our Services
                                             <i class="fas fa-arrow-right ms-2"></i>
                                         </a>
-                                        <a wire:navigate href="{{ route('contact') }}" class="hero-btn-outline">
+                                        <a wire:navigate href="{{ route('contact-us') }}" class="hero-btn-outline">
                                             Get In Touch
                                         </a>
                                     </div>
