@@ -4,263 +4,435 @@
 <div>
     <!-- Hero Slider Section -->
     @if($slides && $slides->count() > 0)
-    <section class="hero-slider-section" style="position: relative; overflow: hidden; background: linear-gradient(135deg, #03A4FC 0%, #03A4FC 100%);">
-        <!-- Animated Background Elements -->
-        <div class="slider-bg-animation" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-            <div class="floating-shapes">
-                <div class="shape shape-1" style="position: absolute; width: 80px; height: 80px; background: rgba(255,255,255,0.1); border-radius: 50%; top: 10%; left: 10%; animation: float 6s ease-in-out infinite;"></div>
-                <div class="shape shape-2" style="position: absolute; width: 120px; height: 120px; background: rgba(255,255,255,0.05); border-radius: 50%; top: 60%; right: 15%; animation: float 8s ease-in-out infinite reverse;"></div>
-                <div class="shape shape-3" style="position: absolute; width: 60px; height: 60px; background: rgba(255,255,255,0.08); border-radius: 50%; bottom: 20%; left: 20%; animation: float 7s ease-in-out infinite 2s;"></div>
-                <div class="shape shape-4" style="position: absolute; width: 100px; height: 100px; background: rgba(255,255,255,0.06); border-radius: 50%; top: 30%; right: 30%; animation: float 9s ease-in-out infinite 1s;"></div>
-            </div>
-        </div>
-        
-        <div class="slider-wrapper" style="position: relative; height: 600px; z-index: 2;">
-            <div id="mainSlider" class="main-slider" style="position: relative; height: 100%;">
-                @foreach($slides as $index => $slide)
-                    <div class="slider-slide" style="position: absolute; top: 0; left: 0; width: 100%; height: 600px; background-size: cover; background-position: center; opacity: 0; transition: opacity 0.8s ease-in-out;">
-                        @if($slide->image)
-                            <div class="slider-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('{{ asset('storage/'.$slide->image) }}'); background-size: cover; background-position: center; background-blend-mode: overlay; background-color: rgba(0,0,0,0.4);"></div>
-                            <!-- Gradient Overlay -->
-                            <div class="gradient-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(3,164,252,0.3) 0%, rgba(3,164,252,0.2) 50%, rgba(0,0,0,0.5) 100%);"></div>
-                        @endif
-                        <div class="slider-content" style="position: relative; z-index: 2; height: 100%; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 120px;">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-lg-8 mx-auto text-center">
-                                        <div class="slider-text" style="color: white; animation: fadeInUp 1.2s ease-out;">
-                                            <div class="slider-cta" style="margin-top: 30px;">
-                                                <a href="{{ route('services') }}" class="slider-btn" style="display: inline-block; background: linear-gradient(135deg, #03A4FC 0%, #03A4FC 100%); color: white; padding: 15px 40px; border-radius: 50px; font-size: 1rem; font-weight: 600; text-decoration: none; box-shadow: 0 10px 30px rgba(3,164,252,0.4); transform: translateY(0); transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;">
-                                                    Explore Our Services
-                                                    <i class="fas fa-arrow-right ms-2"></i>
-                                                </a>
-                                            </div>
-                                        </div>
+    <section id="hero-sec">
+        <div id="mainSlider" class="hero-slider">
+            @foreach($slides as $index => $slide)
+                <div class="hero-slide{{ $index === 0 ? ' active' : '' }}">
+                    {{-- Background image + dark-blue overlay --}}
+                    @if($slide->image)
+                        <div class="hero-slide-bg" style="background-image: url('{{ asset('storage/'.$slide->image) }}');"></div>
+                    @endif
+                    <div class="hero-slide-overlay"></div>
+
+                    {{-- Decorative floating blobs --}}
+                    <div class="hero-blob hero-blob-1"></div>
+                    <div class="hero-blob hero-blob-2"></div>
+
+                    {{-- Content --}}
+                    <div class="hero-slide-content">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-xl-9 col-lg-10 text-center">
+                                    <span class="hero-eyebrow">
+                                        <span class="hero-eyebrow-dot"></span>
+                                        CLEARKAMO
+                                        <span class="hero-eyebrow-dot"></span>
+                                    </span>
+                                    @if($slide->title)
+                                        <h1 class="hero-title">{{ $slide->title }}</h1>
+                                    @endif
+                                    @if($slide->description)
+                                        <p class="hero-desc">{{ $slide->description }}</p>
+                                    @endif
+                                    <div class="hero-cta-row">
+                                        <a wire:navigate href="{{ route('services') }}" class="hero-btn-primary">
+                                            Explore Our Services
+                                            <i class="fas fa-arrow-right ms-2"></i>
+                                        </a>
+                                        <a wire:navigate href="{{ route('contact') }}" class="hero-btn-outline">
+                                            Get In Touch
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                @endforeach
-            </div>
-            
-            <!-- Enhanced Navigation -->
-            <button id="sliderPrev" class="slider-nav-btn slider-prev" style="position: absolute; left: 40px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.95); color: #333; border: none; width: 60px; height: 60px; border-radius: 50%; cursor: pointer; z-index: 10; transition: all 0.4s ease; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 25px rgba(0,0,0,0.2); backdrop-filter: blur(10px);">
-                <i class="fas fa-chevron-left" style="font-size: 20px;"></i>
-            </button>
-            <button id="sliderNext" class="slider-nav-btn slider-next" style="position: absolute; right: 40px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.95); color: #333; border: none; width: 60px; height: 60px; border-radius: 50%; cursor: pointer; z-index: 10; transition: all 0.4s ease; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 25px rgba(0,0,0,0.2); backdrop-filter: blur(10px);">
-                <i class="fas fa-chevron-right" style="font-size: 20px;"></i>
-            </button>
-            
-            <!-- Enhanced Indicators -->
-            <div class="slider-indicators" style="position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; gap: 15px; padding: 15px 25px; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 50px;">
-                @foreach($slides as $index => $slide)
-                    <button class="slider-indicator" data-slide="{{ $index }}" style="width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; background: transparent; cursor: pointer; transition: all 0.4s ease; position: relative;"></button>
-                @endforeach
-            </div>
+
+                    {{-- Progress bar at bottom of slide --}}
+                    <div class="hero-progress{{ $index === 0 ? ' running' : '' }}"></div>
+                </div>
+            @endforeach
+        </div>
+
+        {{-- Prev / Next arrows --}}
+        <button id="sliderPrev" class="hero-nav hero-nav-prev" aria-label="Previous slide">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button id="sliderNext" class="hero-nav hero-nav-next" aria-label="Next slide">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        {{-- Dot indicators --}}
+        <div class="hero-dots">
+            @foreach($slides as $index => $slide)
+                <button class="hero-dot{{ $index === 0 ? ' active' : '' }}" data-slide="{{ $index }}" aria-label="Go to slide {{ $index + 1 }}"></button>
+            @endforeach
         </div>
     </section>
 
-    <!-- Enhanced Hero Slider Styles and JavaScript with Auto-Play -->
     <style>
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* ── Hero Section ────────────────────────────────────────── */
+        #hero-sec {
+            position: relative;
+            overflow: hidden;
         }
-        
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg);
-            }
-            33% {
-                transform: translateY(-20px) rotate(120deg);
-            }
-            66% {
-                transform: translateY(20px) rotate(240deg);
-            }
+
+        .hero-slider {
+            position: relative;
+            height: 100svh;
+            min-height: 540px;
+            max-height: 860px;
         }
-        
-        .slider-slide.active {
-            opacity: 1 !important;
+
+        /* Each slide */
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .9s ease, visibility .9s ease;
+            overflow: hidden;
+        }
+        .hero-slide.active {
+            opacity: 1;
+            visibility: visible;
             z-index: 2;
         }
-        
-        .slider-indicator.active {
-            background: white !important;
-            transform: scale(1.3);
-            box-shadow: 0 0 15px rgba(255,255,255,0.8);
+
+        /* Background photo */
+        .hero-slide-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.06);
+            transition: transform 6s ease;
         }
-        
-        .slider-nav-btn:hover {
-            background: linear-gradient(135deg, #03A4FC 0%, #03A4FC 100%) !important;
-            color: white !important;
-            transform: translateY(-50%) scale(1.1);
+        .hero-slide.active .hero-slide-bg {
+            transform: scale(1);
         }
-        
-        .slider-btn:hover {
+
+        /* Dark gradient overlay */
+        .hero-slide-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(3,164,252,.55) 0%,
+                rgba(2,80,140,.7)  50%,
+                rgba(5,5,20,.82)   100%
+            );
+        }
+
+        /* Decorative blobs */
+        .hero-blob {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .hero-blob-1 {
+            width: 420px; height: 420px;
+            background: radial-gradient(circle, rgba(3,164,252,.25) 0%, transparent 70%);
+            top: -120px; right: -80px;
+            animation: blobFloat 8s ease-in-out infinite;
+        }
+        .hero-blob-2 {
+            width: 280px; height: 280px;
+            background: radial-gradient(circle, rgba(255,255,255,.08) 0%, transparent 70%);
+            bottom: -60px; left: -40px;
+            animation: blobFloat 11s ease-in-out infinite reverse;
+        }
+        @keyframes blobFloat {
+            0%,100% { transform: translate(0,0) scale(1); }
+            50%      { transform: translate(16px,-22px) scale(1.06); }
+        }
+
+        /* Content */
+        .hero-slide-content {
+            position: relative;
+            z-index: 3;
+            width: 100%;
+            padding: 0 16px;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255,255,255,.85);
+            font-size: .82rem;
+            font-weight: 600;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: none;
+        }
+        .hero-slide.active .hero-eyebrow {
+            animation: heroFadeUp .7s ease forwards .1s;
+        }
+        .hero-eyebrow-dot {
+            display: inline-block;
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: #03A4FC;
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 5vw, 3.6rem);
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.15;
+            margin-bottom: 22px;
+            opacity: 0;
+            transform: translateY(28px);
+            animation: none;
+        }
+        .hero-slide.active .hero-title {
+            animation: heroFadeUp .8s ease forwards .28s;
+        }
+
+        .hero-desc {
+            font-size: clamp(.95rem, 2vw, 1.18rem);
+            color: rgba(255,255,255,.82);
+            line-height: 1.7;
+            max-width: 700px;
+            margin: 0 auto 32px;
+            opacity: 0;
+            transform: translateY(28px);
+            animation: none;
+        }
+        .hero-slide.active .hero-desc {
+            animation: heroFadeUp .8s ease forwards .44s;
+        }
+
+        .hero-cta-row {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            transform: translateY(24px);
+            animation: none;
+        }
+        .hero-slide.active .hero-cta-row {
+            animation: heroFadeUp .8s ease forwards .6s;
+        }
+
+        .hero-btn-primary {
+            display: inline-flex;
+            align-items: center;
+            background: #03A4FC;
+            color: #fff;
+            padding: 15px 36px;
+            border-radius: 50px;
+            font-size: .97rem;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: .04em;
+            box-shadow: 0 10px 30px rgba(3,164,252,.45);
+            transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+        }
+        .hero-btn-primary:hover {
+            background: #0295e8;
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(3,164,252,0.6);
+            box-shadow: 0 16px 40px rgba(3,164,252,.55);
+            color: #fff;
+        }
+
+        .hero-btn-outline {
+            display: inline-flex;
+            align-items: center;
+            background: transparent;
+            color: #fff;
+            padding: 14px 34px;
+            border-radius: 50px;
+            border: 2px solid rgba(255,255,255,.65);
+            font-size: .97rem;
+            font-weight: 600;
+            text-decoration: none;
+            backdrop-filter: blur(6px);
+            transition: border-color .25s ease, background .25s ease, transform .25s ease;
+        }
+        .hero-btn-outline:hover {
+            border-color: #fff;
+            background: rgba(255,255,255,.12);
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        /* Progress bar at bottom of slide */
+        .hero-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            width: 0;
+            background: #03A4FC;
+            border-radius: 0 2px 2px 0;
+            z-index: 5;
+        }
+        .hero-progress.running {
+            animation: heroProgress 5s linear forwards;
+        }
+        @keyframes heroProgress {
+            from { width: 0; }
+            to   { width: 100%; }
+        }
+
+        /* Navigation arrows */
+        .hero-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            width: 52px; height: 52px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,.92);
+            color: #0f172a;
+            font-size: 18px;
+            box-shadow: 0 6px 20px rgba(0,0,0,.18);
+            backdrop-filter: blur(8px);
+            transition: background .25s ease, color .25s ease, transform .25s ease, box-shadow .25s ease;
+        }
+        .hero-nav:hover {
+            background: #03A4FC;
+            color: #fff;
+            box-shadow: 0 10px 28px rgba(3,164,252,.45);
+        }
+        .hero-nav-prev { left: 28px; }
+        .hero-nav-next { right: 28px; }
+
+        /* Dot indicators */
+        .hero-dots {
+            position: absolute;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            gap: 10px;
+        }
+        .hero-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,.7);
+            background: transparent;
+            cursor: pointer;
+            transition: all .35s ease;
+            padding: 0;
+        }
+        .hero-dot.active {
+            background: #03A4FC;
+            border-color: #03A4FC;
+            width: 28px;
+            border-radius: 5px;
+            box-shadow: 0 0 12px rgba(3,164,252,.7);
+        }
+
+        /* Entry animation keyframe */
+        @keyframes heroFadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            33%       { transform: translateY(-20px) rotate(120deg); }
+            66%       { transform: translateY(20px) rotate(240deg); }
+        }
+
+        /* Mobile */
+        @media (max-width: 767.98px) {
+            .hero-slider { height: 92svh; min-height: 480px; }
+            .hero-nav { width: 40px; height: 40px; font-size: 15px; }
+            .hero-nav-prev { left: 12px; }
+            .hero-nav-next { right: 12px; }
+            .hero-blob-1 { width: 220px; height: 220px; }
         }
     </style>
 
     <script>
     (function() {
         'use strict';
-        
-        // Initialize slider immediately and also wait for DOM ready
-        initSlider();
+        function initSlider() {
+            const slider = document.getElementById('mainSlider');
+            if (!slider) return;
+            const slides     = slider.querySelectorAll('.hero-slide');
+            const progresses = slider.querySelectorAll('.hero-progress');
+            const dots       = document.querySelectorAll('.hero-dot');
+            const prevBtn    = document.getElementById('sliderPrev');
+            const nextBtn    = document.getElementById('sliderNext');
+            if (!slides.length) return;
+
+            let current = 0;
+            let timer   = null;
+            const DELAY = 5000;
+
+            function go(idx) {
+                slides[current].classList.remove('active');
+                progresses[current].classList.remove('running');
+                dots[current] && dots[current].classList.remove('active');
+
+                // Force reflow so CSS animation restarts
+                void progresses[idx].offsetWidth;
+
+                current = idx;
+                slides[current].classList.add('active');
+                progresses[current].classList.add('running');
+                dots[current] && dots[current].classList.add('active');
+            }
+
+            function next() { go((current + 1) % slides.length); }
+            function prev() { go((current - 1 + slides.length) % slides.length); }
+
+            function start() { timer = setInterval(next, DELAY); }
+            function stop()  { clearInterval(timer); }
+            function reset() { stop(); start(); }
+
+            prevBtn && prevBtn.addEventListener('click', () => { prev(); reset(); });
+            nextBtn && nextBtn.addEventListener('click', () => { next(); reset(); });
+            dots.forEach((dot, i) => dot.addEventListener('click', () => { go(i); reset(); }));
+
+            slider.addEventListener('mouseenter', stop);
+            slider.addEventListener('mouseleave', start);
+
+            // Touch / swipe
+            let tx = 0;
+            slider.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; }, { passive: true });
+            slider.addEventListener('touchend', e => {
+                const diff = tx - e.changedTouches[0].screenX;
+                if (Math.abs(diff) > 50) { diff > 0 ? next() : prev(); reset(); }
+            }, { passive: true });
+
+            // Keyboard
+            document.addEventListener('keydown', e => {
+                if (e.key === 'ArrowLeft')  { prev(); reset(); }
+                if (e.key === 'ArrowRight') { next(); reset(); }
+            });
+
+            // Init first slide
+            slides[0].classList.add('active');
+            progresses[0].classList.add('running');
+            dots[0] && dots[0].classList.add('active');
+            start();
+        }
+
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', initSlider);
-        }
-        
-        // Also initialize after Livewire updates
-        if (typeof Livewire !== 'undefined') {
-            Livewire.hook('component.initialized', component => {
-                if (component.name === 'home') {
-                    setTimeout(initSlider, 100);
-                }
-            });
-        }
-        
-        function initSlider() {
-            const mainSlider = document.getElementById('mainSlider');
-            if (!mainSlider) return;
-            
-            const slides = mainSlider.querySelectorAll('.slider-slide');
-            const prevBtn = document.getElementById('sliderPrev');
-            const nextBtn = document.getElementById('sliderNext');
-            const indicators = document.querySelectorAll('.slider-indicator');
-            
-            if (slides.length === 0) return;
-            
-            let currentSlide = 0;
-            const totalSlides = slides.length;
-            let autoPlayInterval;
-            const autoPlayDelay = 5000;
-            
-            slides[0].classList.add('active');
-            slides[0].style.opacity = '1';
-            if (indicators[0]) {
-                indicators[0].classList.add('active');
-            }
-            
-            function showSlide(index) {
-                slides[currentSlide].classList.remove('active');
-                slides[currentSlide].style.opacity = '0';
-                
-                if (indicators[currentSlide]) {
-                    indicators[currentSlide].classList.remove('active');
-                }
-                
-                currentSlide = index;
-                
-                slides[currentSlide].classList.add('active');
-                slides[currentSlide].style.opacity = '1';
-                
-                if (indicators[currentSlide]) {
-                    indicators[currentSlide].classList.add('active');
-                }
-            }
-            
-            function nextSlide() {
-                const next = (currentSlide + 1) % totalSlides;
-                showSlide(next);
-            }
-            
-            function prevSlide() {
-                const prev = (currentSlide - 1 + totalSlides) % totalSlides;
-                showSlide(prev);
-            }
-            
-            function startAutoPlay() {
-                stopAutoPlay();
-                autoPlayInterval = setInterval(nextSlide, autoPlayDelay);
-            }
-            
-            function stopAutoPlay() {
-                if (autoPlayInterval) {
-                    clearInterval(autoPlayInterval);
-                    autoPlayInterval = null;
-                }
-            }
-            
-            function resetAutoPlay() {
-                stopAutoPlay();
-                startAutoPlay();
-            }
-            
-            if (prevBtn) {
-                prevBtn.addEventListener('click', function() {
-                    prevSlide();
-                    resetAutoPlay();
-                });
-            }
-            
-            if (nextBtn) {
-                nextBtn.addEventListener('click', function() {
-                    nextSlide();
-                    resetAutoPlay();
-                });
-            }
-            
-            indicators.forEach(function(indicator, index) {
-                indicator.addEventListener('click', function() {
-                    showSlide(index);
-                    resetAutoPlay();
-                });
-            });
-            
-            mainSlider.addEventListener('mouseenter', stopAutoPlay);
-            mainSlider.addEventListener('mouseleave', startAutoPlay);
-            
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'ArrowLeft') {
-                    prevSlide();
-                    resetAutoPlay();
-                } else if (e.key === 'ArrowRight') {
-                    nextSlide();
-                    resetAutoPlay();
-                }
-            });
-            
-            let touchStartX = 0;
-            let touchEndX = 0;
-            
-            mainSlider.addEventListener('touchstart', function(e) {
-                touchStartX = e.changedTouches[0].screenX;
-            }, { passive: true });
-            
-            mainSlider.addEventListener('touchend', function(e) {
-                touchEndX = e.changedTouches[0].screenX;
-                handleSwipe();
-            }, { passive: true });
-            
-            function handleSwipe() {
-                const swipeThreshold = 50;
-                const diff = touchStartX - touchEndX;
-                
-                if (Math.abs(diff) > swipeThreshold) {
-                    if (diff > 0) {
-                        nextSlide();
-                    } else {
-                        prevSlide();
-                    }
-                    resetAutoPlay();
-                }
-            }
-            
-            startAutoPlay();
+        } else {
+            initSlider();
         }
     })();
     </script>
     @endif
-    
+
     @if($about)
     <div class="space" id="about-sec">
         <div class="container">
@@ -518,6 +690,114 @@
     </div>
     @endif
 
+    {{-- ── Impact Stats Strip ──────────────────────────────────── --}}
+    @if($about)
+    <div id="stats-strip">
+        <div class="container">
+            <div class="row gy-3 justify-content-center text-center">
+                <div class="col-6 col-md-3">
+                    <div class="stat-item">
+                        <span class="stat-num" data-target="{{ $about->ex_years ?? 25 }}">0</span><span class="stat-suffix">+</span>
+                        <p class="stat-label">Years of Experience</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-item">
+                        <span class="stat-num" data-target="150">0</span><span class="stat-suffix">+</span>
+                        <p class="stat-label">Projects Delivered</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-item">
+                        <span class="stat-num" data-target="30">0</span><span class="stat-suffix">+</span>
+                        <p class="stat-label">Partner Organizations</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-item">
+                        <span class="stat-num" data-target="98">0</span><span class="stat-suffix">%</span>
+                        <p class="stat-label">Client Satisfaction</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        #stats-strip {
+            background: linear-gradient(135deg, #03A4FC 0%, #025ea8 100%);
+            padding: 52px 0;
+        }
+        #stats-strip .stat-item {
+            color: #fff;
+            padding: 0 12px;
+        }
+        #stats-strip .stat-num {
+            font-size: clamp(2.4rem, 5vw, 3.4rem);
+            font-weight: 800;
+            line-height: 1;
+            display: inline;
+        }
+        #stats-strip .stat-suffix {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 800;
+            line-height: 1;
+            margin-left: 2px;
+        }
+        #stats-strip .stat-label {
+            margin: 8px 0 0;
+            font-size: .88rem;
+            font-weight: 500;
+            color: rgba(255,255,255,.82);
+            letter-spacing: .04em;
+            text-transform: uppercase;
+        }
+        /* Vertical dividers on desktop */
+        #stats-strip .col-md-3:not(:last-child) .stat-item {
+            border-right: 1px solid rgba(255,255,255,.25);
+        }
+        @media (max-width: 767.98px) {
+            #stats-strip .col-md-3:not(:last-child) .stat-item {
+                border-right: none;
+            }
+            #stats-strip { padding: 36px 0; }
+        }
+    </style>
+    <script>
+    (function(){
+        function animateCounters() {
+            document.querySelectorAll('#stats-strip .stat-num').forEach(function(el) {
+                var target = parseInt(el.dataset.target, 10);
+                var duration = 1800;
+                var start = null;
+                function step(ts) {
+                    if (!start) start = ts;
+                    var progress = Math.min((ts - start) / duration, 1);
+                    var ease = 1 - Math.pow(1 - progress, 3);
+                    el.textContent = Math.floor(ease * target);
+                    if (progress < 1) requestAnimationFrame(step);
+                    else el.textContent = target;
+                }
+                requestAnimationFrame(step);
+            });
+        }
+
+        var strip = document.getElementById('stats-strip');
+        if (strip && 'IntersectionObserver' in window) {
+            var ran = false;
+            new IntersectionObserver(function(entries, obs) {
+                if (entries[0].isIntersecting && !ran) {
+                    ran = true;
+                    animateCounters();
+                    obs.disconnect();
+                }
+            }, { threshold: 0.3 }).observe(strip);
+        } else if (strip) {
+            animateCounters();
+        }
+    })();
+    </script>
+    @endif
+
     <section class="space-top space-bottom" id="focus-sec">
         <div class="container">
             <div class="title-area text-center">
@@ -674,18 +954,10 @@
         </style>
     </section>
 
-    <!-- Rest of your sections... I'll continue with the main ones -->
-    <section class="space overflow-hidden bg-smoke2" id="service-sec">
-        <div class="shape-mockup moving" data-top="0" data-left="0">
-            <img src="assets/img/shape/service-bg-shape4-1.png" alt="shape">
-        </div>
-        <div class="shape-mockup movingX" data-bottom="0" data-right="0">
-            <img src="assets/img/shape/service-bg-shape4-2.png" alt="shape">
-        </div>
-        <div class="why-sec-1 overflow-hidden" data-bg-src="assets/img/shape/why-shape-1-1.svg"></div>
-        <div class="container-fluid">
+    <section class="space-top space-bottom" id="service-sec">
+        <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-5">
+                <div class="col-lg-6">
                     <div class="title-area text-center">
                         <span class="sub-title">
                             <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
@@ -696,36 +968,125 @@
                     </div>
                 </div>
             </div>
-            <div class="row gy-30 gx-30 justify-content-center">
+            <div class="row g-4 justify-content-center">
                 @if($services)
                     @foreach ($services as $key => $service)
-                       <div class="col-xl-3 col-md-6">
-                        <div class="service-card4">
-                            <div class="service-card-thumb">
-                                <img src="{{ url('/storage/'.$service->image) }}" alt="img" style="width: 400px;height:250px">
-                            </div>
-                            <div class="box-content">
-                                <h3 class="box-title">
-                                    <a wire:navigate href="/service/details/{{ $service->slug }}">{{ $service->title }}</a>
-                                </h3>
-                                <p class="box-text">
-                                    {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($service->description)), 160, '...') }}
-                                </p>
-                                <div class="btn-wrap">
-                                    <a  wire:navigate href="/service/details/{{ $service->slug }}" class="link-btn style2">
-                                        <i class="fas fa-plus-circle me-1"></i>Read More
-                                    </a>
-                                    <div class="service-card-num">
-                                        <span>{{ str_pad($key+1, 2, "0", STR_PAD_LEFT) }}</span>
+                        <div class="col-xl-3 col-lg-4 col-md-6">
+                            <article class="svc-card h-100">
+                                <a wire:navigate href="/service/details/{{ $service->slug }}" class="svc-card-img-link">
+                                    <div class="svc-card-img">
+                                        <img src="{{ url('/storage/'.$service->image) }}" alt="{{ $service->title }}">
+                                        <span class="svc-card-num">{{ str_pad($key+1, 2, '0', STR_PAD_LEFT) }}</span>
                                     </div>
+                                </a>
+                                <div class="svc-card-body">
+                                    <h3 class="svc-card-title">
+                                        <a wire:navigate href="/service/details/{{ $service->slug }}">{{ $service->title }}</a>
+                                    </h3>
+                                    <p class="svc-card-text">
+                                        {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($service->description)), 120, '...') }}
+                                    </p>
+                                    <a wire:navigate href="/service/details/{{ $service->slug }}" class="svc-card-link">
+                                        Read More <i class="fas fa-arrow-right ms-1"></i>
+                                    </a>
                                 </div>
-                            </div>
+                            </article>
                         </div>
-                        </div> 
                     @endforeach
                 @endif
             </div>
         </div>
+
+        <style>
+            #service-sec .svc-card {
+                background: #ffffff;
+                border: 1px solid #e2e8f0;
+                border-radius: 16px;
+                overflow: hidden;
+                box-shadow: 0 10px 24px rgba(15, 23, 42, 0.07);
+                display: flex;
+                flex-direction: column;
+                transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+            }
+            #service-sec .svc-card:hover {
+                transform: translateY(-5px);
+                border-color: rgba(3,164,252,.4);
+                box-shadow: 0 18px 32px rgba(3,164,252,.16);
+            }
+            #service-sec .svc-card-img {
+                position: relative;
+                width: 100%;
+                height: 210px;
+                overflow: hidden;
+            }
+            #service-sec .svc-card-img img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+                transition: transform .4s ease;
+            }
+            #service-sec .svc-card:hover .svc-card-img img {
+                transform: scale(1.05);
+            }
+            #service-sec .svc-card-num {
+                position: absolute;
+                top: 12px;
+                right: 12px;
+                width: 34px; height: 34px;
+                border-radius: 8px;
+                background: #03A4FC;
+                color: #fff;
+                font-size: 13px;
+                font-weight: 700;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+            #service-sec .svc-card-body {
+                padding: 20px 22px 22px;
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
+            }
+            #service-sec .svc-card-title {
+                font-size: 1.05rem;
+                font-weight: 700;
+                color: #0f172a;
+                margin-bottom: 10px;
+                line-height: 1.35;
+            }
+            #service-sec .svc-card-title a {
+                color: inherit;
+                text-decoration: none;
+                transition: color .2s ease;
+            }
+            #service-sec .svc-card-title a:hover { color: #03A4FC; }
+            #service-sec .svc-card-text {
+                color: #475569;
+                font-size: .9rem;
+                line-height: 1.65;
+                flex-grow: 1;
+                margin-bottom: 16px;
+            }
+            #service-sec .svc-card-link {
+                display: inline-flex;
+                align-items: center;
+                color: #03A4FC;
+                font-size: .88rem;
+                font-weight: 600;
+                text-decoration: none;
+                gap: 4px;
+                transition: gap .2s ease, color .2s ease;
+            }
+            #service-sec .svc-card-link:hover {
+                gap: 8px;
+                color: #025ea8;
+            }
+            @media (max-width: 575.98px) {
+                #service-sec .svc-card-img { height: 180px; }
+            }
+        </style>
     </section>
 
     @if($clients && $clients->count() > 0)
