@@ -480,7 +480,7 @@
                         <p class="sec-text">{!! $about->description !!}</p>
                     </div>
                     <div class="row gy-40">
-                        <div class="col-lg-8">
+                        <div class="col-lg-12">
                             @if($aboutVideoEmbedUrl)
                                 <div class="about-video-wrap about-video-inline">
                                     <iframe
@@ -497,14 +497,6 @@
                                     <span>Add YouTube URL in admin About Us to display video.</span>
                                 </div>
                             @endif
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="year-counter style2 about-year-inline" style="background: linear-gradient(135deg, #03A4FC 0%, #03A4FC 100%); padding: 40px 30px; border-radius: 15px; text-align: center; color: white;">
-                                <div class="year-counter_number">
-                                    <span class="counter-number" style="font-size: 3rem; font-weight: 700; color: white;">{{ $about->ex_years ?? 25 }}</span>
-                                </div>
-                                <p class="year-counter_text" style="color: white; margin: 0; font-size: 1.1rem;">Years Of Experience</p>
-                            </div>
                         </div>
                     </div>
                     {{-- <div class="btn-wrap style2 mt-50">
@@ -703,13 +695,13 @@
                 </div>
                 <div class="col-6 col-md-3">
                     <div class="stat-item">
-                        <span class="stat-num" data-target="150">0</span><span class="stat-suffix">+</span>
+                        <span class="stat-num" data-target="{{ $projectsCount }}">0</span><span class="stat-suffix">+</span>
                         <p class="stat-label">Projects Delivered</p>
                     </div>
                 </div>
                 <div class="col-6 col-md-3">
                     <div class="stat-item">
-                        <span class="stat-num" data-target="30">0</span><span class="stat-suffix">+</span>
+                        <span class="stat-num" data-target="{{ $partnersCount }}">0</span><span class="stat-suffix">+</span>
                         <p class="stat-label">Partner Organizations</p>
                     </div>
                 </div>

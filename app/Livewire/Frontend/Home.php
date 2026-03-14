@@ -8,6 +8,7 @@ use App\Models\Team;
 use App\Models\Testimony;
 use App\Models\Blog;
 use App\Models\Client;
+use App\Models\Project;
 use App\Models\Service;
 use Livewire\Component;
 use Illuminate\Support\Str;
@@ -20,6 +21,8 @@ class Home extends Component
         public $teams,$keywords;
         public $aboutVideoEmbedUrl = null;
         public $focusAreas;
+        public $projectsCount = 0;
+        public $partnersCount = 0;
         
 
         public function mount()
@@ -27,6 +30,8 @@ class Home extends Component
         $this->services=Service::where("status","published")->get();
         $this->clients=Client::whereIn("status", ["published", "active"])->latest()->get();
         $this->slides=Slider::where("status","published")->get();
+        $this->projectsCount = Project::where('status', 'published')->count();
+        $this->partnersCount = Client::whereIn('status', ['published', 'active'])->count();
         $about = About::first();
         $this->testimonies=Testimony::where('status','published')->get();
         $this->blogs=Blog::where('status','published')->orderBy('id','desc')->latest()->take(5)->get();
@@ -60,6 +65,8 @@ class Home extends Component
             'teams' => $this->teams,
             'aboutVideoEmbedUrl' => $this->aboutVideoEmbedUrl,
             'focusAreas' => $this->focusAreas,
+            'projectsCount' => $this->projectsCount,
+            'partnersCount' => $this->partnersCount,
         ])->layout("components.layouts.frontend", ["title"=>$this->title,"description"=>Str::limit(html_entity_decode(strip_tags($this->description)), 350, '...'),"keywords"=>$this->keywords,"image"=>$this->image]);
     }
 
