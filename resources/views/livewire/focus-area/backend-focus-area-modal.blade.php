@@ -174,25 +174,12 @@
 
     <script>
         document.addEventListener('livewire:initialized', () => {
-            Livewire.on('editItem', (event) => {
-                @this.editItem(event.id);
-            });
-
-            Livewire.on('deleteItem', (event) => {
-                @this.deleteItem(event.id);
-            });
-
             Livewire.on('open-modal', (event) => {
-                const el = document.getElementById(event);
-                if (el) bootstrap.Modal.getOrCreateInstance(el).show();
+                $('#' + event).modal('show');
             });
 
             Livewire.on('close-modal', (event) => {
-                const el = document.getElementById(event);
-                if (el) {
-                    const m = bootstrap.Modal.getInstance(el);
-                    if (m) m.hide();
-                }
+                $('#' + event).modal('hide');
             });
         });
     </script>

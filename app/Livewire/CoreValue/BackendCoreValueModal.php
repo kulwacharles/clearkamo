@@ -4,6 +4,7 @@ namespace App\Livewire\CoreValue;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Storage;
 use App\Models\CoreValue;
 
@@ -64,6 +65,7 @@ class BackendCoreValueModal extends Component
         $this->dispatch('core-value-updated');
     }
 
+    #[On('editCoreValueItem')]
     public function editItem($id)
     {
         $item = CoreValue::findOrFail($id);
@@ -111,6 +113,7 @@ class BackendCoreValueModal extends Component
         $this->dispatch('core-value-updated');
     }
 
+    #[On('deleteCoreValueItem')]
     public function deleteItem($id)
     {
         $item = CoreValue::findOrFail($id);

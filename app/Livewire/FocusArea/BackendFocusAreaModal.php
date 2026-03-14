@@ -4,6 +4,7 @@ namespace App\Livewire\FocusArea;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Storage;
 use App\Models\FocusArea;
 
@@ -63,6 +64,7 @@ class BackendFocusAreaModal extends Component
         $this->dispatch('focus-area-updated');
     }
 
+    #[On('editItem')]
     public function editItem($id)
     {
         $item = FocusArea::findOrFail($id);
@@ -110,6 +112,7 @@ class BackendFocusAreaModal extends Component
         $this->dispatch('focus-area-updated');
     }
 
+    #[On('deleteItem')]
     public function deleteItem($id)
     {
         $item = FocusArea::findOrFail($id);
