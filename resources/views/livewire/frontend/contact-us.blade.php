@@ -27,7 +27,7 @@
                         <div class="media-body">
                             <h3 class="box-title h5">General Enquires</h3>
                             <p class="box-text">
-                                Phone: <a href="tel:+{{ $contact->phone }}">{{$contact->phone}}</a> 
+                                Phone: <a href="tel:{{ $contact->phone }}">{{$contact->phone}}</a> 
                                 & Email: <a href="mailto:{{ $contact->email }}">{{ $contact->email }}</a>
                             </p>
                         </div>
@@ -45,13 +45,14 @@
                         <div class="box-icon"><i class="fa-light fa-clock"></i></div>
                         <div class="media-body">
                             <h3 class="box-title h5">Operation Hours</h3>
-                            <p class="box-text">Monday-Friday: 08.00 to 17.00</p>
+                            <p class="box-text">Monday – Saturday: 08:00 to 17:00</p>
+                            <p class="box-text">Sunday &amp; Public Holidays: Closed</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-6">
                     <div class="contact-form-v1 bg-smoke" data-bg-src="assets/img/bg/contact_bg_2.jpg">
-                        <h3 class="fs-40 mb-30 mt-n2">Send Massage</h3>
+                        <h3 class="fs-40 mb-30 mt-n2">Send Message</h3>
                         <form action="https://html.themeholy.com/konsal/demo/mail.php" method="POST" class="contact-form ajax-contact">
                             <div class="row">
                                 <div class="form-group col-md-12 style-white">

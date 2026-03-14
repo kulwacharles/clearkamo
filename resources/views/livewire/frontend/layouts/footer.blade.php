@@ -8,13 +8,13 @@
                                 @if($logo)
                                   <div class="about-logo">
                                         <a wire:navigate href="/">
-                                            <img src="{{ url('/storage/'.$logo) }}" alt="ProjectClear-Logo">
+                                            <img src="{{ url('/storage/'.$logo) }}" alt="ClearKamo Logo">
                                         </a>
                                     </div>
                                 @else
                                     <div class="about-logo">
                                         <a wire:navigate href="/">
-                                            <img src="{{asset('assets/img/ProjectClear.png')}}" alt="ProjectClear-Logo">
+                                            <img src="{{asset('assets/img/ProjectClear.png')}}" alt="ClearKamo Logo">
                                         </a>
                                     </div>
                                 @endif
@@ -23,7 +23,7 @@
                                     <div class="info-box_icon"><i class="far fa-phone"></i>
                                     </div>
                                     <p class="info-box_text">
-                                        <a href="tel:+11278956825" class="info-box_link">{{ $contact->phone }}</a>
+                                        <a href="tel:{{ $contact->phone }}" class="info-box_link">{{ $contact->phone }}</a>
                                     </p>
                                 </div>
                                 <div class="info-box">

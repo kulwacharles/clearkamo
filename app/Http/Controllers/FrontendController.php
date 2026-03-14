@@ -10,7 +10,6 @@ class FrontendController extends Controller
         return view();
     }
     public function about_us(){
-        dd("this is found heere");
         return view('about');
     }
 }

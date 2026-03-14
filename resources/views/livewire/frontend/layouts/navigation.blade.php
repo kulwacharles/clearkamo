@@ -7,7 +7,7 @@
             <div class="th-widget-about">
                 <div class="about-logo">
                     <a wire:navigate href="/">
-                        <img src="{{ url('/storage/'.$logo) }}" alt="ProjectClear-Logo">
+                        <img src="{{ url('/storage/'.$logo) }}" alt="ClearKamo Logo">
                     </a>
                 </div>
                 <p class="about-text">Consulting services can provide valuable insights, strategic guidance, specialized
@@ -101,11 +101,11 @@
         <div class="mobile-logo">
             <a wire:navigate href="/">
                 @if($logo)
-                <img src="{{ url('/storage/'.$logo) }}" alt="ProjectClear-Logo">
+                <img src="{{ url('/storage/'.$logo) }}" alt="ClearKamo Logo">
                 
                 @else
                 <!-- <img src="assets/img/ProjectClear-Logo.png" alt="assets/img/ProjectClear-Logo"> -->
-                <img src="assets/img/clearkamo.png" alt="ProjectClear-Logo">
+                <img src="assets/img/clearkamo.png" alt="ClearKamo Logo">
                 @endif
             </a>
         </div>
@@ -179,11 +179,11 @@
                             <div class="header-logo">
                                 <a wire:navigate href="/">
                                 @if($logo)
-                                <img src="{{ url('/storage/'.$logo) }}" alt="ProjectClear-Logo">
+                                <img src="{{ url('/storage/'.$logo) }}" alt="ClearKamo Logo">
                                 
                                 @else
                                 <!-- <img src="assets/img/ProjectClear-Logo.png" alt="assets/img/ProjectClear-Logo"> -->
-                                <img src="assets/img/clearkamo.png" alt="ProjectClear-Logo">
+                                <img src="assets/img/clearkamo.png" alt="ClearKamo Logo">
                                 @endif
                                 </a>
                             </div>
