@@ -173,19 +173,27 @@
     </div>
 
     <script>
-        window.addEventListener('open-modal', event => {
-            const el = document.getElementById(event.detail);
-            if (el) {
-                const m = bootstrap.Modal.getOrCreateInstance(el);
-                m.show();
-            }
-        });
-        window.addEventListener('close-modal', event => {
-            const el = document.getElementById(event.detail);
-            if (el) {
-                const m = bootstrap.Modal.getInstance(el);
-                if (m) m.hide();
-            }
+        document.addEventListener('livewire:initialized', () => {
+            Livewire.on('editItem', (event) => {
+                @this.editItem(event.id);
+            });
+
+            Livewire.on('deleteItem', (event) => {
+                @this.deleteItem(event.id);
+            });
+
+            Livewire.on('open-modal', (event) => {
+                const el = document.getElementById(event);
+                if (el) bootstrap.Modal.getOrCreateInstance(el).show();
+            });
+
+            Livewire.on('close-modal', (event) => {
+                const el = document.getElementById(event);
+                if (el) {
+                    const m = bootstrap.Modal.getInstance(el);
+                    if (m) m.hide();
+                }
+            });
         });
     </script>
 </div>
