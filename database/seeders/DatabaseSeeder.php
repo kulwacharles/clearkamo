@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(MaintenanceRoutesSeeder::class);
+        $this->call(FocusAreaSeeder::class);
     }
 }

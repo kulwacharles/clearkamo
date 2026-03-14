@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Frontend;
 use App\Models\About;
+use App\Models\FocusArea;
 use App\Models\Slider;
 use App\Models\Team;
 use App\Models\Testimony;
@@ -18,6 +19,7 @@ class Home extends Component
         public $slides=null;
         public $teams,$keywords;
         public $aboutVideoEmbedUrl = null;
+        public $focusAreas;
         
 
         public function mount()
@@ -29,6 +31,7 @@ class Home extends Component
         $this->testimonies=Testimony::where('status','published')->get();
         $this->blogs=Blog::where('status','published')->orderBy('id','desc')->latest()->take(5)->get();
         $this->teams=Team::where('status',"published")->get();
+        $this->focusAreas=FocusArea::where('status','published')->orderBy('sort_order')->orderBy('id')->get();
         if ($about) {
             $this->id = $about->id;
             $this->title = $about->title;
@@ -56,6 +59,7 @@ class Home extends Component
             'blogs' => $this->blogs,
             'teams' => $this->teams,
             'aboutVideoEmbedUrl' => $this->aboutVideoEmbedUrl,
+            'focusAreas' => $this->focusAreas,
         ])->layout("components.layouts.frontend", ["title"=>$this->title,"description"=>Str::limit(html_entity_decode(strip_tags($this->description)), 350, '...'),"keywords"=>$this->keywords,"image"=>$this->image]);
     }
 

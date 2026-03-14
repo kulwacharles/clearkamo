@@ -33,6 +33,7 @@ use App\Livewire\Vacancy\VacancyBackend;
 use App\Livewire\AdminChat;
 use App\Livewire\Admin\Dashboard as AdminDashboard;
 use App\Livewire\Admin\MaintenanceMode as AdminMaintenanceMode;
+use App\Livewire\FocusArea\BackendFocusArea;
 use App\Models\Blog;
 use App\Models\ChatMessage;
 
@@ -60,6 +61,7 @@ Route::middleware(['auth'])->prefix('/admin')->group(function () {
     Route::get('contacts',BackendContacts::class)->name('admin.contacts');
     Route::get('business-inquiries', AdminBusinessInquiries::class)->name('admin.business-inquiries');
     Route::get('maintenance', AdminMaintenanceMode::class)->name('admin.maintenance');
+    Route::get('focus-areas', BackendFocusArea::class)->name('admin.focus-areas');
     Route::get('chat/realtime', function () {
         $latestUserMessage = ChatMessage::where('sender_type', 'user')
             ->latest('id')

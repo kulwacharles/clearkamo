@@ -531,67 +531,38 @@
                 </p>
             </div>
 
-            @php
-                $focusAreas = [
-                    [
-                        'icon' => 'fa-tasks',
-                        'title' => 'Execution Performance & Delivery Reliability',
-                        'summary' => 'We support organizations to improve delivery consistency and reduce execution breakdowns.',
-                        'details' => 'Our work focuses on practical routines, stronger coordination, and clear decision ownership for sustained implementation quality.',
-                    ],
-                    [
-                        'icon' => 'fa-brain',
-                        'title' => 'Agency & Decision Environment Design',
-                        'summary' => 'We improve follow-through by strengthening the environment in which decisions are made and acted on.',
-                        'details' => 'This includes aligning incentives, clarifying accountability, and removing operational friction points across teams.',
-                    ],
-                    [
-                        'icon' => 'fa-lightbulb',
-                        'title' => 'Think-Do Strategy Architecture',
-                        'summary' => 'We connect planning and implementation so strategies remain actionable under real-world constraints.',
-                        'details' => 'Our support combines strategy formulation with implementation enablement to protect outcomes during rollout.',
-                    ],
-                    [
-                        'icon' => 'fa-users-cog',
-                        'title' => 'Behavioural & Choice Architecture',
-                        'summary' => 'We apply behavioral insight to improve adoption, accountability, and sustained action.',
-                        'details' => 'Interventions are tailored to local context so behavior shifts are realistic, scalable, and measurable.',
-                    ],
-                    [
-                        'icon' => 'fa-exclamation-triangle',
-                        'title' => 'High-Execution-Risk Sectors',
-                        'summary' => 'We work in sectors where complexity is high and performance pressure is increasing.',
-                        'details' => 'Our experience includes public systems and multi-partner delivery settings that require disciplined execution.',
-                    ],
-                    [
-                        'icon' => 'fa-shield-alt',
-                        'title' => 'Execution Risk Management',
-                        'summary' => 'We help teams detect delivery risks early and adapt implementation before outcomes are affected.',
-                        'details' => 'This creates stronger resilience, better resource use, and improved reliability of results over time.',
-                    ],
-                ];
-            @endphp
-
+            @if($focusAreas && $focusAreas->count())
             <div class="row g-4">
                 @foreach($focusAreas as $index => $area)
                     <div class="col-xl-4 col-md-6">
                         <article class="focus-card h-100">
+                            {{-- Photo banner (when an image is uploaded) --}}
+                            @if($area->image)
+                                <div class="focus-card-img">
+                                    <img src="{{ asset('storage/'.$area->image) }}" alt="{{ $area->title }}">
+                                    <span class="focus-card-number-overlay">{{ str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) }}</span>
+                                </div>
+                            @else
                             <div class="focus-card-top">
                                 <span class="focus-card-number">{{ str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) }}</span>
                                 <span class="focus-card-icon">
-                                    <i class="fas {{ $area['icon'] }}"></i>
+                                    <i class="fas {{ $area->icon ?? 'fa-star' }}"></i>
                                 </span>
                             </div>
-                            <h3 class="focus-card-title">{{ $area['title'] }}</h3>
-                            <p class="focus-card-summary">{{ $area['summary'] }}</p>
+                            @endif
+                            <h3 class="focus-card-title">{{ $area->title }}</h3>
+                            <p class="focus-card-summary">{{ $area->summary }}</p>
+                            @if($area->details)
                             <details class="focus-card-details">
                                 <summary>Read More</summary>
-                                <p>{{ $area['details'] }}</p>
+                                <p>{{ $area->details }}</p>
                             </details>
+                            @endif
                         </article>
                     </div>
                 @endforeach
             </div>
+            @endif
         </div>
 
         <style>
@@ -599,9 +570,11 @@
                 background: #ffffff;
                 border: 1px solid #e2e8f0;
                 border-radius: 16px;
-                padding: 22px;
+                overflow: hidden;
                 box-shadow: 0 12px 26px rgba(15, 23, 42, 0.08);
                 transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+                display: flex;
+                flex-direction: column;
             }
 
             #focus-sec .focus-card:hover {
@@ -610,11 +583,44 @@
                 box-shadow: 0 16px 30px rgba(3, 164, 252, 0.18);
             }
 
+            /* Photo banner */
+            #focus-sec .focus-card-img {
+                position: relative;
+                width: 100%;
+                height: 200px;
+                overflow: hidden;
+            }
+
+            #focus-sec .focus-card-img img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+
+            #focus-sec .focus-card-number-overlay {
+                position: absolute;
+                top: 12px;
+                left: 12px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 36px;
+                height: 36px;
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: 700;
+                color: #ffffff;
+                background: #03A4FC;
+            }
+
+            /* Icon-only header (no image) */
             #focus-sec .focus-card-top {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
                 margin-bottom: 14px;
+                padding: 22px 22px 0;
             }
 
             #focus-sec .focus-card-number {
@@ -643,15 +649,29 @@
             }
 
             #focus-sec .focus-card-title {
-                font-size: 1.5rem;
-                line-height: 1.25;
+                font-size: 1.1rem;
+                line-height: 1.3;
                 margin-bottom: 10px;
                 color: #0f172a;
+                padding: 16px 22px 0;
+                font-weight: 700;
+            }
+
+            /* When there's no image the top-padding is already set by .focus-card-top */
+            #focus-sec .focus-card:has(.focus-card-top) .focus-card-title {
+                padding-top: 0;
             }
 
             #focus-sec .focus-card-summary {
                 color: #334155;
                 margin-bottom: 10px;
+                padding: 0 22px;
+                flex-grow: 1;
+            }
+
+            #focus-sec .focus-card-details {
+                padding: 0 22px 20px;
+                margin-top: auto;
             }
 
             #focus-sec .focus-card-details summary {
@@ -671,6 +691,15 @@
             #focus-sec .focus-card-details p {
                 margin-top: 10px;
                 color: #475569;
+            }
+
+            @media (max-width: 575.98px) {
+                #focus-sec .focus-card-img {
+                    height: 180px;
+                }
+                #focus-sec .focus-card-title {
+                    font-size: 1rem;
+                }
             }
         </style>
     </section>
