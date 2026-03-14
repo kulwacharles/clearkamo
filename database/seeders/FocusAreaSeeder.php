@@ -4,11 +4,17 @@ namespace Database\Seeders;
 
 use App\Models\FocusArea;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class FocusAreaSeeder extends Seeder
 {
     public function run(): void
     {
+        if (!Schema::hasTable('focus_areas')) {
+            $this->command->warn('Skipping FocusAreaSeeder: focus_areas table does not exist. Run php artisan migrate first.');
+            return;
+        }
+
         $areas = [
             [
                 'icon'       => 'fa-tasks',
