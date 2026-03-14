@@ -469,21 +469,33 @@
                 </div>
             </div>
             @if($aboutVideoEmbedUrl)
-                <div class="about-video-wrap mt-4">
-                    <iframe
-                        src="{{ $aboutVideoEmbedUrl }}"
-                        title="ClearKamo video"
-                        loading="lazy"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerpolicy="strict-origin-when-cross-origin"
-                        allowfullscreen
-                    ></iframe>
+                <div class="about-video-cinema mt-5">
+                    <div class="about-video-cinema-inner">
+                        <div class="about-video-cinema-label">
+                            <span class="about-video-dot"></span>
+                            Watch Our Story
+                        </div>
+                        <div class="about-video-frame">
+                            <iframe
+                                src="{{ $aboutVideoEmbedUrl }}"
+                                title="ClearKamo video"
+                                loading="lazy"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin"
+                                allowfullscreen
+                            ></iframe>
+                        </div>
+                    </div>
                 </div>
             @else
-                <div class="about-video-wrap about-video-placeholder d-flex align-items-center justify-content-center mt-4">
-                    <div class="text-center">
-                        <i class="fas fa-play-circle about-video-placeholder-icon"></i>
-                        <p class="mt-3 mb-0">Add a YouTube URL in the admin <strong>About Us</strong> panel to display a video here.</p>
+                <div class="about-video-cinema mt-5">
+                    <div class="about-video-cinema-inner">
+                        <div class="about-video-frame about-video-placeholder d-flex align-items-center justify-content-center">
+                            <div class="text-center text-white">
+                                <i class="fas fa-play-circle about-video-placeholder-icon"></i>
+                                <p class="mt-3 mb-0 opacity-75">Add a YouTube URL in the admin <strong>About Us</strong> panel to display a video here.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             @endif
@@ -579,32 +591,73 @@
             #about-sec .about-description-text p { margin-bottom: 0.6rem; }
             #about-sec .about-description-text p:last-child { margin-bottom: 0; }
 
-            /* Video */
-            #about-sec .about-video-wrap {
+            /* Cinematic video block */
+            #about-sec .about-video-cinema {
+                width: 100%;
+            }
+            #about-sec .about-video-cinema-inner {
+                background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0c1d35 100%);
+                border-radius: 24px;
+                padding: 28px 28px 28px;
+                box-shadow: 0 24px 60px rgba(3, 164, 252, 0.18), 0 8px 24px rgba(15, 23, 42, 0.32);
+                border: 1px solid rgba(3, 164, 252, 0.18);
+                position: relative;
+                overflow: hidden;
+            }
+            #about-sec .about-video-cinema-inner::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(ellipse at top left, rgba(3,164,252,0.1) 0%, transparent 60%);
+                pointer-events: none;
+            }
+            #about-sec .about-video-cinema-label {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 0.78rem;
+                font-weight: 700;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                color: rgba(255,255,255,0.72);
+                margin-bottom: 16px;
+            }
+            #about-sec .about-video-dot {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: #03A4FC;
+                box-shadow: 0 0 0 3px rgba(3,164,252,0.28);
+                animation: videoPulse 2s ease-in-out infinite;
+                display: inline-block;
+            }
+            @keyframes videoPulse {
+                0%, 100% { box-shadow: 0 0 0 3px rgba(3,164,252,0.28); }
+                50%       { box-shadow: 0 0 0 6px rgba(3,164,252,0.14); }
+            }
+            #about-sec .about-video-frame {
                 width: 100%;
                 aspect-ratio: 16 / 9;
-                border-radius: 16px;
+                border-radius: 14px;
                 overflow: hidden;
-                box-shadow: 0 16px 44px rgba(15, 23, 42, 0.18);
-                background: #0f172a;
-                margin-top: 4px;
+                background: #000;
+                box-shadow: 0 8px 32px rgba(0,0,0,0.45);
             }
-            #about-sec .about-video-wrap iframe {
+            #about-sec .about-video-frame iframe {
                 width: 100%;
                 height: 100%;
                 border: 0;
                 display: block;
             }
             #about-sec .about-video-placeholder {
-                color: #64748b;
+                color: rgba(255,255,255,0.6);
                 font-size: 0.95rem;
-                background: #e2e8f0;
-                min-height: 240px;
-                border-radius: 16px;
+                background: rgba(255,255,255,0.04);
+                min-height: 260px;
             }
             #about-sec .about-video-placeholder-icon {
-                font-size: 3.5rem;
-                color: #94a3b8;
+                font-size: 4rem;
+                color: rgba(3,164,252,0.7);
             }
 
             /* ── Mission / Vision cards ──────────────────────────────────────── */
@@ -730,82 +783,244 @@
     </div>
     @endif
 
-    {{-- ── Impact Stats Strip ──────────────────────────────────── --}}
+    {{-- ── Impact Stats Cards ──────────────────────────────────── --}}
     @if($about)
-    <div id="stats-strip">
+    <section id="stats-section">
         <div class="container">
-            <div class="row gy-3 justify-content-center text-center">
-                <div class="col-6 col-md-3">
-                    <div class="stat-item">
-                        <span class="stat-num" data-target="{{ $about->ex_years ?? 25 }}">0</span><span class="stat-suffix">+</span>
-                        <p class="stat-label">Years of Experience</p>
+            <div class="stats-section-header text-center">
+                <span class="sub-title text-primary">
+                    <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
+                    Our Impact in Numbers
+                    <img class="ms-1" src="assets/img/theme-img/title_icon.svg" alt="img">
+                </span>
+                <p class="stats-section-subtext">Trusted results, delivered consistently across every engagement.</p>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="stat-card">
+                        <div class="stat-card-icon-wrap">
+                            <i class="fas fa-calendar-check stat-card-icon"></i>
+                        </div>
+                        <div class="stat-card-body">
+                            <div class="stat-card-number">
+                                <span class="stat-num" data-target="{{ $about->ex_years ?? 25 }}">0</span><span class="stat-suffix">+</span>
+                            </div>
+                            <p class="stat-card-label">Years of Experience</p>
+                        </div>
+                        <div class="stat-card-glow"></div>
                     </div>
                 </div>
-                <div class="col-6 col-md-3">
-                    <div class="stat-item">
-                        <span class="stat-num" data-target="{{ $projectsCount }}">0</span><span class="stat-suffix">+</span>
-                        <p class="stat-label">Projects Delivered</p>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="stat-card stat-card--2">
+                        <div class="stat-card-icon-wrap">
+                            <i class="fas fa-rocket stat-card-icon"></i>
+                        </div>
+                        <div class="stat-card-body">
+                            <div class="stat-card-number">
+                                <span class="stat-num" data-target="{{ $projectsCount }}">0</span><span class="stat-suffix">+</span>
+                            </div>
+                            <p class="stat-card-label">Projects Delivered</p>
+                        </div>
+                        <div class="stat-card-glow"></div>
                     </div>
                 </div>
-                <div class="col-6 col-md-3">
-                    <div class="stat-item">
-                        <span class="stat-num" data-target="{{ $partnersCount }}">0</span><span class="stat-suffix">+</span>
-                        <p class="stat-label">Partner Organizations</p>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="stat-card stat-card--3">
+                        <div class="stat-card-icon-wrap">
+                            <i class="fas fa-handshake stat-card-icon"></i>
+                        </div>
+                        <div class="stat-card-body">
+                            <div class="stat-card-number">
+                                <span class="stat-num" data-target="{{ $partnersCount }}">0</span><span class="stat-suffix">+</span>
+                            </div>
+                            <p class="stat-card-label">Partner Organizations</p>
+                        </div>
+                        <div class="stat-card-glow"></div>
                     </div>
                 </div>
-                <div class="col-6 col-md-3">
-                    <div class="stat-item">
-                        <span class="stat-num" data-target="98">0</span><span class="stat-suffix">%</span>
-                        <p class="stat-label">Client Satisfaction</p>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="stat-card stat-card--4">
+                        <div class="stat-card-icon-wrap">
+                            <i class="fas fa-star stat-card-icon"></i>
+                        </div>
+                        <div class="stat-card-body">
+                            <div class="stat-card-number">
+                                <span class="stat-num" data-target="98">0</span><span class="stat-suffix">%</span>
+                            </div>
+                            <p class="stat-card-label">Client Satisfaction</p>
+                        </div>
+                        <div class="stat-card-glow"></div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
     <style>
-        #stats-strip {
+        /* ── Stats Cards Section ─────────────────────────────────────────── */
+        #stats-section {
+            background: #f0f7ff;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        #stats-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 10% 50%, rgba(3,164,252,0.07) 0%, transparent 55%),
+                radial-gradient(ellipse at 90% 30%, rgba(2,94,168,0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        #stats-section .stats-section-header {
+            margin-bottom: 48px;
+        }
+        #stats-section .stats-section-subtext {
+            color: #64748b;
+            font-size: 1rem;
+            margin-top: 10px;
+            margin-bottom: 0;
+        }
+
+        /* Card base */
+        #stats-section .stat-card {
+            background: #ffffff;
+            border-radius: 22px;
+            padding: 36px 28px 32px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08), 0 1px 4px rgba(15,23,42,0.04);
+            border: 1px solid rgba(3,164,252,0.1);
+            transition: transform 0.3s cubic-bezier(.34,1.4,.64,1), box-shadow 0.3s ease, border-color 0.3s ease;
+            cursor: default;
+        }
+        #stats-section .stat-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 48px rgba(3,164,252,0.18), 0 6px 16px rgba(15,23,42,0.1);
+            border-color: rgba(3,164,252,0.35);
+        }
+        #stats-section .stat-card:hover .stat-card-glow {
+            opacity: 1;
+        }
+
+        /* Radial glow effect behind icon */
+        #stats-section .stat-card-glow {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(3,164,252,0.12) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        /* Icon circle */
+        #stats-section .stat-card-icon-wrap {
+            width: 68px;
+            height: 68px;
+            border-radius: 18px;
             background: linear-gradient(135deg, #03A4FC 0%, #025ea8 100%);
-            padding: 52px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 22px;
+            box-shadow: 0 8px 24px rgba(3,164,252,0.32);
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s cubic-bezier(.34,1.4,.64,1);
         }
-        #stats-strip .stat-item {
-            color: #fff;
-            padding: 0 12px;
+        #stats-section .stat-card:hover .stat-card-icon-wrap {
+            transform: scale(1.12) rotate(-4deg);
         }
-        #stats-strip .stat-num {
-            font-size: clamp(2.4rem, 5vw, 3.4rem);
+        /* Per-card accent colours */
+        #stats-section .stat-card--2 .stat-card-icon-wrap {
+            background: linear-gradient(135deg, #f97316 0%, #c2410c 100%);
+            box-shadow: 0 8px 24px rgba(249,115,22,0.32);
+        }
+        #stats-section .stat-card--3 .stat-card-icon-wrap {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            box-shadow: 0 8px 24px rgba(16,185,129,0.32);
+        }
+        #stats-section .stat-card--4 .stat-card-icon-wrap {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+            box-shadow: 0 8px 24px rgba(139,92,246,0.32);
+        }
+        #stats-section .stat-card-icon {
+            font-size: 1.55rem;
+            color: #ffffff;
+        }
+
+        /* Number */
+        #stats-section .stat-card-number {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 2px;
+            margin-bottom: 8px;
+        }
+        #stats-section .stat-num {
+            font-size: clamp(2.4rem, 5vw, 3rem);
             font-weight: 800;
             line-height: 1;
-            display: inline;
+            color: #0f172a;
         }
-        #stats-strip .stat-suffix {
-            font-size: clamp(1.6rem, 3vw, 2.2rem);
+        /* Per-card accent colours on number */
+        #stats-section .stat-card--2 .stat-num { color: #f97316; }
+        #stats-section .stat-card--3 .stat-num { color: #10b981; }
+        #stats-section .stat-card--4 .stat-num { color: #8b5cf6; }
+        #stats-section .stat-card .stat-num { color: #03A4FC; }
+
+        #stats-section .stat-suffix {
+            font-size: clamp(1.5rem, 3vw, 1.9rem);
             font-weight: 800;
+            color: inherit;
             line-height: 1;
-            margin-left: 2px;
         }
-        #stats-strip .stat-label {
-            margin: 8px 0 0;
-            font-size: .88rem;
-            font-weight: 500;
-            color: rgba(255,255,255,.82);
-            letter-spacing: .04em;
+        #stats-section .stat-card-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #64748b;
             text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin: 0;
         }
-        /* Vertical dividers on desktop */
-        #stats-strip .col-md-3:not(:last-child) .stat-item {
-            border-right: 1px solid rgba(255,255,255,.25);
+
+        /* Bottom accent line */
+        #stats-section .stat-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20%;
+            width: 60%;
+            height: 3px;
+            border-radius: 2px 2px 0 0;
+            background: linear-gradient(90deg, #03A4FC, #025ea8);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
+        #stats-section .stat-card--2::after { background: linear-gradient(90deg, #f97316, #c2410c); }
+        #stats-section .stat-card--3::after { background: linear-gradient(90deg, #10b981, #059669); }
+        #stats-section .stat-card--4::after { background: linear-gradient(90deg, #8b5cf6, #6d28d9); }
+        #stats-section .stat-card:hover::after { opacity: 1; }
+
+        /* Responsive */
         @media (max-width: 767.98px) {
-            #stats-strip .col-md-3:not(:last-child) .stat-item {
-                border-right: none;
-            }
-            #stats-strip { padding: 36px 0; }
+            #stats-section { padding: 52px 0; }
+            #stats-section .stats-section-header { margin-bottom: 36px; }
+            #stats-section .stat-card { padding: 28px 20px 24px; }
+            #stats-section .stat-card-icon-wrap { width: 56px; height: 56px; border-radius: 14px; }
+            #stats-section .stat-card-icon { font-size: 1.3rem; }
         }
     </style>
     <script>
     (function(){
         function animateCounters() {
-            document.querySelectorAll('#stats-strip .stat-num').forEach(function(el) {
+            document.querySelectorAll('#stats-section .stat-num').forEach(function(el) {
                 var target = parseInt(el.dataset.target, 10);
                 var duration = 1800;
                 var start = null;
@@ -821,7 +1036,7 @@
             });
         }
 
-        var strip = document.getElementById('stats-strip');
+        var strip = document.getElementById('stats-section');
         if (strip && 'IntersectionObserver' in window) {
             var ran = false;
             new IntersectionObserver(function(entries, obs) {
