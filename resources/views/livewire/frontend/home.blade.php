@@ -32,7 +32,7 @@
                                         <h1 class="hero-title">{{ $slide->title }}</h1>
                                     @endif
                                     @if($slide->description)
-                                        <p class="hero-desc">{{ $slide->description }}</p>
+                                        <p class="hero-desc">{!! $slide->description !!}</p>
                                     @endif
                                     <div class="hero-cta-row">
                                         <a wire:navigate href="{{ route('services') }}" class="hero-btn-primary">
