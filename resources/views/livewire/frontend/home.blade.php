@@ -507,7 +507,7 @@
             </div>
 
             {{-- ── Row 3: Core Values ──────────────────────────────────────────── --}}
-            <div class="about-cv-section">
+            {{-- <div class="about-cv-section">
                 <div class="text-center about-cv-header">
                     <span class="sub-title text-primary">
                         <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
@@ -566,7 +566,7 @@
                         </div>
                     @endif
                 </div>
-            </div>
+            </div> --}}
 
         </div>
 
@@ -574,8 +574,8 @@
             /* ── About Section ───────────────────────────────────────────────── */
             #about-sec {
                 background: #f8fafc;
-                padding-top: 80px;
-                padding-bottom: 80px;
+                padding-top: 40px;
+                padding-bottom: 40px;
             }
 
             /* Image stack */
@@ -583,7 +583,7 @@
                 position: relative;
                 max-width: 520px;
                 margin: 0 auto;
-                padding-bottom: 30px;
+                padding-bottom: 10px;
             }
             #about-sec .about-media-main img {
                 width: 100%;
@@ -653,7 +653,7 @@
             #about-sec .about-mv-card {
                 background: #fff;
                 border-radius: 18px;
-                padding: 38px 34px;
+                padding: 24px 18px;
                 height: 100%;
                 box-shadow: 0 4px 28px rgba(15, 23, 42, 0.07);
                 border-top: 4px solid #03A4FC;
@@ -757,12 +757,12 @@
                 #about-sec .about-media-secondary { right: 0; bottom: 0; }
             }
             @media (max-width: 575.98px) {
-                #about-sec { padding-top: 52px; padding-bottom: 52px; }
+                #about-sec { padding-top: 12px; padding-bottom: 12px; }
                 #about-sec .about-media-main img { height: 220px; }
-                #about-sec .about-mv-row { margin-top: 40px; }
+                #about-sec .about-mv-row { margin-top: 16px; }
                 #about-sec .about-cv-section { margin-top: 40px; }
                 #about-sec .about-mv-card,
-                #about-sec .about-cv-card { padding: 26px 22px; }
+                #about-sec .about-cv-card { padding: 12px 8px; }
             }
         </style>
     </div>
