@@ -126,16 +126,13 @@
     </div>
 
     <script>
-        window.addEventListener('open-modal', event => {
-            const el = document.getElementById(event.detail);
-            if (el) new bootstrap.Modal(el).show();
-        });
-        window.addEventListener('close-modal', event => {
-            const el = document.getElementById(event.detail);
-            if (el) {
-                const m = bootstrap.Modal.getInstance(el);
-                if (m) m.hide();
-            }
+        document.addEventListener('livewire:initialized', () => {
+            Livewire.on('open-modal', (event) => {
+                $('#' + event).modal('show');
+            });
+            Livewire.on('close-modal', (event) => {
+                $('#' + event).modal('hide');
+            });
         });
     </script>
 </div>

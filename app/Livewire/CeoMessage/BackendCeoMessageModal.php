@@ -11,7 +11,6 @@ class BackendCeoMessageModal extends Component
 {
     public $itemId, $team_id, $message, $scroll_trigger_percent = 30;
     public $is_active = false;
-    public $teams = [];
 
     protected $rules = [
         'team_id'               => 'required|exists:teams,id',
@@ -34,7 +33,7 @@ class BackendCeoMessageModal extends Component
 
     public function mount()
     {
-        $this->teams = Team::orderBy('name')->get();
+        // no-op: teams are passed fresh from render()
     }
 
     public function store()
@@ -130,6 +129,8 @@ class BackendCeoMessageModal extends Component
 
     public function render()
     {
-        return view('livewire.ceo-message.backend-ceo-message-modal');
+        return view('livewire.ceo-message.backend-ceo-message-modal', [
+            'teams' => Team::orderBy('name')->get(),
+        ]);
     }
 }
