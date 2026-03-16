@@ -2054,6 +2054,167 @@
     </section>
     @endif
 
+    {{-- ── News & Updates ───────────────────────────────────────── --}}
+    @if($blogs && $blogs->count() > 0)
+    <section class="space-top space-bottom" id="news-sec">
+        <div class="container">
+            <div class="title-area text-center">
+                <span class="sub-title">
+                    <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">LATEST NEWS
+                    <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
+                </span>
+                <h2 class="sec-title">News &amp; Updates</h2>
+                <p class="mx-auto" style="max-width: 640px; color: #64748b;">
+                    Stay informed with the latest insights, announcements and stories from CLEARKAMO.
+                </p>
+            </div>
+
+            <div class="row g-4">
+                @foreach($blogs->take(3) as $blog)
+                <div class="col-lg-4 col-md-6">
+                    <article class="news-card h-100">
+                        <a wire:navigate href="{{ route('news-and-updates.details', ['slug' => $blog->slug]) }}" class="news-card-thumb-link">
+                            <div class="news-card-thumb">
+                                <img src="{{ asset('storage/'.$blog->image) }}" alt="{{ $blog->title }}">
+                                <span class="news-card-category">{{ $blog->category }}</span>
+                            </div>
+                        </a>
+                        <div class="news-card-body">
+                            <div class="news-card-meta">
+                                <span class="news-card-date">
+                                    <i class="far fa-calendar-alt me-1"></i>
+                                    {{ $blog->created_at->format('d M Y') }}
+                                </span>
+                            </div>
+                            <h3 class="news-card-title">
+                                <a wire:navigate href="{{ route('news-and-updates.details', ['slug' => $blog->slug]) }}">
+                                    {{ $blog->title }}
+                                </a>
+                            </h3>
+                            <p class="news-card-excerpt">
+                                {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($blog->description)), 120, '…') }}
+                            </p>
+                            <a wire:navigate href="{{ route('news-and-updates.details', ['slug' => $blog->slug]) }}" class="news-card-link">
+                                Read More <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+                @endforeach
+            </div>
+
+            <div class="text-center mt-5">
+                <a wire:navigate href="{{ route('news-and-update') }}" class="th-btn style3">
+                    View All News &amp; Updates
+                    <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+
+        <style>
+            #news-sec .news-card {
+                background: #ffffff;
+                border: 1px solid #e2e8f0;
+                border-radius: 16px;
+                overflow: hidden;
+                box-shadow: 0 8px 22px rgba(15, 23, 42, 0.07);
+                transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+                display: flex;
+                flex-direction: column;
+            }
+            #news-sec .news-card:hover {
+                transform: translateY(-5px);
+                border-color: rgba(3, 164, 252, 0.45);
+                box-shadow: 0 18px 36px rgba(3, 164, 252, 0.15);
+            }
+            /* Thumbnail */
+            #news-sec .news-card-thumb-link { display: block; }
+            #news-sec .news-card-thumb {
+                position: relative;
+                height: 220px;
+                overflow: hidden;
+            }
+            #news-sec .news-card-thumb img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+                transition: transform .4s ease;
+            }
+            #news-sec .news-card:hover .news-card-thumb img {
+                transform: scale(1.06);
+            }
+            /* Category badge */
+            #news-sec .news-card-category {
+                position: absolute;
+                top: 14px;
+                left: 14px;
+                background: #03A4FC;
+                color: #fff;
+                font-size: 11px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: .06em;
+                padding: 4px 11px;
+                border-radius: 20px;
+            }
+            /* Body */
+            #news-sec .news-card-body {
+                padding: 22px 24px 26px;
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+            }
+            #news-sec .news-card-meta {
+                margin-bottom: 10px;
+            }
+            #news-sec .news-card-date {
+                font-size: 12.5px;
+                color: #94a3b8;
+                font-weight: 500;
+            }
+            #news-sec .news-card-title {
+                font-size: 1.05rem;
+                font-weight: 700;
+                line-height: 1.4;
+                color: #0f172a;
+                margin-bottom: 10px;
+            }
+            #news-sec .news-card-title a {
+                color: inherit;
+                text-decoration: none;
+                transition: color .2s ease;
+            }
+            #news-sec .news-card-title a:hover { color: #03A4FC; }
+            #news-sec .news-card-excerpt {
+                font-size: .9rem;
+                color: #475569;
+                line-height: 1.65;
+                flex: 1;
+                margin-bottom: 18px;
+            }
+            #news-sec .news-card-link {
+                display: inline-flex;
+                align-items: center;
+                font-size: .875rem;
+                font-weight: 700;
+                color: #03A4FC;
+                text-decoration: none;
+                gap: 4px;
+                transition: gap .2s ease, color .2s ease;
+            }
+            #news-sec .news-card-link:hover {
+                gap: 8px;
+                color: #0284c7;
+            }
+            @media (max-width: 575.98px) {
+                #news-sec .news-card-thumb { height: 200px; }
+                #news-sec .news-card-title { font-size: 1rem; }
+            }
+        </style>
+    </section>
+    @endif
+
     <section class="overflow-hidden space-top" id="testimonials">
     <div class="container">
         <div class="title-area text-center">
