@@ -1,446 +1,308 @@
 <div>
-<div class="sidemenu-wrapper sidemenu-info d-none d-lg-block">
-    <div class="sidemenu-content">
-        <button class="closeButton sideMenuCls"><i class="far fa-times"></i>
+
+{{-- ══════════════════════════════════════════════════════════════════════════
+     TOP BAR — contact info + social icons (desktop only)
+════════════════════════════════════════════════════════════════════════════ --}}
+<div class="ck-topbar d-none d-lg-flex align-items-center justify-content-between">
+    <div class="ck-topbar-left">
+        <a href="tel:{{ $contact->phone }}"><i class="fa-regular fa-phone me-1"></i>{{ $contact->phone }}</a>
+        <a href="mailto:{{ $contact->email }}" class="ms-3"><i class="fa-regular fa-envelope-open me-1"></i>{{ $contact->email }}</a>
+    </div>
+    <div class="ck-topbar-right">
+        <a href="{{ $contact->facebook }}" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="{{ $contact->twitter }}" target="_blank" rel="noopener" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="{{ $contact->instagram }}" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="{{ $contact->youtube }}" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="{{ $contact->linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+</div>
+
+{{-- ══════════════════════════════════════════════════════════════════════════
+     MAIN NAVBAR
+     Logo is always in navbar-brand — it is NEVER hidden by Bootstrap.
+════════════════════════════════════════════════════════════════════════════ --}}
+<nav class="ck-navbar navbar navbar-expand-lg" id="ck-navbar" aria-label="Main navigation">
+    <div class="container">
+
+        {{-- ── Logo (always visible) ─────────────────────────────────────── --}}
+        <a class="navbar-brand ck-nav-brand" wire:navigate href="/">
+            @if($logo)
+                <img src="{{ url('/storage/'.$logo) }}" alt="ClearKamo Logo" class="ck-logo-img">
+            @else
+                <img src="{{ asset('assets/img/clearkamo.png') }}" alt="ClearKamo Logo" class="ck-logo-img">
+            @endif
+        </a>
+
+        {{-- ── Mobile hamburger ──────────────────────────────────────────── --}}
+        <button class="navbar-toggler ck-toggler" type="button"
+                data-bs-toggle="collapse" data-bs-target="#ckNavCollapse"
+                aria-controls="ckNavCollapse" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <i class="far fa-bars"></i>
         </button>
-        <div class="widget">
-            <div class="th-widget-about">
-                <div class="about-logo">
-                    <a wire:navigate href="/">
-                        <img src="{{ url('/storage/'.$logo) }}" alt="ClearKamo Logo">
-                    </a>
-                </div>
-                <p class="about-text">Consulting services can provide valuable insights, strategic guidance, specialized
 
-                </p>
-                <div class="info-box">
-                    <div class="info-box_icon">
-                        <i class="far fa-phone"></i>
-                    </div>
-                    <p class="info-box_text">
-                        <a href="tel:{{ $contact->phone }}" class="info-box_link">{{ $contact->phone }}</a>
-                    </p>
-                </div>
-                <div class="info-box">
-                    <div class="info-box_icon">
-                        <i class="far fa-envelope-open"></i>
-                    </div>
-                    <p class="info-box_text">
-                        <a href="mailto:{{ $contact->email }}" class="info-box_link">{{ $contact->email }}</a>
-                    </p>
-                </div>
-                <div class="info-box">
-                    <div class="info-box_icon">
-                        <i class="far fa-location-dot"></i>
-                    </div>
-                    <p class="info-box_text">{{ $contact->physical_address }}</p>
-                </div>
-            </div>
-        </div>
-        <div class="widget">
-            <h3 class="widget_title">Recent News & Updates</h3>
-            <div class="recent-post-wrap">
-                 @if($blogs)
-                    @foreach ($blogs as $blog)
-                        <div class="recent-post">
-                            <div class="media-img">
-                                <a wire:navigate href="/news-and-updates/details/{{ $blog->id }}">
-                                    <img src="{{ asset('storage/'.$blog->image) }}" alt="Blog Image">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <div class="recent-post-meta">
-                                    <a  wire:navigate href="/news-and-updates/details/{{ $blog->id }}"><i class="fa-light fa-calendar-days"></i>{{$blog->updated_at->format('d F, Y')}}</a>
-                                </div>
-                                <h4 class="post-title"><a class="text-inherit"  wire:navigate href="/news-and-updates/details/{{ $blog->id }}">{{$blog->title}}</a>
-                                </h4>
-                            </div>
-                        </div>
-                    @endforeach
-                @endif
-    </div>
-</div>
-<div class="widget newsletter-widget">
-    <h3 class="widget_title">Subscribe Now</h3>
-    <form class="newsletter-form">
-        <div class="form-group">
-            <input class="form-control" type="email" placeholder="Email Address" required=""> 
-            <button type="submit" class="th-btn">
-                <i class="far fa-paper-plane"></i> Subscribe
-            </button>
-        </div>
-    </form>
-    <div class="th-social style2">
-        <a href="https://www.facebook.com/">
-            <i class="fab fa-facebook-f"></i>
-        </a> 
-        <a href="https://www.twitter.com/">
-            <i class="fab fa-twitter"></i>
-        </a>
-         <a href="https://www.linkedin.com/"><i class="fab fa-linkedin-in"></i>
-        </a> 
-        <a href="https://www.behance.com/">
-            <i class="fab fa-behance"></i>
-        </a>
-         <a href="https://www.vimeo.com/"><i class="fab fa-vimeo-v"></i>
-        </a>
-    </div>
-</div>
-</div>
-</div>
-<div class="popup-search-box d-none d-lg-block">
-    <button class="searchClose"><i class="fal fa-times"></i>
-    </button>
-    <form action="{{ route('search.results') }}" method="GET"><input type="text" name="q" placeholder="What are you looking for?"> 
-        <button type="submit"><i class="fal fa-search"></i></button>
-    </form>
-</div>
-<div class="th-menu-wrapper">
-    <div class="th-menu-area text-center">
-        <button class="th-menu-toggle"><i class="fal fa-times"></i></button>
-        <div class="mobile-logo">
-            <a wire:navigate href="/">
-                @if($logo)
-                <img src="{{ url('/storage/'.$logo) }}" alt="ClearKamo Logo">
-                
-                @else
-                <!-- <img src="assets/img/ProjectClear-Logo.png" alt="assets/img/ProjectClear-Logo"> -->
-                <img src="assets/img/clearkamo.png" alt="ClearKamo Logo">
-                @endif
-            </a>
-        </div>
-        <div class="th-mobile-menu">
-            <ul>
-                {{-- <li >
-                    <a wire:navigate  href="/">Home</a>
-                </li> --}}
-                <li>
-                    <a wire:navigate  href="/about-us">About Us</a>
-                </li>
-                <li >
-                    <a wire:navigate  href="/services">Services</a>
-                </li>
-                <li >
-                    <a wire:navigate  href="/projects">Projects</a>
-                </li>
-                <li >
-                    <a wire:navigate  href="/news-and-updates">News & Updates</a>
-                </li>
-                 <li>
-                    <a wire:navigate  href="/publications">Publications</a>
+        {{-- ── Collapsible nav ───────────────────────────────────────────── --}}
+        <div class="collapse navbar-collapse" id="ckNavCollapse">
 
+            {{-- Nav links centred on desktop --}}
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" wire:navigate href="/">Home</a>
                 </li>
-                <li>
-                    <a wire:navigate  href="/contact-us">Contact Us</a>
+                <li class="nav-item">
+                    <a class="nav-link" wire:navigate href="/about-us">About Us</a>
                 </li>
-                {{-- <li >
-                    <a wire:navigate href="/vacancies">Vacancies</a>
-                </li> --}}
+                <li class="nav-item">
+                    <a class="nav-link" wire:navigate href="/services">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" wire:navigate href="/projects">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" wire:navigate href="/news-and-updates">News &amp; Updates</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" wire:navigate href="/publications">Publications</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" wire:navigate href="/vacancies">Vacancies</a>
+                </li>
             </ul>
-        </div>
-    </div>
-</div>
- <header class="th-header header-layout7">
-    <div class="header-top">
-        <div class="container">
-            <div class="row justify-content-center justify-content-lg-between align-items-center gy-2">
-                <div class="col-auto d-none d-lg-block">
-                    <div class="header-links">
-                        <ul class="header-left-wrap">
-                            <li><i class="fa-regular fa-phone"></i><a href="tel:{{ $contact->phone }}">{{ $contact->phone }}</a></li>
-                            <li><i class="fa-regular fa-envelope-open"></i><a href="mailto:{{ $contact->email }}">{{ $contact->email }}</a></li>
-                        </ul>
+
+            {{-- Desktop-only: search trigger + contact CTA --}}
+            <div class="d-flex align-items-center gap-2 ck-nav-actions">
+                <div class="ck-search-wrap position-relative">
+                    <button type="button" class="ck-search-trigger" id="ck-search-trigger" aria-label="Open search">
+                        <i class="far fa-search"></i>
+                    </button>
+                    <div class="ck-search-popover" id="ck-search-popover">
+                        @livewire('frontend.search-box')
                     </div>
                 </div>
-                <div class="col-auto">
-                    <div class="header-links">
-                        <ul class="header-right-wrap">
-         
-                                <li>
-                                    <div class="social-links">
-                                        <a href="{{ $contact->facebook }}"><i class="fab fa-facebook-f"></i></a> 
-                                        <a href="{{ $contact->twitter }}"><i class="fab fa-twitter"></i></a> 
-                                        <a href="{{ $contact->instagram }}"><i class="fab fa-instagram"></i></a>
-                                        <a href="{{ $contact->youtube }}"><i class="fab fa-youtube"></i></a>
-                                        <a href="{{ $contact->linkedin }}"><i class="fab fa-linkedin"></i></a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <a wire:navigate href="/contact-us" class="ck-contact-btn d-none d-xl-inline-flex align-items-center gap-2">
+                    Contact Us <i class="fa-solid fa-arrow-up-right"></i>
+                </a>
             </div>
-        </div>
-        <div class="sticky-wrapper">
-            <div class="menu-area">
-                <div class="container">
-                    <div class="row align-items-center justify-content-between">
-                        <div class="col-auto">
-                            <div class="header-logo">
-                                <a wire:navigate href="/">
-                                @if($logo)
-                                <img src="{{ url('/storage/'.$logo) }}" alt="ClearKamo Logo">
-                                
-                                @else
-                                <!-- <img src="assets/img/ProjectClear-Logo.png" alt="assets/img/ProjectClear-Logo"> -->
-                                <img src="assets/img/clearkamo.png" alt="ClearKamo Logo">
-                                @endif
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-auto me-xl-auto">
-                            <nav class="main-menu d-none d-lg-inline-block">
-                                <ul>
-                                    <li >
-                                        <a wire:navigate  href="/">Home</a>
-                                      
-                                    </li>
-                                    <li>
-                                        <a wire:navigate href="/about-us">About Us</a>
-                                    </li>
-                                    <li >
-                                        <a wire:navigate href="/services">Services</a>
-                                        
-                                    </li>
-                                    <li >
-                                        <a wire:navigate href="/projects">Projects</a>
-                                        
-                                    </li>
-                                    <li >
-                                        <a wire:navigate href="/news-and-updates">News & Updates</a>
-                                        
-                                    </li>
-                                    <li >
-                                        <a wire:navigate href="/publications">Publications</a>
-                                    </li>
-                                    <li >
-                                        <a wire:navigate href="/vacancies">Vacancies</a>
-                                    </li>
-                                    <li>
-                                        <a wire:navigate  href="/contact-us">Contact Us</a>
-                                    </li>  
-                                    {{-- <li>
-                                        <a wire:navigate  href="/contact-us">Contact Us</a>
-                                    </li> --}}
-                                </ul>
-                            </nav>
-                            <div class="header-button d-flex d-lg-none">
-                                 <button type="button" class="th-menu-toggle d-block d-lg-none"><i class="far fa-bars"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="col-auto d-none d-xl-block">
-                            <div class="header-search-wrap">
-                                <button type="button" class="simple-icon header-search-trigger" id="header-search-trigger" aria-label="Open search">
-                                    <i class="far fa-search"></i>
-                                </button>
-                                <div class="header-search-popover" id="header-search-popover">
-                                    @livewire('frontend.search-box')
-                                </div>
-                            </div>
-                        </div>
-                        {{-- <div class="col-auto d-none d-xl-block">
-                            <div class="header-button">
-                                <button type="button" class="simple-icon searchBoxToggler"><i class="far fa-search"></i>
-                                </button> 
-                                     <button type="button" class="simple-icon sideMenuInfo"><i class="fa-solid fa-bars"></i>
-                                    </button>
-                                    <div class="d-xxl-block d-none">
-                                        <a wire:navigate href="/contact-us" class="th-btn">
-                                            Contact us <span class="icon"><i class="fa-solid fa-arrow-up-right ms-3"></i></span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div> --}}
-                        </div>
-                    </div>
-                </div>
-         </div>
-</header>
+
+            {{-- Mobile-only: search link + contact link ─────────────────── --}}
+            <div class="d-flex d-lg-none flex-column gap-2 mt-3 pb-2 ck-mobile-extras">
+                <form action="{{ route('search.results') }}" method="GET" class="d-flex">
+                    <input type="text" name="q" class="form-control form-control-sm" placeholder="Search…">
+                    <button type="submit" class="btn btn-sm ck-mobile-search-btn ms-2">
+                        <i class="far fa-search"></i>
+                    </button>
+                </form>
+                <a wire:navigate href="/contact-us" class="ck-contact-btn w-100 text-center">
+                    Contact Us <i class="fa-solid fa-arrow-up-right ms-1"></i>
+                </a>
+            </div>
+
+        </div>{{-- /#ckNavCollapse --}}
+    </div>{{-- /.container --}}
+</nav>
+
+{{-- ══════════════════════════════════════════════════════════════════════════
+     STYLES
+════════════════════════════════════════════════════════════════════════════ --}}
 <style>
-    .header-search-wrap {
-        position: relative;
-        display: flex;
-        justify-content: flex-end;
-        margin-left: 14px;
+    /* ── Top bar ─────────────────────────────────────────────────────────── */
+    .ck-topbar {
+        background: #0f172a;
+        color: #cbd5e1;
+        font-size: .82rem;
+        padding: 7px 3%;
+        gap: 10px;
     }
+    .ck-topbar a {
+        color: #cbd5e1;
+        text-decoration: none;
+        transition: color .2s;
+    }
+    .ck-topbar a:hover { color: #03A4FC; }
+    .ck-topbar-right { display: flex; gap: 14px; }
+    .ck-topbar-right a { font-size: .9rem; }
 
-    .header-search-trigger {
-        width: 44px;
-        height: 44px;
-        border-radius: 12px;
-        border: 1px solid #dbe4ff;
+    /* ── Main navbar ─────────────────────────────────────────────────────── */
+    .ck-navbar {
         background: #ffffff;
+        border-bottom: 1px solid #e9ecef;
+        padding: 10px 0;
+        position: sticky;
+        top: 0;
+        z-index: 1050;
+        transition: box-shadow .25s ease;
+    }
+    .ck-navbar.scrolled {
+        box-shadow: 0 4px 20px rgba(15, 23, 42, .10);
+    }
+
+    /* ── Logo ──────────────────────────────────────────────────────────────
+       navbar-brand is NEVER hidden by Bootstrap — this is the fix.
+    ───────────────────────────────────────────────────────────────────────── */
+    .ck-nav-brand { padding: 0; margin-right: 24px; flex-shrink: 0; }
+    .ck-logo-img  { width: 140px; height: auto; display: block; }
+    @media (max-width: 575.98px) { .ck-logo-img { width: 115px; } }
+
+    /* ── Nav links ───────────────────────────────────────────────────────── */
+    .ck-navbar .nav-link {
+        color: #0f172a;
+        font-size: .88rem;
+        font-weight: 600;
+        padding: 6px 10px;
+        border-radius: 6px;
+        transition: color .2s, background .2s;
+        white-space: nowrap;
+    }
+    .ck-navbar .nav-link:hover,
+    .ck-navbar .nav-link.active {
         color: #03A4FC;
-        transition: all .2s ease;
+        background: #eef7ff;
     }
 
-    .header-search-trigger:hover {
-        background: #eef4ff;
-        border-color: #c7d7ff;
+    /* ── Hamburger ───────────────────────────────────────────────────────── */
+    .ck-toggler {
+        border: 1.5px solid #03A4FC;
+        border-radius: 8px;
+        padding: 6px 10px;
+        color: #03A4FC;
+        background: transparent;
+        transition: background .2s;
     }
+    .ck-toggler:hover { background: #eef7ff; }
+    .ck-toggler:focus { box-shadow: 0 0 0 3px rgba(3,164,252,.25); outline: none; }
+    .ck-toggler i { font-size: 1.15rem; pointer-events: none; }
 
-    .header-search-popover {
+    /* ── Desktop search ──────────────────────────────────────────────────── */
+    .ck-search-trigger {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        border: 1px solid #dbe4ff;
+        background: #f8faff;
+        color: #03A4FC;
+        transition: background .2s, border-color .2s;
+        cursor: pointer;
+    }
+    .ck-search-trigger:hover { background: #eef4ff; border-color: #b8d0ff; }
+    .ck-search-popover {
         position: absolute;
         top: calc(100% + 10px);
         right: 0;
-        width: 390px;
-        max-width: min(390px, 72vw);
-        background: #ffffff;
+        width: 380px;
+        max-width: min(380px, 90vw);
+        background: #fff;
         border: 1px solid #dbe4ff;
         border-radius: 14px;
-        box-shadow: 0 18px 38px rgba(15, 23, 42, 0.16);
+        box-shadow: 0 18px 38px rgba(15,23,42,.14);
         padding: 10px;
         display: none;
         z-index: 1200;
     }
+    .ck-search-wrap.open .ck-search-popover { display: block; }
 
-    .header-search-wrap.open .header-search-popover {
-        display: block;
-    }
-
-    @media (max-width: 991.98px) {
-        .header-top {
-            display: none !important;
-        }
-        .header-logo {
-            display: flex !important;
-            justify-content: flex-start !important;
-            align-items: center;
-            width: 100%;
-            padding: 12px 0 12px 12px;
-            background: #fff;
-            z-index: 1001;
-            position: relative;
-        }
-        .header-logo img {
-            max-width: 130px;
-            height: auto;
-            display: block;
-        }
-    }
-
-    @media (max-width: 575.98px) {
-        .header-logo img {
-            max-width: 110px;
-        }
-    }
-
-    @media (max-width: 1199.98px) {
-        .header-logo {
-            display: flex !important;
-            justify-content: flex-start !important;
-            align-items: center;
-            width: 100%;
-            padding: 12px 0 12px 12px;
-            background: #fff;
-            z-index: 1001;
-            position: relative;
-        }
-        .header-logo img {
-            max-width: 140px;
-            height: auto;
-            display: block;
-        }
-    }
-
-    @media (min-width: 1200px) {
-        .header-logo {
-            display: flex !important;
-            justify-content: flex-start !important;
-            align-items: center;
-            width: 100%;
-            padding: 12px 0 12px 12px;
-            background: #fff;
-            z-index: 1001;
-            position: relative;
-        }
-        .header-logo img {
-            max-width: 160px;
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-    }
-
-    .header-logo {
-        display: flex !important;
+    /* ── Contact CTA button ──────────────────────────────────────────────── */
+    .ck-contact-btn {
+        display: inline-flex;
         align-items: center;
-        background: #fff;
-        z-index: 1001;
-        position: relative;
-        width: 200px;
-        min-width: 120px;
-        padding: 12px 0 12px 12px;
+        gap: 6px;
+        background: #03A4FC;
+        color: #fff;
+        font-size: .84rem;
+        font-weight: 700;
+        padding: 8px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background .2s, transform .15s;
+        white-space: nowrap;
     }
+    .ck-contact-btn:hover { background: #028de0; color: #fff; transform: translateY(-1px); }
 
-    .header-logo img {
-        max-width: 160px;
-        width: 100%;
-        height: auto;
-        display: block;
+    /* ── Mobile extras ───────────────────────────────────────────────────── */
+    .ck-mobile-extras .form-control { border-radius: 8px; font-size: .85rem; }
+    .ck-mobile-search-btn {
+        background: #03A4FC;
+        color: #fff;
+        border-radius: 8px;
+        padding: 6px 12px;
     }
+    .ck-mobile-search-btn:hover { background: #028de0; color: #fff; }
 
+    /* ── Mobile collapse panel ───────────────────────────────────────────── */
     @media (max-width: 991.98px) {
-        .header-logo {
-            width: 140px;
-            min-width: 100px;
-            padding: 10px 0 10px 10px;
+        #ckNavCollapse {
+            background: #fff;
+            border-top: 1px solid #e9ecef;
+            padding: 12px 4px;
         }
-        .header-logo img {
-            max-width: 130px;
+        .ck-navbar .nav-link {
+            padding: 9px 12px;
+            font-size: .92rem;
+            border-radius: 8px;
         }
-    }
-
-    @media (max-width: 575.98px) {
-        .header-logo {
-            width: 110px;
-            min-width: 80px;
-            padding: 8px 0 8px 8px;
-        }
-        .header-logo img {
-            max-width: 110px;
-        }
+        .ck-nav-actions { display: none !important; }
     }
 </style>
+
+{{-- ══════════════════════════════════════════════════════════════════════════
+     SCRIPTS
+════════════════════════════════════════════════════════════════════════════ --}}
 <script>
-    (function () {
-        const bindHeaderSearch = () => {
-            const wrap = document.querySelector('.header-search-wrap');
-            const trigger = document.getElementById('header-search-trigger');
+(function () {
+    /* ── Scroll shadow on navbar ──────────────────────────────────────── */
+    const applyScrollClass = () => {
+        const nav = document.getElementById('ck-navbar');
+        if (!nav) return;
+        if (window.scrollY > 10) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+    };
 
-            if (!wrap || !trigger) {
-                return;
+    /* ── Desktop search popover ───────────────────────────────────────── */
+    const bindSearch = () => {
+        const wrap    = document.querySelector('.ck-search-wrap');
+        const trigger = document.getElementById('ck-search-trigger');
+        if (!wrap || !trigger) return;
+
+        trigger.onclick = e => { e.preventDefault(); e.stopPropagation(); wrap.classList.toggle('open'); };
+    };
+
+    /* ── Active nav link ──────────────────────────────────────────────── */
+    const markActive = () => {
+        const path = window.location.pathname;
+        document.querySelectorAll('.ck-navbar .nav-link').forEach(a => {
+            const href = a.getAttribute('href') || '';
+            const isHome = href === '/' && path === '/';
+            const isOther = href !== '/' && path.startsWith(href);
+            a.classList.toggle('active', isHome || isOther);
+        });
+    };
+
+    /* ── Init / re-init on Livewire navigate ──────────────────────────── */
+    const init = () => {
+        applyScrollClass();
+        bindSearch();
+        markActive();
+    };
+
+    if (!window.__ckNavBound) {
+        window.__ckNavBound = true;
+
+        window.addEventListener('scroll', applyScrollClass, { passive: true });
+
+        document.addEventListener('click', e => {
+            const wrap = document.querySelector('.ck-search-wrap');
+            if (wrap && !wrap.contains(e.target)) wrap.classList.remove('open');
+        });
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                const wrap = document.querySelector('.ck-search-wrap');
+                if (wrap) wrap.classList.remove('open');
             }
+        });
+    }
 
-            trigger.onclick = function (e) {
-                e.preventDefault();
-                wrap.classList.toggle('open');
-            };
-        };
-
-        if (!window.__headerSearchBound) {
-            window.__headerSearchBound = true;
-
-            document.addEventListener('click', function (e) {
-                const wrap = document.querySelector('.header-search-wrap');
-                if (wrap && !wrap.contains(e.target)) {
-                    wrap.classList.remove('open');
-                }
-            });
-
-            document.addEventListener('keydown', function (e) {
-                if (e.key === 'Escape') {
-                    const wrap = document.querySelector('.header-search-wrap');
-                    if (wrap) {
-                        wrap.classList.remove('open');
-                    }
-                }
-            });
-        }
-
-        document.addEventListener('livewire:navigated', bindHeaderSearch);
-        bindHeaderSearch();
-    })();
+    document.addEventListener('livewire:navigated', init);
+    init();
+})();
 </script>
 </div>
