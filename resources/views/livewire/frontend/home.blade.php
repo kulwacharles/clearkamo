@@ -468,37 +468,111 @@
                     </div>
                 </div>
             </div>
-            @if($aboutVideoEmbedUrl)
-                <div class="about-video-cinema mt-5">
-                    <div class="about-video-cinema-inner">
-                        <div class="about-video-cinema-label">
-                            <span class="about-video-dot"></span>
-                            Watch Our Story
-                        </div>
-                        <div class="about-video-frame">
-                            <iframe
-                                src="{{ $aboutVideoEmbedUrl }}"
-                                title="ClearKamo video"
-                                loading="lazy"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin"
-                                allowfullscreen
-                            ></iframe>
-                        </div>
-                    </div>
-                </div>
-            @else
-                <div class="about-video-cinema mt-5">
-                    <div class="about-video-cinema-inner">
-                        <div class="about-video-frame about-video-placeholder d-flex align-items-center justify-content-center">
-                            <div class="text-center text-white">
-                                <i class="fas fa-play-circle about-video-placeholder-icon"></i>
-                                <p class="mt-3 mb-0 opacity-75">Add a YouTube URL in the admin <strong>About Us</strong> panel to display a video here.</p>
+            {{-- ── Row 2: Side-by-side YouTube video + Project Gallery ── --}}
+            <div class="row gy-4 mt-2" id="media-row">
+                {{-- Left: YouTube video --}}
+                <div class="col-lg-6">
+                    @if($aboutVideoEmbedUrl)
+                        <div class="about-video-cinema h-100">
+                            <div class="about-video-cinema-inner h-100">
+                                <div class="about-video-cinema-label">
+                                    <span class="about-video-dot"></span>
+                                    Watch Our Story
+                                </div>
+                                <div class="about-video-frame">
+                                    <iframe
+                                        src="{{ $aboutVideoEmbedUrl }}"
+                                        title="ClearKamo video"
+                                        loading="lazy"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        referrerpolicy="strict-origin-when-cross-origin"
+                                        allowfullscreen
+                                    ></iframe>
+                                </div>
                             </div>
                         </div>
+                    @else
+                        <div class="about-video-cinema h-100">
+                            <div class="about-video-cinema-inner h-100">
+                                <div class="about-video-frame about-video-placeholder d-flex align-items-center justify-content-center">
+                                    <div class="text-center text-white">
+                                        <i class="fas fa-play-circle about-video-placeholder-icon"></i>
+                                        <p class="mt-3 mb-0 opacity-75">Add a YouTube URL in the admin <strong>About Us</strong> panel to display a video here.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+
+                {{-- Right: Project Gallery Slider --}}
+                <div class="col-lg-6">
+                    <div class="gallery-block h-100">
+                        <div class="gallery-block-header">
+                            <div class="gallery-block-title-wrap">
+                                <span class="gallery-block-dot"></span>
+                                <span class="gallery-block-label">Our Gallery</span>
+                            </div>
+                            {{-- Project filter tabs --}}
+                            @if($galleryProjects && $galleryProjects->count())
+                                <div class="gallery-tabs" id="galleryTabs">
+                                    @foreach($galleryProjects as $gIdx => $gProj)
+                                        <button class="gallery-tab{{ $gIdx === 0 ? ' active' : '' }}"
+                                                data-project="{{ $gIdx }}">
+                                            {{ $gProj->project_name }}
+                                        </button>
+                                    @endforeach
+                                </div>
+                            @endif
+                        </div>
+
+                        @if($galleryProjects && $galleryProjects->count())
+                            <div class="gallery-panels">
+                                @foreach($galleryProjects as $gIdx => $gProj)
+                                    <div class="gallery-panel{{ $gIdx === 0 ? ' active' : '' }}" data-panel="{{ $gIdx }}">
+                                        <div class="gallery-slider" id="gallerySlider{{ $gIdx }}">
+                                            @foreach($gProj->galleryPhotos as $photo)
+                                                <div class="gallery-slide">
+                                                    <div class="gallery-slide-img-wrap">
+                                                        <img src="{{ asset('storage/'.$photo->image) }}"
+                                                             alt="{{ $photo->caption ?: $gProj->project_name }}"
+                                                             loading="lazy">
+                                                        @if($photo->caption)
+                                                            <div class="gallery-slide-caption">{{ $photo->caption }}</div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                        {{-- Slide navigation --}}
+                                        @if($gProj->galleryPhotos->count() > 1)
+                                            <div class="gallery-nav">
+                                                <button class="gallery-nav-btn gallery-prev" data-slider="{{ $gIdx }}">
+                                                    <i class="fas fa-chevron-left"></i>
+                                                </button>
+                                                <div class="gallery-dots" id="galleryDots{{ $gIdx }}">
+                                                    @foreach($gProj->galleryPhotos as $dIdx => $photo)
+                                                        <span class="gallery-dot{{ $dIdx === 0 ? ' active' : '' }}"
+                                                              data-slider="{{ $gIdx }}" data-idx="{{ $dIdx }}"></span>
+                                                    @endforeach
+                                                </div>
+                                                <button class="gallery-nav-btn gallery-next" data-slider="{{ $gIdx }}">
+                                                    <i class="fas fa-chevron-right"></i>
+                                                </button>
+                                            </div>
+                                        @endif
+                                    </div>
+                                @endforeach
+                            </div>
+                        @else
+                            <div class="gallery-empty">
+                                <i class="fas fa-images gallery-empty-icon"></i>
+                                <p class="mt-3">No gallery photos yet. Add photos via the admin <strong>Gallery</strong> panel.</p>
+                            </div>
+                        @endif
                     </div>
                 </div>
-            @endif
+            </div>
         </div>
 
         <style>
@@ -760,6 +834,284 @@
                 50%       { transform: translateY(-10px); }
             }
 
+            /* ── Media row (side-by-side video + gallery) ─────────────────────── */
+            #about-sec #media-row {
+                margin-top: 40px;
+            }
+
+            /* Cinematic video block */
+            #about-sec .about-video-cinema {
+                width: 100%;
+            }
+            #about-sec .about-video-cinema-inner {
+                background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0c1d35 100%);
+                border-radius: 24px;
+                padding: 24px;
+                box-shadow: 0 24px 60px rgba(3, 164, 252, 0.18), 0 8px 24px rgba(15, 23, 42, 0.32);
+                border: 1px solid rgba(3, 164, 252, 0.18);
+                position: relative;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+            }
+            #about-sec .about-video-cinema-inner::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(ellipse at top left, rgba(3,164,252,0.1) 0%, transparent 60%);
+                pointer-events: none;
+            }
+            #about-sec .about-video-cinema-label {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 0.78rem;
+                font-weight: 700;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                color: rgba(255,255,255,0.72);
+                margin-bottom: 14px;
+            }
+            #about-sec .about-video-dot {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: #03A4FC;
+                box-shadow: 0 0 0 3px rgba(3,164,252,0.28);
+                animation: videoPulse 2s ease-in-out infinite;
+                display: inline-block;
+            }
+            @keyframes videoPulse {
+                0%, 100% { box-shadow: 0 0 0 3px rgba(3,164,252,0.28); }
+                50%       { box-shadow: 0 0 0 6px rgba(3,164,252,0.14); }
+            }
+            #about-sec .about-video-frame {
+                width: 100%;
+                aspect-ratio: 16 / 9;
+                border-radius: 14px;
+                overflow: hidden;
+                background: #000;
+                box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+                flex: 1;
+            }
+            #about-sec .about-video-frame iframe {
+                width: 100%;
+                height: 100%;
+                border: 0;
+                display: block;
+            }
+            #about-sec .about-video-placeholder {
+                color: rgba(255,255,255,0.6);
+                font-size: 0.95rem;
+                background: rgba(255,255,255,0.04);
+                min-height: 220px;
+            }
+            #about-sec .about-video-placeholder-icon {
+                font-size: 4rem;
+                color: rgba(3,164,252,0.7);
+            }
+
+            /* ── Gallery block ───────────────────────────────────────────────── */
+            #about-sec .gallery-block {
+                background: linear-gradient(135deg, #0f172a 0%, #1e2d44 60%, #0c1d35 100%);
+                border-radius: 24px;
+                padding: 24px;
+                box-shadow: 0 24px 60px rgba(3, 164, 252, 0.15), 0 8px 24px rgba(15, 23, 42, 0.28);
+                border: 1px solid rgba(3, 164, 252, 0.18);
+                display: flex;
+                flex-direction: column;
+                position: relative;
+                overflow: hidden;
+                min-height: 340px;
+            }
+            #about-sec .gallery-block::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(ellipse at bottom right, rgba(3,164,252,0.08) 0%, transparent 60%);
+                pointer-events: none;
+            }
+            #about-sec .gallery-block-header {
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 12px;
+                margin-bottom: 16px;
+            }
+            #about-sec .gallery-block-title-wrap {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+            }
+            #about-sec .gallery-block-dot {
+                width: 8px; height: 8px;
+                border-radius: 50%;
+                background: #10b981;
+                box-shadow: 0 0 0 3px rgba(16,185,129,0.3);
+                display: inline-block;
+                animation: galleryDotPulse 2.4s ease-in-out infinite;
+            }
+            @keyframes galleryDotPulse {
+                0%, 100% { box-shadow: 0 0 0 3px rgba(16,185,129,0.3); }
+                50%       { box-shadow: 0 0 0 6px rgba(16,185,129,0.12); }
+            }
+            #about-sec .gallery-block-label {
+                font-size: 0.78rem;
+                font-weight: 700;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                color: rgba(255,255,255,0.72);
+            }
+
+            /* Project tabs */
+            #about-sec .gallery-tabs {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 6px;
+                max-width: 100%;
+            }
+            #about-sec .gallery-tab {
+                background: rgba(255,255,255,0.07);
+                color: rgba(255,255,255,0.6);
+                border: 1px solid rgba(255,255,255,0.12);
+                border-radius: 20px;
+                padding: 4px 14px;
+                font-size: 0.75rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                white-space: nowrap;
+            }
+            #about-sec .gallery-tab.active,
+            #about-sec .gallery-tab:hover {
+                background: #03A4FC;
+                color: #fff;
+                border-color: #03A4FC;
+                box-shadow: 0 4px 12px rgba(3,164,252,0.35);
+            }
+
+            /* Panels */
+            #about-sec .gallery-panels {
+                flex: 1;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+            }
+            #about-sec .gallery-panel {
+                display: none;
+                flex: 1;
+                flex-direction: column;
+            }
+            #about-sec .gallery-panel.active {
+                display: flex;
+            }
+
+            /* Slider */
+            #about-sec .gallery-slider {
+                flex: 1;
+                overflow: hidden;
+                border-radius: 14px;
+                position: relative;
+            }
+            #about-sec .gallery-slide {
+                display: none;
+            }
+            #about-sec .gallery-slide.active {
+                display: block;
+            }
+            #about-sec .gallery-slide-img-wrap {
+                position: relative;
+                width: 100%;
+                aspect-ratio: 4 / 3;
+                border-radius: 14px;
+                overflow: hidden;
+                background: #000;
+                box-shadow: 0 8px 28px rgba(0,0,0,0.5);
+            }
+            #about-sec .gallery-slide-img-wrap img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+                transition: transform 0.4s ease;
+            }
+            #about-sec .gallery-slide.active .gallery-slide-img-wrap img {
+                transform: scale(1.02);
+            }
+            #about-sec .gallery-slide-caption {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: linear-gradient(transparent, rgba(0,0,0,0.72));
+                color: rgba(255,255,255,0.92);
+                font-size: 0.82rem;
+                padding: 24px 14px 12px;
+                border-radius: 0 0 14px 14px;
+                font-weight: 500;
+            }
+
+            /* Nav */
+            #about-sec .gallery-nav {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 12px;
+            }
+            #about-sec .gallery-nav-btn {
+                width: 34px; height: 34px;
+                border-radius: 50%;
+                border: 1px solid rgba(255,255,255,0.2);
+                background: rgba(255,255,255,0.08);
+                color: rgba(255,255,255,0.75);
+                display: flex; align-items: center; justify-content: center;
+                cursor: pointer;
+                font-size: 0.75rem;
+                transition: all 0.2s ease;
+                padding: 0;
+            }
+            #about-sec .gallery-nav-btn:hover {
+                background: #03A4FC;
+                border-color: #03A4FC;
+                color: #fff;
+                box-shadow: 0 4px 12px rgba(3,164,252,0.35);
+            }
+            #about-sec .gallery-dots {
+                display: flex; gap: 6px; align-items: center;
+            }
+            #about-sec .gallery-dot {
+                width: 6px; height: 6px;
+                border-radius: 50%;
+                background: rgba(255,255,255,0.28);
+                cursor: pointer;
+                transition: all 0.2s ease;
+            }
+            #about-sec .gallery-dot.active {
+                width: 20px;
+                border-radius: 3px;
+                background: #03A4FC;
+            }
+
+            /* Empty state */
+            #about-sec .gallery-empty {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                color: rgba(255,255,255,0.45);
+                font-size: 0.95rem;
+                text-align: center;
+                padding: 40px 20px;
+            }
+            #about-sec .gallery-empty-icon {
+                font-size: 3.5rem;
+                color: rgba(3,164,252,0.4);
+            }
+            #about-sec .gallery-empty strong { color: rgba(255,255,255,0.65); }
+
             /* ── Responsive ──────────────────────────────────────────────────── */
             @media (max-width: 1199.98px) {
                 #about-sec .about-media-stack  { max-width: 460px; }
@@ -778,8 +1130,97 @@
                 #about-sec .about-cv-section { margin-top: 40px; }
                 #about-sec .about-mv-card,
                 #about-sec .about-cv-card { padding: 12px 8px; }
+                #about-sec .gallery-block-header { flex-direction: column; }
+                #about-sec .gallery-tabs { gap: 4px; }
+                #about-sec .gallery-tab { font-size: 0.7rem; padding: 3px 10px; }
             }
         </style>
+
+        <script>
+        (function () {
+            // ── Gallery: tab switching + slide navigation ──────────────────
+            var sliderState = {}; // keyed by panel index
+
+            function initGallery() {
+                // Build initial state for each panel
+                document.querySelectorAll('#about-sec .gallery-panel').forEach(function (panel) {
+                    var idx = panel.dataset.panel;
+                    var slides = panel.querySelectorAll('.gallery-slide');
+                    sliderState[idx] = { current: 0, total: slides.length };
+                    showSlide(idx, 0);
+                });
+
+                // Tab click
+                document.querySelectorAll('#about-sec .gallery-tab').forEach(function (tab) {
+                    tab.addEventListener('click', function () {
+                        var panelIdx = tab.dataset.project;
+                        // Update tabs
+                        document.querySelectorAll('#about-sec .gallery-tab').forEach(function (t) { t.classList.remove('active'); });
+                        tab.classList.add('active');
+                        // Update panels
+                        document.querySelectorAll('#about-sec .gallery-panel').forEach(function (p) { p.classList.remove('active'); });
+                        var target = document.querySelector('#about-sec .gallery-panel[data-panel="' + panelIdx + '"]');
+                        if (target) { target.classList.add('active'); }
+                    });
+                });
+
+                // Prev / Next
+                document.querySelectorAll('#about-sec .gallery-prev').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        var idx = btn.dataset.slider;
+                        var s = sliderState[idx];
+                        if (!s) return;
+                        showSlide(idx, (s.current - 1 + s.total) % s.total);
+                    });
+                });
+                document.querySelectorAll('#about-sec .gallery-next').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        var idx = btn.dataset.slider;
+                        var s = sliderState[idx];
+                        if (!s) return;
+                        showSlide(idx, (s.current + 1) % s.total);
+                    });
+                });
+
+                // Dot click
+                document.querySelectorAll('#about-sec .gallery-dot').forEach(function (dot) {
+                    dot.addEventListener('click', function () {
+                        showSlide(dot.dataset.slider, parseInt(dot.dataset.idx, 10));
+                    });
+                });
+
+                // Auto-play (4 s interval) per panel
+                setInterval(function () {
+                    document.querySelectorAll('#about-sec .gallery-panel.active').forEach(function (panel) {
+                        var idx = panel.dataset.panel;
+                        var s = sliderState[idx];
+                        if (s && s.total > 1) {
+                            showSlide(idx, (s.current + 1) % s.total);
+                        }
+                    });
+                }, 4000);
+            }
+
+            function showSlide(panelIdx, slideIdx) {
+                var panel = document.querySelector('#about-sec .gallery-panel[data-panel="' + panelIdx + '"]');
+                if (!panel) return;
+                var slides = panel.querySelectorAll('.gallery-slide');
+                var dots   = panel.querySelectorAll('.gallery-dot');
+                slides.forEach(function (s) { s.classList.remove('active'); });
+                dots.forEach(function (d) { d.classList.remove('active'); });
+                if (slides[slideIdx]) slides[slideIdx].classList.add('active');
+                if (dots[slideIdx])   dots[slideIdx].classList.add('active');
+                sliderState[panelIdx] = sliderState[panelIdx] || {};
+                sliderState[panelIdx].current = slideIdx;
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initGallery);
+            } else {
+                initGallery();
+            }
+        })();
+        </script>
     </div>
     @endif
 

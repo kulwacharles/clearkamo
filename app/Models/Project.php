@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class Project extends Model
@@ -25,5 +26,10 @@ class Project extends Model
     private static function nameForSlug(self $project): string
     {
         return (string) ($project->title ?? $project->project_name ?? '');
+    }
+
+    public function galleryPhotos(): HasMany
+    {
+        return $this->hasMany(GalleryPhoto::class)->orderBy('sort_order')->orderBy('id');
     }
 }

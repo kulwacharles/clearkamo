@@ -35,6 +35,7 @@ use App\Livewire\Admin\Dashboard as AdminDashboard;
 use App\Livewire\Admin\MaintenanceMode as AdminMaintenanceMode;
 use App\Livewire\FocusArea\BackendFocusArea;
 use App\Livewire\CoreValue\BackendCoreValue;
+use App\Livewire\Gallery\BackendGallery;
 use App\Models\Blog;
 use App\Models\ChatMessage;
 
@@ -64,6 +65,7 @@ Route::middleware(['auth'])->prefix('/admin')->group(function () {
     Route::get('maintenance', AdminMaintenanceMode::class)->name('admin.maintenance');
     Route::get('focus-areas', BackendFocusArea::class)->name('admin.focus-areas');
     Route::get('core-values', BackendCoreValue::class)->name('admin.core-values');
+    Route::get('gallery', BackendGallery::class)->name('admin.gallery');
     Route::get('chat/realtime', function () {
         $latestUserMessage = ChatMessage::where('sender_type', 'user')
             ->latest('id')

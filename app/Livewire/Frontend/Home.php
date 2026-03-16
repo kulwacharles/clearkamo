@@ -9,6 +9,7 @@ use App\Models\Testimony;
 use App\Models\Blog;
 use App\Models\Client;
 use App\Models\CoreValue;
+use App\Models\GalleryPhoto;
 use App\Models\Project;
 use App\Models\Service;
 use Livewire\Component;
@@ -25,6 +26,7 @@ class Home extends Component
         public $projectsCount = 0;
         public $partnersCount = 0;
         public $coreValues;
+        public $galleryProjects;
         
 
         public function mount()
@@ -35,6 +37,12 @@ class Home extends Component
         $this->projectsCount = Project::where('status', 'published')->count();
         $this->partnersCount = Client::whereIn('status', ['published', 'active'])->count();
         $this->coreValues = CoreValue::where('status', 'published')->orderBy('sort_order')->orderBy('id')->get();
+        // Load projects that have published gallery photos
+        $this->galleryProjects = Project::where('status', 'published')
+            ->whereHas('galleryPhotos', fn ($q) => $q->where('status', 'published'))
+            ->with(['galleryPhotos' => fn ($q) => $q->where('status', 'published')])
+            ->orderBy('project_name')
+            ->get();
         $about = About::first();
         $this->testimonies=Testimony::where('status','published')->get();
         $this->blogs=Blog::where('status','published')->orderBy('id','desc')->latest()->take(5)->get();
@@ -71,6 +79,7 @@ class Home extends Component
             'projectsCount' => $this->projectsCount,
             'partnersCount' => $this->partnersCount,
             'coreValues' => $this->coreValues,
+            'galleryProjects' => $this->galleryProjects,
         ])->layout("components.layouts.frontend", ["title"=>$this->title,"description"=>Str::limit(html_entity_decode(strip_tags($this->description)), 350, '...'),"keywords"=>$this->keywords,"image"=>$this->image]);
     }
 
