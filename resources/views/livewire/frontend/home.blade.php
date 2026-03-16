@@ -263,7 +263,7 @@
                         </span>
                         <h3 class="sec-title">{{ $about->title }}</h3>
                         <div class="sec-text about-description-text">
-                            {!! \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($about->description)), 280, '…') !!}
+                            {!! html_entity_decode($about->description) !!}
                         </div>
                         <a wire:navigate href="{{ route('about-us') }}" class="about-readmore-link mt-3">
                             Learn More About Us <i class="fas fa-arrow-right ms-2"></i>
