@@ -17,100 +17,41 @@
             </div>
         </div>
     </div>
-    
-    <section class="th-blog-wrapper space-top space-extra-bottom">
+
+    <section class="space-top space-extra-bottom">
         <div class="container">
-            <div class="row gx-40">
-                 @if($publications)
-                <div class="col-xxl-8 col-lg-7">
-                     @foreach ($publications as $publication)
-                    <div class="th-blog blog-single has-post-thumbnail">
-                        <div class="blog-img">
-                            <a href="{{ $publication->link }}" target="_blank" rel="noopener noreferrer">
-                                <img src="{{ asset('storage/'.$publication->image) }}" alt="{{ $publication->title }}">
-                            </a>
-                        </div>
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <a class="author" href="{{ $publication->link }}" target="_blank" rel="noopener noreferrer">
-                                    <i class="far fa-user"></i>Publicated by Admin
-                                </a>
-                                 <a href="{{ $publication->link }}" target="_blank" rel="noopener noreferrer">
-                                    <i class="fa-light fa-calendar-days"></i>{{$publication->created_at->format('d F, Y')}}
-                                </a>
-                               
-                             </div>
-                            <h2 class="blog-title">
-                                <a href="{{ $publication->link }}" target="_blank" rel="noopener noreferrer">{{$publication->title}}</a>
-                            </h2>
-                            <a href="{{ $publication->link }}" target="_blank" rel="noopener noreferrer" class="th-btn">Open Publication
-                                <div class="icon">
-                                    <i class="fa-solid fa-external-link-alt ms-3"></i>
-                                </div>
-                            </a>
-                        </div>
+            @if($publications && $publications->count() > 0)
+                <div class="row g-4">
+                    @foreach ($publications as $publication)
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <a href="{{ $publication->link }}" target="_blank" rel="noopener noreferrer" class="pub-card d-block text-decoration-none">
+                            <div class="pub-card-img">
+                                <img src="{{ asset('storage/'.$publication->image) }}" alt="{{ $publication->title }}" loading="lazy">
+                            </div>
+                            <div class="pub-card-body">
+                                <h6 class="pub-card-title">{{ $publication->title }}</h6>
+                            </div>
+                        </a>
                     </div>
                     @endforeach
-                    <div class="th-pagination">
-                        {{ $publications->links() }}
-                    </div>
                 </div>
-                @else
-                <div class="col-xxl-8 col-lg-7">
-                    There is no Publications
+                <div class="th-pagination mt-5">
+                    {{ $publications->links() }}
                 </div>
-                @endif
-                <div class="col-xxl-4 col-lg-5">
-                    <aside class="sidebar-area">
-                        {{-- <div class="widget widget_search">
-                            <form class="search-form">
-                                <input type="text" placeholder="Enter Keyword"> 
-                                <button type="submit"><i class="far fa-search"></i></button>
-                            </form>
-                        </div> --}}
-                         <div class="widget widget_categories">
-                            <h3 class="widget_title">Other Publications</h3>
-                            <ul>
-                                @forelse($otherPublications as $otherPublication)
-                                     <li>
-                                        <a href="{{ $otherPublication->link }}" target="_blank" rel="noopener noreferrer">
-                                            {{ \Illuminate\Support\Str::limit($otherPublication->title, 36) }}
-                                        </a>
-                                        <span>{{ $otherPublication->updated_at->format('d M') }}</span>
-                                    </li>
-                                @empty
-                                    <li>
-                                        <span>No publications available.</span>
-                                    </li>
-                                @endforelse
-                            </ul>
-                         </div>
-                         <div class="col-md-6 col-xl-auto">
-                                <div class="widget newsletter-widget footer-widget">
-                                    <h3 class="widget_title">Subscribe Now</h3>
-                                    <form class="newsletter-form">
-                                        <div class="form-group">
-                                            <input class="form-control" type="email" placeholder="Email Address" required=""> 
-                                            <button type="submit" class="th-btn"><i class="far fa-paper-plane"></i> Subscribe</button>
-                                        </div>
-                                        <div class="check-group">
-                                            <input type="checkbox" id="privacyPolicy">
-                                            <label for="privacyPolicy">I agree to the privacy policy</label>
-                                        </div>
-                                    </form>
-                                    {{-- <div class="th-social style2">
-                                            <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
-                                            <a href="https://www.twitter.com/"><i class="fab fa-twitter"></i></a> 
-                                            <a href="https://www.linkedin.com/"><i class="fab fa-linkedin-in"></i></a> 
-                                            <a href="https://www.behance.com/"><i class="fab fa-behance"></i></a>
-                                            <a href="https://www.vimeo.com/"><i class="fab fa-vimeo-v"></i></a>
-                                    </div> --}}
-                                </div>
-                        </div>
-
-                    </aside>
-                </div>
-            </div>
+            @else
+                <p class="text-center py-5">No publications available.</p>
+            @endif
         </div>
     </section>
+
+    <style>
+        .pub-card { border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; transition: box-shadow .2s; }
+        .pub-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,.12); }
+        .pub-card-img { width: 100%; height: 160px; overflow: hidden; }
+        .pub-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s; }
+        .pub-card:hover .pub-card-img img { transform: scale(1.06); }
+        .pub-card-body { padding: 10px 12px; background: #fff; }
+        .pub-card-title { font-size: .9rem; font-weight: 600; color: #1f2937; margin: 0; line-height: 1.4; }
+    </style>
 </div>
+
