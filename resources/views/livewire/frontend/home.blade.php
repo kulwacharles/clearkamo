@@ -1761,11 +1761,11 @@
     </div>
 </section>
 
-{{-- ── Clients Marquee ──────────────────────────────────────── --}}
+{{-- ── Clients & Partners Marquee ──────────────────────────── --}}
 @if($clients && $clients->count() > 0)
 <section id="clients-sec">
     <div class="clients-marquee-label">
-        <span>Trusted By</span>
+        <span>Our Clients &amp; Partners</span>
     </div>
     <div class="clients-track-wrap">
         <div class="clients-track">
@@ -1870,12 +1870,10 @@
         width: auto;
         max-width: 140px;
         object-fit: contain;
-        filter: grayscale(1) opacity(.55);
-        transition: filter .3s ease, transform .3s ease;
+        transition: transform .3s ease;
         display: block;
     }
     .clients-item:hover img {
-        filter: grayscale(0) opacity(1);
         transform: scale(1.06);
     }
     @media (max-width: 575.98px) {
