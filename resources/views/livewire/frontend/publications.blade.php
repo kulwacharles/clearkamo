@@ -26,29 +26,26 @@
                      @foreach ($publications as $publication)
                     <div class="th-blog blog-single has-post-thumbnail">
                         <div class="blog-img">
-                            <a wire:navigate href="/publication/details/{{ $publication->slug }}">
-                                <img src="{{ asset('storage/'.$publication->image) }}" alt="Blog Image">
+                            <a href="{{ $publication->link }}" target="_blank" rel="noopener noreferrer">
+                                <img src="{{ asset('storage/'.$publication->image) }}" alt="{{ $publication->title }}">
                             </a>
                         </div>
                         <div class="blog-content">
                             <div class="blog-meta">
-                                <a class="author" href="/publication/details/{{ $publication->slug }}">
+                                <a class="author" href="{{ $publication->link }}" target="_blank" rel="noopener noreferrer">
                                     <i class="far fa-user"></i>Publicated by Admin
                                 </a>
-                                 <a href="/publication/details/{{ $publication->slug }}">
+                                 <a href="{{ $publication->link }}" target="_blank" rel="noopener noreferrer">
                                     <i class="fa-light fa-calendar-days"></i>{{$publication->created_at->format('d F, Y')}}
                                 </a>
                                
                              </div>
                             <h2 class="blog-title">
-                                <a wire:navigate href="/publication/details/{{ $publication->slug }}">{{$publication->title}}</a>
+                                <a href="{{ $publication->link }}" target="_blank" rel="noopener noreferrer">{{$publication->title}}</a>
                             </h2>
-                            <p class="blog-text">
-                                 {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($publication->description)), 350, '...') }}
-                            </p>
-                            <a wire:navigate href="/publication/details/{{ $publication->slug }}" class="th-btn">Read More
+                            <a href="{{ $publication->link }}" target="_blank" rel="noopener noreferrer" class="th-btn">Open Publication
                                 <div class="icon">
-                                    <i class="fa-solid fa-arrow-up-right ms-3"></i>
+                                    <i class="fa-solid fa-external-link-alt ms-3"></i>
                                 </div>
                             </a>
                         </div>
@@ -75,8 +72,8 @@
                             <h3 class="widget_title">Other Publications</h3>
                             <ul>
                                 @forelse($otherPublications as $otherPublication)
-                                    <li>
-                                        <a wire:navigate href="/publication/details/{{ $otherPublication->slug }}">
+                                     <li>
+                                        <a href="{{ $otherPublication->link }}" target="_blank" rel="noopener noreferrer">
                                             {{ \Illuminate\Support\Str::limit($otherPublication->title, 36) }}
                                         </a>
                                         <span>{{ $otherPublication->updated_at->format('d M') }}</span>
