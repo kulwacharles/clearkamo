@@ -8,47 +8,13 @@
         <div id="mainSlider" class="hero-slider">
             @foreach($slides as $index => $slide)
                 <div class="hero-slide{{ $index === 0 ? ' active' : '' }}">
-                    {{-- Background image + dark-blue overlay --}}
+                    {{-- Pure background photo — no overlay, no text --}}
                     @if($slide->image)
                         <div class="hero-slide-bg" style="background-image: url('{{ asset('storage/'.$slide->image) }}');"></div>
                     @endif
-                    <div class="hero-slide-overlay"></div>
-
-                    {{-- Decorative floating blobs --}}
-                    <div class="hero-blob hero-blob-1"></div>
-                    <div class="hero-blob hero-blob-2"></div>
-
-                    {{-- Content --}}
-                    <div class="hero-slide-content">
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-xl-9 col-lg-10 text-center">
-                                    <span class="hero-eyebrow">
-                                        <span class="hero-eyebrow-dot"></span>
-                                        CLEARKAMO
-                                        <span class="hero-eyebrow-dot"></span>
-                                    </span>
-                                    @if($slide->title)
-                                        <h1 class="hero-title">{{ $slide->title }}</h1>
-                                    @endif
-                                    @if($slide->description)
-                                        <p class="hero-desc">{!! $slide->description !!}</p>
-                                    @endif
-                                    <div class="hero-cta-row">
-                                        <a wire:navigate href="{{ route('services') }}" class="hero-btn-primary">
-                                            Explore Our Services
-                                            <i class="fas fa-arrow-right ms-2"></i>
-                                        </a>
-                                        <a wire:navigate href="{{ route('contact-us') }}" class="hero-btn-outline">
-                                            Get In Touch
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {{-- Progress bar at bottom of slide --}}
+                    {{-- Subtle bottom vignette for controls readability only --}}
+                    <div class="hero-slide-vignette"></div>
+                    {{-- Progress bar --}}
                     <div class="hero-progress{{ $index === 0 ? ' running' : '' }}"></div>
                 </div>
             @endforeach
@@ -71,7 +37,7 @@
     </section>
 
     <style>
-        /* ── Hero Section ────────────────────────────────────────── */
+        /* ── Hero Section — pure image slideshow ─────────────────── */
         #hero-sec {
             position: relative;
             overflow: hidden;
@@ -81,18 +47,16 @@
             position: relative;
             height: 100svh;
             min-height: 540px;
-            max-height: 860px;
+            max-height: 900px;
         }
 
         /* Each slide */
         .hero-slide {
             position: absolute;
             inset: 0;
-            display: flex;
-            align-items: center;
             opacity: 0;
             visibility: hidden;
-            transition: opacity .9s ease, visibility .9s ease;
+            transition: opacity 1s ease, visibility 1s ease;
             overflow: hidden;
         }
         .hero-slide.active {
@@ -101,167 +65,30 @@
             z-index: 2;
         }
 
-        /* Background photo */
+        /* Background photo — fills frame, subtle Ken Burns on active */
         .hero-slide-bg {
             position: absolute;
             inset: 0;
             background-size: cover;
             background-position: center;
-            transform: scale(1.06);
-            transition: transform 6s ease;
+            transform: scale(1.04);
+            transition: transform 7s ease;
         }
         .hero-slide.active .hero-slide-bg {
             transform: scale(1);
         }
 
-        /* Dark gradient overlay */
-        .hero-slide-overlay {
+        /* Very subtle bottom vignette — only to keep controls legible */
+        .hero-slide-vignette {
             position: absolute;
             inset: 0;
             background: linear-gradient(
-                135deg,
-                rgba(3,164,252,.55) 0%,
-                rgba(2,80,140,.7)  50%,
-                rgba(5,5,20,.82)   100%
+                to top,
+                rgba(0,0,0,.35) 0%,
+                rgba(0,0,0,.08) 22%,
+                transparent     50%
             );
-        }
-
-        /* Decorative blobs */
-        .hero-blob {
-            position: absolute;
-            border-radius: 50%;
             pointer-events: none;
-        }
-        .hero-blob-1 {
-            width: 420px; height: 420px;
-            background: radial-gradient(circle, rgba(3,164,252,.25) 0%, transparent 70%);
-            top: -120px; right: -80px;
-            animation: blobFloat 8s ease-in-out infinite;
-        }
-        .hero-blob-2 {
-            width: 280px; height: 280px;
-            background: radial-gradient(circle, rgba(255,255,255,.08) 0%, transparent 70%);
-            bottom: -60px; left: -40px;
-            animation: blobFloat 11s ease-in-out infinite reverse;
-        }
-        @keyframes blobFloat {
-            0%,100% { transform: translate(0,0) scale(1); }
-            50%      { transform: translate(16px,-22px) scale(1.06); }
-        }
-
-        /* Content */
-        .hero-slide-content {
-            position: relative;
-            z-index: 3;
-            width: 100%;
-            padding: 0 16px;
-        }
-
-        .hero-eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            color: rgba(255,255,255,.85);
-            font-size: .82rem;
-            font-weight: 600;
-            letter-spacing: .2em;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: none;
-        }
-        .hero-slide.active .hero-eyebrow {
-            animation: heroFadeUp .7s ease forwards .1s;
-        }
-        .hero-eyebrow-dot {
-            display: inline-block;
-            width: 6px; height: 6px;
-            border-radius: 50%;
-            background: #03A4FC;
-        }
-
-        .hero-title {
-            font-size: clamp(2rem, 5vw, 3.6rem);
-            font-weight: 800;
-            color: #ffffff;
-            line-height: 1.15;
-            margin-bottom: 22px;
-            opacity: 0;
-            transform: translateY(28px);
-            animation: none;
-        }
-        .hero-slide.active .hero-title {
-            animation: heroFadeUp .8s ease forwards .28s;
-        }
-
-        .hero-desc {
-            font-size: clamp(.95rem, 2vw, 1.18rem);
-            color: rgba(255,255,255,.82);
-            line-height: 1.7;
-            max-width: 700px;
-            margin: 0 auto 32px;
-            opacity: 0;
-            transform: translateY(28px);
-            animation: none;
-        }
-        .hero-slide.active .hero-desc {
-            animation: heroFadeUp .8s ease forwards .44s;
-        }
-
-        .hero-cta-row {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-            opacity: 0;
-            transform: translateY(24px);
-            animation: none;
-        }
-        .hero-slide.active .hero-cta-row {
-            animation: heroFadeUp .8s ease forwards .6s;
-        }
-
-        .hero-btn-primary {
-            display: inline-flex;
-            align-items: center;
-            background: #03A4FC;
-            color: #fff;
-            padding: 15px 36px;
-            border-radius: 50px;
-            font-size: .97rem;
-            font-weight: 700;
-            text-decoration: none;
-            letter-spacing: .04em;
-            box-shadow: 0 10px 30px rgba(3,164,252,.45);
-            transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
-        }
-        .hero-btn-primary:hover {
-            background: #0295e8;
-            transform: translateY(-3px);
-            box-shadow: 0 16px 40px rgba(3,164,252,.55);
-            color: #fff;
-        }
-
-        .hero-btn-outline {
-            display: inline-flex;
-            align-items: center;
-            background: transparent;
-            color: #fff;
-            padding: 14px 34px;
-            border-radius: 50px;
-            border: 2px solid rgba(255,255,255,.65);
-            font-size: .97rem;
-            font-weight: 600;
-            text-decoration: none;
-            backdrop-filter: blur(6px);
-            transition: border-color .25s ease, background .25s ease, transform .25s ease;
-        }
-        .hero-btn-outline:hover {
-            border-color: #fff;
-            background: rgba(255,255,255,.12);
-            color: #fff;
-            transform: translateY(-3px);
         }
 
         /* Progress bar at bottom of slide */
@@ -269,10 +96,9 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            height: 4px;
+            height: 3px;
             width: 0;
             background: #03A4FC;
-            border-radius: 0 2px 2px 0;
             z-index: 5;
         }
         .hero-progress.running {
@@ -296,65 +122,54 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(255,255,255,.92);
+            background: rgba(255,255,255,.88);
             color: #0f172a;
             font-size: 18px;
-            box-shadow: 0 6px 20px rgba(0,0,0,.18);
-            backdrop-filter: blur(8px);
-            transition: background .25s ease, color .25s ease, transform .25s ease, box-shadow .25s ease;
+            box-shadow: 0 4px 18px rgba(0,0,0,.22);
+            backdrop-filter: blur(6px);
+            transition: background .2s ease, color .2s ease, transform .2s ease, box-shadow .2s ease;
         }
         .hero-nav:hover {
             background: #03A4FC;
             color: #fff;
-            box-shadow: 0 10px 28px rgba(3,164,252,.45);
+            transform: translateY(-50%) scale(1.08);
+            box-shadow: 0 8px 24px rgba(3,164,252,.45);
         }
-        .hero-nav-prev { left: 28px; }
-        .hero-nav-next { right: 28px; }
+        .hero-nav-prev { left: 24px; }
+        .hero-nav-next { right: 24px; }
 
         /* Dot indicators */
         .hero-dots {
             position: absolute;
-            bottom: 28px;
+            bottom: 22px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 10;
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
         .hero-dot {
-            width: 10px; height: 10px;
+            width: 9px; height: 9px;
             border-radius: 50%;
-            border: 2px solid rgba(255,255,255,.7);
+            border: 2px solid rgba(255,255,255,.8);
             background: transparent;
             cursor: pointer;
-            transition: all .35s ease;
+            transition: all .3s ease;
             padding: 0;
         }
         .hero-dot.active {
-            background: #03A4FC;
-            border-color: #03A4FC;
-            width: 28px;
+            background: #fff;
+            border-color: #fff;
+            width: 26px;
             border-radius: 5px;
-            box-shadow: 0 0 12px rgba(3,164,252,.7);
-        }
-
-        /* Entry animation keyframe */
-        @keyframes heroFadeUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            33%       { transform: translateY(-20px) rotate(120deg); }
-            66%       { transform: translateY(20px) rotate(240deg); }
         }
 
         /* Mobile */
         @media (max-width: 767.98px) {
-            .hero-slider { height: 92svh; min-height: 480px; }
+            .hero-slider { height: 88svh; min-height: 420px; }
             .hero-nav { width: 40px; height: 40px; font-size: 15px; }
-            .hero-nav-prev { left: 12px; }
-            .hero-nav-next { right: 12px; }
-            .hero-blob-1 { width: 220px; height: 220px; }
+            .hero-nav-prev { left: 10px; }
+            .hero-nav-next { right: 10px; }
         }
     </style>
 
@@ -447,7 +262,12 @@
                             <img class="ms-1" src="assets/img/theme-img/title_icon.svg" alt="img">
                         </span>
                         <h3 class="sec-title">{{ $about->title }}</h3>
-                        <div class="sec-text about-description-text">{!! $about->description !!}</div>
+                        <div class="sec-text about-description-text">
+                            {!! \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($about->description)), 280, '…') !!}
+                        </div>
+                        <a wire:navigate href="{{ route('about') }}" class="about-readmore-link mt-3">
+                            Learn More About Us <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
                     </div>
                 </div>
                 <div class="col-xl-5 col-lg-6 order-1 order-lg-2">
@@ -665,6 +485,21 @@
             }
             #about-sec .about-description-text p { margin-bottom: 0.6rem; }
             #about-sec .about-description-text p:last-child { margin-bottom: 0; }
+
+            #about-sec .about-readmore-link {
+                display: inline-flex;
+                align-items: center;
+                font-size: .9rem;
+                font-weight: 700;
+                color: #03A4FC;
+                text-decoration: none;
+                gap: 4px;
+                transition: gap .2s ease, color .2s ease;
+            }
+            #about-sec .about-readmore-link:hover {
+                gap: 10px;
+                color: #025ea8;
+            }
 
             /* Cinematic video block */
             #about-sec .about-video-cinema {
@@ -1295,9 +1130,11 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="title-area text-center sr-fade-up">
+                        <span class="sub-title">
+                            <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">OUR SERVICES
                             <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
                         </span>
-                        <h2 class="sec-title">Beyond Boundaries Into Success</h2>
+                        <h2 class="sec-title">What We Do</h2>
                     </div>
                 </div>
             </div>
@@ -1316,11 +1153,8 @@
                                     <h3 class="svc-card-title">
                                         <a wire:navigate href="/service/details/{{ $service->slug }}">{{ $service->title }}</a>
                                     </h3>
-                                    <p class="svc-card-text">
-                                        {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($service->description)), 120, '...') }}
-                                    </p>
                                     <a wire:navigate href="/service/details/{{ $service->slug }}" class="svc-card-link">
-                                        Read More <i class="fas fa-arrow-right ms-1"></i>
+                                        Explore <i class="fas fa-arrow-right ms-1"></i>
                                     </a>
                                 </div>
                             </article>
@@ -1349,7 +1183,7 @@
             #service-sec .svc-card-img {
                 position: relative;
                 width: 100%;
-                height: 210px;
+                height: 240px;
                 overflow: hidden;
             }
             #service-sec .svc-card-img img {
@@ -1377,16 +1211,17 @@
                 justify-content: center;
             }
             #service-sec .svc-card-body {
-                padding: 20px 22px 22px;
+                padding: 18px 20px 20px;
                 display: flex;
                 flex-direction: column;
-                flex-grow: 1;
+                align-items: flex-start;
+                gap: 12px;
             }
             #service-sec .svc-card-title {
                 font-size: 1.05rem;
                 font-weight: 700;
                 color: #0f172a;
-                margin-bottom: 10px;
+                margin: 0;
                 line-height: 1.35;
             }
             #service-sec .svc-card-title a {
@@ -1395,29 +1230,22 @@
                 transition: color .2s ease;
             }
             #service-sec .svc-card-title a:hover { color: #03A4FC; }
-            #service-sec .svc-card-text {
-                color: #475569;
-                font-size: .9rem;
-                line-height: 1.65;
-                flex-grow: 1;
-                margin-bottom: 16px;
-            }
             #service-sec .svc-card-link {
                 display: inline-flex;
                 align-items: center;
                 color: #03A4FC;
                 font-size: .88rem;
-                font-weight: 600;
+                font-weight: 700;
                 text-decoration: none;
-                gap: 4px;
+                gap: 5px;
                 transition: gap .2s ease, color .2s ease;
             }
             #service-sec .svc-card-link:hover {
-                gap: 8px;
+                gap: 10px;
                 color: #025ea8;
             }
             @media (max-width: 575.98px) {
-                #service-sec .svc-card-img { height: 180px; }
+                #service-sec .svc-card-img { height: 200px; }
             }
         </style>
     </section>
@@ -1536,9 +1364,6 @@
                     <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
                 </span>
                 <h2 class="sec-title">News &amp; Updates</h2>
-                <p class="mx-auto" style="max-width: 640px; color: #64748b;">
-                    Stay informed with the latest insights, announcements and stories from CLEARKAMO.
-                </p>
             </div>
 
             <div class="row g-4">
@@ -1564,9 +1389,6 @@
                                     {{ $blog->title }}
                                 </a>
                             </h3>
-                            <p class="news-card-excerpt">
-                                {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($blog->description)), 120, '…') }}
-                            </p>
                             <a wire:navigate href="{{ route('news-and-updates.details', ['slug' => $blog->slug]) }}" class="news-card-link">
                                 Read More <i class="fas fa-arrow-right ms-1"></i>
                             </a>
@@ -1634,25 +1456,27 @@
             }
             /* Body */
             #news-sec .news-card-body {
-                padding: 22px 24px 26px;
+                padding: 20px 22px 22px;
                 display: flex;
                 flex-direction: column;
+                gap: 10px;
                 flex: 1;
             }
             #news-sec .news-card-meta {
-                margin-bottom: 10px;
+                margin: 0;
             }
             #news-sec .news-card-date {
-                font-size: 12.5px;
+                font-size: 12px;
                 color: #94a3b8;
                 font-weight: 500;
             }
             #news-sec .news-card-title {
-                font-size: 1.05rem;
+                font-size: 1rem;
                 font-weight: 700;
                 line-height: 1.4;
                 color: #0f172a;
-                margin-bottom: 10px;
+                margin: 0;
+                flex: 1;
             }
             #news-sec .news-card-title a {
                 color: inherit;
@@ -1660,13 +1484,6 @@
                 transition: color .2s ease;
             }
             #news-sec .news-card-title a:hover { color: #03A4FC; }
-            #news-sec .news-card-excerpt {
-                font-size: .9rem;
-                color: #475569;
-                line-height: 1.65;
-                flex: 1;
-                margin-bottom: 18px;
-            }
             #news-sec .news-card-link {
                 display: inline-flex;
                 align-items: center;
@@ -1683,7 +1500,6 @@
             }
             @media (max-width: 575.98px) {
                 #news-sec .news-card-thumb { height: 200px; }
-                #news-sec .news-card-title { font-size: 1rem; }
             }
         </style>
     </section>
@@ -1793,27 +1609,24 @@
             <div class="row gy-30">
                 @foreach($teams as $teamIdx => $team)
                     <div class="col-xl-3 col-lg-4 col-md-6 sr-fade-up" style="animation-delay: {{ $teamIdx * 0.1 }}s">
-                        <div class="team-card p-3 h-100" style="border: 1px solid #e5e7eb; border-radius: 14px; background: #fff; box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);">
-                            <a wire:navigate href="{{ route('team-details', ['slug' => $team->slug ?: $team->id]) }}" class="d-block">
+                        <div class="team-card h-100">
+                            <a wire:navigate href="{{ route('team-details', ['slug' => $team->slug ?: $team->id]) }}" class="team-card-photo-link">
                                 <img
                                     src="{{ asset('storage/'.$team->image) }}"
                                     alt="{{ $team->name }}"
-                                    style="width: 100%; height: 260px; object-fit: cover; border-radius: 10px;"
+                                    class="team-card-photo"
                                 >
+                                <div class="team-card-hover-overlay">
+                                    <span class="team-card-view-btn"><i class="fas fa-user me-1"></i> View Profile</span>
+                                </div>
                             </a>
-                            <div class="pt-3">
-                                <h3 class="h5 mb-1">
-                                    <a wire:navigate href="{{ route('team-details', ['slug' => $team->slug ?: $team->id]) }}" style="color: #0f172a; text-decoration: none;">
+                            <div class="team-card-info">
+                                <h3 class="team-card-name">
+                                    <a wire:navigate href="{{ route('team-details', ['slug' => $team->slug ?: $team->id]) }}">
                                         {{ $team->name }}
                                     </a>
                                 </h3>
-                                <p class="mb-2" style="color: #03A4FC; font-weight: 600;">{{ $team->position }}</p>
-                                <p class="mb-3" style="color: #64748b;">
-                                    {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($team->description)), 110, '...') }}
-                                </p>
-                                <a wire:navigate href="{{ route('team-details', ['slug' => $team->slug ?: $team->id]) }}" class="link-btn style2">
-                                    <i class="fas fa-plus-circle me-1"></i>View Profile
-                                </a>
+                                <p class="team-card-position">{{ $team->position }}</p>
                             </div>
                         </div>
                     </div>
@@ -1821,6 +1634,78 @@
             </div>
         </div>
     </section>
+
+    <style>
+        #team-sec .team-card {
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 6px 22px rgba(15,23,42,.08);
+            border: 1px solid #e5e7eb;
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+        #team-sec .team-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 40px rgba(3,164,252,.14);
+        }
+        #team-sec .team-card-photo-link {
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+        #team-sec .team-card-photo {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+            transition: transform .45s ease;
+        }
+        #team-sec .team-card:hover .team-card-photo { transform: scale(1.06); }
+        #team-sec .team-card-hover-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(3,164,252,.72);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity .3s ease;
+        }
+        #team-sec .team-card:hover .team-card-hover-overlay { opacity: 1; }
+        #team-sec .team-card-view-btn {
+            color: #fff;
+            font-size: .88rem;
+            font-weight: 700;
+            letter-spacing: .04em;
+            background: rgba(255,255,255,.18);
+            border: 2px solid rgba(255,255,255,.8);
+            border-radius: 30px;
+            padding: 8px 22px;
+            text-decoration: none;
+        }
+        #team-sec .team-card-info {
+            padding: 18px 18px 20px;
+        }
+        #team-sec .team-card-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+        #team-sec .team-card-name a {
+            color: inherit;
+            text-decoration: none;
+            transition: color .2s ease;
+        }
+        #team-sec .team-card-name a:hover { color: #03A4FC; }
+        #team-sec .team-card-position {
+            font-size: .85rem;
+            color: #03A4FC;
+            font-weight: 600;
+            margin: 0;
+        }
+    </style>
+
     @endif
 
 
@@ -1880,6 +1765,130 @@
         </div>
     </div>
 </section>
+
+{{-- ── Clients Marquee ──────────────────────────────────────── --}}
+@if($clients && $clients->count() > 0)
+<section id="clients-sec">
+    <div class="clients-marquee-label">
+        <span>Trusted By</span>
+    </div>
+    <div class="clients-track-wrap">
+        <div class="clients-track">
+            @foreach($clients as $client)
+                <div class="clients-item">
+                    @if($client->url)
+                        <a href="{{ $client->url }}" target="_blank" rel="noopener noreferrer" class="clients-link">
+                            <img src="{{ asset('storage/'.$client->image) }}" alt="{{ $client->name }}" loading="lazy">
+                        </a>
+                    @else
+                        <span class="clients-link">
+                            <img src="{{ asset('storage/'.$client->image) }}" alt="{{ $client->name }}" loading="lazy">
+                        </span>
+                    @endif
+                </div>
+            @endforeach
+            {{-- Duplicate for seamless infinite loop --}}
+            @foreach($clients as $client)
+                <div class="clients-item" aria-hidden="true">
+                    @if($client->url)
+                        <a href="{{ $client->url }}" target="_blank" rel="noopener noreferrer" class="clients-link">
+                            <img src="{{ asset('storage/'.$client->image) }}" alt="{{ $client->name }}" loading="lazy">
+                        </a>
+                    @else
+                        <span class="clients-link">
+                            <img src="{{ asset('storage/'.$client->image) }}" alt="{{ $client->name }}" loading="lazy">
+                        </span>
+                    @endif
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+<style>
+    #clients-sec {
+        background: #ffffff;
+        padding: 36px 0 40px;
+        border-top: 1px solid #f1f5f9;
+        border-bottom: 1px solid #f1f5f9;
+        overflow: hidden;
+    }
+    .clients-marquee-label {
+        text-align: center;
+        margin-bottom: 22px;
+    }
+    .clients-marquee-label span {
+        font-size: .75rem;
+        font-weight: 700;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+        color: #94a3b8;
+    }
+    .clients-track-wrap {
+        overflow: hidden;
+        position: relative;
+    }
+    .clients-track-wrap::before,
+    .clients-track-wrap::after {
+        content: '';
+        position: absolute;
+        top: 0; bottom: 0;
+        width: 120px;
+        z-index: 2;
+        pointer-events: none;
+    }
+    .clients-track-wrap::before {
+        left: 0;
+        background: linear-gradient(to right, #ffffff, transparent);
+    }
+    .clients-track-wrap::after {
+        right: 0;
+        background: linear-gradient(to left, #ffffff, transparent);
+    }
+    .clients-track {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        width: max-content;
+        animation: clientsScroll 28s linear infinite;
+    }
+    .clients-track:hover { animation-play-state: paused; }
+    @keyframes clientsScroll {
+        0%   { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+    .clients-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 44px;
+        flex-shrink: 0;
+    }
+    .clients-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+    }
+    .clients-item img {
+        height: 52px;
+        width: auto;
+        max-width: 140px;
+        object-fit: contain;
+        filter: grayscale(1) opacity(.55);
+        transition: filter .3s ease, transform .3s ease;
+        display: block;
+    }
+    .clients-item:hover img {
+        filter: grayscale(0) opacity(1);
+        transform: scale(1.06);
+    }
+    @media (max-width: 575.98px) {
+        .clients-item { padding: 0 28px; }
+        .clients-item img { height: 38px; max-width: 100px; }
+    }
+</style>
+@endif
 
 {{-- ── Scroll-Reveal Animations ──────────────────────────────── --}}
 <style>
