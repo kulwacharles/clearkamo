@@ -11,6 +11,8 @@ use App\Models\Client;
 use App\Models\CoreValue;
 use App\Models\GalleryPhoto;
 use App\Models\Project;
+use App\Models\Publication;
+use App\Models\Vacancy;
 use App\Models\Service;
 use App\Models\CeoMessage;
 use Livewire\Component;
@@ -29,6 +31,9 @@ class Home extends Component
         public $coreValues;
         public $galleryProjects;
         public $ceoMessage = null;
+        public $projects;
+        public $publications;
+        public $vacancies;
         
 
         public function mount()
@@ -45,6 +50,11 @@ class Home extends Component
             ->with(['galleryPhotos' => fn ($q) => $q->where('status', 'published')])
             ->orderBy('title')
             ->get();
+        // Load projects for the picture grid
+        $this->projects = Project::where('status', 'published')->orderBy('title')->take(6)->get();
+        // Load publications and vacancies for new home sections
+        $this->publications = Publication::where('status', 'published')->orderBy('id', 'desc')->take(6)->get();
+        $this->vacancies = Vacancy::where('status', 'published')->orderBy('due_date', 'desc')->take(6)->get();
         $about = About::first();
         $this->testimonies=Testimony::where('status','published')->get();
         $this->blogs=Blog::where('status','published')->whereNotNull('slug')->where('slug','!=','')->orderBy('id','desc')->latest()->take(5)->get();
@@ -84,6 +94,9 @@ class Home extends Component
             'coreValues' => $this->coreValues,
             'galleryProjects' => $this->galleryProjects,
             'ceoMessage'      => $this->ceoMessage,
+            'projects'        => $this->projects,
+            'publications'    => $this->publications,
+            'vacancies'       => $this->vacancies,
         ])->layout("components.layouts.frontend", ["title"=>$this->title,"description"=>Str::limit(html_entity_decode(strip_tags($this->description)), 350, '...'),"keywords"=>$this->keywords,"image"=>$this->image]);
     }
 

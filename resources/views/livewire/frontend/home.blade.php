@@ -1559,162 +1559,6 @@
     </script>
     @endif
 
-    <section class="space-top space-bottom" id="focus-sec">
-        <div class="container">
-            <div class="title-area text-center">
-                <span class="sub-title">
-                    <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
-                    Our Focus Areas
-                    <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
-                </span>
-                <p class="mx-auto" style="max-width: 980px;">
-                    At CLEARKAMO, we strengthen execution performance in complex systems and help organizations convert strategic intent into reliable, measurable results.
-                </p>
-            </div>
-
-            @if($focusAreas && $focusAreas->count())
-            <div class="row g-4">
-                @foreach($focusAreas as $index => $area)
-                    <div class="col-xl-4 col-md-6">
-                        <article class="focus-card h-100">
-                            {{-- Photo banner (when an image is uploaded) --}}
-                            @if($area->image)
-                                <div class="focus-card-img">
-                                    <img src="{{ asset('storage/'.$area->image) }}" alt="{{ $area->title }}">
-                                    <span class="focus-card-number-overlay">{{ str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) }}</span>
-                                </div>
-                            @else
-                            <div class="focus-card-top">
-                                <span class="focus-card-number">{{ str_pad((string) ($index + 1), 2, '0', STR_PAD_LEFT) }}</span>
-                                <span class="focus-card-icon">
-                                    <i class="fas {{ $area->icon ?? 'fa-star' }}"></i>
-                                </span>
-                            </div>
-                            @endif
-                            <h3 class="focus-card-title">{{ $area->title }}</h3>
-                            <p class="focus-card-summary">{{ $area->summary }}</p>
-                        </article>
-                    </div>
-                @endforeach
-            </div>
-            @endif
-        </div>
-
-        <style>
-            #focus-sec .focus-card {
-                background: #ffffff;
-                border: 1px solid #e2e8f0;
-                border-radius: 16px;
-                overflow: hidden;
-                box-shadow: 0 12px 26px rgba(15, 23, 42, 0.08);
-                transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-                display: flex;
-                flex-direction: column;
-            }
-
-            #focus-sec .focus-card:hover {
-                transform: translateY(-4px);
-                border-color: rgba(3, 164, 252, 0.45);
-                box-shadow: 0 16px 30px rgba(3, 164, 252, 0.18);
-            }
-
-            /* Photo banner */
-            #focus-sec .focus-card-img {
-                position: relative;
-                width: 100%;
-                height: 200px;
-                overflow: hidden;
-            }
-
-            #focus-sec .focus-card-img img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                display: block;
-            }
-
-            #focus-sec .focus-card-number-overlay {
-                position: absolute;
-                top: 12px;
-                left: 12px;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                width: 36px;
-                height: 36px;
-                border-radius: 8px;
-                font-size: 14px;
-                font-weight: 700;
-                color: #ffffff;
-                background: #03A4FC;
-            }
-
-            /* Icon-only header (no image) */
-            #focus-sec .focus-card-top {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                margin-bottom: 14px;
-                padding: 22px 22px 0;
-            }
-
-            #focus-sec .focus-card-number {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                width: 40px;
-                height: 40px;
-                border-radius: 10px;
-                font-size: 15px;
-                font-weight: 700;
-                color: #ffffff;
-                background: #03A4FC;
-            }
-
-            #focus-sec .focus-card-icon {
-                width: 44px;
-                height: 44px;
-                border-radius: 12px;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                background: rgba(3, 164, 252, 0.13);
-                color: #03A4FC;
-                font-size: 20px;
-            }
-
-            #focus-sec .focus-card-title {
-                font-size: 1.1rem;
-                line-height: 1.3;
-                margin-bottom: 10px;
-                color: #0f172a;
-                padding: 16px 22px 0;
-                font-weight: 700;
-            }
-
-            /* When there's no image the top-padding is already set by .focus-card-top */
-            #focus-sec .focus-card:has(.focus-card-top) .focus-card-title {
-                padding-top: 0;
-            }
-
-            #focus-sec .focus-card-summary {
-                color: #334155;
-                margin-bottom: 20px;
-                padding: 0 22px 22px;
-                flex-grow: 1;
-            }
-
-            @media (max-width: 575.98px) {
-                #focus-sec .focus-card-img {
-                    height: 180px;
-                }
-                #focus-sec .focus-card-title {
-                    font-size: 1rem;
-                }
-            }
-        </style>
-    </section>
-
     <section class="space-top space-bottom" id="service-sec">
         <div class="container">
             <div class="row justify-content-center">
@@ -1849,6 +1693,111 @@
             }
         </style>
     </section>
+
+    {{-- ── Projects Section ─────────────────────────────────────── --}}
+    @if($projects && $projects->count() > 0)
+    <section class="space-top space-bottom" id="projects-sec" style="background: #f8fafc;">
+        <div class="container">
+            <div class="title-area text-center mb-4">
+                <span class="sub-title">
+                    <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">Our Projects
+                    <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
+                </span>
+                <h2 class="sec-title">Delivering Real-World Impact</h2>
+            </div>
+            <div class="row g-3">
+                @foreach($projects->take(6) as $project)
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <a wire:navigate href="{{ route('project', ['slug' => $project->slug]) }}" class="proj-pic-card d-block text-decoration-none">
+                        <div class="proj-pic-img">
+                            <img src="{{ asset('storage/'.$project->image) }}" alt="{{ $project->title }}" loading="lazy">
+                            <div class="proj-pic-overlay">
+                                <span class="proj-pic-category">{{ $project->category }}</span>
+                                <h4 class="proj-pic-title">{{ $project->title }}</h4>
+                                <span class="proj-pic-cta"><i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                @endforeach
+            </div>
+            <div class="text-center mt-5">
+                <a wire:navigate href="{{ route('projects') }}" class="th-btn style3">
+                    View All Projects <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+        <style>
+            #projects-sec .proj-pic-card { display: block; }
+            #projects-sec .proj-pic-img {
+                position: relative;
+                height: 260px;
+                overflow: hidden;
+                border-radius: 16px;
+                box-shadow: 0 8px 24px rgba(15,23,42,0.10);
+            }
+            #projects-sec .proj-pic-img img {
+                width: 100%; height: 100%;
+                object-fit: cover;
+                display: block;
+                transition: transform .45s ease;
+            }
+            #projects-sec .proj-pic-card:hover .proj-pic-img img { transform: scale(1.07); }
+            #projects-sec .proj-pic-overlay {
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(to top, rgba(10,25,50,.82) 0%, rgba(10,25,50,.18) 60%, transparent 100%);
+                border-radius: 16px;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                opacity: .92;
+                transition: opacity .3s ease;
+            }
+            #projects-sec .proj-pic-card:hover .proj-pic-overlay { opacity: 1; }
+            #projects-sec .proj-pic-category {
+                font-size: 11px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: .06em;
+                color: #03A4FC;
+                background: rgba(3,164,252,.15);
+                border: 1px solid rgba(3,164,252,.35);
+                border-radius: 20px;
+                padding: 3px 10px;
+                display: inline-block;
+                margin-bottom: 8px;
+                width: fit-content;
+            }
+            #projects-sec .proj-pic-title {
+                font-size: 1rem;
+                font-weight: 700;
+                color: #fff;
+                line-height: 1.35;
+                margin: 0 0 10px;
+            }
+            #projects-sec .proj-pic-cta {
+                width: 34px; height: 34px;
+                border-radius: 50%;
+                background: #03A4FC;
+                color: #fff;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-size: .85rem;
+                transition: background .2s ease, transform .2s ease;
+            }
+            #projects-sec .proj-pic-card:hover .proj-pic-cta {
+                background: #025ea8;
+                transform: translateX(4px);
+            }
+            @media (max-width: 575.98px) {
+                #projects-sec .proj-pic-img { height: 220px; }
+            }
+        </style>
+    </section>
+    @endif
 
     @if($clients && $clients->count() > 0)
     <section class="space-top space-bottom" id="clients-sec" style="background: #f8fafc;">
@@ -2216,6 +2165,276 @@
         </style>
     </section>
     @endif
+
+    {{-- ── Publications Section ─────────────────────────────────── --}}
+    @if($publications && $publications->count() > 0)
+    <section class="space-top space-bottom" id="publications-sec">
+        <div class="container">
+            <div class="title-area text-center mb-4">
+                <span class="sub-title">
+                    <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">Publications
+                    <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
+                </span>
+                <h2 class="sec-title">Research & Publications</h2>
+            </div>
+            <div class="row g-4">
+                @foreach($publications->take(4) as $pub)
+                <div class="col-lg-3 col-md-6">
+                    <a wire:navigate href="{{ route('publication.details', ['slug' => $pub->slug]) }}" class="pub-pic-card d-block text-decoration-none">
+                        <div class="pub-pic-img">
+                            <img src="{{ asset('storage/'.$pub->image) }}" alt="{{ $pub->title }}" loading="lazy">
+                            <div class="pub-pic-overlay">
+                                <h4 class="pub-pic-title">{{ $pub->title }}</h4>
+                                <span class="pub-pic-cta">Read <i class="fas fa-arrow-right ms-1"></i></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                @endforeach
+            </div>
+            <div class="text-center mt-5">
+                <a wire:navigate href="{{ route('publications') }}" class="th-btn style3">
+                    View All Publications <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+        <style>
+            #publications-sec .pub-pic-card { display: block; }
+            #publications-sec .pub-pic-img {
+                position: relative;
+                height: 320px;
+                overflow: hidden;
+                border-radius: 16px;
+                box-shadow: 0 8px 24px rgba(15,23,42,0.10);
+            }
+            #publications-sec .pub-pic-img img {
+                width: 100%; height: 100%;
+                object-fit: cover;
+                display: block;
+                transition: transform .45s ease;
+            }
+            #publications-sec .pub-pic-card:hover .pub-pic-img img { transform: scale(1.07); }
+            #publications-sec .pub-pic-overlay {
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(to top, rgba(10,25,50,.88) 0%, rgba(10,25,50,.12) 55%, transparent 100%);
+                border-radius: 16px;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                transition: opacity .3s ease;
+            }
+            #publications-sec .pub-pic-title {
+                font-size: .97rem;
+                font-weight: 700;
+                color: #fff;
+                line-height: 1.4;
+                margin: 0 0 10px;
+            }
+            #publications-sec .pub-pic-cta {
+                font-size: .82rem;
+                font-weight: 700;
+                color: #03A4FC;
+                letter-spacing: .02em;
+            }
+            #publications-sec .pub-pic-card:hover .pub-pic-cta { color: #7dd3fc; }
+            @media (max-width: 575.98px) {
+                #publications-sec .pub-pic-img { height: 260px; }
+            }
+        </style>
+    </section>
+    @endif
+
+    {{-- ── Vacancies Section ────────────────────────────────────── --}}
+    @if($vacancies && $vacancies->count() > 0)
+    <section class="space-top space-bottom" id="vacancies-sec" style="background: #f8fafc;">
+        <div class="container">
+            <div class="title-area text-center mb-4">
+                <span class="sub-title">
+                    <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">Vacancies
+                    <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
+                </span>
+                <h2 class="sec-title">Join Our Team</h2>
+            </div>
+            <div class="row g-4">
+                @foreach($vacancies->take(3) as $vacancy)
+                <div class="col-lg-4 col-md-6">
+                    <a wire:navigate href="{{ route('vacancy.details', ['slug' => $vacancy->slug]) }}" class="vac-pic-card d-block text-decoration-none">
+                        <div class="vac-pic-img">
+                            <img src="{{ asset('storage/'.$vacancy->image) }}" alt="{{ $vacancy->title }}" loading="lazy">
+                            <div class="vac-pic-overlay">
+                                <span class="vac-pic-contract">{{ $vacancy->contract }}</span>
+                                <h4 class="vac-pic-title">{{ $vacancy->title }}</h4>
+                                <div class="vac-pic-meta">
+                                    <span><i class="fas fa-building me-1"></i>{{ $vacancy->department }}</span>
+                                    <span><i class="fas fa-clock me-1"></i>Closes {{ \Carbon\Carbon::parse($vacancy->due_date)->format('d M Y') }}</span>
+                                </div>
+                                <span class="vac-pic-cta">Apply Now <i class="fas fa-arrow-right ms-1"></i></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                @endforeach
+            </div>
+            <div class="text-center mt-5">
+                <a wire:navigate href="{{ route('vacancies') }}" class="th-btn style3">
+                    View All Vacancies <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+        <style>
+            #vacancies-sec .vac-pic-card { display: block; }
+            #vacancies-sec .vac-pic-img {
+                position: relative;
+                height: 300px;
+                overflow: hidden;
+                border-radius: 16px;
+                box-shadow: 0 8px 24px rgba(15,23,42,0.10);
+            }
+            #vacancies-sec .vac-pic-img img {
+                width: 100%; height: 100%;
+                object-fit: cover;
+                display: block;
+                transition: transform .45s ease;
+            }
+            #vacancies-sec .vac-pic-card:hover .vac-pic-img img { transform: scale(1.07); }
+            #vacancies-sec .vac-pic-overlay {
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(to top, rgba(10,25,50,.90) 0%, rgba(10,25,50,.18) 60%, transparent 100%);
+                border-radius: 16px;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                gap: 6px;
+            }
+            #vacancies-sec .vac-pic-contract {
+                font-size: 11px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: .06em;
+                color: #34d399;
+                background: rgba(52,211,153,.15);
+                border: 1px solid rgba(52,211,153,.35);
+                border-radius: 20px;
+                padding: 3px 10px;
+                display: inline-block;
+                width: fit-content;
+            }
+            #vacancies-sec .vac-pic-title {
+                font-size: 1.05rem;
+                font-weight: 700;
+                color: #fff;
+                line-height: 1.35;
+                margin: 0;
+            }
+            #vacancies-sec .vac-pic-meta {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 12px;
+                font-size: .78rem;
+                color: rgba(255,255,255,.7);
+            }
+            #vacancies-sec .vac-pic-cta {
+                font-size: .85rem;
+                font-weight: 700;
+                color: #03A4FC;
+                margin-top: 4px;
+            }
+            #vacancies-sec .vac-pic-card:hover .vac-pic-cta { color: #7dd3fc; }
+            @media (max-width: 575.98px) {
+                #vacancies-sec .vac-pic-img { height: 260px; }
+            }
+        </style>
+    </section>
+    @endif
+
+    {{-- ── Contact CTA Section ──────────────────────────────────── --}}
+    <section id="contact-cta-sec">
+        <div class="container">
+            <div class="contact-cta-inner">
+                <div class="row align-items-center gy-4">
+                    <div class="col-lg-7">
+                        <span class="contact-cta-eyebrow">Get In Touch</span>
+                        <h2 class="contact-cta-title">Ready to Work With Us?</h2>
+                        <p class="contact-cta-text">Let's discuss how CLEARKAMO can help you achieve your goals.</p>
+                    </div>
+                    <div class="col-lg-5 text-lg-end">
+                        <a wire:navigate href="{{ route('contact-us') }}" class="contact-cta-btn">
+                            Contact Us <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <style>
+            #contact-cta-sec {
+                padding: 60px 0;
+                background: #0f172a;
+            }
+            #contact-cta-sec .contact-cta-inner {
+                background: linear-gradient(135deg, #03A4FC 0%, #025ea8 100%);
+                border-radius: 24px;
+                padding: 52px 48px;
+                position: relative;
+                overflow: hidden;
+            }
+            #contact-cta-sec .contact-cta-inner::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='28' stroke='rgba(255,255,255,0.08)' stroke-width='1' fill='none'/%3E%3C/svg%3E") repeat;
+                pointer-events: none;
+                opacity: .5;
+            }
+            #contact-cta-sec .contact-cta-eyebrow {
+                font-size: .78rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: .1em;
+                color: rgba(255,255,255,.75);
+                display: block;
+                margin-bottom: 10px;
+            }
+            #contact-cta-sec .contact-cta-title {
+                font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+                font-weight: 800;
+                color: #fff;
+                line-height: 1.2;
+                margin-bottom: 12px;
+            }
+            #contact-cta-sec .contact-cta-text {
+                color: rgba(255,255,255,.82);
+                font-size: 1rem;
+                margin: 0;
+            }
+            #contact-cta-sec .contact-cta-btn {
+                display: inline-flex;
+                align-items: center;
+                background: #fff;
+                color: #025ea8;
+                font-weight: 700;
+                font-size: 1rem;
+                padding: 16px 36px;
+                border-radius: 50px;
+                text-decoration: none;
+                transition: all .25s ease;
+                box-shadow: 0 8px 24px rgba(0,0,0,.18);
+                position: relative;
+            }
+            #contact-cta-sec .contact-cta-btn:hover {
+                background: #0f172a;
+                color: #fff;
+                transform: translateY(-2px);
+                box-shadow: 0 14px 32px rgba(0,0,0,.28);
+            }
+            @media (max-width: 767.98px) {
+                #contact-cta-sec .contact-cta-inner { padding: 36px 28px; }
+            }
+        </style>
+    </section>
 
     <section class="overflow-hidden space-top" id="testimonials">
     <div class="container">
