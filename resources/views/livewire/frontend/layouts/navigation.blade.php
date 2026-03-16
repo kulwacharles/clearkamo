@@ -1,4 +1,4 @@
-<div>
+<div id="ck-header-root" style="position:sticky;top:0;z-index:1050;">
 
 {{-- Sticky wrapper — keeps topbar + navbar fixed at the top together --}}
 <div id="ck-header-wrap" class="ck-header-wrap">
@@ -112,9 +112,6 @@
 <style>
     /* ── Sticky header wrapper — topbar + navbar stick together ─────────── */
     .ck-header-wrap {
-        position: sticky;
-        top: 0;
-        z-index: 1050;
         background: #ffffff;
         transition: box-shadow .25s ease;
     }
