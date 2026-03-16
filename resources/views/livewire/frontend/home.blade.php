@@ -261,7 +261,7 @@
                             WHO WE ARE
                             <img class="ms-1" src="assets/img/theme-img/title_icon.svg" alt="img">
                         </span>
-                        <h3 class="sec-title">{{ $about->title }}</h3>
+                        {{-- <h3 class="sec-title">{{ $about->title }}</h3> --}}
                         <div class="sec-text about-description-text">
                             {!! html_entity_decode($about->description) !!}
                         </div>
