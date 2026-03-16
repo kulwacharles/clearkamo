@@ -21,64 +21,31 @@
                             </div>
                         @endif
 
-                        <div class="row mb-3">
-                            <div class="col-md-8">
-                                <label>Title</label>
-                                <input type="text" class="form-control" wire:model="title">
-                                @error('title') <span class="text-danger">{{ $message }}</span> @enderror
-                            </div>
-                            <div class="col-md-4">
-                                <label>Post Category</label>
-                                <select class="form-control" wire:model="category" required>
-                                    <option value="">Please Select Category</option>
-                                    <option value="News">News</option>
-                                    <option value="Announcement">Announcement</option>
-                                </select>
-                                @error('category') <span class="text-danger">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-
-                        <div class="mb-3 row">
-                            <div class="col-md-6">
-                                <label>Status</label>
-                                <select class="form-control" wire:model="status" required>
-                                    <option value="draft">Draft</option>
-                                    <option value="published">Published</option>
-                                    <option value="archived">Archived</option>
-                                </select>
-                                @error('status') <span class="text-danger">{{ $message }}</span> @enderror
-                            </div>
-                            <div class="col-md-6">
-                                <label>Publish date</label>
-                                <input type="date" class="form-control" wire:model="published_date">
-                                @error('published_date') <span class="text-danger">{{ $message }}</span> @enderror 
-                            </div>
-                        </div>
-                         <div class="mb-3" wire:ignore>
-                            <label>Keywords</label>
-                            <textarea class="form-control" wire:model.defer="keywords"></textarea>
-                            @error('keywords') <span class="text-danger">{{ $message }}</span> @enderror
-                        </div>
-                        <div class="row">
-                            <div class="col-md-8 mb-3">
-                                <label>Publication Link (URL)</label>
-                                <input type="url" class="form-control" wire:model="link" placeholder="https://example.com/publication.pdf">
-                                @error('link') <span class="text-danger">{{ $message }}</span> @enderror
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label>Link Label</label>
-                                <input type="text" class="form-control" wire:model="link_label" placeholder="e.g. Download PDF">
-                                @error('link_label') <span class="text-danger">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                        <div class="mb-3" wire:ignore>
-                            <label>Description</label>
-                            <textarea id="description"></textarea>
-                            @error('description') <span class="text-danger">{{ $message }}</span> @enderror
+                        <div class="mb-3">
+                            <label>Title <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" wire:model="title">
+                            @error('title') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
 
                         <div class="mb-3">
-                            <label>Image</label>
+                            <label>External Link (URL) <span class="text-danger">*</span></label>
+                            <input type="url" class="form-control" wire:model="link" placeholder="https://example.com/publication.pdf">
+                            <small class="text-muted">Users will be directed to this link when they click on the publication.</small>
+                            @error('link') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Status</label>
+                            <select class="form-control" wire:model="status">
+                                <option value="draft">Draft</option>
+                                <option value="published">Published</option>
+                                <option value="archived">Archived</option>
+                            </select>
+                            @error('status') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Cover Image <span class="text-danger">*</span></label>
                             <input type="file" class="form-control" wire:model="image">
                             @error('image') <span class="text-danger">{{ $message }}</span> @enderror
                             @if($image)
@@ -125,66 +92,31 @@
 
                         <input type="hidden" wire:model="pubId">
 
-                        <div class="row mb-3">
-                            <div class="col-md-8">
-                                <label>Title</label>
-                                <input type="text" class="form-control" wire:model="title">
-                                @error('title') <span class="text-danger">{{ $message }}</span> @enderror
-                            </div>
-                            <div class="col-md-4">
-                                <label>Post Category</label>
-                                <select class="form-control" wire:model="category" required>
-                                    <option value="">Please Select Category</option>
-                                    <option value="News">News</option>
-                                    <option value="Announcement">Announcement</option>
-                                </select>
-                                @error('category') <span class="text-danger">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-
-                        <div class="mb-3 row">
-                            <div class="col-md-6">
-                                <label>Status</label>
-                                <select class="form-control" wire:model="status" required>
-                                    <option value="draft">Draft</option>
-                                    <option value="published">Published</option>
-                                    <option value="archived">Archived</option>
-                                </select>
-                                @error('status') <span class="text-danger">{{ $message }}</span> @enderror
-                            </div>
-                            <div class="col-md-6">
-                                <label>Publish date</label>
-                                <input type="date" class="form-control" wire:model="published_date">
-                                @error('published_date') <span class="text-danger">{{ $message }}</span> @enderror 
-                            </div>
-                        </div>
-                        <div class="mb-3" wire:ignore>
-                            <label>Keywords</label>
-                            <textarea class="form-control" wire:model.defer="keywords"></textarea>
-                            @error('keywords') <span class="text-danger">{{ $message }}</span> @enderror
-                        </div>
-                        <div class="row">
-                            <div class="col-md-8 mb-3">
-                                <label>Publication Link (URL)</label>
-                                <input type="url" class="form-control" wire:model="link" placeholder="https://example.com/publication.pdf">
-                                @error('link') <span class="text-danger">{{ $message }}</span> @enderror
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label>Link Label</label>
-                                <input type="text" class="form-control" wire:model="link_label" placeholder="e.g. Download PDF">
-                                @error('link_label') <span class="text-danger">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                        <div class="mb-3" wire:ignore>
-                            <label>Description</label>
-                            <div id="editDescriptionContainer">
-                                <textarea id="editDescription">{{ $description }}</textarea>
-                            </div>
-                            @error('description') <span class="text-danger">{{ $message }}</span> @enderror
+                        <div class="mb-3">
+                            <label>Title <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" wire:model="title">
+                            @error('title') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
 
                         <div class="mb-3">
-                            <label>Current Image</label>
+                            <label>External Link (URL) <span class="text-danger">*</span></label>
+                            <input type="url" class="form-control" wire:model="link" placeholder="https://example.com/publication.pdf">
+                            <small class="text-muted">Users will be directed to this link when they click on the publication.</small>
+                            @error('link') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Status</label>
+                            <select class="form-control" wire:model="status">
+                                <option value="draft">Draft</option>
+                                <option value="published">Published</option>
+                                <option value="archived">Archived</option>
+                            </select>
+                            @error('status') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Cover Image</label>
                             @if($currentImage)
                                 <div class="text-center mb-2">
                                     <img src="{{ asset('storage/'.$currentImage) }}" alt="Current Image" class="blog-image-preview img-fluid rounded" style="max-height: 200px;">
@@ -231,67 +163,34 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="row mb-3">
-                        <div class="col-md-8">
-                            <label class="fw-bold">Title</label>
-                            <p class="form-control-plaintext border-bottom pb-2">{{ $viewTitle ?? 'No title' }}</p>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="fw-bold">Category</label>
-                            <p class="form-control-plaintext border-bottom pb-2">{{ $viewCategory ?? 'No category' }}</p>
-                        </div>
+                    <div class="mb-3">
+                        <label class="fw-bold">Title</label>
+                        <p class="form-control-plaintext border-bottom pb-2">{{ $viewTitle ?? 'No title' }}</p>
                     </div>
 
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label class="fw-bold">Status</label>
-                            <p class="form-control-plaintext border-bottom pb-2">
-                                @if($viewStatus)
-                                    {{ ucfirst($viewStatus) }}
-                                @else
-                                    No status
-                                @endif
-                            </p>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="fw-bold">Publish Date</label>
-                            <p class="form-control-plaintext border-bottom pb-2">
-                                @if($viewPublishedDate)
-                                    {{ $viewPublishedDate }}
-                                @else
-                                    No publish date
-                                @endif
-                            </p>
-                        </div>
-                    </div>
                     <div class="mb-3">
-                        <label class="fw-bold">Keywords</label>
-                        <div class="blog-content-preview border rounded p-3 ">
-                            {!! $viewKeywords ?? 'No keywords' !!}
-                        </div>
-                    </div>
-                    @if($viewLink)
-                    <div class="mb-3">
-                        <label class="fw-bold">Publication Link</label>
-                        <p class="form-control-plaintext">
-                            <a href="{{ $viewLink }}" target="_blank" rel="noopener noreferrer">
-                                {{ $viewLinkLabel ?: $viewLink }}
-                            </a>
+                        <label class="fw-bold">Status</label>
+                        <p class="form-control-plaintext border-bottom pb-2">
+                            {{ $viewStatus ? ucfirst($viewStatus) : 'No status' }}
                         </p>
                     </div>
-                    @endif
+
                     <div class="mb-3">
-                        <label class="fw-bold">Description</label>
-                        <div class="blog-content-preview border rounded p-3 bg-light">
-                            {!! $viewDescription ?? 'No description' !!}
-                        </div>
+                        <label class="fw-bold">External Link</label>
+                        <p class="form-control-plaintext">
+                            @if($viewLink)
+                                <a href="{{ $viewLink }}" target="_blank" rel="noopener noreferrer">{{ $viewLink }}</a>
+                            @else
+                                <span class="text-muted">No link provided</span>
+                            @endif
+                        </p>
                     </div>
 
                     <div class="mb-3">
-                        <label class="fw-bold">Image</label>
+                        <label class="fw-bold">Cover Image</label>
                         <div class="text-center">
                             @if($viewImage)
-                                <img src="{{ asset('storage/'.$viewImage) }}" alt="Blog Image" class="blog-image-preview img-fluid rounded">
+                                <img src="{{ asset('storage/'.$viewImage) }}" alt="Cover Image" class="blog-image-preview img-fluid rounded">
                             @else
                                 <p class="text-muted">No image uploaded</p>
                             @endif
@@ -306,39 +205,7 @@
     </div>
 
     <script>
-        // Global variables to store CKEditor instances
-        let createEditor = null;
-        let editEditor = null;
-
         document.addEventListener('livewire:initialized', () => {
-            // Initialize CKEditor for create modal
-            initializeCreateEditor();
-
-            // Handle modal events for edit modal
-            const editModal = document.getElementById('editPubModal');
-            if (editModal) {
-                editModal.addEventListener('shown.bs.modal', function () {
-                    // Small delay to ensure modal is fully rendered
-                    setTimeout(() => {
-                        initializeEditEditor();
-                    }, 100);
-                });
-
-                editModal.addEventListener('hidden.bs.modal', function () {
-                    // Destroy edit editor when modal closes to prevent conflicts
-                    if (editEditor) {
-                        editEditor.destroy().then(() => {
-                            editEditor = null;
-                            // Recreate the textarea for next time
-                            const container = document.getElementById('editDescriptionContainer');
-                            if (container) {
-                                container.innerHTML = '<textarea id="editDescription">{{ $description }}</textarea>';
-                            }
-                        });
-                    }
-                });
-            }
-
             // Handle modal open/close events
             Livewire.on('open-modal', (event) => {
                 $('#' + event).modal('show');
@@ -348,7 +215,7 @@
                 $('#' + event).modal('hide');
             });
 
-            // Listen for events from blog list
+            // Listen for events from publication list
             Livewire.on('viewPub', (event) => {
                 @this.viewPub(event.pubId);
             });
@@ -361,80 +228,10 @@
                 @this.deletePub(event.pubId);
             });
 
-            // Handle CKEditor content setting for edit modal
-            Livewire.on('set-ckeditor-content', (event) => {
-                if (editEditor) {
-                    editEditor.setData(event.content || '');
-                } else {
-                    // If editor not ready, try again after a short delay
-                    setTimeout(() => {
-                        if (editEditor) {
-                            editEditor.setData(event.content || '');
-                        }
-                    }, 200);
-                }
-            });
-
             // Refresh page on update
             Livewire.on('pub-updated', () => {
                 window.location.reload();
             });
-        });
-
-        function initializeCreateEditor() {
-            const descriptionElement = document.querySelector('#description');
-            if (descriptionElement && typeof ClassicEditor !== 'undefined' && !createEditor) {
-                ClassicEditor
-                    .create(descriptionElement)
-                    .then(editor => {
-                        createEditor = editor;
-                        editor.model.document.on('change:data', () => {
-                            @this.set('description', editor.getData());
-                        });
-
-                        // Reset editor when modal is closed
-                        Livewire.on('reset-ckeditor', () => {
-                            editor.setData('');
-                        });
-                    })
-                    .catch(error => {
-                        console.error('Create editor error:', error);
-                    });
-            }
-        }
-
-        function initializeEditEditor() {
-            const editDescriptionElement = document.querySelector('#editDescription');
-            if (editDescriptionElement && typeof ClassicEditor !== 'undefined' && !editEditor) {
-                ClassicEditor
-                    .create(editDescriptionElement)
-                    .then(editor => {
-                        editEditor = editor;
-                        editor.model.document.on('change:data', () => {
-                            @this.set('description', editor.getData());
-                        });
-
-                        // Set initial content from Livewire
-                        const currentDescription = @this.get('description');
-                        if (currentDescription) {
-                            editor.setData(currentDescription);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Edit editor error:', error);
-                    });
-            }
-        }
-
-        // Alternative approach: Reinitialize editors when Livewire updates
-        document.addEventListener('livewire:update', () => {
-            // Check if edit modal is visible and initialize editor if needed
-            const editModal = document.getElementById('editPubModal');
-            if (editModal && editModal.classList.contains('show') && !editEditor) {
-                setTimeout(() => {
-                    initializeEditEditor();
-                }, 100);
-            }
         });
     </script>
 </div>

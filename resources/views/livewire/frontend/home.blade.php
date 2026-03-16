@@ -1519,18 +1519,13 @@
             <div class="row g-4">
                 @foreach($publications->take(4) as $index => $pub)
                 <div class="col-lg-3 col-md-6 sr-fade-up" style="animation-delay: {{ $index * 0.1 }}s">
-                    @if($pub->link)
                     <a href="{{ $pub->link }}" target="_blank" rel="noopener noreferrer" class="pub-pic-card d-block text-decoration-none">
-                    @else
-                    <a wire:navigate href="{{ route('publication.details', ['slug' => $pub->slug]) }}" class="pub-pic-card d-block text-decoration-none">
-                    @endif
                         <div class="pub-pic-img">
                             <img src="{{ asset('storage/'.$pub->image) }}" alt="{{ $pub->title }}" loading="lazy">
                             <div class="pub-pic-overlay">
                                 <h4 class="pub-pic-title">{{ $pub->title }}</h4>
                                 <span class="pub-pic-cta">
-                                    {{ $pub->link_label ?: ($pub->link ? 'Open' : 'Read') }}
-                                    <i class="fas fa-arrow-right ms-1"></i>
+                                    Open <i class="fas fa-external-link-alt ms-1"></i>
                                 </span>
                             </div>
                         </div>

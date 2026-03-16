@@ -23,28 +23,24 @@ class PublicationsModal extends Component
     public $viewLink, $viewLinkLabel;
 
     protected $messages = [
-        'title.required'       => 'The Title is required.',
-        'title.min'            => 'The Title must be at least 3 characters.',
-        'category.required'    => 'The Category is required.',
-        'description.required' => 'The Description is required.',
-        'description.min'      => 'The Description must be at least 10 characters.',
-        'image.required'       => 'The Image is required.',
-        'image.image'          => 'The Image must be valid.',
-        'image.max'            => 'The Image may not be greater than 2MB.',
-        'status.required'      => 'The Status is required.',
-        'status.in'            => 'The selected Status is invalid.',
-        'published_date.required' => 'Publish date required',
+        'title.required'    => 'The Title is required.',
+        'title.min'         => 'The Title must be at least 3 characters.',
+        'link.required'     => 'The external link URL is required.',
+        'link.url'          => 'The external link must be a valid URL.',
+        'image.required'    => 'The Cover Image is required.',
+        'image.image'       => 'The Cover Image must be a valid image.',
+        'image.max'         => 'The Cover Image may not be greater than 2MB.',
+        'status.required'   => 'The Status is required.',
+        'status.in'         => 'The selected Status is invalid.',
     ];
 
     protected function rules()
     {
         return [
-            'title'       => 'required|min:3|max:255',
-            'published_date' => 'required|date',
-            'category'    => 'required|min:3|max:255',
-            'description' => 'required|min:10',
-            'image'       => $this->pubId ? 'nullable|image|max:2048' : 'required|image|max:2048',
-            'status'      => 'required|in:published,draft,archived',
+            'title'  => 'required|min:3|max:255',
+            'link'   => 'required|url|max:2048',
+            'image'  => $this->pubId ? 'nullable|image|max:2048' : 'required|image|max:2048',
+            'status' => 'required|in:published,draft,archived',
         ];
     }
 
@@ -73,7 +69,6 @@ class PublicationsModal extends Component
             if($pub->save()){
                 session()->flash('message', 'Publication Post saved successfully.'); 
                 $this->resetAll();
-                $this->dispatch('reset-ckeditor');
                 $this->dispatch('close-modal', 'addBlogModal');
                 $this->dispatch('pub-updated');
             }
@@ -98,7 +93,6 @@ class PublicationsModal extends Component
         $this->keywords = $pub->keywords;
         $this->link = $pub->link;
         $this->link_label = $pub->link_label;
-        $this->dispatch('set-ckeditor-content', content: $pub->description);
         $this->dispatch('open-modal', 'editPubModal');
     }
 
