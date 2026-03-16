@@ -513,15 +513,15 @@
                                 <span class="gallery-block-dot"></span>
                                 <span class="gallery-block-label">Our Gallery</span>
                             </div>
-                            {{-- Project filter tabs --}}
+                            {{-- Project filter dropdown --}}
                             @if($galleryProjects && $galleryProjects->count())
-                                <div class="gallery-tabs" id="galleryTabs">
-                                    @foreach($galleryProjects as $gIdx => $gProj)
-                                        <button class="gallery-tab{{ $gIdx === 0 ? ' active' : '' }}"
-                                                data-project="{{ $gIdx }}">
-                                            {{ $gProj->title }}
-                                        </button>
-                                    @endforeach
+                                <div class="gallery-select-wrap">
+                                    <select id="galleryProjectSelect" class="gallery-select">
+                                        @foreach($galleryProjects as $gIdx => $gProj)
+                                            <option value="{{ $gIdx }}">{{ $gProj->title }}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="gallery-select-arrow"><i class="fas fa-chevron-down"></i></span>
                                 </div>
                             @endif
                         </div>
@@ -964,31 +964,42 @@
                 color: rgba(255,255,255,0.72);
             }
 
-            /* Project tabs */
-            #about-sec .gallery-tabs {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 6px;
-                max-width: 100%;
+            /* Project dropdown */
+            #about-sec .gallery-select-wrap {
+                position: relative;
+                display: inline-flex;
+                align-items: center;
             }
-            #about-sec .gallery-tab {
+            #about-sec .gallery-select {
+                appearance: none;
+                -webkit-appearance: none;
                 background: rgba(255,255,255,0.07);
-                color: rgba(255,255,255,0.6);
-                border: 1px solid rgba(255,255,255,0.12);
+                color: #fff;
+                border: 1px solid rgba(255,255,255,0.18);
                 border-radius: 20px;
-                padding: 4px 14px;
-                font-size: 0.75rem;
+                padding: 5px 34px 5px 14px;
+                font-size: 0.78rem;
                 font-weight: 600;
                 cursor: pointer;
+                outline: none;
                 transition: all 0.2s ease;
-                white-space: nowrap;
             }
-            #about-sec .gallery-tab.active,
-            #about-sec .gallery-tab:hover {
-                background: #03A4FC;
+            #about-sec .gallery-select option {
+                background: #1a2535;
                 color: #fff;
+            }
+            #about-sec .gallery-select:focus,
+            #about-sec .gallery-select:hover {
+                background: rgba(3,164,252,0.18);
                 border-color: #03A4FC;
-                box-shadow: 0 4px 12px rgba(3,164,252,0.35);
+                box-shadow: 0 4px 12px rgba(3,164,252,0.25);
+            }
+            #about-sec .gallery-select-arrow {
+                position: absolute;
+                right: 11px;
+                pointer-events: none;
+                color: rgba(255,255,255,0.6);
+                font-size: 0.65rem;
             }
 
             /* Panels */
@@ -1131,14 +1142,12 @@
                 #about-sec .about-mv-card,
                 #about-sec .about-cv-card { padding: 12px 8px; }
                 #about-sec .gallery-block-header { flex-direction: column; }
-                #about-sec .gallery-tabs { gap: 4px; }
-                #about-sec .gallery-tab { font-size: 0.7rem; padding: 3px 10px; }
             }
         </style>
 
         <script>
         (function () {
-            // ── Gallery: tab switching + slide navigation ──────────────────
+            // ── Gallery: dropdown switching + slide navigation ──────────────────
             var sliderState = {}; // keyed by panel index
 
             function initGallery() {
@@ -1150,19 +1159,16 @@
                     showSlide(idx, 0);
                 });
 
-                // Tab click
-                document.querySelectorAll('#about-sec .gallery-tab').forEach(function (tab) {
-                    tab.addEventListener('click', function () {
-                        var panelIdx = tab.dataset.project;
-                        // Update tabs
-                        document.querySelectorAll('#about-sec .gallery-tab').forEach(function (t) { t.classList.remove('active'); });
-                        tab.classList.add('active');
-                        // Update panels
+                // Dropdown change
+                var sel = document.getElementById('galleryProjectSelect');
+                if (sel) {
+                    sel.addEventListener('change', function () {
+                        var panelIdx = sel.value;
                         document.querySelectorAll('#about-sec .gallery-panel').forEach(function (p) { p.classList.remove('active'); });
                         var target = document.querySelector('#about-sec .gallery-panel[data-panel="' + panelIdx + '"]');
                         if (target) { target.classList.add('active'); }
                     });
-                });
+                }
 
                 // Prev / Next
                 document.querySelectorAll('#about-sec .gallery-prev').forEach(function (btn) {
