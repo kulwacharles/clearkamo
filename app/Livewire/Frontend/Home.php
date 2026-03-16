@@ -45,7 +45,7 @@ class Home extends Component
             ->get();
         $about = About::first();
         $this->testimonies=Testimony::where('status','published')->get();
-        $this->blogs=Blog::where('status','published')->orderBy('id','desc')->latest()->take(5)->get();
+        $this->blogs=Blog::where('status','published')->whereNotNull('slug')->where('slug','!=','')->orderBy('id','desc')->latest()->take(5)->get();
         $this->teams=Team::where('status',"published")->get();
         $this->focusAreas=FocusArea::where('status','published')->orderBy('sort_order')->orderBy('id')->get();
         if ($about) {

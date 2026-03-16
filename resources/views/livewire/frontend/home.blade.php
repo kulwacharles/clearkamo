@@ -2071,6 +2071,7 @@
 
             <div class="row g-4">
                 @foreach($blogs->take(3) as $blog)
+                @if($blog->slug)
                 <div class="col-lg-4 col-md-6">
                     <article class="news-card h-100">
                         <a wire:navigate href="{{ route('news-and-updates.details', ['slug' => $blog->slug]) }}" class="news-card-thumb-link">
@@ -2100,6 +2101,7 @@
                         </div>
                     </article>
                 </div>
+                @endif
                 @endforeach
             </div>
 
