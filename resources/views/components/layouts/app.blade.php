@@ -89,6 +89,19 @@
                 background: transparent !important;
             }
 
+            /*
+             * Fix: .main_content_iner has `position: relative; z-index: 22` in style1.css
+             * which creates a CSS stacking context. Bootstrap 5 appends .modal-backdrop to
+             * <body> (z-index: 1055) and renders .modal at z-index 1060, but both are in the
+             * root stacking context. Because the entire .main_content_iner is at stacking-context
+             * level 22 (below 1055), all modal dialogs inside it appear BEHIND the backdrop.
+             * Setting z-index: auto removes the stacking context so Bootstrap modal z-indexes
+             * work correctly relative to the root.
+             */
+            .main_content .main_content_iner {
+                z-index: auto !important;
+            }
+
             .admin-sticky-header {
                 position: fixed;
                 top: 0;
