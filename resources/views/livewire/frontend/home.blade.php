@@ -1634,32 +1634,40 @@
         #team-sec .team-card {
             background: #fff;
             border-radius: 16px;
-            overflow: hidden;
             box-shadow: 0 6px 22px rgba(15,23,42,.08);
             border: 1px solid #e5e7eb;
             transition: transform .25s ease, box-shadow .25s ease;
+            text-align: center;
+            padding: 28px 20px 24px;
         }
         #team-sec .team-card:hover {
             transform: translateY(-6px);
             box-shadow: 0 18px 40px rgba(3,164,252,.14);
         }
         #team-sec .team-card-photo-link {
-            display: block;
+            display: inline-block;
             position: relative;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
             overflow: hidden;
+            border: 4px solid #03A4FC;
+            margin-bottom: 18px;
+            flex-shrink: 0;
         }
         #team-sec .team-card-photo {
             width: 100%;
-            height: 280px;
+            height: 100%;
             object-fit: cover;
             display: block;
             transition: transform .45s ease;
         }
-        #team-sec .team-card:hover .team-card-photo { transform: scale(1.06); }
+        #team-sec .team-card:hover .team-card-photo { transform: scale(1.08); }
         #team-sec .team-card-hover-overlay {
             position: absolute;
             inset: 0;
-            background: rgba(3,164,252,.72);
+            border-radius: 50%;
+            background: rgba(3,164,252,.75);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1669,17 +1677,15 @@
         #team-sec .team-card:hover .team-card-hover-overlay { opacity: 1; }
         #team-sec .team-card-view-btn {
             color: #fff;
-            font-size: .88rem;
+            font-size: .78rem;
             font-weight: 700;
-            letter-spacing: .04em;
-            background: rgba(255,255,255,.18);
-            border: 2px solid rgba(255,255,255,.8);
-            border-radius: 30px;
-            padding: 8px 22px;
+            letter-spacing: .03em;
             text-decoration: none;
+            text-align: center;
+            line-height: 1.3;
         }
         #team-sec .team-card-info {
-            padding: 18px 18px 20px;
+            padding: 0;
         }
         #team-sec .team-card-name {
             font-size: 1rem;
