@@ -36,7 +36,7 @@ class BackendGalleryModal extends Component
 
     public function mount()
     {
-        $this->projects = Project::where('status', 'published')->orderBy('project_name')->get();
+        $this->projects = Project::where('status', 'published')->orderBy('title')->get();
     }
 
     public function store()

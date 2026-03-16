@@ -24,7 +24,7 @@
                                 <select class="form-control" wire:model="project_id">
                                     <option value="">— Select Project —</option>
                                     @foreach($projects as $proj)
-                                        <option value="{{ $proj->id }}">{{ $proj->project_name }}</option>
+                                        <option value="{{ $proj->id }}">{{ $proj->title }}</option>
                                     @endforeach
                                 </select>
                                 @error('project_id') <span class="text-danger small">{{ $message }}</span> @enderror
@@ -101,7 +101,7 @@
                                 <select class="form-control" wire:model="project_id">
                                     <option value="">— Select Project —</option>
                                     @foreach($projects as $proj)
-                                        <option value="{{ $proj->id }}">{{ $proj->project_name }}</option>
+                                        <option value="{{ $proj->id }}">{{ $proj->title }}</option>
                                     @endforeach
                                 </select>
                                 @error('project_id') <span class="text-danger small">{{ $message }}</span> @enderror

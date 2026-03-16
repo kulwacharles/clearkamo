@@ -16,7 +16,7 @@ class BackendGallery extends Component
     public function mount()
     {
         abort_unless(auth()->check(), 401);
-        $this->projects = Project::where('status', 'published')->orderBy('project_name')->get();
+        $this->projects = Project::where('status', 'published')->orderBy('title')->get();
         $this->loadPhotos();
     }
 

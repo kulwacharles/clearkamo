@@ -32,7 +32,7 @@
                                         <select class="form-control form-control-sm" wire:model.live="filterProjectId" style="min-width:200px;">
                                             <option value="">— All Projects —</option>
                                             @foreach($projects as $proj)
-                                                <option value="{{ $proj->id }}">{{ $proj->project_name }}</option>
+                                                <option value="{{ $proj->id }}">{{ $proj->title }}</option>
                                             @endforeach
                                         </select>
                                         <div class="add_button ms-2">
@@ -61,7 +61,7 @@
                                                     <td>
                                                         <img src="{{ asset('storage/'.$photo->image) }}" class="gal-thumb" alt="gallery">
                                                     </td>
-                                                    <td>{{ $photo->project->project_name ?? '—' }}</td>
+                                                    <td>{{ $photo->project->title ?? '—' }}</td>
                                                     <td>{{ $photo->caption ?: '—' }}</td>
                                                     <td>{{ $photo->sort_order }}</td>
                                                     <td>

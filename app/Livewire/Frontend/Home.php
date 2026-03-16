@@ -41,7 +41,7 @@ class Home extends Component
         $this->galleryProjects = Project::where('status', 'published')
             ->whereHas('galleryPhotos', fn ($q) => $q->where('status', 'published'))
             ->with(['galleryPhotos' => fn ($q) => $q->where('status', 'published')])
-            ->orderBy('project_name')
+            ->orderBy('title')
             ->get();
         $about = About::first();
         $this->testimonies=Testimony::where('status','published')->get();

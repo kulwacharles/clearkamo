@@ -519,7 +519,7 @@
                                     @foreach($galleryProjects as $gIdx => $gProj)
                                         <button class="gallery-tab{{ $gIdx === 0 ? ' active' : '' }}"
                                                 data-project="{{ $gIdx }}">
-                                            {{ $gProj->project_name }}
+                                            {{ $gProj->title }}
                                         </button>
                                     @endforeach
                                 </div>
@@ -535,7 +535,7 @@
                                                 <div class="gallery-slide">
                                                     <div class="gallery-slide-img-wrap">
                                                         <img src="{{ asset('storage/'.$photo->image) }}"
-                                                             alt="{{ $photo->caption ?: $gProj->project_name }}"
+                                                             alt="{{ $photo->caption ?: $gProj->title }}"
                                                              loading="lazy">
                                                         @if($photo->caption)
                                                             <div class="gallery-slide-caption">{{ $photo->caption }}</div>
