@@ -121,21 +121,33 @@
 
     /* ── Top bar ─────────────────────────────────────────────────────────── */
     .ck-topbar {
-        background: #ffffff;
-        color: #a3a3a3;
+        background: #03a4fc;
+        color: rgba(255,255,255,.85);
         font-size: .82rem;
         padding: 7px 3%;
         gap: 10px;
-        border-bottom: 1px solid #e9ecef;
+        border-bottom: none;
+        overflow: hidden;
+        max-height: 60px;
+        opacity: 1;
+        transition: max-height .35s ease, padding .35s ease, opacity .25s ease;
     }
     .ck-topbar a {
-        color: #a3a3a3;
+        color: rgba(255,255,255,.9);
         text-decoration: none;
-        transition: color .2s;
+        transition: color .2s, opacity .2s;
     }
-    .ck-topbar a:hover { color: #03a4fc; }
+    .ck-topbar a:hover { color: #ffffff; opacity: 1; }
     .ck-topbar-right { display: flex; gap: 14px; }
     .ck-topbar-right a { font-size: .9rem; }
+
+    /* Hide top bar while scrolled, restore when back at top */
+    .ck-header-wrap.scrolled .ck-topbar {
+        max-height: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        opacity: 0;
+    }
 
     /* ── Main navbar ─────────────────────────────────────────────────────── */
     .ck-navbar {
