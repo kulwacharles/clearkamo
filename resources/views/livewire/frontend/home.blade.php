@@ -671,11 +671,11 @@
                 width: 100%;
             }
             #about-sec .about-video-cinema-inner {
-                background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0c1d35 100%);
+                background: #a3a3a3;
                 border-radius: 24px;
                 padding: 28px 28px 28px;
-                box-shadow: 0 24px 60px rgba(3, 164, 252, 0.18), 0 8px 24px rgba(15, 23, 42, 0.32);
-                border: 1px solid rgba(3, 164, 252, 0.18);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+                border: 1px solid rgba(0, 0, 0, 0.12);
                 position: relative;
                 overflow: hidden;
             }
@@ -683,7 +683,7 @@
                 content: '';
                 position: absolute;
                 inset: 0;
-                background: radial-gradient(ellipse at top left, rgba(3,164,252,0.1) 0%, transparent 60%);
+                background: none;
                 pointer-events: none;
             }
             #about-sec .about-video-cinema-label {
@@ -694,7 +694,7 @@
                 font-weight: 700;
                 letter-spacing: 0.12em;
                 text-transform: uppercase;
-                color: rgba(255,255,255,0.72);
+                color: rgba(0,0,0,0.72);
                 margin-bottom: 16px;
             }
             #about-sec .about-video-dot {
@@ -725,9 +725,9 @@
                 display: block;
             }
             #about-sec .about-video-placeholder {
-                color: rgba(255,255,255,0.6);
+                color: rgba(0,0,0,0.6);
                 font-size: 0.95rem;
-                background: rgba(255,255,255,0.04);
+                background: rgba(0,0,0,0.06);
                 min-height: 260px;
             }
             #about-sec .about-video-placeholder-icon {
@@ -845,11 +845,11 @@
                 width: 100%;
             }
             #about-sec .about-video-cinema-inner {
-                background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0c1d35 100%);
+                background: #a3a3a3;
                 border-radius: 24px;
                 padding: 24px;
-                box-shadow: 0 24px 60px rgba(3, 164, 252, 0.18), 0 8px 24px rgba(15, 23, 42, 0.32);
-                border: 1px solid rgba(3, 164, 252, 0.18);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+                border: 1px solid rgba(0, 0, 0, 0.12);
                 position: relative;
                 overflow: hidden;
                 display: flex;
@@ -859,7 +859,7 @@
                 content: '';
                 position: absolute;
                 inset: 0;
-                background: radial-gradient(ellipse at top left, rgba(3,164,252,0.1) 0%, transparent 60%);
+                background: none;
                 pointer-events: none;
             }
             #about-sec .about-video-cinema-label {
@@ -870,7 +870,7 @@
                 font-weight: 700;
                 letter-spacing: 0.12em;
                 text-transform: uppercase;
-                color: rgba(255,255,255,0.72);
+                color: rgba(0,0,0,0.72);
                 margin-bottom: 14px;
             }
             #about-sec .about-video-dot {
@@ -902,9 +902,9 @@
                 display: block;
             }
             #about-sec .about-video-placeholder {
-                color: rgba(255,255,255,0.6);
+                color: rgba(0,0,0,0.6);
                 font-size: 0.95rem;
-                background: rgba(255,255,255,0.04);
+                background: rgba(0,0,0,0.06);
                 min-height: 220px;
             }
             #about-sec .about-video-placeholder-icon {
@@ -914,11 +914,11 @@
 
             /* ── Gallery block ───────────────────────────────────────────────── */
             #about-sec .gallery-block {
-                background: linear-gradient(135deg, #0f172a 0%, #1e2d44 60%, #0c1d35 100%);
+                background: #a3a3a3;
                 border-radius: 24px;
                 padding: 24px;
-                box-shadow: 0 24px 60px rgba(3, 164, 252, 0.15), 0 8px 24px rgba(15, 23, 42, 0.28);
-                border: 1px solid rgba(3, 164, 252, 0.18);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+                border: 1px solid rgba(0, 0, 0, 0.12);
                 display: flex;
                 flex-direction: column;
                 position: relative;
@@ -929,7 +929,7 @@
                 content: '';
                 position: absolute;
                 inset: 0;
-                background: radial-gradient(ellipse at bottom right, rgba(3,164,252,0.08) 0%, transparent 60%);
+                background: none;
                 pointer-events: none;
             }
             #about-sec .gallery-block-header {
@@ -962,7 +962,7 @@
                 font-weight: 700;
                 letter-spacing: 0.12em;
                 text-transform: uppercase;
-                color: rgba(255,255,255,0.72);
+                color: rgba(0,0,0,0.72);
             }
 
             /* Project dropdown */
@@ -974,9 +974,9 @@
             #about-sec .gallery-select {
                 appearance: none;
                 -webkit-appearance: none;
-                background: rgba(255,255,255,0.07);
-                color: #fff;
-                border: 1px solid rgba(255,255,255,0.18);
+                background: rgba(0,0,0,0.08);
+                color: #222;
+                border: 1px solid rgba(0,0,0,0.2);
                 border-radius: 20px;
                 padding: 5px 34px 5px 14px;
                 font-size: 0.78rem;
@@ -986,20 +986,20 @@
                 transition: all 0.2s ease;
             }
             #about-sec .gallery-select option {
-                background: #1a2535;
-                color: #fff;
+                background: #a3a3a3;
+                color: #222;
             }
             #about-sec .gallery-select:focus,
             #about-sec .gallery-select:hover {
-                background: rgba(3,164,252,0.18);
-                border-color: #03A4FC;
-                box-shadow: 0 4px 12px rgba(3,164,252,0.25);
+                background: rgba(0,0,0,0.14);
+                border-color: rgba(0,0,0,0.4);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             }
             #about-sec .gallery-select-arrow {
                 position: absolute;
                 right: 11px;
                 pointer-events: none;
-                color: rgba(255,255,255,0.6);
+                color: rgba(0,0,0,0.6);
                 font-size: 0.65rem;
             }
 
