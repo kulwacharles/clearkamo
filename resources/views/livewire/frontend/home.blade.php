@@ -265,7 +265,7 @@
                         <div class="sec-text about-description-text">
                             {!! \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($about->description)), 280, '…') !!}
                         </div>
-                        <a wire:navigate href="{{ route('about') }}" class="about-readmore-link mt-3">
+                        <a wire:navigate href="{{ route('about-us') }}" class="about-readmore-link mt-3">
                             Learn More About Us <i class="fas fa-arrow-right ms-2"></i>
                         </a>
                     </div>
@@ -680,10 +680,10 @@
                 width: 100%;
             }
             #about-sec .about-video-cinema-inner {
-                background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0c1d35 100%);
+                background: linear-gradient(135deg, #0f172a 0%, #1e2d44 60%, #0c1d35 100%);
                 border-radius: 24px;
                 padding: 24px;
-                box-shadow: 0 24px 60px rgba(3, 164, 252, 0.18), 0 8px 24px rgba(15, 23, 42, 0.32);
+                box-shadow: 0 24px 60px rgba(3, 164, 252, 0.15), 0 8px 24px rgba(15, 23, 42, 0.28);
                 border: 1px solid rgba(3, 164, 252, 0.18);
                 position: relative;
                 overflow: hidden;

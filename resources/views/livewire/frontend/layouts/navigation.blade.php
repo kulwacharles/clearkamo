@@ -111,9 +111,9 @@
         </div>
         <div class="th-mobile-menu">
             <ul>
-                <li >
+                {{-- <li >
                     <a wire:navigate  href="/">Home</a>
-                </li>
+                </li> --}}
                 <li>
                     <a wire:navigate  href="/about-us">About Us</a>
                 </li>
@@ -133,9 +133,9 @@
                 <li>
                     <a wire:navigate  href="/contact-us">Contact Us</a>
                 </li>
-                <li >
+                {{-- <li >
                     <a wire:navigate href="/vacancies">Vacancies</a>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </div>
@@ -297,6 +297,110 @@
 
     .header-search-wrap.open .header-search-popover {
         display: block;
+    }
+
+    @media (max-width: 991.98px) {
+        .header-top {
+            display: none !important;
+        }
+        .header-logo {
+            display: flex !important;
+            justify-content: flex-start !important;
+            align-items: center;
+            width: 100%;
+            padding: 12px 0 12px 12px;
+            background: #fff;
+            z-index: 1001;
+            position: relative;
+        }
+        .header-logo img {
+            max-width: 130px;
+            height: auto;
+            display: block;
+        }
+    }
+
+    @media (max-width: 575.98px) {
+        .header-logo img {
+            max-width: 110px;
+        }
+    }
+
+    @media (max-width: 1199.98px) {
+        .header-logo {
+            display: flex !important;
+            justify-content: flex-start !important;
+            align-items: center;
+            width: 100%;
+            padding: 12px 0 12px 12px;
+            background: #fff;
+            z-index: 1001;
+            position: relative;
+        }
+        .header-logo img {
+            max-width: 140px;
+            height: auto;
+            display: block;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .header-logo {
+            display: flex !important;
+            justify-content: flex-start !important;
+            align-items: center;
+            width: 100%;
+            padding: 12px 0 12px 12px;
+            background: #fff;
+            z-index: 1001;
+            position: relative;
+        }
+        .header-logo img {
+            max-width: 160px;
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    }
+
+    .header-logo {
+        display: flex !important;
+        align-items: center;
+        background: #fff;
+        z-index: 1001;
+        position: relative;
+        width: 200px;
+        min-width: 120px;
+        padding: 12px 0 12px 12px;
+    }
+
+    .header-logo img {
+        max-width: 160px;
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    @media (max-width: 991.98px) {
+        .header-logo {
+            width: 140px;
+            min-width: 100px;
+            padding: 10px 0 10px 10px;
+        }
+        .header-logo img {
+            max-width: 130px;
+        }
+    }
+
+    @media (max-width: 575.98px) {
+        .header-logo {
+            width: 110px;
+            min-width: 80px;
+            padding: 8px 0 8px 8px;
+        }
+        .header-logo img {
+            max-width: 110px;
+        }
     }
 </style>
 <script>
