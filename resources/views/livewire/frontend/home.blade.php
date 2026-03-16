@@ -517,6 +517,7 @@
                             @if($galleryProjects && $galleryProjects->count())
                                 <div class="gallery-select-wrap">
                                     <select id="galleryProjectSelect" class="gallery-select">
+                                        <option value="all">All Projects</option>
                                         @foreach($galleryProjects as $gIdx => $gProj)
                                             <option value="{{ $gIdx }}">{{ $gProj->title }}</option>
                                         @endforeach
@@ -1147,84 +1148,142 @@
 
         <script>
         (function () {
-            // ── Gallery: dropdown switching + slide navigation ──────────────────
-            var sliderState = {}; // keyed by panel index
+                // ── Gallery: dropdown switching + slide navigation ──────────────────
+                var sliderState = {}; // keyed by panel index
+                var autoRotateInterval = null;
 
-            function initGallery() {
-                // Build initial state for each panel
+                // Collect ordered panel indices
+                var panelIndices = [];
                 document.querySelectorAll('#about-sec .gallery-panel').forEach(function (panel) {
-                    var idx = panel.dataset.panel;
-                    var slides = panel.querySelectorAll('.gallery-slide');
-                    sliderState[idx] = { current: 0, total: slides.length };
-                    showSlide(idx, 0);
+                    panelIndices.push(panel.dataset.panel);
                 });
 
-                // Dropdown change
-                var sel = document.getElementById('galleryProjectSelect');
-                if (sel) {
-                    sel.addEventListener('change', function () {
-                        var panelIdx = sel.value;
-                        document.querySelectorAll('#about-sec .gallery-panel').forEach(function (p) { p.classList.remove('active'); });
-                        var target = document.querySelector('#about-sec .gallery-panel[data-panel="' + panelIdx + '"]');
-                        if (target) { target.classList.add('active'); }
+                function initGallery() {
+                    // Build initial state for each panel
+                    document.querySelectorAll('#about-sec .gallery-panel').forEach(function (panel) {
+                        var idx = panel.dataset.panel;
+                        var slides = panel.querySelectorAll('.gallery-slide');
+                        sliderState[idx] = { current: 0, total: slides.length };
+                        showSlide(idx, 0);
                     });
+
+                    // Dropdown change
+                    var sel = document.getElementById('galleryProjectSelect');
+                    if (sel) {
+                        sel.addEventListener('change', function () {
+                            var val = sel.value;
+                            stopAutoRotate();
+                            if (val === 'all') {
+                                // Show first panel and begin cross-project autoplay
+                                activatePanel(panelIndices[0]);
+                                startAutoRotate();
+                            } else {
+                                // Lock to the chosen project
+                                activatePanel(val);
+                                // Still autoplay slides within the locked project
+                                startSlideOnlyAutoplay(val);
+                            }
+                        });
+                    }
+
+                    // Prev / Next
+                    document.querySelectorAll('#about-sec .gallery-prev').forEach(function (btn) {
+                        btn.addEventListener('click', function () {
+                            var idx = btn.dataset.slider;
+                            var s = sliderState[idx];
+                            if (!s) return;
+                            showSlide(idx, (s.current - 1 + s.total) % s.total);
+                        });
+                    });
+                    document.querySelectorAll('#about-sec .gallery-next').forEach(function (btn) {
+                        btn.addEventListener('click', function () {
+                            var idx = btn.dataset.slider;
+                            var s = sliderState[idx];
+                            if (!s) return;
+                            showSlide(idx, (s.current + 1) % s.total);
+                        });
+                    });
+
+                    // Dot click
+                    document.querySelectorAll('#about-sec .gallery-dot').forEach(function (dot) {
+                        dot.addEventListener('click', function () {
+                            showSlide(dot.dataset.slider, parseInt(dot.dataset.idx, 10));
+                        });
+                    });
+
+                    // Start in "all projects" mode
+                    startAutoRotate();
                 }
 
-                // Prev / Next
-                document.querySelectorAll('#about-sec .gallery-prev').forEach(function (btn) {
-                    btn.addEventListener('click', function () {
-                        var idx = btn.dataset.slider;
-                        var s = sliderState[idx];
-                        if (!s) return;
-                        showSlide(idx, (s.current - 1 + s.total) % s.total);
+                // Activate a panel by index string, deactivate all others
+                function activatePanel(panelIdx) {
+                    document.querySelectorAll('#about-sec .gallery-panel').forEach(function (p) {
+                        p.classList.remove('active');
                     });
-                });
-                document.querySelectorAll('#about-sec .gallery-next').forEach(function (btn) {
-                    btn.addEventListener('click', function () {
-                        var idx = btn.dataset.slider;
-                        var s = sliderState[idx];
-                        if (!s) return;
-                        showSlide(idx, (s.current + 1) % s.total);
-                    });
-                });
+                    var target = document.querySelector('#about-sec .gallery-panel[data-panel="' + panelIdx + '"]');
+                    if (target) { target.classList.add('active'); }
+                }
 
-                // Dot click
-                document.querySelectorAll('#about-sec .gallery-dot').forEach(function (dot) {
-                    dot.addEventListener('click', function () {
-                        showSlide(dot.dataset.slider, parseInt(dot.dataset.idx, 10));
-                    });
-                });
-
-                // Auto-play (4 s interval) per panel
-                setInterval(function () {
-                    document.querySelectorAll('#about-sec .gallery-panel.active').forEach(function (panel) {
-                        var idx = panel.dataset.panel;
-                        var s = sliderState[idx];
-                        if (s && s.total > 1) {
-                            showSlide(idx, (s.current + 1) % s.total);
+                // Cross-project autoplay: advances slide; when last slide of a project is
+                // shown, next tick moves to the first slide of the next project.
+                function startAutoRotate() {
+                    stopAutoRotate();
+                    autoRotateInterval = setInterval(function () {
+                        var activePanel = document.querySelector('#about-sec .gallery-panel.active');
+                        if (!activePanel) return;
+                        var idx = activePanel.dataset.panel;
+                        var s   = sliderState[idx];
+                        if (!s) return;
+                        var nextSlide = (s.current + 1) % s.total;
+                        if (nextSlide !== 0 || s.total === 1) {
+                            // Advance within this project
+                            showSlide(idx, nextSlide);
+                        } else {
+                            // Finished last slide — advance to the next project's first slide
+                            showSlide(idx, 0);
+                            var currentPanelPos = panelIndices.indexOf(idx);
+                            var nextPanelIdx    = panelIndices[(currentPanelPos + 1) % panelIndices.length];
+                            activatePanel(nextPanelIdx);
+                            showSlide(nextPanelIdx, 0);
                         }
-                    });
-                }, 4000);
-            }
+                    }, 4000);
+                }
 
-            function showSlide(panelIdx, slideIdx) {
-                var panel = document.querySelector('#about-sec .gallery-panel[data-panel="' + panelIdx + '"]');
-                if (!panel) return;
-                var slides = panel.querySelectorAll('.gallery-slide');
-                var dots   = panel.querySelectorAll('.gallery-dot');
-                slides.forEach(function (s) { s.classList.remove('active'); });
-                dots.forEach(function (d) { d.classList.remove('active'); });
-                if (slides[slideIdx]) slides[slideIdx].classList.add('active');
-                if (dots[slideIdx])   dots[slideIdx].classList.add('active');
-                sliderState[panelIdx] = sliderState[panelIdx] || {};
-                sliderState[panelIdx].current = slideIdx;
-            }
+                // Slide-only autoplay for a locked project (no project rotation)
+                function startSlideOnlyAutoplay(panelIdx) {
+                    stopAutoRotate();
+                    autoRotateInterval = setInterval(function () {
+                        var s = sliderState[panelIdx];
+                        if (!s || s.total <= 1) return;
+                        showSlide(panelIdx, (s.current + 1) % s.total);
+                    }, 4000);
+                }
 
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', initGallery);
-            } else {
-                initGallery();
-            }
+                function stopAutoRotate() {
+                    if (autoRotateInterval) {
+                        clearInterval(autoRotateInterval);
+                        autoRotateInterval = null;
+                    }
+                }
+
+                function showSlide(panelIdx, slideIdx) {
+                    var panel = document.querySelector('#about-sec .gallery-panel[data-panel="' + panelIdx + '"]');
+                    if (!panel) return;
+                    var slides = panel.querySelectorAll('.gallery-slide');
+                    var dots   = panel.querySelectorAll('.gallery-dot');
+                    slides.forEach(function (s) { s.classList.remove('active'); });
+                    dots.forEach(function (d) { d.classList.remove('active'); });
+                    if (slides[slideIdx]) slides[slideIdx].classList.add('active');
+                    if (dots[slideIdx])   dots[slideIdx].classList.add('active');
+                    sliderState[panelIdx] = sliderState[panelIdx] || {};
+                    sliderState[panelIdx].current = slideIdx;
+                }
+
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', initGallery);
+                } else {
+                    initGallery();
+                }
         })();
         </script>
     </div>
