@@ -49,7 +49,7 @@
 
             {{-- Nav links centred on desktop --}}
             <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                <li class="nav-item">
+                <li class="nav-item" id="ck-home-nav-item"@if(request()->is('/')) style="display:none"@endif>
                     <a class="nav-link" wire:navigate href="/">Home</a>
                 </li>
                 <li class="nav-item">
@@ -286,7 +286,7 @@
         trigger.onclick = e => { e.preventDefault(); e.stopPropagation(); wrap.classList.toggle('open'); };
     };
 
-    /* ── Active nav link ──────────────────────────────────────────────── */
+    /* ── Active nav link + Home link visibility ───────────────────────── */
     const markActive = () => {
         const path = window.location.pathname;
         document.querySelectorAll('.ck-navbar .nav-link').forEach(a => {
@@ -295,6 +295,8 @@
             const isOther = href !== '/' && path.startsWith(href);
             a.classList.toggle('active', isHome || isOther);
         });
+        const homeItem = document.getElementById('ck-home-nav-item');
+        if (homeItem) homeItem.style.display = (path === '/') ? 'none' : '';
     };
 
     /* ── Init / re-init on Livewire navigate ──────────────────────────── */
