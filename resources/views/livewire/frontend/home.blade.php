@@ -1289,214 +1289,12 @@
     </div>
     @endif
 
-    {{-- ── Impact Stats Cards ──────────────────────────────────── --}}
-    @if($about)
-    <style>
-        /* ── Stats Cards Section ─────────────────────────────────────────── */
-        #stats-section {
-            background: #f0f7ff;
-            padding: 80px 0;
-            position: relative;
-            overflow: hidden;
-        }
-        #stats-section::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(ellipse at 10% 50%, rgba(3,164,252,0.07) 0%, transparent 55%),
-                radial-gradient(ellipse at 90% 30%, rgba(2,94,168,0.06) 0%, transparent 50%);
-            pointer-events: none;
-        }
-        #stats-section .stats-section-header {
-            margin-bottom: 48px;
-        }
-        #stats-section .stats-section-subtext {
-            color: #64748b;
-            font-size: 1rem;
-            margin-top: 10px;
-            margin-bottom: 0;
-        }
-
-        /* Card base */
-        #stats-section .stat-card {
-            background: #ffffff;
-            border-radius: 22px;
-            padding: 36px 28px 32px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08), 0 1px 4px rgba(15,23,42,0.04);
-            border: 1px solid rgba(3,164,252,0.1);
-            transition: transform 0.3s cubic-bezier(.34,1.4,.64,1), box-shadow 0.3s ease, border-color 0.3s ease;
-            cursor: default;
-        }
-        #stats-section .stat-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 48px rgba(3,164,252,0.18), 0 6px 16px rgba(15,23,42,0.1);
-            border-color: rgba(3,164,252,0.35);
-        }
-        #stats-section .stat-card:hover .stat-card-glow {
-            opacity: 1;
-        }
-
-        /* Radial glow effect behind icon */
-        #stats-section .stat-card-glow {
-            position: absolute;
-            top: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(3,164,252,0.12) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            pointer-events: none;
-        }
-
-        /* Icon circle */
-        #stats-section .stat-card-icon-wrap {
-            width: 68px;
-            height: 68px;
-            border-radius: 18px;
-            background: linear-gradient(135deg, #03A4FC 0%, #025ea8 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 22px;
-            box-shadow: 0 8px 24px rgba(3,164,252,0.32);
-            position: relative;
-            z-index: 1;
-            transition: transform 0.3s cubic-bezier(.34,1.4,.64,1);
-        }
-        #stats-section .stat-card:hover .stat-card-icon-wrap {
-            transform: scale(1.12) rotate(-4deg);
-        }
-        /* Per-card accent colours */
-        #stats-section .stat-card--2 .stat-card-icon-wrap {
-            background: linear-gradient(135deg, #f97316 0%, #c2410c 100%);
-            box-shadow: 0 8px 24px rgba(249,115,22,0.32);
-        }
-        #stats-section .stat-card--3 .stat-card-icon-wrap {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            box-shadow: 0 8px 24px rgba(16,185,129,0.32);
-        }
-        #stats-section .stat-card--4 .stat-card-icon-wrap {
-            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
-            box-shadow: 0 8px 24px rgba(139,92,246,0.32);
-        }
-        #stats-section .stat-card-icon {
-            font-size: 1.55rem;
-            color: #ffffff;
-        }
-
-        /* Number */
-        #stats-section .stat-card-number {
-            display: flex;
-            align-items: baseline;
-            justify-content: center;
-            gap: 2px;
-            margin-bottom: 8px;
-        }
-        #stats-section .stat-num {
-            font-size: clamp(2.4rem, 5vw, 3rem);
-            font-weight: 800;
-            line-height: 1;
-            color: #0f172a;
-        }
-        /* Per-card accent colours on number */
-        #stats-section .stat-card--2 .stat-num { color: #f97316; }
-        #stats-section .stat-card--3 .stat-num { color: #10b981; }
-        #stats-section .stat-card--4 .stat-num { color: #8b5cf6; }
-        #stats-section .stat-card .stat-num { color: #03A4FC; }
-
-        #stats-section .stat-suffix {
-            font-size: clamp(1.5rem, 3vw, 1.9rem);
-            font-weight: 800;
-            color: inherit;
-            line-height: 1;
-        }
-        #stats-section .stat-card-label {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #64748b;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            margin: 0;
-        }
-
-        /* Bottom accent line */
-        #stats-section .stat-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 20%;
-            width: 60%;
-            height: 3px;
-            border-radius: 2px 2px 0 0;
-            background: linear-gradient(90deg, #03A4FC, #025ea8);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        #stats-section .stat-card--2::after { background: linear-gradient(90deg, #f97316, #c2410c); }
-        #stats-section .stat-card--3::after { background: linear-gradient(90deg, #10b981, #059669); }
-        #stats-section .stat-card--4::after { background: linear-gradient(90deg, #8b5cf6, #6d28d9); }
-        #stats-section .stat-card:hover::after { opacity: 1; }
-
-        /* Responsive */
-        @media (max-width: 767.98px) {
-            #stats-section { padding: 52px 0; }
-            #stats-section .stats-section-header { margin-bottom: 36px; }
-            #stats-section .stat-card { padding: 28px 20px 24px; }
-            #stats-section .stat-card-icon-wrap { width: 56px; height: 56px; border-radius: 14px; }
-            #stats-section .stat-card-icon { font-size: 1.3rem; }
-        }
-    </style>
-    <script>
-    (function(){
-        function animateCounters() {
-            document.querySelectorAll('#stats-section .stat-num').forEach(function(el) {
-                var target = parseInt(el.dataset.target, 10);
-                var duration = 1800;
-                var start = null;
-                function step(ts) {
-                    if (!start) start = ts;
-                    var progress = Math.min((ts - start) / duration, 1);
-                    var ease = 1 - Math.pow(1 - progress, 3);
-                    el.textContent = Math.floor(ease * target);
-                    if (progress < 1) requestAnimationFrame(step);
-                    else el.textContent = target;
-                }
-                requestAnimationFrame(step);
-            });
-        }
-
-        var strip = document.getElementById('stats-section');
-        if (strip && 'IntersectionObserver' in window) {
-            var ran = false;
-            new IntersectionObserver(function(entries, obs) {
-                if (entries[0].isIntersecting && !ran) {
-                    ran = true;
-                    animateCounters();
-                    obs.disconnect();
-                }
-            }, { threshold: 0.3 }).observe(strip);
-        } else if (strip) {
-            animateCounters();
-        }
-    })();
-    </script>
-    @endif
 
     <section class="space-top space-bottom" id="service-sec">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-6">
-                    <div class="title-area text-center">
-                        <span class="sub-title">
-                            <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
-                            Our Services
+                    <div class="title-area text-center sr-fade-up">
                             <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
                         </span>
                         <h2 class="sec-title">Beyond Boundaries Into Success</h2>
@@ -1628,7 +1426,7 @@
     @if($projects && $projects->count() > 0)
     <section class="space-top space-bottom" id="projects-sec" style="background: #f8fafc;">
         <div class="container">
-            <div class="title-area text-center mb-4">
+            <div class="title-area text-center mb-4 sr-fade-up">
                 <span class="sub-title">
                     <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">Our Projects
                     <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
@@ -1636,8 +1434,8 @@
                 <h2 class="sec-title">Delivering Real-World Impact</h2>
             </div>
             <div class="row g-3">
-                @foreach($projects->take(6) as $project)
-                <div class="col-lg-4 col-md-6 col-sm-6">
+                @foreach($projects->take(6) as $index => $project)
+                <div class="col-lg-4 col-md-6 col-sm-6 sr-fade-up" style="animation-delay: {{ $index * 0.1 }}s">
                     <a wire:navigate href="{{ route('project', ['slug' => $project->slug]) }}" class="proj-pic-card d-block text-decoration-none">
                         <div class="proj-pic-img">
                             <img src="{{ asset('storage/'.$project->image) }}" alt="{{ $project->title }}" loading="lazy">
@@ -1728,216 +1526,11 @@
         </style>
     </section>
     @endif
-
-    @if($clients && $clients->count() > 0)
-    <section class="space-top space-bottom" id="clients-sec" style="background: #f8fafc;">
-        <div class="container">
-            <div class="title-area text-center">
-                <span class="sub-title">
-                    <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">OUR CLIENTS
-                    <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
-                </span>
-                <h2 class="sec-title">Trusted By Leading Organizations</h2>
-                <p class="mx-auto" style="max-width: 760px;">
-                    We partner with institutions and businesses to deliver practical, measurable impact.
-                </p>
-            </div>
-
-            @php
-                $scrollDuration = max(18, $clients->count() * 4);
-            @endphp
-            <div class="clients-marquee" style="--clients-scroll-duration: {{ $scrollDuration }}s;">
-                <div class="clients-track">
-                    @foreach($clients as $client)
-                        <a
-                            href="{{ $client->url }}"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="client-card d-flex flex-column justify-content-center align-items-center text-center"
-                        >
-                            <div class="client-logo-wrap">
-                                <img
-                                    src="{{ asset('storage/'.$client->image) }}"
-                                    alt="{{ $client->name }}"
-                                    class="client-logo"
-                                >
-                            </div>
-                            <h3 class="client-name">{{ $client->name }}</h3>
-                        </a>
-                    @endforeach
-
-                    @foreach($clients as $client)
-                        <a
-                            href="{{ $client->url }}"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-hidden="true"
-                            tabindex="-1"
-                            class="client-card d-flex flex-column justify-content-center align-items-center text-center"
-                        >
-                            <div class="client-logo-wrap">
-                                <img
-                                    src="{{ asset('storage/'.$client->image) }}"
-                                    alt="{{ $client->name }}"
-                                    class="client-logo"
-                                >
-                            </div>
-                            <h3 class="client-name">{{ $client->name }}</h3>
-                        </a>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-
-        <style>
-            #clients-sec .clients-marquee {
-                position: relative;
-                overflow: hidden;
-                width: 100%;
-                padding: 10px 0;
-            }
-
-            #clients-sec .clients-marquee::before,
-            #clients-sec .clients-marquee::after {
-                content: "";
-                position: absolute;
-                top: 0;
-                width: 90px;
-                height: 100%;
-                z-index: 2;
-                pointer-events: none;
-            }
-
-            #clients-sec .clients-marquee::before {
-                left: 0;
-                background: linear-gradient(to right, #f8fafc 35%, rgba(248, 250, 252, 0));
-            }
-
-            #clients-sec .clients-marquee::after {
-                right: 0;
-                background: linear-gradient(to left, #f8fafc 35%, rgba(248, 250, 252, 0));
-            }
-
-            #clients-sec .clients-track {
-                display: flex;
-                align-items: stretch;
-                gap: 20px;
-                width: max-content;
-                animation: clients-scroll var(--clients-scroll-duration) linear infinite;
-            }
-
-            #clients-sec .client-card {
-                background: #ffffff;
-                border: 1px solid #e2e8f0;
-                border-radius: 16px;
-                padding: 24px 20px;
-                text-decoration: none;
-                box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
-                transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-                flex: 0 0 230px;
-                min-height: 170px;
-            }
-
-            #clients-sec .client-card:hover {
-                transform: translateY(-6px);
-                border-color: rgba(3, 164, 252, 0.45);
-                box-shadow: 0 18px 30px rgba(3, 164, 252, 0.2);
-            }
-
-            #clients-sec .client-logo-wrap {
-                width: 100%;
-                height: 96px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin-bottom: 14px;
-            }
-
-            #clients-sec .client-logo {
-                max-width: 170px;
-                max-height: 86px;
-                width: auto;
-                height: auto;
-                object-fit: contain;
-                transition: transform .2s ease;
-            }
-
-            #clients-sec .client-card:hover .client-logo {
-                transform: scale(1.04);
-            }
-
-            #clients-sec .client-name {
-                margin: 0;
-                font-size: 1rem;
-                line-height: 1.4;
-                color: #0f172a;
-                font-weight: 600;
-            }
-
-            #clients-sec .clients-marquee:hover .clients-track {
-                animation-play-state: paused;
-            }
-
-            @keyframes clients-scroll {
-                from {
-                    transform: translateX(0);
-                }
-                to {
-                    transform: translateX(calc(-50% - 10px));
-                }
-            }
-        </style>
-    </section>
-    @endif
-
-    @if($teams && $teams->count() > 0)
-    <section class="space-top" id="team-sec">
-        <div class="container">
-            <div class="title-area text-center">
-                <span class="sub-title">
-                    <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">OUR TEAM
-                    <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
-                </span>
-                <h2 class="sec-title">Meet Our Team</h2>
-            </div>
-            <div class="row gy-30">
-                @foreach($teams as $team)
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="team-card p-3 h-100" style="border: 1px solid #e5e7eb; border-radius: 14px; background: #fff; box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);">
-                            <a wire:navigate href="{{ route('team-details', ['slug' => $team->slug ?: $team->id]) }}" class="d-block">
-                                <img
-                                    src="{{ asset('storage/'.$team->image) }}"
-                                    alt="{{ $team->name }}"
-                                    style="width: 100%; height: 260px; object-fit: cover; border-radius: 10px;"
-                                >
-                            </a>
-                            <div class="pt-3">
-                                <h3 class="h5 mb-1">
-                                    <a wire:navigate href="{{ route('team-details', ['slug' => $team->slug ?: $team->id]) }}" style="color: #0f172a; text-decoration: none;">
-                                        {{ $team->name }}
-                                    </a>
-                                </h3>
-                                <p class="mb-2" style="color: #03A4FC; font-weight: 600;">{{ $team->position }}</p>
-                                <p class="mb-3" style="color: #64748b;">
-                                    {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($team->description)), 110, '...') }}
-                                </p>
-                                <a wire:navigate href="{{ route('team-details', ['slug' => $team->slug ?: $team->id]) }}" class="link-btn style2">
-                                    <i class="fas fa-plus-circle me-1"></i>View Profile
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-    @endif
-
     {{-- ── News & Updates ───────────────────────────────────────── --}}
     @if($blogs && $blogs->count() > 0)
     <section class="space-top space-bottom" id="news-sec">
         <div class="container">
-            <div class="title-area text-center">
+            <div class="title-area text-center sr-fade-up">
                 <span class="sub-title">
                     <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">LATEST NEWS
                     <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
@@ -1949,9 +1542,9 @@
             </div>
 
             <div class="row g-4">
-                @foreach($blogs->take(3) as $blog)
+                @foreach($blogs->take(3) as $blogIdx => $blog)
                 @if($blog->slug)
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 sr-fade-up" style="animation-delay: {{ $blogIdx * 0.12 }}s">
                     <article class="news-card h-100">
                         <a wire:navigate href="{{ route('news-and-updates.details', ['slug' => $blog->slug]) }}" class="news-card-thumb-link">
                             <div class="news-card-thumb">
@@ -2100,29 +1693,36 @@
     @if($publications && $publications->count() > 0)
     <section class="space-top space-bottom" id="publications-sec">
         <div class="container">
-            <div class="title-area text-center mb-4">
+            <div class="title-area text-center mb-4 sr-fade-up">
                 <span class="sub-title">
                     <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">Publications
                     <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
                 </span>
-                <h2 class="sec-title">Research & Publications</h2>
+                <h2 class="sec-title">Research &amp; Publications</h2>
             </div>
             <div class="row g-4">
-                @foreach($publications->take(4) as $pub)
-                <div class="col-lg-3 col-md-6">
+                @foreach($publications->take(4) as $index => $pub)
+                <div class="col-lg-3 col-md-6 sr-fade-up" style="animation-delay: {{ $index * 0.1 }}s">
+                    @if($pub->link)
+                    <a href="{{ $pub->link }}" target="_blank" rel="noopener noreferrer" class="pub-pic-card d-block text-decoration-none">
+                    @else
                     <a wire:navigate href="{{ route('publication.details', ['slug' => $pub->slug]) }}" class="pub-pic-card d-block text-decoration-none">
+                    @endif
                         <div class="pub-pic-img">
                             <img src="{{ asset('storage/'.$pub->image) }}" alt="{{ $pub->title }}" loading="lazy">
                             <div class="pub-pic-overlay">
                                 <h4 class="pub-pic-title">{{ $pub->title }}</h4>
-                                <span class="pub-pic-cta">Read <i class="fas fa-arrow-right ms-1"></i></span>
+                                <span class="pub-pic-cta">
+                                    {{ $pub->link_label ?: ($pub->link ? 'Open' : 'Read') }}
+                                    <i class="fas fa-arrow-right ms-1"></i>
+                                </span>
                             </div>
                         </div>
                     </a>
                 </div>
                 @endforeach
             </div>
-            <div class="text-center mt-5">
+            <div class="text-center mt-5 sr-fade-up">
                 <a wire:navigate href="{{ route('publications') }}" class="th-btn style3">
                     View All Publications <i class="fas fa-arrow-right ms-2"></i>
                 </a>
@@ -2132,7 +1732,7 @@
             #publications-sec .pub-pic-card { display: block; }
             #publications-sec .pub-pic-img {
                 position: relative;
-                height: 320px;
+                height: 340px;
                 overflow: hidden;
                 border-radius: 16px;
                 box-shadow: 0 8px 24px rgba(15,23,42,0.10);
@@ -2141,19 +1741,22 @@
                 width: 100%; height: 100%;
                 object-fit: cover;
                 display: block;
-                transition: transform .45s ease;
+                transition: transform .5s ease;
             }
-            #publications-sec .pub-pic-card:hover .pub-pic-img img { transform: scale(1.07); }
+            #publications-sec .pub-pic-card:hover .pub-pic-img img { transform: scale(1.08); }
             #publications-sec .pub-pic-overlay {
                 position: absolute;
                 inset: 0;
-                background: linear-gradient(to top, rgba(10,25,50,.88) 0%, rgba(10,25,50,.12) 55%, transparent 100%);
+                background: linear-gradient(to top, rgba(10,25,50,.92) 0%, rgba(10,25,50,.10) 55%, transparent 100%);
                 border-radius: 16px;
-                padding: 20px;
+                padding: 22px;
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-end;
-                transition: opacity .3s ease;
+                transition: background .35s ease;
+            }
+            #publications-sec .pub-pic-card:hover .pub-pic-overlay {
+                background: linear-gradient(to top, rgba(3,60,110,.95) 0%, rgba(3,60,110,.18) 60%, transparent 100%);
             }
             #publications-sec .pub-pic-title {
                 font-size: .97rem;
@@ -2167,104 +1770,62 @@
                 font-weight: 700;
                 color: #03A4FC;
                 letter-spacing: .02em;
+                transition: color .2s;
             }
             #publications-sec .pub-pic-card:hover .pub-pic-cta { color: #7dd3fc; }
             @media (max-width: 575.98px) {
-                #publications-sec .pub-pic-img { height: 260px; }
+                #publications-sec .pub-pic-img { height: 280px; }
             }
         </style>
     </section>
     @endif
 
-    {{-- ── Vacancies Section ────────────────────────────────────── --}}
-
-
-    {{-- ── Contact CTA Section ──────────────────────────────────── --}}
-    <section id="contact-cta-sec">
+    @if($teams && $teams->count() > 0)
+    <section class="space-top" id="team-sec">
         <div class="container">
-            <div class="contact-cta-inner">
-                <div class="row align-items-center gy-4">
-                    <div class="col-lg-7">
-                        <span class="contact-cta-eyebrow">Get In Touch</span>
-                        <h2 class="contact-cta-title">Ready to Work With Us?</h2>
-                        <p class="contact-cta-text">Let's discuss how CLEARKAMO can help you achieve your goals.</p>
+            <div class="title-area text-center sr-fade-up">
+                <span class="sub-title">
+                    <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">OUR TEAM
+                    <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
+                </span>
+                <h2 class="sec-title">Meet Our Team</h2>
+            </div>
+            <div class="row gy-30">
+                @foreach($teams as $teamIdx => $team)
+                    <div class="col-xl-3 col-lg-4 col-md-6 sr-fade-up" style="animation-delay: {{ $teamIdx * 0.1 }}s">
+                        <div class="team-card p-3 h-100" style="border: 1px solid #e5e7eb; border-radius: 14px; background: #fff; box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);">
+                            <a wire:navigate href="{{ route('team-details', ['slug' => $team->slug ?: $team->id]) }}" class="d-block">
+                                <img
+                                    src="{{ asset('storage/'.$team->image) }}"
+                                    alt="{{ $team->name }}"
+                                    style="width: 100%; height: 260px; object-fit: cover; border-radius: 10px;"
+                                >
+                            </a>
+                            <div class="pt-3">
+                                <h3 class="h5 mb-1">
+                                    <a wire:navigate href="{{ route('team-details', ['slug' => $team->slug ?: $team->id]) }}" style="color: #0f172a; text-decoration: none;">
+                                        {{ $team->name }}
+                                    </a>
+                                </h3>
+                                <p class="mb-2" style="color: #03A4FC; font-weight: 600;">{{ $team->position }}</p>
+                                <p class="mb-3" style="color: #64748b;">
+                                    {{ \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($team->description)), 110, '...') }}
+                                </p>
+                                <a wire:navigate href="{{ route('team-details', ['slug' => $team->slug ?: $team->id]) }}" class="link-btn style2">
+                                    <i class="fas fa-plus-circle me-1"></i>View Profile
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-lg-5 text-lg-end">
-                        <a wire:navigate href="{{ route('contact-us') }}" class="contact-cta-btn">
-                            Contact Us <i class="fas fa-arrow-right ms-2"></i>
-                        </a>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
-        <style>
-            #contact-cta-sec {
-                padding: 60px 0;
-                background: #0f172a;
-            }
-            #contact-cta-sec .contact-cta-inner {
-                background: linear-gradient(135deg, #03A4FC 0%, #025ea8 100%);
-                border-radius: 24px;
-                padding: 52px 48px;
-                position: relative;
-                overflow: hidden;
-            }
-            #contact-cta-sec .contact-cta-inner::before {
-                content: '';
-                position: absolute;
-                inset: 0;
-                background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='28' stroke='rgba(255,255,255,0.08)' stroke-width='1' fill='none'/%3E%3C/svg%3E") repeat;
-                pointer-events: none;
-                opacity: .5;
-            }
-            #contact-cta-sec .contact-cta-eyebrow {
-                font-size: .78rem;
-                font-weight: 700;
-                text-transform: uppercase;
-                letter-spacing: .1em;
-                color: rgba(255,255,255,.75);
-                display: block;
-                margin-bottom: 10px;
-            }
-            #contact-cta-sec .contact-cta-title {
-                font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-                font-weight: 800;
-                color: #fff;
-                line-height: 1.2;
-                margin-bottom: 12px;
-            }
-            #contact-cta-sec .contact-cta-text {
-                color: rgba(255,255,255,.82);
-                font-size: 1rem;
-                margin: 0;
-            }
-            #contact-cta-sec .contact-cta-btn {
-                display: inline-flex;
-                align-items: center;
-                background: #fff;
-                color: #025ea8;
-                font-weight: 700;
-                font-size: 1rem;
-                padding: 16px 36px;
-                border-radius: 50px;
-                text-decoration: none;
-                transition: all .25s ease;
-                box-shadow: 0 8px 24px rgba(0,0,0,.18);
-                position: relative;
-            }
-            #contact-cta-sec .contact-cta-btn:hover {
-                background: #0f172a;
-                color: #fff;
-                transform: translateY(-2px);
-                box-shadow: 0 14px 32px rgba(0,0,0,.28);
-            }
-            @media (max-width: 767.98px) {
-                #contact-cta-sec .contact-cta-inner { padding: 36px 28px; }
-            }
-        </style>
     </section>
+    @endif
 
-    <section class="overflow-hidden space-top" id="testimonials">
+
+    {{-- ── Testimonials ─────────────────────────────────────────── --}}
+    <section class="overflow-hidden space-top space-bottom" id="testimonials">
     <div class="container">
         <div class="title-area text-center">
             <span class="sub-title">
@@ -2319,6 +1880,40 @@
         </div>
     </div>
 </section>
+
+{{-- ── Scroll-Reveal Animations ──────────────────────────────── --}}
+<style>
+    /* Scroll-reveal base */
+    .sr-fade-up {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity .65s ease, transform .65s ease;
+    }
+    .sr-fade-up.sr-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    /* Picture zoom on hover — global helper */
+    .pic-zoom { overflow: hidden; border-radius: 16px; }
+    .pic-zoom img { transition: transform .5s ease; display: block; width: 100%; height: 100%; object-fit: cover; }
+    .pic-zoom:hover img { transform: scale(1.07); }
+</style>
+<script>
+(function () {
+    'use strict';
+    var elems = document.querySelectorAll('.sr-fade-up');
+    if (!elems.length) return;
+    var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('sr-visible');
+                io.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12 });
+    elems.forEach(function (el) { io.observe(el); });
+})();
+</script>
 
 @if(isset($ceoMessage) && $ceoMessage && $ceoMessage->team)
 {{-- ── Floating CEO Message Popup ──────────────────────────────────── --}}

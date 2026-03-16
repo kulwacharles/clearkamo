@@ -14,11 +14,13 @@ class PublicationsModal extends Component
     use WithFileUploads;
 
     public $title, $category, $description, $image, $imagePath, $pubId,$published_date,$keywords;
+    public $link, $link_label;
     public $status = 'draft';
     public $currentImage;
     
     // View modal properties
     public $viewTitle, $viewCategory, $viewDescription, $viewStatus, $viewImage,$viewPublishedDate,$viewKeywords;
+    public $viewLink, $viewLinkLabel;
 
     protected $messages = [
         'title.required'       => 'The Title is required.',
@@ -94,6 +96,8 @@ class PublicationsModal extends Component
         $this->currentImage = $pub->image;
         $this->published_date = $pub->published_date;
         $this->keywords = $pub->keywords;
+        $this->link = $pub->link;
+        $this->link_label = $pub->link_label;
         $this->dispatch('set-ckeditor-content', content: $pub->description);
         $this->dispatch('open-modal', 'editPubModal');
     }
@@ -146,6 +150,8 @@ class PublicationsModal extends Component
         $this->viewImage = $pub->image;
         $this->viewPublishedDate = $pub->published_date;
         $this->viewKeywords = $pub->keywords;
+        $this->viewLink = $pub->link;
+        $this->viewLinkLabel = $pub->link_label;
         $this->dispatch('open-modal', 'viewPubModal');
     }
 
@@ -177,6 +183,8 @@ class PublicationsModal extends Component
         $this->currentImage = null;
         $this->published_date = null;
         $this->keywords    = null;
+        $this->link        = null;
+        $this->link_label  = null;
     }
 
     public function render()
@@ -212,6 +220,14 @@ class PublicationsModal extends Component
 
         if (Schema::hasColumn('publications', 'status')) {
             $pub->status = $this->status;
+        }
+
+        if (Schema::hasColumn('publications', 'link')) {
+            $pub->link = $this->link;
+        }
+
+        if (Schema::hasColumn('publications', 'link_label')) {
+            $pub->link_label = $this->link_label;
         }
     }
 }

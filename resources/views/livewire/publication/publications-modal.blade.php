@@ -59,6 +59,18 @@
                             <textarea class="form-control" wire:model.defer="keywords"></textarea>
                             @error('keywords') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
+                        <div class="row">
+                            <div class="col-md-8 mb-3">
+                                <label>Publication Link (URL)</label>
+                                <input type="url" class="form-control" wire:model="link" placeholder="https://example.com/publication.pdf">
+                                @error('link') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label>Link Label</label>
+                                <input type="text" class="form-control" wire:model="link_label" placeholder="e.g. Download PDF">
+                                @error('link_label') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
                         <div class="mb-3" wire:ignore>
                             <label>Description</label>
                             <textarea id="description"></textarea>
@@ -150,6 +162,18 @@
                             <label>Keywords</label>
                             <textarea class="form-control" wire:model.defer="keywords"></textarea>
                             @error('keywords') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8 mb-3">
+                                <label>Publication Link (URL)</label>
+                                <input type="url" class="form-control" wire:model="link" placeholder="https://example.com/publication.pdf">
+                                @error('link') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label>Link Label</label>
+                                <input type="text" class="form-control" wire:model="link_label" placeholder="e.g. Download PDF">
+                                @error('link_label') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
                         </div>
                         <div class="mb-3" wire:ignore>
                             <label>Description</label>
@@ -246,6 +270,16 @@
                             {!! $viewKeywords ?? 'No keywords' !!}
                         </div>
                     </div>
+                    @if($viewLink)
+                    <div class="mb-3">
+                        <label class="fw-bold">Publication Link</label>
+                        <p class="form-control-plaintext">
+                            <a href="{{ $viewLink }}" target="_blank" rel="noopener noreferrer">
+                                {{ $viewLinkLabel ?: $viewLink }}
+                            </a>
+                        </p>
+                    </div>
+                    @endif
                     <div class="mb-3">
                         <label class="fw-bold">Description</label>
                         <div class="blog-content-preview border rounded p-3 bg-light">
