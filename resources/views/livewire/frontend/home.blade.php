@@ -2273,4 +2273,159 @@
     </div>
 </section>
 
+@if(isset($ceoMessage) && $ceoMessage && $ceoMessage->team)
+{{-- ── Floating CEO Message Popup ──────────────────────────────────── --}}
+<style>
+    #ceo-popup {
+        position: fixed;
+        bottom: -320px;
+        right: 24px;
+        z-index: 9999;
+        width: 340px;
+        max-width: calc(100vw - 32px);
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 8px 40px rgba(15,23,42,.22), 0 2px 8px rgba(15,23,42,.10);
+        border: 1px solid rgba(3,164,252,.18);
+        overflow: hidden;
+        transition: bottom .55s cubic-bezier(.22,1,.36,1), opacity .45s ease;
+        opacity: 0;
+    }
+    #ceo-popup.ceo-popup-visible {
+        bottom: 24px;
+        opacity: 1;
+    }
+    #ceo-popup .ceo-popup-header {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 70%, #0c1d35 100%);
+        padding: 18px 20px 14px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        position: relative;
+    }
+    #ceo-popup .ceo-popup-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid rgba(3,164,252,.55);
+        flex-shrink: 0;
+    }
+    #ceo-popup .ceo-popup-avatar-placeholder {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: rgba(3,164,252,.18);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        border: 3px solid rgba(3,164,252,.55);
+        color: #03A4FC;
+        font-size: 1.6rem;
+    }
+    #ceo-popup .ceo-popup-name {
+        color: #fff;
+        font-weight: 700;
+        font-size: .95rem;
+        line-height: 1.3;
+        margin: 0;
+    }
+    #ceo-popup .ceo-popup-position {
+        color: rgba(255,255,255,.65);
+        font-size: .78rem;
+        margin: 2px 0 0;
+    }
+    #ceo-popup .ceo-popup-close {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        background: rgba(255,255,255,.12);
+        border: none;
+        border-radius: 50%;
+        width: 26px;
+        height: 26px;
+        color: rgba(255,255,255,.8);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: .85rem;
+        transition: background .2s;
+        line-height: 1;
+    }
+    #ceo-popup .ceo-popup-close:hover { background: rgba(255,255,255,.22); }
+    #ceo-popup .ceo-popup-body {
+        padding: 16px 20px 20px;
+    }
+    #ceo-popup .ceo-popup-quote-icon {
+        color: #03A4FC;
+        font-size: 1.5rem;
+        line-height: 1;
+        margin-bottom: 6px;
+        display: block;
+    }
+    #ceo-popup .ceo-popup-message {
+        font-size: .88rem;
+        color: #374151;
+        line-height: 1.7;
+        margin: 0;
+    }
+</style>
+
+<div id="ceo-popup" role="dialog" aria-label="Message from {{ $ceoMessage->team->name }}">
+    <div class="ceo-popup-header">
+        @if($ceoMessage->team->image)
+            <img class="ceo-popup-avatar"
+                 src="{{ asset('storage/'.$ceoMessage->team->image) }}"
+                 alt="{{ $ceoMessage->team->name }}">
+        @else
+            <div class="ceo-popup-avatar-placeholder">
+                <i class="fa fa-user"></i>
+            </div>
+        @endif
+        <div>
+            <p class="ceo-popup-name">{{ $ceoMessage->team->name }}</p>
+            <p class="ceo-popup-position">{{ $ceoMessage->team->position }}</p>
+        </div>
+        <button class="ceo-popup-close" id="ceo-popup-close-btn" aria-label="Close">&#x2715;</button>
+    </div>
+    <div class="ceo-popup-body">
+        <span class="ceo-popup-quote-icon">&#8220;</span>
+        <p class="ceo-popup-message">{{ $ceoMessage->message }}</p>
+    </div>
+</div>
+
+<script>
+(function () {
+    var trigger = {{ (int)$ceoMessage->scroll_trigger_percent }};
+    var popup   = document.getElementById('ceo-popup');
+    var closeBtn = document.getElementById('ceo-popup-close-btn');
+    var shown   = false;
+    var dismissed = sessionStorage.getItem('ceo_popup_dismissed') === '1';
+
+    if (dismissed || !popup) return;
+
+    function checkScroll() {
+        if (shown || dismissed) return;
+        var scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+        if (scrolled >= trigger) {
+            popup.classList.add('ceo-popup-visible');
+            shown = true;
+        }
+    }
+
+    window.addEventListener('scroll', checkScroll, { passive: true });
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function () {
+            popup.classList.remove('ceo-popup-visible');
+            dismissed = true;
+            sessionStorage.setItem('ceo_popup_dismissed', '1');
+        });
+    }
+})();
+</script>
+@endif
+
 </div>

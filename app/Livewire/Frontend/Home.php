@@ -12,6 +12,7 @@ use App\Models\CoreValue;
 use App\Models\GalleryPhoto;
 use App\Models\Project;
 use App\Models\Service;
+use App\Models\CeoMessage;
 use Livewire\Component;
 use Illuminate\Support\Str;
 
@@ -27,6 +28,7 @@ class Home extends Component
         public $partnersCount = 0;
         public $coreValues;
         public $galleryProjects;
+        public $ceoMessage = null;
         
 
         public function mount()
@@ -48,6 +50,7 @@ class Home extends Component
         $this->blogs=Blog::where('status','published')->whereNotNull('slug')->where('slug','!=','')->orderBy('id','desc')->latest()->take(5)->get();
         $this->teams=Team::where('status',"published")->get();
         $this->focusAreas=FocusArea::where('status','published')->orderBy('sort_order')->orderBy('id')->get();
+        $this->ceoMessage = CeoMessage::where('is_active', true)->with('team')->first();
         if ($about) {
             $this->id = $about->id;
             $this->title = $about->title;
@@ -80,6 +83,7 @@ class Home extends Component
             'partnersCount' => $this->partnersCount,
             'coreValues' => $this->coreValues,
             'galleryProjects' => $this->galleryProjects,
+            'ceoMessage'      => $this->ceoMessage,
         ])->layout("components.layouts.frontend", ["title"=>$this->title,"description"=>Str::limit(html_entity_decode(strip_tags($this->description)), 350, '...'),"keywords"=>$this->keywords,"image"=>$this->image]);
     }
 
