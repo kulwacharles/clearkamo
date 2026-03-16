@@ -1,7 +1,12 @@
 {{-- @section('title',$title)
 @section('description',$seodescription)
 @section('keywords',$keywords) --}}
-<div>
+<div id="ck-home">
+<style>
+    /* Reduce section spacing on the home page */
+    #ck-home { --section-space: 70px; --section-space-mobile: 45px; }
+    @media (max-width: 575px) { #ck-home { --section-space-mobile: 30px; } }
+</style>
     <!-- Hero Slider Section -->
     @if($slides && $slides->count() > 0)
     <section id="hero-sec">
