@@ -115,7 +115,7 @@
         position: sticky;
         top: 0;
         z-index: 1050;
-        background: #03a4fc;
+        background: #ffffff;
         transition: box-shadow .25s ease;
     }
     .ck-header-wrap.scrolled {
@@ -142,7 +142,8 @@
 
     /* ── Main navbar ─────────────────────────────────────────────────────── */
     .ck-navbar {
-        background: #03a4fc;
+        background: #ffffff;
+        border-bottom: 1px solid #e9ecef;
         padding: 10px 0;
         transition: none;
     }
@@ -156,7 +157,7 @@
 
     /* ── Nav links ───────────────────────────────────────────────────────── */
     .ck-navbar .nav-link {
-        color: #ffffff;
+        color: #0f172a;
         font-size: .88rem;
         font-weight: 600;
         padding: 6px 10px;
@@ -166,21 +167,21 @@
     }
     .ck-navbar .nav-link:hover,
     .ck-navbar .nav-link.active {
-        color: #ffffff;
-        background: rgba(255,255,255,.18);
+        color: #03a4fc;
+        background: #eef7ff;
     }
 
     /* ── Hamburger ───────────────────────────────────────────────────────── */
     .ck-toggler {
-        border: 1.5px solid rgba(255,255,255,.7);
+        border: 1.5px solid #03a4fc;
         border-radius: 8px;
         padding: 6px 10px;
-        color: #ffffff;
+        color: #03a4fc;
         background: transparent;
         transition: background .2s;
     }
-    .ck-toggler:hover { background: rgba(255,255,255,.15); }
-    .ck-toggler:focus { box-shadow: 0 0 0 3px rgba(255,255,255,.35); outline: none; }
+    .ck-toggler:hover { background: #eef7ff; }
+    .ck-toggler:focus { box-shadow: 0 0 0 3px rgba(3,164,252,.25); outline: none; }
     .ck-toggler i { font-size: 1.15rem; pointer-events: none; }
 
     /* ── Desktop search ──────────────────────────────────────────────────── */
@@ -188,13 +189,13 @@
         width: 40px;
         height: 40px;
         border-radius: 10px;
-        border: 1px solid rgba(255,255,255,.6);
-        background: rgba(255,255,255,.15);
-        color: #ffffff;
+        border: 1px solid #dbe4ff;
+        background: #f8faff;
+        color: #03a4fc;
         transition: background .2s, border-color .2s;
         cursor: pointer;
     }
-    .ck-search-trigger:hover { background: rgba(255,255,255,.28); border-color: rgba(255,255,255,.9); }
+    .ck-search-trigger:hover { background: #eef4ff; border-color: #b8d0ff; }
     .ck-search-popover {
         position: absolute;
         top: calc(100% + 10px);
@@ -216,8 +217,8 @@
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        background: #ffffff;
-        color: #03a4fc;
+        background: #03a4fc;
+        color: #ffffff;
         font-size: .84rem;
         font-weight: 700;
         padding: 8px 18px;
@@ -226,7 +227,7 @@
         transition: background .2s, transform .15s;
         white-space: nowrap;
     }
-    .ck-contact-btn:hover { background: #e6f5ff; color: #028de0; transform: translateY(-1px); }
+    .ck-contact-btn:hover { background: #028de0; color: #fff; transform: translateY(-1px); }
 
     /* ── Mobile extras ───────────────────────────────────────────────────── */
     .ck-mobile-extras .form-control { border-radius: 8px; font-size: .85rem; }
@@ -242,25 +243,14 @@
     @media (max-width: 991.98px) {
         #ckNavCollapse {
             background: #fff;
-            border-top: 1px solid rgba(255,255,255,.3);
+            border-top: 1px solid #e9ecef;
             padding: 12px 4px;
         }
         .ck-navbar .nav-link {
-            color: #0f172a;
             padding: 9px 12px;
             font-size: .92rem;
             border-radius: 8px;
         }
-        .ck-navbar .nav-link:hover,
-        .ck-navbar .nav-link.active {
-            color: #03a4fc;
-            background: #eef7ff;
-        }
-        .ck-contact-btn {
-            background: #03a4fc;
-            color: #fff;
-        }
-        .ck-contact-btn:hover { background: #028de0; color: #fff; }
         .ck-nav-actions { display: none !important; }
     }
 </style>
