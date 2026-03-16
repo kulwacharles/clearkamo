@@ -1,5 +1,8 @@
 <div>
 
+{{-- Sticky wrapper — keeps topbar + navbar fixed at the top together --}}
+<div id="ck-header-wrap" class="ck-header-wrap">
+
 {{-- ══════════════════════════════════════════════════════════════════════════
      TOP BAR — contact info + social icons (desktop only)
 ════════════════════════════════════════════════════════════════════════════ --}}
@@ -101,24 +104,39 @@
     </div>{{-- /.container --}}
 </nav>
 
+</div>{{-- /#ck-header-wrap --}}
+
 {{-- ══════════════════════════════════════════════════════════════════════════
      STYLES
 ════════════════════════════════════════════════════════════════════════════ --}}
 <style>
+    /* ── Sticky header wrapper — topbar + navbar stick together ─────────── */
+    .ck-header-wrap {
+        position: sticky;
+        top: 0;
+        z-index: 1050;
+        background: #ffffff;
+        transition: box-shadow .25s ease;
+    }
+    .ck-header-wrap.scrolled {
+        box-shadow: 0 4px 20px rgba(15, 23, 42, .10);
+    }
+
     /* ── Top bar ─────────────────────────────────────────────────────────── */
     .ck-topbar {
-        background: #0f172a;
-        color: #cbd5e1;
+        background: #ffffff;
+        color: #a3a3a3;
         font-size: .82rem;
         padding: 7px 3%;
         gap: 10px;
+        border-bottom: 1px solid #e9ecef;
     }
     .ck-topbar a {
-        color: #cbd5e1;
+        color: #a3a3a3;
         text-decoration: none;
         transition: color .2s;
     }
-    .ck-topbar a:hover { color: #03A4FC; }
+    .ck-topbar a:hover { color: #03a4fc; }
     .ck-topbar-right { display: flex; gap: 14px; }
     .ck-topbar-right a { font-size: .9rem; }
 
@@ -127,13 +145,10 @@
         background: #ffffff;
         border-bottom: 1px solid #e9ecef;
         padding: 10px 0;
-        position: sticky;
-        top: 0;
-        z-index: 1050;
-        transition: box-shadow .25s ease;
+        transition: none;
     }
-    .ck-navbar.scrolled {
-        box-shadow: 0 4px 20px rgba(15, 23, 42, .10);
+    .ck-header-wrap.scrolled .ck-navbar {
+        border-bottom-color: transparent;
     }
 
     /* ── Logo ──────────────────────────────────────────────────────────────
@@ -248,12 +263,12 @@
 ════════════════════════════════════════════════════════════════════════════ --}}
 <script>
 (function () {
-    /* ── Scroll shadow on navbar ──────────────────────────────────────── */
+    /* ── Scroll shadow on the wrapper ────────────────────────────────── */
     const applyScrollClass = () => {
-        const nav = document.getElementById('ck-navbar');
-        if (!nav) return;
-        if (window.scrollY > 10) nav.classList.add('scrolled');
-        else nav.classList.remove('scrolled');
+        const wrap = document.getElementById('ck-header-wrap');
+        if (!wrap) return;
+        if (window.scrollY > 10) wrap.classList.add('scrolled');
+        else wrap.classList.remove('scrolled');
     };
 
     /* ── Desktop search popover ───────────────────────────────────────── */
