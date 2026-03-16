@@ -1141,7 +1141,7 @@
             <div class="row g-4 justify-content-center">
                 @if($services)
                     @foreach ($services as $key => $service)
-                        <div class="col-xl-3 col-lg-4 col-md-6">
+                        <div class="col-xl-4 col-lg-6 col-md-6">
                             <article class="svc-card h-100">
                                 <a wire:navigate href="/service/details/{{ $service->slug }}" class="svc-card-img-link">
                                     <div class="svc-card-img">
@@ -1183,7 +1183,7 @@
             #service-sec .svc-card-img {
                 position: relative;
                 width: 100%;
-                height: 240px;
+                height: 300px;
                 overflow: hidden;
             }
             #service-sec .svc-card-img img {
@@ -1211,14 +1211,14 @@
                 justify-content: center;
             }
             #service-sec .svc-card-body {
-                padding: 18px 20px 20px;
+                padding: 22px 24px 24px;
                 display: flex;
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 12px;
+                gap: 14px;
             }
             #service-sec .svc-card-title {
-                font-size: 1.05rem;
+                font-size: 1.2rem;
                 font-weight: 700;
                 color: #0f172a;
                 margin: 0;
@@ -1245,7 +1245,7 @@
                 color: #025ea8;
             }
             @media (max-width: 575.98px) {
-                #service-sec .svc-card-img { height: 200px; }
+                #service-sec .svc-card-img { height: 220px; }
             }
         </style>
     </section>
