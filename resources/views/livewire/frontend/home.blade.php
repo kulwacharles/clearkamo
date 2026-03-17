@@ -293,9 +293,37 @@
                     </div>
                 </div>
             </div>
-            {{-- ── Row 2: Side-by-side YouTube video + Project Gallery ── --}}
+            {{-- ── Row 2: Mission/Vision/Core (left) + Video (right) ── --}}
             <div class="row gy-4 mt-2" id="media-row">
-                {{-- Left: YouTube video --}}
+                <div class="col-lg-6">
+                    <div class="mission-vision-core-values h-100">
+                        <div class="mb-4">
+                            <h4 class="text-primary mb-3" style="font-weight: 700; font-size: 1.15rem;">
+                                <i class="fas fa-bullseye me-2"></i>Mission
+                            </h4>
+                            <p style="color: #475569; line-height: 1.75; margin-bottom: 0;">
+                                To apply decision science and systems design to help organizations define long-term strategies and translate them into clear, executable decisions that deliver reliable results under real-world conditions.
+                            </p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-primary mb-3" style="font-weight: 700; font-size: 1.15rem;">
+                                <i class="fas fa-eye me-2"></i>Vision
+                            </h4>
+                            <p style="color: #475569; line-height: 1.75; margin-bottom: 0;">
+                                To be partner of choice for organizations seeking dependable execution and sustained results.
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="text-primary mb-3" style="font-weight: 700; font-size: 1.15rem;">
+                                <i class="fas fa-gem me-2"></i>Core Values
+                            </h4>
+                            <p style="color: #475569; line-height: 1.75; margin-bottom: 0;">
+                                Community/Customer-centred; Local relevance with global reach; Evidence-based practice; Accountable results; Responsible innovation.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="col-lg-6">
                     @if($aboutVideoEmbedUrl)
                         <div class="about-video-cinema h-100">
@@ -329,16 +357,17 @@
                         </div>
                     @endif
                 </div>
+            </div>
 
-                {{-- Right: Project Gallery Slider --}}
-                <div class="col-lg-6">
+            {{-- ── Row 3: Project Gallery Slider ── --}}
+            <div class="row gy-4 mt-2">
+                <div class="col-12">
                     <div class="gallery-block h-100">
                         <div class="gallery-block-header">
                             <div class="gallery-block-title-wrap">
                                 <span class="gallery-block-dot"></span>
                                 <span class="gallery-block-label">Our Gallery</span>
                             </div>
-                            {{-- Project filter dropdown --}}
                             @if($galleryProjects && $galleryProjects->count())
                                 <div class="gallery-select-wrap">
                                     <select id="galleryProjectSelect" class="gallery-select">
@@ -370,7 +399,6 @@
                                                 </div>
                                             @endforeach
                                         </div>
-                                        {{-- Slide navigation --}}
                                         @if($gProj->galleryPhotos->count() > 1)
                                             <div class="gallery-nav">
                                                 <button class="gallery-nav-btn gallery-prev" data-slider="{{ $gIdx }}">
@@ -504,6 +532,22 @@
             #about-sec .about-readmore-link:hover {
                 gap: 10px;
                 color: #025ea8;
+            }
+
+            /* Mission / Vision / Core panel */
+            #about-sec .mission-vision-core-values {
+                background: #ffffff;
+                border-left: 4px solid #03A4FC;
+                border-radius: 18px;
+                padding: 28px 24px;
+                box-shadow: 0 12px 34px rgba(15, 23, 42, 0.08);
+                height: 100%;
+            }
+            #about-sec .mission-vision-core-values h4 {
+                letter-spacing: 0.01em;
+            }
+            #about-sec .mission-vision-core-values p {
+                margin-bottom: 0;
             }
 
             /* Cinematic video block */
