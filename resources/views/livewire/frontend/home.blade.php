@@ -279,8 +279,12 @@
                                 <img class="ms-1" src="assets/img/theme-img/title_icon.svg" alt="img">
                             </span>
 
-                            <div class="about-description-text mt-2">
-                                {!! $aboutDescriptionHtml !!}
+                            <div class="about-description-text about-typing-wrap mt-2">
+                                <div class="about-description-source d-none">{!! $aboutDescriptionHtml !!}</div>
+                                <div class="about-typewriter" data-type-speed="14" aria-live="polite"></div>
+                                <noscript>
+                                    <div class="about-description-fallback">{!! $aboutDescriptionHtml !!}</div>
+                                </noscript>
                             </div>
 
                             <div class="about-hero-footer">
@@ -381,7 +385,7 @@
                 align-items: center;
                 box-shadow: 0 24px 50px rgba(15, 23, 42, 0.2);
                 background-image:
-                    linear-gradient(120deg, rgba(15, 23, 42, 0.84) 0%, rgba(15, 23, 42, 0.55) 55%, rgba(15, 23, 42, 0.2) 100%),
+                    linear-gradient(120deg, rgba(8, 14, 26, 0.9) 0%, rgba(12, 22, 38, 0.7) 56%, rgba(12, 22, 38, 0.35) 100%),
                     var(--about-hero-bg);
                 background-size: cover;
                 background-position: center;
@@ -389,30 +393,48 @@
             #about-sec .about-hero-overlay {
                 position: absolute;
                 inset: 0;
-                background: radial-gradient(circle at 12% 20%, rgba(3, 164, 252, 0.22), transparent 42%);
+                background: radial-gradient(circle at 12% 20%, rgba(3, 164, 252, 0.16), transparent 42%);
                 pointer-events: none;
             }
             #about-sec .about-hero-content {
                 position: relative;
                 z-index: 2;
                 width: min(760px, 100%);
-                background: rgba(255, 255, 255, 0.92);
-                border: 1px solid rgba(255, 255, 255, 0.68);
-                border-radius: 20px;
-                padding: 26px 24px 22px;
-                backdrop-filter: blur(5px);
-                box-shadow: 0 16px 35px rgba(15, 23, 42, 0.2);
+                background: transparent;
+                border: 0;
+                border-radius: 0;
+                padding: 8px 0 0;
+                backdrop-filter: none;
+                box-shadow: none;
             }
             #about-sec .about-description-text {
-                color: #334155;
+                color: rgba(241, 245, 249, 0.95);
                 font-size: 1.02rem;
                 line-height: 1.85;
+                text-shadow: 0 1px 2px rgba(2, 6, 23, 0.55);
             }
             #about-sec .about-description-text p {
                 margin-bottom: 1rem;
             }
             #about-sec .about-description-text p:last-child {
                 margin-bottom: 0;
+            }
+            #about-sec .about-typewriter {
+                white-space: pre-line;
+            }
+            #about-sec .about-typing-wrap.is-typing .about-typewriter::after {
+                content: '|';
+                margin-left: 2px;
+                color: #03A4FC;
+                font-weight: 700;
+                animation: aboutTypingCursor 0.75s steps(1) infinite;
+            }
+            #about-sec .about-typing-wrap.is-typed .about-typewriter::after {
+                display: none;
+            }
+            @keyframes aboutTypingCursor {
+                0%, 49% { opacity: 1; }
+                50%, 100% { opacity: 0; }
             }
             #about-sec .about-hero-secondary {
                 position: absolute;
@@ -477,13 +499,14 @@
                 gap: 6px;
                 font-size: 0.98rem;
                 font-weight: 700;
-                color: #03A4FC;
+                color: #7fd0ff;
                 text-decoration: none;
                 transition: gap 0.2s ease, color 0.2s ease;
+                text-shadow: 0 1px 2px rgba(2, 6, 23, 0.55);
             }
             #about-sec .about-readmore-link:hover {
                 gap: 12px;
-                color: #025ea8;
+                color: #03A4FC;
             }
 
             #about-sec #media-row {
@@ -587,7 +610,7 @@
                 }
                 #about-sec .about-hero-content {
                     width: 100%;
-                    padding: 20px 18px;
+                    padding: 4px 0 0;
                 }
                 #about-sec .about-hero-secondary {
                     width: 190px;
@@ -616,8 +639,8 @@
                     border-radius: 16px;
                 }
                 #about-sec .about-hero-content {
-                    padding: 16px 14px;
-                    border-radius: 14px;
+                    padding: 0;
+                    border-radius: 0;
                 }
                 #about-sec .about-hero-secondary {
                     display: none !important;
@@ -642,6 +665,98 @@
                 }
             }
         </style>
+
+        <script>
+            (function () {
+                function extractWhoWeAreText(source) {
+                    const paragraphs = Array.from(source.querySelectorAll('p'))
+                        .map((p) => p.textContent.trim())
+                        .filter(Boolean);
+
+                    if (paragraphs.length) {
+                        return paragraphs.join('\n\n');
+                    }
+
+                    return (source.textContent || '').trim();
+                }
+
+                function initWhoWeAreTyping() {
+                    const wraps = document.querySelectorAll('#about-sec .about-typing-wrap');
+                    if (!wraps.length) {
+                        return;
+                    }
+
+                    wraps.forEach((wrap) => {
+                        if (wrap.dataset.typingReady === '1') {
+                            return;
+                        }
+
+                        wrap.dataset.typingReady = '1';
+                        const source = wrap.querySelector('.about-description-source');
+                        const target = wrap.querySelector('.about-typewriter');
+                        if (!source || !target) {
+                            return;
+                        }
+
+                        const fullText = extractWhoWeAreText(source);
+                        if (!fullText) {
+                            return;
+                        }
+
+                        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                        if (prefersReducedMotion) {
+                            target.textContent = fullText;
+                            wrap.classList.add('is-typed');
+                            return;
+                        }
+
+                        const startTyping = () => {
+                            if (wrap.dataset.typed === '1') {
+                                return;
+                            }
+                            wrap.dataset.typed = '1';
+                            wrap.classList.add('is-typing');
+
+                            let index = 0;
+                            const speed = parseInt(target.dataset.typeSpeed || '14', 10);
+
+                            const tick = () => {
+                                index += 1;
+                                target.textContent = fullText.slice(0, index);
+
+                                if (index < fullText.length) {
+                                    window.setTimeout(tick, speed);
+                                } else {
+                                    wrap.classList.remove('is-typing');
+                                    wrap.classList.add('is-typed');
+                                }
+                            };
+
+                            tick();
+                        };
+
+                        const observer = new IntersectionObserver((entries) => {
+                            entries.forEach((entry) => {
+                                if (entry.isIntersecting) {
+                                    startTyping();
+                                    observer.disconnect();
+                                }
+                            });
+                        }, { threshold: 0.35 });
+
+                        observer.observe(wrap);
+                    });
+                }
+
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', initWhoWeAreTyping);
+                } else {
+                    initWhoWeAreTyping();
+                }
+
+                document.addEventListener('livewire:navigated', initWhoWeAreTyping);
+            })();
+        </script>
     </div>
     @endif
 
