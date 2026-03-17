@@ -53,22 +53,22 @@
                     <a class="nav-link" wire:navigate href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" wire:navigate href="/about-us">About Us</a>
+                    <a class="nav-link" wire:navigate href="/about-us">Who We Are</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" wire:navigate href="/services">Services</a>
+                    <a class="nav-link" wire:navigate href="/services">Our Services</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" wire:navigate href="/projects">Projects</a>
+                    <a class="nav-link" wire:navigate href="/projects">Our Projects</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" wire:navigate href="/news-and-updates">News &amp; Updates</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" wire:navigate href="/publications">Publications</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" wire:navigate href="/vacancies">Vacancies</a>
+                <li class="nav-item dropdown ck-resources-nav">
+                    <a class="nav-link dropdown-toggle" href="#" id="ckResourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Resources
+                    </a>
+                    <ul class="dropdown-menu ck-resources-menu" aria-labelledby="ckResourcesDropdown">
+                        <li><a class="dropdown-item ck-resource-link" wire:navigate href="/publications">Publications</a></li>
+                        <li><a class="dropdown-item ck-resource-link" wire:navigate href="/news-and-updates">Reports</a></li>
+                    </ul>
                 </li>
             </ul>
 
@@ -180,6 +180,32 @@
         background: #eef7ff;
     }
 
+    /* ── Resources dropdown ─────────────────────────────────────────────── */
+    .ck-resources-menu {
+        border: 1px solid #dbe4ff;
+        border-radius: 10px;
+        box-shadow: 0 16px 32px rgba(15,23,42,.12);
+        padding: 8px;
+        min-width: 210px;
+    }
+    .ck-resource-link {
+        border-radius: 8px;
+        font-size: .86rem;
+        font-weight: 600;
+        color: #0f172a;
+        padding: 8px 10px;
+    }
+    .ck-resource-link:hover,
+    .ck-resource-link.active {
+        color: #03a4fc;
+        background: #eef7ff;
+    }
+    @media (min-width: 992px) {
+        .ck-resources-nav:hover > .ck-resources-menu {
+            display: block;
+        }
+    }
+
     /* ── Hamburger ───────────────────────────────────────────────────────── */
     .ck-toggler {
         border: 1.5px solid #03a4fc;
@@ -260,6 +286,12 @@
             font-size: .92rem;
             border-radius: 8px;
         }
+        .ck-resources-menu {
+            border: 0;
+            box-shadow: none;
+            padding: 4px 0 4px 14px;
+            margin-top: 2px;
+        }
         .ck-nav-actions { display: none !important; }
     }
 </style>
@@ -295,6 +327,20 @@
             const isOther = href !== '/' && path.startsWith(href);
             a.classList.toggle('active', isHome || isOther);
         });
+
+        const resourcePaths = ['/publications', '/news-and-updates', '/reports'];
+        const resourcesToggle = document.querySelector('.ck-resources-nav > .nav-link');
+        if (resourcesToggle) {
+            const isResourcesPath = resourcePaths.some(p => path === p || path.startsWith(p + '/'));
+            resourcesToggle.classList.toggle('active', isResourcesPath);
+        }
+
+        document.querySelectorAll('.ck-resources-menu .ck-resource-link').forEach(link => {
+            const href = link.getAttribute('href') || '';
+            const isActive = path === href || path.startsWith(href + '/');
+            link.classList.toggle('active', isActive);
+        });
+
         const homeItem = document.getElementById('ck-home-nav-item');
         if (homeItem) homeItem.style.display = (path === '/') ? 'none' : '';
     };

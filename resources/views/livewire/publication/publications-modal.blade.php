@@ -49,8 +49,13 @@
                             <input type="file" class="form-control" wire:model="image">
                             @error('image') <span class="text-danger">{{ $message }}</span> @enderror
                             @if($image)
+                                @php($previewUrl = $this->temporaryImagePreviewUrl($image))
                                 <div class="mt-2">
-                                    <img src="{{ $image->temporaryUrl() }}" class="blog-image-preview">
+                                    @if($previewUrl)
+                                        <img src="{{ $previewUrl }}" class="blog-image-preview">
+                                    @else
+                                        <small class="text-muted">Preview not available for this file, but upload is still allowed.</small>
+                                    @endif
                                 </div>
                             @endif
                         </div>
@@ -130,9 +135,14 @@
                             @error('image') <span class="text-danger">{{ $message }}</span> @enderror
                             
                             @if($image)
+                                @php($previewUrl = $this->temporaryImagePreviewUrl($image))
                                 <div class="mt-2">
                                     <p>New Image Preview:</p>
-                                    <img src="{{ $image->temporaryUrl() }}" class="blog-image-preview">
+                                    @if($previewUrl)
+                                        <img src="{{ $previewUrl }}" class="blog-image-preview">
+                                    @else
+                                        <small class="text-muted">Preview not available for this file, but upload is still allowed.</small>
+                                    @endif
                                 </div>
                             @endif
                         </div>

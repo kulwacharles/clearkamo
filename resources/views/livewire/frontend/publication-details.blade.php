@@ -41,7 +41,11 @@
                                 </a>
                             </div>
                             <h2 class="blog-title">{{ $publication->title }}</h2>
-                            <p>{!! $publication->description !!}</p>
+                            @if(!empty($publication->link))
+                                <a href="{{ $publication->link }}" target="_blank" rel="noopener noreferrer" class="th-btn style3 mt-2">
+                                    Open Publication <i class="fas fa-arrow-up-right-from-square ms-2"></i>
+                                </a>
+                            @endif
 
                         
 

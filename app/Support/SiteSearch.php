@@ -52,14 +52,29 @@ class SiteSearch
         $publications = Publication::query()
             ->whereIn('status', $publishedOrActive)
             ->where(function ($query) use ($q) {
-                $query->where('title', 'like', "%{$q}%")
-                    ->orWhere('description', 'like', "%{$q}%");
+                $query->where('title', 'like', "%{$q}%");
+
+                if (Schema::hasColumn('publications', 'publication_category')) {
+                    $query->orWhere('publication_category', 'like', "%{$q}%");
+                }
+                if (Schema::hasColumn('publications', 'keywords')) {
+                    $query->orWhere('keywords', 'like', "%{$q}%");
+                }
+                if (Schema::hasColumn('publications', 'link_label')) {
+                    $query->orWhere('link_label', 'like', "%{$q}%");
+                }
             })
             ->limit(12)
             ->get();
 
         foreach ($publications as $publication) {
-            $items->push(self::item('Publication', $publication->title, (string) $publication->description, url('/publication/details/' . $publication->slug), optional($publication->updated_at)?->toDateString()));
+            $items->push(self::item(
+                'Publication',
+                $publication->title,
+                (string) ($publication->publication_category ?? $publication->keywords ?? $publication->link_label ?? ''),
+                url('/publication/details/' . $publication->slug),
+                optional($publication->updated_at)?->toDateString()
+            ));
         }
 
         $services = Service::query()

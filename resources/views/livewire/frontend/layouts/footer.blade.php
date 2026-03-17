@@ -18,7 +18,7 @@
                                         </a>
                                     </div>
                                 @endif
-                                <p class="about-text">Consulting services can provide valuable insights, strategic guidance, pecialized</p>
+                                {{-- <p class="about-text">Consulting services can provide valuable insights, strategic guidance, pecialized</p> --}}
                                 <div class="info-box">
                                     <div class="info-box_icon"><i class="far fa-phone"></i>
                                     </div>

@@ -11,13 +11,36 @@ class Publication extends Model
         parent::boot();
 
         static::creating(function ($publication) {
-            $publication->slug = Str::slug($publication->title);
+            $publication->slug = static::generateUniqueSlug((string) $publication->title);
         });
-                // When updating (only if title changed)
+
+        // When updating (only if title changed)
         static::updating(function ($publication) {
             if ($publication->isDirty('title')) {
-                $publication->slug = Str::slug($publication->title);
+                $publication->slug = static::generateUniqueSlug((string) $publication->title, (int) $publication->id);
             }
         });
+    }
+
+    private static function generateUniqueSlug(string $title, ?int $ignoreId = null): string
+    {
+        $baseSlug = Str::slug($title);
+        if ($baseSlug === '') {
+            $baseSlug = 'publication';
+        }
+
+        $slug = $baseSlug;
+        $counter = 2;
+
+        while (static::query()
+            ->where('slug', $slug)
+            ->when($ignoreId, fn ($query) => $query->where('id', '!=', $ignoreId))
+            ->exists()
+        ) {
+            $slug = $baseSlug . '-' . $counter;
+            $counter++;
+        }
+
+        return $slug;
     }
 }

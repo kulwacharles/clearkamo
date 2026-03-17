@@ -6,6 +6,11 @@
     /* Reduce section spacing on the home page */
     #ck-home { --section-space: 70px; --section-space-mobile: 45px; }
     @media (max-width: 575px) { #ck-home { --section-space-mobile: 30px; } }
+
+    /* Remove only decorative "~" icons while keeping heading text visible */
+    #ck-home .sub-title img {
+        display: none !important;
+    }
 </style>
     <!-- Hero Slider Section -->
     @if($slides && $slides->count() > 0)
@@ -256,10 +261,8 @@
     @if($whoWeAre)
     <div class="space" id="about-sec">
         <div class="container">
-
-            {{-- ── Row 1: Background image with foreground text card ── --}}
-            <div class="row">
-                <div class="col-12">
+            <div class="row g-4 align-items-start">
+                <div class="col-xl-8">
                     @php
                         $aboutDescriptionHtml = html_entity_decode($whoWeAre->description ?? '');
                     @endphp
@@ -299,8 +302,45 @@
                         </div>
                     </section>
                 </div>
+
+                <div class="col-xl-4">
+                    <aside class="home-news-side sr-fade-up">
+                        <div class="home-news-side-head">
+                            <h3>News &amp; Updates</h3>
+                            <a wire:navigate href="{{ route('news-and-update') }}">
+                                View all <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                        <div class="home-news-side-list">
+                            @if($blogs && $blogs->count())
+                                @foreach($blogs->take(4) as $sideBlog)
+                                    @if($sideBlog->slug)
+                                    <article class="home-news-mini">
+                                        <a wire:navigate href="{{ route('news-and-updates.details', ['slug' => $sideBlog->slug]) }}" class="home-news-mini-thumb">
+                                            <img src="{{ asset('storage/'.$sideBlog->image) }}" alt="{{ $sideBlog->title }}">
+                                        </a>
+                                        <div class="home-news-mini-body">
+                                            <span class="home-news-mini-date">
+                                                <i class="far fa-calendar-alt me-1"></i>{{ $sideBlog->created_at->format('d M Y') }}
+                                            </span>
+                                            <h4>
+                                                <a wire:navigate href="{{ route('news-and-updates.details', ['slug' => $sideBlog->slug]) }}">
+                                                    {{ \Illuminate\Support\Str::limit($sideBlog->title, 80) }}
+                                                </a>
+                                            </h4>
+                                        </div>
+                                    </article>
+                                    @endif
+                                @endforeach
+                            @else
+                                <div class="home-news-empty">No news updates available yet.</div>
+                            @endif
+                        </div>
+                    </aside>
+                </div>
             </div>
-            {{-- ── Row 2: Mission/Vision/Core (left) + Video (right) ── --}}
+
+            {{-- ── Mission/Vision/Core + Video: equal-size blocks full content width ── --}}
             <div class="row gy-4 mt-2" id="media-row">
                 <div class="col-lg-6">
                     <div class="mission-vision-core-values h-100">
@@ -512,6 +552,110 @@
 
             #about-sec #media-row {
                 margin-top: 36px;
+                align-items: stretch;
+            }
+            #about-sec #media-row > [class*='col-'] {
+                display: flex;
+            }
+            #about-sec #media-row .mission-vision-core-values,
+            #about-sec #media-row .about-video-cinema {
+                width: 100%;
+                height: 100%;
+            }
+
+            #about-sec .home-news-side {
+                position: sticky;
+                top: 120px;
+                background: #ffffff;
+                border: 1px solid #dbe3ef;
+                border-radius: 20px;
+                padding: 18px;
+                box-shadow: 0 18px 36px rgba(15, 23, 42, 0.08);
+            }
+            #about-sec .home-news-side-head {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+                padding-bottom: 12px;
+                margin-bottom: 12px;
+                border-bottom: 1px solid #e2e8f0;
+            }
+            #about-sec .home-news-side-head h3 {
+                margin: 0;
+                font-size: 1.05rem;
+                font-weight: 800;
+                color: #0f172a;
+            }
+            #about-sec .home-news-side-head a {
+                font-size: 0.8rem;
+                font-weight: 700;
+                color: #03A4FC;
+                text-decoration: none;
+                white-space: nowrap;
+            }
+            #about-sec .home-news-side-head a:hover {
+                color: #0284c7;
+            }
+            #about-sec .home-news-side-list {
+                display: grid;
+                gap: 12px;
+            }
+            #about-sec .home-news-mini {
+                display: grid;
+                grid-template-columns: 96px 1fr;
+                gap: 12px;
+                align-items: start;
+                padding: 10px;
+                border-radius: 14px;
+                border: 1px solid #edf2f7;
+                transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+            }
+            #about-sec .home-news-mini:hover {
+                border-color: rgba(3,164,252,.35);
+                box-shadow: 0 10px 24px rgba(3,164,252,.12);
+                transform: translateY(-2px);
+            }
+            #about-sec .home-news-mini-thumb {
+                display: block;
+                width: 96px;
+                height: 76px;
+                border-radius: 10px;
+                overflow: hidden;
+            }
+            #about-sec .home-news-mini-thumb img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+            #about-sec .home-news-mini-date {
+                display: inline-block;
+                font-size: 0.7rem;
+                font-weight: 600;
+                color: #64748b;
+                margin-bottom: 5px;
+            }
+            #about-sec .home-news-mini-body h4 {
+                margin: 0;
+                font-size: 0.9rem;
+                line-height: 1.45;
+                font-weight: 700;
+            }
+            #about-sec .home-news-mini-body h4 a {
+                color: #0f172a;
+                text-decoration: none;
+                transition: color .2s ease;
+            }
+            #about-sec .home-news-mini-body h4 a:hover {
+                color: #03A4FC;
+            }
+            #about-sec .home-news-empty {
+                padding: 14px;
+                border: 1px dashed #cbd5e1;
+                border-radius: 12px;
+                color: #64748b;
+                font-size: 0.88rem;
             }
             #about-sec .mission-vision-core-values {
                 background: rgba(226, 232, 240, 0.45);
@@ -623,6 +767,13 @@
                 #about-sec .about-hero-secondary img {
                     height: 116px;
                 }
+                #about-sec .home-news-side {
+                    position: static;
+                    top: auto;
+                }
+                #about-sec #media-row > [class*='col-'] {
+                    display: block;
+                }
                 #about-sec .mission-vision-core-values {
                     padding: 24px 22px;
                 }
@@ -665,6 +816,19 @@
                 #about-sec .mission-vision-core-values {
                     border-radius: 16px;
                     padding: 18px 16px;
+                }
+                #about-sec .home-news-side {
+                    border-radius: 16px;
+                    padding: 14px;
+                }
+                #about-sec .home-news-mini {
+                    grid-template-columns: 84px 1fr;
+                    gap: 10px;
+                    padding: 8px;
+                }
+                #about-sec .home-news-mini-thumb {
+                    width: 84px;
+                    height: 68px;
                 }
             }
         </style>
@@ -776,7 +940,6 @@
                             <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">OUR SERVICES
                             <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
                         </span>
-                        <h2 class="sec-title">What We Do</h2>
                     </div>
                 </div>
             </div>
@@ -924,7 +1087,6 @@
                     <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">Our Projects
                     <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
                 </span>
-                <h2 class="sec-title">Delivering Real-World Impact</h2>
             </div>
             <div class="row g-3">
                 @foreach($projects->take(6) as $index => $project)
@@ -1019,157 +1181,6 @@
         </style>
     </section>
     @endif
-    {{-- ── News & Updates ───────────────────────────────────────── --}}
-    @if($blogs && $blogs->count() > 0)
-    <section class="space-top space-bottom" id="news-sec">
-        <div class="container">
-            <div class="title-area text-center sr-fade-up">
-                <span class="sub-title">
-                    <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">LATEST NEWS
-                    <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
-                </span>
-                <h2 class="sec-title">News &amp; Updates</h2>
-            </div>
-
-            <div class="row g-4">
-                @foreach($blogs->take(3) as $blogIdx => $blog)
-                @if($blog->slug)
-                <div class="col-lg-4 col-md-6 sr-fade-up" style="animation-delay: {{ $blogIdx * 0.12 }}s">
-                    <article class="news-card h-100">
-                        <a wire:navigate href="{{ route('news-and-updates.details', ['slug' => $blog->slug]) }}" class="news-card-thumb-link">
-                            <div class="news-card-thumb">
-                                <img src="{{ asset('storage/'.$blog->image) }}" alt="{{ $blog->title }}">
-                                <span class="news-card-category">{{ $blog->category }}</span>
-                            </div>
-                        </a>
-                        <div class="news-card-body">
-                            <div class="news-card-meta">
-                                <span class="news-card-date">
-                                    <i class="far fa-calendar-alt me-1"></i>
-                                    {{ $blog->created_at->format('d M Y') }}
-                                </span>
-                            </div>
-                            <h3 class="news-card-title">
-                                <a wire:navigate href="{{ route('news-and-updates.details', ['slug' => $blog->slug]) }}">
-                                    {{ $blog->title }}
-                                </a>
-                            </h3>
-                            <a wire:navigate href="{{ route('news-and-updates.details', ['slug' => $blog->slug]) }}" class="news-card-link">
-                                Read More <i class="fas fa-arrow-right ms-1"></i>
-                            </a>
-                        </div>
-                    </article>
-                </div>
-                @endif
-                @endforeach
-            </div>
-
-            <div class="text-center mt-5">
-                <a wire:navigate href="{{ route('news-and-update') }}" class="th-btn style3">
-                    View All News &amp; Updates
-                    <i class="fas fa-arrow-right ms-2"></i>
-                </a>
-            </div>
-        </div>
-
-        <style>
-            #news-sec .news-card {
-                background: #ffffff;
-                border: 1px solid #e2e8f0;
-                border-radius: 16px;
-                overflow: hidden;
-                box-shadow: 0 8px 22px rgba(15, 23, 42, 0.07);
-                transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-                display: flex;
-                flex-direction: column;
-            }
-            #news-sec .news-card:hover {
-                transform: translateY(-5px);
-                border-color: rgba(3, 164, 252, 0.45);
-                box-shadow: 0 18px 36px rgba(3, 164, 252, 0.15);
-            }
-            /* Thumbnail */
-            #news-sec .news-card-thumb-link { display: block; }
-            #news-sec .news-card-thumb {
-                position: relative;
-                height: 220px;
-                overflow: hidden;
-            }
-            #news-sec .news-card-thumb img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                display: block;
-                transition: transform .4s ease;
-            }
-            #news-sec .news-card:hover .news-card-thumb img {
-                transform: scale(1.06);
-            }
-            /* Category badge */
-            #news-sec .news-card-category {
-                position: absolute;
-                top: 14px;
-                left: 14px;
-                background: #03A4FC;
-                color: #fff;
-                font-size: 11px;
-                font-weight: 700;
-                text-transform: uppercase;
-                letter-spacing: .06em;
-                padding: 4px 11px;
-                border-radius: 20px;
-            }
-            /* Body */
-            #news-sec .news-card-body {
-                padding: 20px 22px 22px;
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-                flex: 1;
-            }
-            #news-sec .news-card-meta {
-                margin: 0;
-            }
-            #news-sec .news-card-date {
-                font-size: 12px;
-                color: #94a3b8;
-                font-weight: 500;
-            }
-            #news-sec .news-card-title {
-                font-size: 1rem;
-                font-weight: 700;
-                line-height: 1.4;
-                color: #0f172a;
-                margin: 0;
-                flex: 1;
-            }
-            #news-sec .news-card-title a {
-                color: inherit;
-                text-decoration: none;
-                transition: color .2s ease;
-            }
-            #news-sec .news-card-title a:hover { color: #03A4FC; }
-            #news-sec .news-card-link {
-                display: inline-flex;
-                align-items: center;
-                font-size: .875rem;
-                font-weight: 700;
-                color: #03A4FC;
-                text-decoration: none;
-                gap: 4px;
-                transition: gap .2s ease, color .2s ease;
-            }
-            #news-sec .news-card-link:hover {
-                gap: 8px;
-                color: #0284c7;
-            }
-            @media (max-width: 575.98px) {
-                #news-sec .news-card-thumb { height: 200px; }
-            }
-        </style>
-    </section>
-    @endif
-
     {{-- ── Publications Section ─────────────────────────────────── --}}
     @if($publications && $publications->count() > 0)
     <section class="space-top space-bottom" id="publications-sec">
@@ -1179,7 +1190,6 @@
                     <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">Publications
                     <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
                 </span>
-                <h2 class="sec-title">Research &amp; Publications</h2>
             </div>
             <div class="row g-4">
                 @foreach($publications->take(4) as $index => $pub)
@@ -1422,7 +1432,6 @@
                     <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">OUR TEAM
                     <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
                 </span>
-                <h2 class="sec-title">Meet Our Team</h2>
             </div>
             <div class="row gy-30">
                 @foreach($teams as $teamIdx => $team)
@@ -1541,7 +1550,6 @@
                 <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">TESTIMONIAL
                 <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
             </span>
-            <h2 class="sec-title">What Clients Say About Us</h2>
         </div>
         <div class="slider-area testi-grid-area">
             <div class="swiper th-slider" id="testiSlide1" data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"1"},"768":{"slidesPerView":"1"},"992":{"slidesPerView":"2"},"1356":{"slidesPerView":"3"}}}'>

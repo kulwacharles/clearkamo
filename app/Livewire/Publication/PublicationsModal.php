@@ -7,19 +7,20 @@ use App\Models\Publication;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\UniqueConstraintViolationException;
 use Throwable;
 
 class PublicationsModal extends Component
 {
     use WithFileUploads;
 
-    public $title, $category, $description, $image, $imagePath, $pubId,$published_date,$keywords;
+    public $title, $category, $image, $imagePath, $pubId,$published_date,$keywords;
     public $link, $link_label;
     public $status = 'draft';
     public $currentImage;
     
     // View modal properties
-    public $viewTitle, $viewCategory, $viewDescription, $viewStatus, $viewImage,$viewPublishedDate,$viewKeywords;
+    public $viewTitle, $viewCategory, $viewStatus, $viewImage,$viewPublishedDate,$viewKeywords;
     public $viewLink, $viewLinkLabel;
 
     protected $messages = [
@@ -29,7 +30,7 @@ class PublicationsModal extends Component
         'link.url'          => 'The external link must be a valid URL.',
         'image.required'    => 'The Cover Image is required.',
         'image.image'       => 'The Cover Image must be a valid image.',
-        'image.max'         => 'The Cover Image may not be greater than 2MB.',
+        'image.max'         => 'The Cover Image may not be greater than 20MB.',
         'status.required'   => 'The Status is required.',
         'status.in'         => 'The selected Status is invalid.',
     ];
@@ -56,7 +57,7 @@ class PublicationsModal extends Component
                 $last = Publication::latest()->first();
                 $newId = $last ? $last->id + 1 : 1;
 
-                $extension = $this->image->getClientOriginalExtension();
+                $extension = $this->resolveImageExtension($this->image);
                 $filename  = 'clear_Kamo_' . $newId . '.' . $extension;
                 $imagePath = 'publications/' . $filename;
 
@@ -72,6 +73,9 @@ class PublicationsModal extends Component
                 $this->dispatch('close-modal', 'addBlogModal');
                 $this->dispatch('pub-updated');
             }
+        } catch (UniqueConstraintViolationException $e) {
+            report($e);
+            session()->flash('message', 'Publication with this title already exists. Please use a different title.');
         } catch (Throwable $e) {
             report($e);
             session()->flash('message', 'Failed to save publication. Please check all required fields and try again.');
@@ -86,7 +90,6 @@ class PublicationsModal extends Component
         $this->pubId = $pub->id;
         $this->title = $pub->title;
         $this->category = $pub->publication_category ?? $pub->category ?? (string) ($pub->category_id ?? '');
-        $this->description = $pub->description;
         $this->status = $pub->status;
         $this->currentImage = $pub->image;
         $this->published_date = $pub->published_date;
@@ -111,7 +114,7 @@ class PublicationsModal extends Component
                     Storage::disk('public')->delete($pub->image);
                 }
 
-                $extension = $this->image->getClientOriginalExtension();
+                $extension = $this->resolveImageExtension($this->image);
                 $filename  = 'clear_Kamo_' . $pub->id . '.' . $extension;
                 $imagePath = 'publications/' . $filename;
 
@@ -126,6 +129,9 @@ class PublicationsModal extends Component
                 $this->dispatch('close-modal', 'editPubModal');
                 $this->dispatch('pub-updated');
             }
+        } catch (UniqueConstraintViolationException $e) {
+            report($e);
+            session()->flash('message', 'Publication title already exists. Please use a different title.');
         } catch (Throwable $e) {
             report($e);
             session()->flash('message', 'Failed to update publication. Please review form values and try again.');
@@ -139,7 +145,6 @@ class PublicationsModal extends Component
         
         $this->viewTitle = $pub->title;
         $this->viewCategory = $pub->publication_category ?? $pub->category ?? (string) ($pub->category_id ?? 'N/A');
-        $this->viewDescription = $pub->description;
         $this->viewStatus = $pub->status;
         $this->viewImage = $pub->image;
         $this->viewPublishedDate = $pub->published_date;
@@ -169,7 +174,6 @@ class PublicationsModal extends Component
     {
         $this->title       = null;
         $this->category    = null;
-        $this->description = '';
         $this->image       = null;
         $this->imagePath   = null;
         $this->pubId      = null;
@@ -189,7 +193,6 @@ class PublicationsModal extends Component
     private function applyPublicationData(Publication $pub, ?string $imagePath): void
     {
         $pub->title = $this->title;
-        $pub->description = $this->description;
         $pub->image = $imagePath;
 
         if (Schema::hasColumn('publications', 'publication_category')) {
@@ -223,5 +226,29 @@ class PublicationsModal extends Component
         if (Schema::hasColumn('publications', 'link_label')) {
             $pub->link_label = $this->link_label;
         }
+    }
+
+    public function temporaryImagePreviewUrl($file): ?string
+    {
+        if (!$file) {
+            return null;
+        }
+
+        try {
+            return $file->temporaryUrl();
+        } catch (Throwable) {
+            return null;
+        }
+    }
+
+    private function resolveImageExtension($file): string
+    {
+        $extension = strtolower((string) $file->getClientOriginalExtension());
+        if ($extension !== '') {
+            return $extension;
+        }
+
+        $guessed = strtolower((string) $file->guessExtension());
+        return $guessed !== '' ? $guessed : 'jpg';
     }
 }
