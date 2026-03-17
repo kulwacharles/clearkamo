@@ -15,5 +15,8 @@ class WhoWeAre extends Model
         'title',
         'description',
         'image_path',
+        'secondary_image_path',
+        'years_of_experience',
+        'youtube_url',
     ];
 }

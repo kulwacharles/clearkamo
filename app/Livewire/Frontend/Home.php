@@ -4,6 +4,7 @@ namespace App\Livewire\Frontend;
 use App\Models\About;
 use App\Models\FocusArea;
 use App\Models\Slider;
+use App\Models\WhoWeAre;
 use App\Models\Team;
 use App\Models\Testimony;
 use App\Models\Blog;
@@ -23,7 +24,7 @@ class Home extends Component
         public $id, $imagePath, $image2Path, $about1, $about2;
         public $slides=null;
         public $teams,$keywords;
-        public $aboutVideoEmbedUrl = null;
+        public $whoWeAreVideoEmbedUrl = null;
         public $focusAreas;
         public $projectsCount = 0;
         public $partnersCount = 0;
@@ -32,6 +33,7 @@ class Home extends Component
         public $ceoMessage = null;
         public $projects;
         public $publications;
+        public $whoWeAre;
         
 
         public function mount()
@@ -58,6 +60,11 @@ class Home extends Component
         $this->teams=Team::where('status',"published")->get();
         $this->focusAreas=FocusArea::where('status','published')->orderBy('sort_order')->orderBy('id')->get();
         $this->ceoMessage = CeoMessage::where('is_active', true)->with('team')->first();
+        $this->whoWeAre = WhoWeAre::query()->first();
+        if ($this->whoWeAre) {
+            $this->whoWeAreVideoEmbedUrl = $this->toYouTubeEmbedUrl($this->whoWeAre->youtube_url);
+        }
+
         if ($about) {
             $this->id = $about->id;
             $this->title = $about->title;
@@ -67,24 +74,28 @@ class Home extends Component
             $this->about2 = $about->image2;
             $this->keywords = $about->keywords;
             $this->seodescription=Str::limit($this->description, 350, '...');
-            $this->aboutVideoEmbedUrl = $this->toYouTubeEmbedUrl($about->youtube_url);
+            $this->image = $about->logo ? url('/storage/'.$about->logo) : null;
             // Push initial description into CKEditor
             //$this->dispatch('load-ckeditor-data', $this->description);
+        } elseif ($this->whoWeAre) {
+            $this->title = $this->whoWeAre->title ?: 'ClearKamo';
+            $this->description = strip_tags((string) $this->whoWeAre->description);
+            $this->seodescription = Str::limit($this->description, 350, '...');
+            $this->image = $this->whoWeAre->image_path ? url('/storage/'.$this->whoWeAre->image_path) : null;
         }
         
     }
     public function render()
     {
-        $about = About::first();
         return view('livewire.frontend.home', [
-            'about' => $about,
+            'whoWeAre' => $this->whoWeAre,
             'services' => $this->services,
             'clients' => $this->clients,
             'slides' => $this->slides,
             'testimonies' => $this->testimonies,
             'blogs' => $this->blogs,
             'teams' => $this->teams,
-            'aboutVideoEmbedUrl' => $this->aboutVideoEmbedUrl,
+            'whoWeAreVideoEmbedUrl' => $this->whoWeAreVideoEmbedUrl,
             'focusAreas' => $this->focusAreas,
             'projectsCount' => $this->projectsCount,
             'partnersCount' => $this->partnersCount,
@@ -93,7 +104,7 @@ class Home extends Component
             'ceoMessage'      => $this->ceoMessage,
             'projects'        => $this->projects,
             'publications'    => $this->publications,
-        ])->layout("components.layouts.frontend", ["title"=>$this->title,"description"=>Str::limit(html_entity_decode(strip_tags($this->description)), 350, '...'),"keywords"=>$this->keywords,"image"=>$this->image]);
+        ])->layout("components.layouts.frontend", ["title"=>$this->title,"description"=>Str::limit(html_entity_decode(strip_tags((string) $this->description)), 350, '...'),"keywords"=>$this->keywords,"image"=>$this->image]);
     }
 
     private function toYouTubeEmbedUrl(?string $url): ?string

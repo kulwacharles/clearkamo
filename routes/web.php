@@ -37,6 +37,7 @@ use App\Livewire\FocusArea\BackendFocusArea;
 use App\Livewire\CoreValue\BackendCoreValue;
 use App\Livewire\Gallery\BackendGallery;
 use App\Livewire\CeoMessage\BackendCeoMessage;
+use App\Livewire\WhoWeAre\BackendWhoWeAre;
 use App\Models\Blog;
 use App\Models\ChatMessage;
 
@@ -53,6 +54,7 @@ Route::middleware(['auth'])->prefix('/admin')->group(function () {
     Route::get('dashboard', AdminDashboard::class)->name('admin.dashboard');
     Route::get('sliders',Sliders::class)->name('sliders');
     Route::get('about-us',Abouts::class)->name('admin.about');
+    Route::get('who-we-are', BackendWhoWeAre::class)->name('admin.who-we-are');
     Route::get('blog-posts',BackendBlog::class)->name('admin.blogs');
     Route::get('publications',BackendPublications::class)->name('admin.publications');
     Route::get('projects',BackendProject::class)->name('admin.projects');

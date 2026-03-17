@@ -444,6 +444,7 @@
                 'admin.dashboard' => 'Dashboard',
                 'sliders' => 'Sliders',
                 'admin.about' => 'About Us',
+                'admin.who-we-are' => 'Who We Are',
                 'admin.blogs' => 'News & Updates',
                 'admin.publications' => 'Publications',
                 'admin.projects' => 'Projects',

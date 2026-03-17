@@ -253,7 +253,7 @@
     </script>
     @endif
 
-    @if($about)
+    @if($whoWeAre)
     <div class="space" id="about-sec">
         <div class="container">
 
@@ -261,14 +261,14 @@
             <div class="row">
                 <div class="col-12">
                     @php
-                        $aboutDescriptionHtml = html_entity_decode($about->description ?? '');
+                        $aboutDescriptionHtml = html_entity_decode($whoWeAre->description ?? '');
                     @endphp
-                    <section class="about-hero-stage mb-4" style="--about-hero-bg: url('{{ asset('storage/'.$about->image) }}');">
+                    <section class="about-hero-stage mb-4" style="--about-hero-bg: url('{{ $whoWeAre->image_path ? asset('storage/'.$whoWeAre->image_path) : asset('assets/img/default/about.jpg') }}');">
                         <div class="about-hero-overlay"></div>
 
-                        @if(!empty($about->image2))
+                        @if(!empty($whoWeAre->secondary_image_path))
                             <div class="about-hero-secondary d-none d-lg-block">
-                                <img src="{{ asset('storage/'.$about->image2) }}" alt="ClearKamo team">
+                                <img src="{{ asset('storage/'.$whoWeAre->secondary_image_path) }}" alt="ClearKamo team">
                             </div>
                         @endif
 
@@ -288,7 +288,7 @@
                                     Learn More About Us <i class="fas fa-arrow-right ms-2"></i>
                                 </a>
                                 <div class="about-exp-badge">
-                                    <span class="about-exp-num">{{ $about->ex_years ?? 25 }}+</span>
+                                    <span class="about-exp-num">{{ $whoWeAre->years_of_experience ?? 25 }}+</span>
                                     <span class="about-exp-label">Years of<br>Experience</span>
                                 </div>
                             </div>
@@ -328,7 +328,7 @@
                 </div>
 
                 <div class="col-lg-6">
-                    @if($aboutVideoEmbedUrl)
+                    @if($whoWeAreVideoEmbedUrl)
                         <div class="about-video-cinema h-100">
                             <div class="about-video-cinema-inner h-100">
                                 <div class="about-video-cinema-label">
@@ -337,7 +337,7 @@
                                 </div>
                                 <div class="about-video-frame">
                                     <iframe
-                                        src="{{ $aboutVideoEmbedUrl }}"
+                                        src="{{ $whoWeAreVideoEmbedUrl }}"
                                         title="ClearKamo video"
                                         loading="lazy"
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -353,7 +353,7 @@
                                 <div class="about-video-frame about-video-placeholder d-flex align-items-center justify-content-center">
                                     <div class="text-center text-white">
                                         <i class="fas fa-play-circle about-video-placeholder-icon"></i>
-                                        <p class="mt-3 mb-0 opacity-75">Add a YouTube URL in the admin <strong>About Us</strong> panel to display a video here.</p>
+                                        <p class="mt-3 mb-0 opacity-75">Add a YouTube URL in the admin <strong>Who We Are</strong> panel to display a video here.</p>
                                     </div>
                                 </div>
                             </div>
