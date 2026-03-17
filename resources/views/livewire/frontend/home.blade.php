@@ -1871,30 +1871,55 @@
 
 <script>
 (function () {
+    var AUTO_HIDE_MS = 2 * 60 * 1000; // 2 minutes
     var trigger = {{ (int)$ceoMessage->scroll_trigger_percent }};
     var popup   = document.getElementById('ceo-popup');
     var closeBtn = document.getElementById('ceo-popup-close-btn');
     var shown   = false;
     var dismissed = sessionStorage.getItem('ceo_popup_dismissed') === '1';
+    var autoHideTimer = null;
 
     if (dismissed || !popup) return;
 
+    function dismissPopup() {
+        if (dismissed || !popup) return;
+        popup.classList.remove('ceo-popup-visible');
+        dismissed = true;
+        sessionStorage.setItem('ceo_popup_dismissed', '1');
+        if (autoHideTimer) {
+            clearTimeout(autoHideTimer);
+            autoHideTimer = null;
+        }
+        window.removeEventListener('scroll', checkScroll);
+    }
+
+    function startAutoHideCountdown() {
+        if (autoHideTimer) {
+            clearTimeout(autoHideTimer);
+        }
+        autoHideTimer = setTimeout(function () {
+            dismissPopup();
+        }, AUTO_HIDE_MS);
+    }
+
     function checkScroll() {
         if (shown || dismissed) return;
-        var scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+        var totalScrollable = document.documentElement.scrollHeight - window.innerHeight;
+        if (totalScrollable <= 0) return;
+        var scrolled = (window.scrollY / totalScrollable) * 100;
         if (scrolled >= trigger) {
             popup.classList.add('ceo-popup-visible');
             shown = true;
+            startAutoHideCountdown();
         }
     }
 
     window.addEventListener('scroll', checkScroll, { passive: true });
+    checkScroll();
 
     if (closeBtn) {
         closeBtn.addEventListener('click', function () {
-            popup.classList.remove('ceo-popup-visible');
-            dismissed = true;
-            sessionStorage.setItem('ceo_popup_dismissed', '1');
+            dismissPopup();
         });
     }
 })();
