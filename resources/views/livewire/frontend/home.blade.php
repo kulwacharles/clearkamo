@@ -399,7 +399,8 @@
             #about-sec .about-hero-content {
                 position: relative;
                 z-index: 2;
-                width: min(760px, 100%);
+                width: clamp(320px, 33%, 460px);
+                max-width: 34%;
                 background: transparent;
                 border: 0;
                 border-radius: 0;
@@ -463,7 +464,7 @@
                 margin-top: 16px;
                 display: flex;
                 align-items: center;
-                justify-content: space-between;
+                justify-content: flex-start;
                 gap: 16px;
                 flex-wrap: wrap;
             }
@@ -599,7 +600,8 @@
                     padding: 28px;
                 }
                 #about-sec .about-hero-content {
-                    width: min(700px, 100%);
+                    width: clamp(300px, 42%, 430px);
+                    max-width: 45%;
                 }
             }
             @media (max-width: 991.98px) {
@@ -610,6 +612,7 @@
                 }
                 #about-sec .about-hero-content {
                     width: 100%;
+                    max-width: 100%;
                     padding: 4px 0 0;
                 }
                 #about-sec .about-hero-secondary {

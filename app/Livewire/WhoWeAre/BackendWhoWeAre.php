@@ -26,8 +26,8 @@ class BackendWhoWeAre extends Component
         'description' => 'required|string|min:20',
         'years_of_experience' => 'nullable|integer|min:0|max:200',
         'youtube_url' => 'nullable|url|max:255',
-        'image' => 'nullable|image|max:4096',
-        'secondary_image' => 'nullable|image|max:4096',
+        'image' => 'nullable|image|max:20480',
+        'secondary_image' => 'nullable|image|max:20480',
     ];
 
     protected $messages = [

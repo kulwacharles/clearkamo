@@ -20,7 +20,7 @@ class ClientModal extends Component
     protected $rules = [
         'name'       => 'required|min:3|max:255',
         'url' => 'required|min:3|max:255',
-        'image'       => 'nullable|image|max:2048',
+        'image'       => 'nullable|image|max:20480',
         'status'      => 'required|in:published,draft,archived',
     ];
 

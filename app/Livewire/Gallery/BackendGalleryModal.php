@@ -20,7 +20,7 @@ class BackendGalleryModal extends Component
     protected $rules = [
         'project_id' => 'required|exists:projects,id',
         'caption'    => 'nullable|max:255',
-        'image'      => 'nullable|image|max:4096',
+        'image'      => 'nullable|image|max:20480',
         'sort_order' => 'nullable|integer|min:0',
         'status'     => 'required|in:published,draft',
     ];
@@ -41,7 +41,7 @@ class BackendGalleryModal extends Component
 
     public function store()
     {
-        $this->rules['image'] = 'required|image|max:4096';
+        $this->rules['image'] = 'required|image|max:20480';
         $this->validate();
 
         $last  = GalleryPhoto::latest()->first();

@@ -25,7 +25,7 @@ class BackendProjectModal extends Component
         'amountFunded'=> 'required|min:3|max:255',
         'startDate'=> 'required',
         'endDate'=> 'required',
-        'image'       => 'nullable|image|max:2048',
+        'image'       => 'nullable|image|max:20480',
         'status'      => 'required|in:published,draft,archived',
     ];
 

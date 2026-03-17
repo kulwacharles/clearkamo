@@ -20,7 +20,7 @@ class BackendFocusAreaModal extends Component
         'summary'    => 'required|min:3|max:500',
         'details'    => 'nullable|min:3',
         'icon'       => 'nullable|max:100',
-        'image'      => 'nullable|image|max:2048',
+        'image'      => 'nullable|image|max:20480',
         'sort_order' => 'nullable|integer|min:0',
         'status'     => 'required|in:published,draft',
     ];

@@ -39,7 +39,7 @@ class PublicationsModal extends Component
         return [
             'title'  => 'required|min:3|max:255',
             'link'   => 'required|url|max:2048',
-            'image'  => $this->pubId ? 'nullable|image|max:2048' : 'required|image|max:2048',
+            'image'  => $this->pubId ? 'nullable|image|max:20480' : 'required|image|max:20480',
             'status' => 'required|in:published,draft,archived',
         ];
     }
