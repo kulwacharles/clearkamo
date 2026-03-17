@@ -257,40 +257,43 @@
     <div class="space" id="about-sec">
         <div class="container">
 
-            {{-- ── Row 1: Image stack + WHO WE ARE title / description / video ── --}}
-            <div class="row align-items-stretch gy-4">
-                <div class="col-xl-7 col-lg-6 order-2 order-lg-1">
-                    <div class="title-area mb-4">
-                        <span class="sub-title text-primary">
-                            <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
-                            WHO WE ARE
-                            <img class="ms-1" src="assets/img/theme-img/title_icon.svg" alt="img">
-                        </span>
-                        {{-- <h3 class="sec-title">{{ $about->title }}</h3> --}}
-                        <div class="sec-text about-description-text">
-                            {!! html_entity_decode($about->description) !!}
-                        </div>
-                        <a wire:navigate href="{{ route('about-us') }}" class="about-readmore-link mt-3">
-                            Learn More About Us <i class="fas fa-arrow-right ms-2"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-xl-5 col-lg-6 order-1 order-lg-2">
-                    <div class="about-media-stack">
-                        <div class="about-media-main">
-                            <img src="{{ asset('storage/'.$about->image) }}" alt="About ClearKamo">
-                        </div>
+            {{-- ── Row 1: Background image with foreground text card ── --}}
+            <div class="row">
+                <div class="col-12">
+                    @php
+                        $aboutDescriptionHtml = html_entity_decode($about->description ?? '');
+                    @endphp
+                    <section class="about-hero-stage mb-4" style="--about-hero-bg: url('{{ asset('storage/'.$about->image) }}');">
+                        <div class="about-hero-overlay"></div>
+
                         @if(!empty($about->image2))
-                            <div class="about-media-secondary d-none d-lg-block">
+                            <div class="about-hero-secondary d-none d-lg-block">
                                 <img src="{{ asset('storage/'.$about->image2) }}" alt="ClearKamo team">
                             </div>
                         @endif
-                        {{-- Experience badge overlay --}}
-                        <div class="about-exp-badge">
-                            <span class="about-exp-num">{{ $about->ex_years ?? 25 }}+</span>
-                            <span class="about-exp-label">Years of<br>Experience</span>
+
+                        <div class="about-hero-content">
+                            <span class="sub-title text-primary">
+                                <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
+                                WHO WE ARE
+                                <img class="ms-1" src="assets/img/theme-img/title_icon.svg" alt="img">
+                            </span>
+
+                            <div class="about-description-text mt-2">
+                                {!! $aboutDescriptionHtml !!}
+                            </div>
+
+                            <div class="about-hero-footer">
+                                <a wire:navigate href="{{ route('about-us') }}" class="about-readmore-link">
+                                    Learn More About Us <i class="fas fa-arrow-right ms-2"></i>
+                                </a>
+                                <div class="about-exp-badge">
+                                    <span class="about-exp-num">{{ $about->ex_years ?? 25 }}+</span>
+                                    <span class="about-exp-label">Years of<br>Experience</span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </section>
                 </div>
             </div>
             {{-- ── Row 2: Mission/Vision/Core (left) + Video (right) ── --}}
@@ -359,372 +362,143 @@
                 </div>
             </div>
 
-            {{-- ── Row 3: Project Gallery Slider ── --}}
-            <div class="row gy-4 mt-2">
-                <div class="col-12">
-                    <div class="gallery-block h-100">
-                        <div class="gallery-block-header">
-                            <div class="gallery-block-title-wrap">
-                                <span class="gallery-block-dot"></span>
-                                <span class="gallery-block-label">Our Gallery</span>
-                            </div>
-                            @if($galleryProjects && $galleryProjects->count())
-                                <div class="gallery-select-wrap">
-                                    <select id="galleryProjectSelect" class="gallery-select">
-                                        <option value="all">All Projects</option>
-                                        @foreach($galleryProjects as $gIdx => $gProj)
-                                            <option value="{{ $gIdx }}">{{ $gProj->title }}</option>
-                                        @endforeach
-                                    </select>
-                                    <span class="gallery-select-arrow"><i class="fas fa-chevron-down"></i></span>
-                                </div>
-                            @endif
-                        </div>
-
-                        @if($galleryProjects && $galleryProjects->count())
-                            <div class="gallery-panels">
-                                @foreach($galleryProjects as $gIdx => $gProj)
-                                    <div class="gallery-panel{{ $gIdx === 0 ? ' active' : '' }}" data-panel="{{ $gIdx }}">
-                                        <div class="gallery-slider" id="gallerySlider{{ $gIdx }}">
-                                            @foreach($gProj->galleryPhotos as $photo)
-                                                <div class="gallery-slide">
-                                                    <div class="gallery-slide-img-wrap">
-                                                        <img src="{{ asset('storage/'.$photo->image) }}"
-                                                             alt="{{ $photo->caption ?: $gProj->title }}"
-                                                             loading="lazy">
-                                                        @if($photo->caption)
-                                                            <div class="gallery-slide-caption">{{ $photo->caption }}</div>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                        @if($gProj->galleryPhotos->count() > 1)
-                                            <div class="gallery-nav">
-                                                <button class="gallery-nav-btn gallery-prev" data-slider="{{ $gIdx }}">
-                                                    <i class="fas fa-chevron-left"></i>
-                                                </button>
-                                                <div class="gallery-dots" id="galleryDots{{ $gIdx }}">
-                                                    @foreach($gProj->galleryPhotos as $dIdx => $photo)
-                                                        <span class="gallery-dot{{ $dIdx === 0 ? ' active' : '' }}"
-                                                              data-slider="{{ $gIdx }}" data-idx="{{ $dIdx }}"></span>
-                                                    @endforeach
-                                                </div>
-                                                <button class="gallery-nav-btn gallery-next" data-slider="{{ $gIdx }}">
-                                                    <i class="fas fa-chevron-right"></i>
-                                                </button>
-                                            </div>
-                                        @endif
-                                    </div>
-                                @endforeach
-                            </div>
-                        @else
-                            <div class="gallery-empty">
-                                <i class="fas fa-images gallery-empty-icon"></i>
-                                <p class="mt-3">No gallery photos yet. Add photos via the admin <strong>Gallery</strong> panel.</p>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-            </div>
         </div>
 
         <style>
-            /* ── About Section ───────────────────────────────────────────────── */
             #about-sec {
                 background: #f8fafc;
                 padding-top: 40px;
                 padding-bottom: 40px;
             }
 
-            /* Image stack */
-            #about-sec .about-media-stack {
+            #about-sec .about-hero-stage {
                 position: relative;
-                width: 100%;
-                max-width: 520px;
-                margin: 0 auto;
-                padding-bottom: 10px;
-            }
-            #about-sec .col-xl-5.d-flex,
-            #about-sec .col-lg-6.d-flex {
-                flex-direction: column;
-            }
-            #about-sec .about-media-main {
-                flex: 1;
-                display: flex;
-            }
-            #about-sec .about-media-main img {
-                width: 100%;
-                height: 100%;
-                min-height: 340px;
-                object-fit: cover;
-                border-radius: 18px;
-                box-shadow: 0 20px 48px rgba(15, 23, 42, 0.16);
-                display: block;
-            }
-            #about-sec .about-media-secondary {
-                position: absolute;
-                right: -24px;
-                bottom: 60px;
-                width: 52%;
-                z-index: 2;
-                animation: aboutFloat 5s ease-in-out infinite;
-            }
-            #about-sec .about-media-secondary img {
-                width: 100%;
-                height: 160px;
-                object-fit: cover;
-                border-radius: 14px;
-                box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18);
-                border: 4px solid #fff;
-            }
-
-            /* Experience badge */
-            #about-sec .about-exp-badge {
-                position: absolute;
-                left: -14px;
-                bottom: 28px;
-                background: linear-gradient(135deg, #03A4FC 0%, #025ea8 100%);
-                color: #fff;
-                border-radius: 16px;
-                padding: 16px 22px;
-                box-shadow: 0 10px 32px rgba(3, 164, 252, 0.38);
+                min-height: 520px;
+                border-radius: 26px;
+                overflow: hidden;
+                padding: 34px;
                 display: flex;
                 align-items: center;
-                gap: 12px;
+                box-shadow: 0 24px 50px rgba(15, 23, 42, 0.2);
+                background-image:
+                    linear-gradient(120deg, rgba(15, 23, 42, 0.84) 0%, rgba(15, 23, 42, 0.55) 55%, rgba(15, 23, 42, 0.2) 100%),
+                    var(--about-hero-bg);
+                background-size: cover;
+                background-position: center;
+            }
+            #about-sec .about-hero-overlay {
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(circle at 12% 20%, rgba(3, 164, 252, 0.22), transparent 42%);
+                pointer-events: none;
+            }
+            #about-sec .about-hero-content {
+                position: relative;
+                z-index: 2;
+                width: min(760px, 100%);
+                background: rgba(255, 255, 255, 0.92);
+                border: 1px solid rgba(255, 255, 255, 0.68);
+                border-radius: 20px;
+                padding: 26px 24px 22px;
+                backdrop-filter: blur(5px);
+                box-shadow: 0 16px 35px rgba(15, 23, 42, 0.2);
+            }
+            #about-sec .about-description-text {
+                color: #334155;
+                font-size: 1.02rem;
+                line-height: 1.85;
+            }
+            #about-sec .about-description-text p {
+                margin-bottom: 1rem;
+            }
+            #about-sec .about-description-text p:last-child {
+                margin-bottom: 0;
+            }
+            #about-sec .about-hero-secondary {
+                position: absolute;
+                right: 24px;
+                bottom: 24px;
+                width: 240px;
+                border-radius: 16px;
+                overflow: hidden;
+                border: 3px solid rgba(255, 255, 255, 0.9);
+                box-shadow: 0 14px 30px rgba(15, 23, 42, 0.32);
                 z-index: 3;
-                min-width: 148px;
+                animation: aboutSecondaryFloat 6s ease-in-out infinite;
             }
-            #about-sec .about-exp-num {
-                font-size: 2rem;
-                font-weight: 800;
-                line-height: 1;
-                white-space: nowrap;
+            #about-sec .about-hero-secondary img {
+                width: 100%;
+                height: 140px;
+                object-fit: cover;
+                display: block;
             }
-            #about-sec .about-exp-label {
-                font-size: 0.78rem;
-                font-weight: 600;
-                line-height: 1.35;
-                text-transform: uppercase;
-                letter-spacing: 0.04em;
-                opacity: 0.92;
+            @keyframes aboutSecondaryFloat {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-8px); }
             }
 
-            /* Description text */
-            #about-sec .about-description-text {
-                color: #475569;
-                line-height: 1.8;
-                font-size: 1rem;
+            #about-sec .about-hero-footer {
+                margin-top: 16px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 16px;
+                flex-wrap: wrap;
             }
-            #about-sec .about-description-text p { margin-bottom: 0.6rem; }
-            #about-sec .about-description-text p:last-child { margin-bottom: 0; }
+            #about-sec .about-exp-badge {
+                background: linear-gradient(135deg, #03A4FC, #0284c7);
+                color: #fff;
+                border-radius: 16px;
+                padding: 12px 16px;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                box-shadow: 0 12px 24px rgba(3, 164, 252, 0.28);
+            }
+            #about-sec .about-exp-num {
+                font-size: 1.8rem;
+                font-weight: 800;
+                line-height: 1;
+                letter-spacing: -0.02em;
+                color: #fff;
+            }
+            #about-sec .about-exp-label {
+                font-size: 0.74rem;
+                font-weight: 700;
+                line-height: 1.25;
+                letter-spacing: 0.03em;
+                text-transform: uppercase;
+                color: rgba(255, 255, 255, 0.95);
+            }
 
             #about-sec .about-readmore-link {
                 display: inline-flex;
                 align-items: center;
-                font-size: .9rem;
+                gap: 6px;
+                font-size: 0.98rem;
                 font-weight: 700;
                 color: #03A4FC;
                 text-decoration: none;
-                gap: 4px;
-                transition: gap .2s ease, color .2s ease;
+                transition: gap 0.2s ease, color 0.2s ease;
             }
             #about-sec .about-readmore-link:hover {
-                gap: 10px;
+                gap: 12px;
                 color: #025ea8;
             }
 
-            /* Mission / Vision / Core panel */
-            #about-sec .mission-vision-core-values {
-                background: #ffffff;
-                border-left: 4px solid #03A4FC;
-                border-radius: 18px;
-                padding: 28px 24px;
-                box-shadow: 0 12px 34px rgba(15, 23, 42, 0.08);
-                height: 100%;
+            #about-sec #media-row {
+                margin-top: 36px;
             }
-            #about-sec .mission-vision-core-values h4 {
-                letter-spacing: 0.01em;
+            #about-sec .mission-vision-core-values {
+                background: rgba(226, 232, 240, 0.45);
+                border-left: 4px solid #03A4FC;
+                border-radius: 20px;
+                padding: 28px 28px 26px;
             }
             #about-sec .mission-vision-core-values p {
-                margin-bottom: 0;
+                color: #475569 !important;
             }
 
-            /* Cinematic video block */
-            #about-sec .about-video-cinema {
-                width: 100%;
-            }
-            #about-sec .about-video-cinema-inner {
-                background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0c1d35 100%);
-                border-radius: 24px;
-                padding: 28px 28px 28px;
-                box-shadow: 0 24px 60px rgba(3, 164, 252, 0.18), 0 8px 24px rgba(15, 23, 42, 0.32);
-                border: 1px solid rgba(3, 164, 252, 0.18);
-                position: relative;
-                overflow: hidden;
-            }
-            #about-sec .about-video-cinema-inner::before {
-                content: '';
-                position: absolute;
-                inset: 0;
-                background: radial-gradient(ellipse at top left, rgba(3,164,252,0.1) 0%, transparent 60%);
-                pointer-events: none;
-            }
-            #about-sec .about-video-cinema-label {
-                display: inline-flex;
-                align-items: center;
-                gap: 8px;
-                font-size: 0.78rem;
-                font-weight: 700;
-                letter-spacing: 0.12em;
-                text-transform: uppercase;
-                color: rgba(255,255,255,0.72);
-                margin-bottom: 16px;
-            }
-            #about-sec .about-video-dot {
-                width: 8px;
-                height: 8px;
-                border-radius: 50%;
-                background: #03A4FC;
-                box-shadow: 0 0 0 3px rgba(3,164,252,0.28);
-                animation: videoPulse 2s ease-in-out infinite;
-                display: inline-block;
-            }
-            @keyframes videoPulse {
-                0%, 100% { box-shadow: 0 0 0 3px rgba(3,164,252,0.28); }
-                50%       { box-shadow: 0 0 0 6px rgba(3,164,252,0.14); }
-            }
-            #about-sec .about-video-frame {
-                width: 100%;
-                aspect-ratio: 16 / 9;
-                border-radius: 14px;
-                overflow: hidden;
-                background: #000;
-                box-shadow: 0 8px 32px rgba(0,0,0,0.45);
-            }
-            #about-sec .about-video-frame iframe {
-                width: 100%;
-                height: 100%;
-                border: 0;
-                display: block;
-            }
-            #about-sec .about-video-placeholder {
-                color: rgba(255,255,255,0.6);
-                font-size: 0.95rem;
-                background: rgba(255,255,255,0.04);
-                min-height: 260px;
-            }
-            #about-sec .about-video-placeholder-icon {
-                font-size: 4rem;
-                color: rgba(3,164,252,0.7);
-            }
-
-            /* ── Mission / Vision cards ──────────────────────────────────────── */
-            #about-sec .about-mv-row {
-                margin-top: 56px;
-            }
-            #about-sec .about-mv-card {
-                background: #fff;
-                border-radius: 18px;
-                padding: 24px 18px;
-                height: 100%;
-                box-shadow: 0 4px 28px rgba(15, 23, 42, 0.07);
-                border-top: 4px solid #03A4FC;
-                transition: transform 0.25s ease, box-shadow 0.25s ease;
-            }
-            #about-sec .about-mv-card--vision {
-                border-top-color: #0ea5e9;
-            }
-            #about-sec .about-mv-card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 16px 40px rgba(3, 164, 252, 0.14);
-            }
-            #about-sec .about-mv-icon {
-                width: 58px;
-                height: 58px;
-                border-radius: 16px;
-                background: linear-gradient(135deg, #03A4FC, #025ea8);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin-bottom: 20px;
-                font-size: 1.45rem;
-                color: #fff;
-                box-shadow: 0 6px 18px rgba(3, 164, 252, 0.32);
-            }
-            #about-sec .about-mv-icon--vision {
-                background: linear-gradient(135deg, #0ea5e9, #0284c7);
-                box-shadow: 0 6px 18px rgba(14, 165, 233, 0.32);
-            }
-            #about-sec .about-mv-title {
-                font-size: 1.3rem;
-                font-weight: 700;
-                color: #0f172a;
-                margin-bottom: 14px;
-            }
-            #about-sec .about-mv-text {
-                color: #475569;
-                line-height: 1.8;
-                font-size: 0.97rem;
-                margin-bottom: 0;
-            }
-
-            /* ── Core Values ─────────────────────────────────────────────────── */
-            #about-sec .about-cv-section {
-                margin-top: 60px;
-            }
-            #about-sec .about-cv-header {
-                margin-bottom: 38px;
-            }
-            #about-sec .about-cv-card {
-                background: #fff;
-                border-radius: 18px;
-                padding: 32px 28px;
-                height: 100%;
-                box-shadow: 0 4px 24px rgba(15, 23, 42, 0.07);
-                border-top: 3px solid #03A4FC;
-                transition: transform 0.25s ease, box-shadow 0.25s ease;
-            }
-            #about-sec .about-cv-card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 14px 36px rgba(3, 164, 252, 0.15);
-            }
-            #about-sec .about-cv-icon {
-                width: 54px;
-                height: 54px;
-                border-radius: 14px;
-                background: linear-gradient(135deg, rgba(3,164,252,0.12), rgba(3,164,252,0.22));
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin-bottom: 18px;
-                font-size: 1.35rem;
-                color: #03A4FC;
-            }
-            #about-sec .about-cv-title {
-                font-size: 1.08rem;
-                font-weight: 700;
-                color: #0f172a;
-                margin-bottom: 10px;
-            }
-            #about-sec .about-cv-text {
-                color: #475569;
-                line-height: 1.75;
-                font-size: 0.93rem;
-                margin-bottom: 0;
-            }
-
-            @keyframes aboutFloat {
-                0%, 100% { transform: translateY(0); }
-                50%       { transform: translateY(-10px); }
-            }
-
-            /* ── Media row (side-by-side video + gallery) ─────────────────────── */
-            #about-sec #media-row {
-                margin-top: 40px;
-            }
-
-            /* Cinematic video block */
             #about-sec .about-video-cinema {
                 width: 100%;
             }
@@ -768,7 +542,7 @@
             }
             @keyframes videoPulse {
                 0%, 100% { box-shadow: 0 0 0 3px rgba(3,164,252,0.28); }
-                50%       { box-shadow: 0 0 0 6px rgba(3,164,252,0.14); }
+                50% { box-shadow: 0 0 0 6px rgba(3,164,252,0.14); }
             }
             #about-sec .about-video-frame {
                 width: 100%;
@@ -796,386 +570,87 @@
                 color: rgba(3,164,252,0.7);
             }
 
-            /* ── Gallery block ───────────────────────────────────────────────── */
-            #about-sec .gallery-block {
-                background: linear-gradient(135deg, #0f172a 0%, #1e2d44 60%, #0c1d35 100%);
-                border-radius: 24px;
-                padding: 24px;
-                box-shadow: 0 24px 60px rgba(3, 164, 252, 0.15), 0 8px 24px rgba(15, 23, 42, 0.28);
-                border: 1px solid rgba(3, 164, 252, 0.18);
-                display: flex;
-                flex-direction: column;
-                position: relative;
-                overflow: hidden;
-                min-height: 340px;
-            }
-            #about-sec .gallery-block::before {
-                content: '';
-                position: absolute;
-                inset: 0;
-                background: radial-gradient(ellipse at bottom right, rgba(3,164,252,0.08) 0%, transparent 60%);
-                pointer-events: none;
-            }
-            #about-sec .gallery-block-header {
-                display: flex;
-                align-items: flex-start;
-                justify-content: space-between;
-                flex-wrap: wrap;
-                gap: 12px;
-                margin-bottom: 16px;
-            }
-            #about-sec .gallery-block-title-wrap {
-                display: inline-flex;
-                align-items: center;
-                gap: 8px;
-            }
-            #about-sec .gallery-block-dot {
-                width: 8px; height: 8px;
-                border-radius: 50%;
-                background: #10b981;
-                box-shadow: 0 0 0 3px rgba(16,185,129,0.3);
-                display: inline-block;
-                animation: galleryDotPulse 2.4s ease-in-out infinite;
-            }
-            @keyframes galleryDotPulse {
-                0%, 100% { box-shadow: 0 0 0 3px rgba(16,185,129,0.3); }
-                50%       { box-shadow: 0 0 0 6px rgba(16,185,129,0.12); }
-            }
-            #about-sec .gallery-block-label {
-                font-size: 0.78rem;
-                font-weight: 700;
-                letter-spacing: 0.12em;
-                text-transform: uppercase;
-                color: rgba(255,255,255,0.72);
-            }
-
-            /* Project dropdown */
-            #about-sec .gallery-select-wrap {
-                position: relative;
-                display: inline-flex;
-                align-items: center;
-            }
-            #about-sec .gallery-select {
-                appearance: none;
-                -webkit-appearance: none;
-                background: rgba(255,255,255,0.07);
-                color: #fff;
-                border: 1px solid rgba(255,255,255,0.18);
-                border-radius: 20px;
-                padding: 5px 34px 5px 14px;
-                font-size: 0.78rem;
-                font-weight: 600;
-                cursor: pointer;
-                outline: none;
-                transition: all 0.2s ease;
-            }
-            #about-sec .gallery-select option {
-                background: #1a2535;
-                color: #fff;
-            }
-            #about-sec .gallery-select:focus,
-            #about-sec .gallery-select:hover {
-                background: rgba(3,164,252,0.18);
-                border-color: #03A4FC;
-                box-shadow: 0 4px 12px rgba(3,164,252,0.25);
-            }
-            #about-sec .gallery-select-arrow {
-                position: absolute;
-                right: 11px;
-                pointer-events: none;
-                color: rgba(255,255,255,0.6);
-                font-size: 0.65rem;
-            }
-
-            /* Panels */
-            #about-sec .gallery-panels {
-                flex: 1;
-                position: relative;
-                display: flex;
-                flex-direction: column;
-            }
-            #about-sec .gallery-panel {
-                display: none;
-                flex: 1;
-                flex-direction: column;
-            }
-            #about-sec .gallery-panel.active {
-                display: flex;
-            }
-
-            /* Slider */
-            #about-sec .gallery-slider {
-                flex: 1;
-                overflow: hidden;
-                border-radius: 14px;
-                position: relative;
-            }
-            #about-sec .gallery-slide {
-                display: none;
-            }
-            #about-sec .gallery-slide.active {
-                display: block;
-            }
-            #about-sec .gallery-slide-img-wrap {
-                position: relative;
-                width: 100%;
-                aspect-ratio: 4 / 3;
-                border-radius: 14px;
-                overflow: hidden;
-                background: #000;
-                box-shadow: 0 8px 28px rgba(0,0,0,0.5);
-            }
-            #about-sec .gallery-slide-img-wrap img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                display: block;
-                transition: transform 0.4s ease;
-            }
-            #about-sec .gallery-slide.active .gallery-slide-img-wrap img {
-                transform: scale(1.02);
-            }
-            #about-sec .gallery-slide-caption {
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                background: linear-gradient(transparent, rgba(0,0,0,0.72));
-                color: rgba(255,255,255,0.92);
-                font-size: 0.82rem;
-                padding: 24px 14px 12px;
-                border-radius: 0 0 14px 14px;
-                font-weight: 500;
-            }
-
-            /* Nav */
-            #about-sec .gallery-nav {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 10px;
-                margin-top: 12px;
-            }
-            #about-sec .gallery-nav-btn {
-                width: 34px; height: 34px;
-                border-radius: 50%;
-                border: 1px solid rgba(255,255,255,0.2);
-                background: rgba(255,255,255,0.08);
-                color: rgba(255,255,255,0.75);
-                display: flex; align-items: center; justify-content: center;
-                cursor: pointer;
-                font-size: 0.75rem;
-                transition: all 0.2s ease;
-                padding: 0;
-            }
-            #about-sec .gallery-nav-btn:hover {
-                background: #03A4FC;
-                border-color: #03A4FC;
-                color: #fff;
-                box-shadow: 0 4px 12px rgba(3,164,252,0.35);
-            }
-            #about-sec .gallery-dots {
-                display: flex; gap: 6px; align-items: center;
-            }
-            #about-sec .gallery-dot {
-                width: 6px; height: 6px;
-                border-radius: 50%;
-                background: rgba(255,255,255,0.28);
-                cursor: pointer;
-                transition: all 0.2s ease;
-            }
-            #about-sec .gallery-dot.active {
-                width: 20px;
-                border-radius: 3px;
-                background: #03A4FC;
-            }
-
-            /* Empty state */
-            #about-sec .gallery-empty {
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                color: rgba(255,255,255,0.45);
-                font-size: 0.95rem;
-                text-align: center;
-                padding: 40px 20px;
-            }
-            #about-sec .gallery-empty-icon {
-                font-size: 3.5rem;
-                color: rgba(3,164,252,0.4);
-            }
-            #about-sec .gallery-empty strong { color: rgba(255,255,255,0.65); }
-
-            /* ── Responsive ──────────────────────────────────────────────────── */
             @media (max-width: 1199.98px) {
-                #about-sec .about-media-stack  { max-width: 460px; }
-                #about-sec .about-media-main img { min-height: 300px; }
+                #about-sec .about-hero-stage {
+                    min-height: 480px;
+                    padding: 28px;
+                }
+                #about-sec .about-hero-content {
+                    width: min(700px, 100%);
+                }
             }
             @media (max-width: 991.98px) {
-                #about-sec .about-media-stack  { max-width: 100%; min-height: 280px; }
-                #about-sec .about-media-main img { min-height: 260px; }
-                #about-sec .about-media-secondary { right: 0; bottom: 60px; }
-                #about-sec .about-exp-badge { left: 12px; bottom: 20px; }
+                #about-sec .about-hero-stage {
+                    min-height: 440px;
+                    padding: 22px;
+                    border-radius: 20px;
+                }
+                #about-sec .about-hero-content {
+                    width: 100%;
+                    padding: 20px 18px;
+                }
+                #about-sec .about-hero-secondary {
+                    width: 190px;
+                    right: 14px;
+                    bottom: 14px;
+                }
+                #about-sec .about-hero-secondary img {
+                    height: 116px;
+                }
+                #about-sec .mission-vision-core-values {
+                    padding: 24px 22px;
+                }
             }
             @media (max-width: 575.98px) {
-                #about-sec { padding-top: 12px; padding-bottom: 12px; }
-                #about-sec .about-media-main img { height: 220px; }
-                #about-sec .about-mv-row { margin-top: 16px; }
-                #about-sec .about-cv-section { margin-top: 40px; }
-                #about-sec .about-mv-card,
-                #about-sec .about-cv-card { padding: 12px 8px; }
-                #about-sec .gallery-block-header { flex-direction: column; }
+                #about-sec {
+                    padding-top: 22px;
+                    padding-bottom: 22px;
+                }
+                #about-sec .about-description-text {
+                    font-size: 0.98rem;
+                    line-height: 1.78;
+                }
+                #about-sec .about-hero-stage {
+                    min-height: auto;
+                    padding: 14px;
+                    border-radius: 16px;
+                }
+                #about-sec .about-hero-content {
+                    padding: 16px 14px;
+                    border-radius: 14px;
+                }
+                #about-sec .about-hero-secondary {
+                    display: none !important;
+                }
+                #about-sec .about-hero-footer {
+                    gap: 12px;
+                }
+                #about-sec .about-exp-badge {
+                    padding: 10px 14px;
+                    border-radius: 14px;
+                    gap: 6px;
+                }
+                #about-sec .about-exp-num {
+                    font-size: 1.4rem;
+                }
+                #about-sec .about-exp-label {
+                    font-size: 0.64rem;
+                }
+                #about-sec .mission-vision-core-values {
+                    border-radius: 16px;
+                    padding: 18px 16px;
+                }
             }
         </style>
-
-        <script>
-        (function () {
-                // ── Gallery: dropdown switching + slide navigation ──────────────────
-                var sliderState = {}; // keyed by panel index
-                var autoRotateInterval = null;
-
-                // Collect ordered panel indices
-                var panelIndices = [];
-                document.querySelectorAll('#about-sec .gallery-panel').forEach(function (panel) {
-                    panelIndices.push(panel.dataset.panel);
-                });
-
-                function initGallery() {
-                    // Build initial state for each panel
-                    document.querySelectorAll('#about-sec .gallery-panel').forEach(function (panel) {
-                        var idx = panel.dataset.panel;
-                        var slides = panel.querySelectorAll('.gallery-slide');
-                        sliderState[idx] = { current: 0, total: slides.length };
-                        showSlide(idx, 0);
-                    });
-
-                    // Dropdown change
-                    var sel = document.getElementById('galleryProjectSelect');
-                    if (sel) {
-                        sel.addEventListener('change', function () {
-                            var val = sel.value;
-                            stopAutoRotate();
-                            if (val === 'all') {
-                                // Show first panel and begin cross-project autoplay
-                                activatePanel(panelIndices[0]);
-                                startAutoRotate();
-                            } else {
-                                // Lock to the chosen project
-                                activatePanel(val);
-                                // Still autoplay slides within the locked project
-                                startSlideOnlyAutoplay(val);
-                            }
-                        });
-                    }
-
-                    // Prev / Next
-                    document.querySelectorAll('#about-sec .gallery-prev').forEach(function (btn) {
-                        btn.addEventListener('click', function () {
-                            var idx = btn.dataset.slider;
-                            var s = sliderState[idx];
-                            if (!s) return;
-                            showSlide(idx, (s.current - 1 + s.total) % s.total);
-                        });
-                    });
-                    document.querySelectorAll('#about-sec .gallery-next').forEach(function (btn) {
-                        btn.addEventListener('click', function () {
-                            var idx = btn.dataset.slider;
-                            var s = sliderState[idx];
-                            if (!s) return;
-                            showSlide(idx, (s.current + 1) % s.total);
-                        });
-                    });
-
-                    // Dot click
-                    document.querySelectorAll('#about-sec .gallery-dot').forEach(function (dot) {
-                        dot.addEventListener('click', function () {
-                            showSlide(dot.dataset.slider, parseInt(dot.dataset.idx, 10));
-                        });
-                    });
-
-                    // Start in "all projects" mode
-                    startAutoRotate();
-                }
-
-                // Activate a panel by index string, deactivate all others
-                function activatePanel(panelIdx) {
-                    document.querySelectorAll('#about-sec .gallery-panel').forEach(function (p) {
-                        p.classList.remove('active');
-                    });
-                    var target = document.querySelector('#about-sec .gallery-panel[data-panel="' + panelIdx + '"]');
-                    if (target) { target.classList.add('active'); }
-                }
-
-                // Cross-project autoplay: advances slide; when last slide of a project is
-                // shown, next tick moves to the first slide of the next project.
-                function startAutoRotate() {
-                    stopAutoRotate();
-                    autoRotateInterval = setInterval(function () {
-                        var activePanel = document.querySelector('#about-sec .gallery-panel.active');
-                        if (!activePanel) return;
-                        var idx = activePanel.dataset.panel;
-                        var s   = sliderState[idx];
-                        if (!s) return;
-                        var nextSlide = (s.current + 1) % s.total;
-                        if (nextSlide !== 0 || s.total === 1) {
-                            // Advance within this project
-                            showSlide(idx, nextSlide);
-                        } else {
-                            // Finished last slide — advance to the next project's first slide
-                            showSlide(idx, 0);
-                            var currentPanelPos = panelIndices.indexOf(idx);
-                            var nextPanelIdx    = panelIndices[(currentPanelPos + 1) % panelIndices.length];
-                            activatePanel(nextPanelIdx);
-                            showSlide(nextPanelIdx, 0);
-                        }
-                    }, 4000);
-                }
-
-                // Slide-only autoplay for a locked project (no project rotation)
-                function startSlideOnlyAutoplay(panelIdx) {
-                    stopAutoRotate();
-                    autoRotateInterval = setInterval(function () {
-                        var s = sliderState[panelIdx];
-                        if (!s || s.total <= 1) return;
-                        showSlide(panelIdx, (s.current + 1) % s.total);
-                    }, 4000);
-                }
-
-                function stopAutoRotate() {
-                    if (autoRotateInterval) {
-                        clearInterval(autoRotateInterval);
-                        autoRotateInterval = null;
-                    }
-                }
-
-                function showSlide(panelIdx, slideIdx) {
-                    var panel = document.querySelector('#about-sec .gallery-panel[data-panel="' + panelIdx + '"]');
-                    if (!panel) return;
-                    var slides = panel.querySelectorAll('.gallery-slide');
-                    var dots   = panel.querySelectorAll('.gallery-dot');
-                    slides.forEach(function (s) { s.classList.remove('active'); });
-                    dots.forEach(function (d) { d.classList.remove('active'); });
-                    if (slides[slideIdx]) slides[slideIdx].classList.add('active');
-                    if (dots[slideIdx])   dots[slideIdx].classList.add('active');
-                    sliderState[panelIdx] = sliderState[panelIdx] || {};
-                    sliderState[panelIdx].current = slideIdx;
-                }
-
-                if (document.readyState === 'loading') {
-                    document.addEventListener('DOMContentLoaded', initGallery);
-                } else {
-                    initGallery();
-                }
-        })();
-        </script>
     </div>
     @endif
 
 
     <section class="space-top space-bottom" id="service-sec">
         <div class="container">
+            @php
+                $serviceCount = $services ? $services->count() : 0;
+            @endphp
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="title-area text-center sr-fade-up">
@@ -1187,10 +662,17 @@
                     </div>
                 </div>
             </div>
-            <div class="row g-4 justify-content-center">
+            <div class="row g-4 justify-content-center svc-row svc-row-{{ $serviceCount }}">
                 @if($services)
                     @foreach ($services as $key => $service)
-                        <div class="col-xl-4 col-lg-6 col-md-6">
+                        @php
+                            $serviceColClass = match (true) {
+                                $serviceCount <= 1 => 'col-12 col-md-10 col-lg-8',
+                                $serviceCount === 2 => 'col-12 col-md-6 col-lg-6',
+                                default => 'col-xl-4 col-lg-6 col-md-6',
+                            };
+                        @endphp
+                        <div class="{{ $serviceColClass }}">
                             <article class="svc-card h-100">
                                 <a wire:navigate href="/service/details/{{ $service->slug }}" class="svc-card-img-link">
                                     <div class="svc-card-img">
@@ -1292,6 +774,22 @@
             #service-sec .svc-card-link:hover {
                 gap: 10px;
                 color: #025ea8;
+            }
+            #service-sec .svc-row {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            #service-sec .svc-row-1 {
+                max-width: 860px;
+            }
+            #service-sec .svc-row-2 {
+                max-width: 1260px;
+            }
+            #service-sec .svc-row-2 .svc-card-img {
+                height: 340px;
+            }
+            #service-sec .svc-row-1 .svc-card-img {
+                height: 360px;
             }
             @media (max-width: 575.98px) {
                 #service-sec .svc-card-img { height: 220px; }
@@ -1635,6 +1133,164 @@
             #publications-sec .pub-pic-card:hover .pub-pic-cta { color: #7dd3fc; }
             @media (max-width: 575.98px) {
                 #publications-sec .pub-pic-img { height: 280px; }
+            }
+        </style>
+    </section>
+    @endif
+
+    {{-- ── Gallery Section (moved before team) ─────────────────── --}}
+    @if($galleryProjects && $galleryProjects->count())
+    <section class="space-top space-bottom" id="home-gallery-sec">
+        @php
+            $galleryItems = $galleryProjects->flatMap(function ($project) {
+                return $project->galleryPhotos->map(function ($photo) use ($project) {
+                    return [
+                        'image' => $photo->image,
+                        'caption' => $photo->caption,
+                        'project' => $project->title,
+                    ];
+                });
+            })->values();
+            $galleryScrollDuration = max(42, $galleryItems->count() * 5);
+        @endphp
+        <div class="container">
+            <div class="title-area text-center mb-4 sr-fade-up">
+                <span class="sub-title">
+                    <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">OUR GALLERY
+                    <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
+                </span>
+            </div>
+            @if($galleryItems->count())
+                <div class="gallery-train" style="--gallery-train-duration: {{ $galleryScrollDuration }}s;">
+                    <div class="gallery-train-track">
+                        @foreach($galleryItems as $item)
+                            <article class="gallery-train-item">
+                                <img src="{{ asset('storage/'.$item['image']) }}"
+                                     alt="{{ $item['caption'] ?: $item['project'] }}"
+                                     loading="lazy">
+                            </article>
+                        @endforeach
+                        @foreach($galleryItems as $item)
+                            <article class="gallery-train-item" aria-hidden="true">
+                                <img src="{{ asset('storage/'.$item['image']) }}"
+                                     alt="{{ $item['caption'] ?: $item['project'] }}"
+                                     loading="lazy">
+                            </article>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+        </div>
+        <style>
+            #home-gallery-sec {
+                padding-top: 46px;
+                padding-bottom: 46px;
+                background: #f8fafc;
+            }
+            #home-gallery-sec .gallery-train {
+                position: relative;
+                overflow: hidden;
+                border-radius: 20px;
+                padding: 8px 0;
+            }
+            #home-gallery-sec .gallery-train::before,
+            #home-gallery-sec .gallery-train::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                width: 90px;
+                height: 100%;
+                z-index: 3;
+                pointer-events: none;
+            }
+            #home-gallery-sec .gallery-train::before {
+                left: 0;
+                background: linear-gradient(to right, #f8fafc 28%, rgba(248, 250, 252, 0));
+            }
+            #home-gallery-sec .gallery-train::after {
+                right: 0;
+                background: linear-gradient(to left, #f8fafc 28%, rgba(248, 250, 252, 0));
+            }
+            #home-gallery-sec .gallery-train-track {
+                display: flex;
+                gap: 16px;
+                width: max-content;
+                animation: galleryTrainScroll var(--gallery-train-duration) linear infinite;
+            }
+            #home-gallery-sec .gallery-train:hover .gallery-train-track {
+                animation-play-state: paused;
+            }
+            #home-gallery-sec .gallery-train-item {
+                flex: 0 0 300px;
+                height: 190px;
+                border-radius: 16px;
+                overflow: hidden;
+                position: relative;
+                box-shadow: 0 12px 24px rgba(15, 23, 42, 0.15);
+                border: 1px solid rgba(3, 164, 252, 0.25);
+                background: #0f172a;
+            }
+            #home-gallery-sec .gallery-train-item img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+                transition: transform .35s ease;
+            }
+            #home-gallery-sec .gallery-train-item:hover img {
+                transform: scale(1.06);
+            }
+            #home-gallery-sec .gallery-train-overlay {
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                padding: 12px 14px 10px;
+                background: linear-gradient(to top, rgba(12, 29, 53, 0.92) 0%, rgba(12, 29, 53, 0.1) 100%);
+            }
+            #home-gallery-sec .gallery-train-project {
+                display: inline-block;
+                font-size: .7rem;
+                font-weight: 700;
+                color: #7dd3fc;
+                text-transform: uppercase;
+                letter-spacing: .08em;
+                margin-bottom: 4px;
+            }
+            #home-gallery-sec .gallery-train-caption {
+                margin: 0;
+                font-size: .82rem;
+                line-height: 1.35;
+                color: #f8fafc;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+            @keyframes galleryTrainScroll {
+                from { transform: translateX(0); }
+                to { transform: translateX(calc(-50% - 8px)); }
+            }
+            @media (max-width: 991.98px) {
+                #home-gallery-sec .gallery-train-item {
+                    flex-basis: 250px;
+                    height: 168px;
+                }
+            }
+            @media (max-width: 575.98px) {
+                #home-gallery-sec {
+                    padding-top: 34px;
+                    padding-bottom: 34px;
+                }
+                #home-gallery-sec .gallery-train::before,
+                #home-gallery-sec .gallery-train::after {
+                    width: 36px;
+                }
+                #home-gallery-sec .gallery-train-item {
+                    flex-basis: 210px;
+                    height: 146px;
+                    border-radius: 12px;
+                }
             }
         </style>
     </section>
