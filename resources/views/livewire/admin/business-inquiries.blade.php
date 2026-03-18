@@ -56,38 +56,11 @@
                         <div class="col-md-6 mb-2"><strong>Email:</strong> {{ $selectedInquiry->email }}</div>
                         <div class="col-md-6 mb-2"><strong>Phone:</strong> {{ $selectedInquiry->phone ?: '-' }}</div>
                         <div class="col-md-6 mb-2"><strong>Company:</strong> {{ $selectedInquiry->company_name }}</div>
-                        <div class="col-md-6 mb-2"><strong>Role:</strong> {{ $selectedInquiry->job_title ?: '-' }}</div>
-                        <div class="col-md-6 mb-2"><strong>Industry:</strong> {{ $selectedInquiry->industry ?: '-' }}</div>
-                        <div class="col-md-6 mb-2"><strong>Company Size:</strong> {{ $selectedInquiry->company_size ?: '-' }}</div>
-                        <div class="col-md-6 mb-2"><strong>Website:</strong> {{ $selectedInquiry->website ?: '-' }}</div>
-                        <div class="col-md-6 mb-2"><strong>Country:</strong> {{ $selectedInquiry->country ?: '-' }}</div>
-                        <div class="col-md-6 mb-2"><strong>City:</strong> {{ $selectedInquiry->city ?: '-' }}</div>
-                        <div class="col-md-6 mb-2"><strong>Service Interest:</strong> {{ $selectedInquiry->service_interest ?: '-' }}</div>
-                        <div class="col-md-6 mb-2"><strong>Budget Range:</strong> {{ $selectedInquiry->budget_range ?: '-' }}</div>
-                        <div class="col-md-6 mb-2"><strong>Timeline:</strong> {{ $selectedInquiry->timeline ?: '-' }}</div>
                     </div>
                     <div class="mt-3">
                         <strong>Business Summary:</strong>
                         <p class="mb-2">{{ $selectedInquiry->business_summary }}</p>
                     </div>
-                    @if($selectedInquiry->challenge_details)
-                        <div class="mt-2">
-                            <strong>Challenges:</strong>
-                            <p class="mb-2">{{ $selectedInquiry->challenge_details }}</p>
-                        </div>
-                    @endif
-                    @if($selectedInquiry->goals)
-                        <div class="mt-2">
-                            <strong>Goals:</strong>
-                            <p class="mb-2">{{ $selectedInquiry->goals }}</p>
-                        </div>
-                    @endif
-                    @if($selectedInquiry->additional_details)
-                        <div class="mt-2">
-                            <strong>Additional Details:</strong>
-                            <p class="mb-0">{{ $selectedInquiry->additional_details }}</p>
-                        </div>
-                    @endif
                 </div>
             @endif
         </div>

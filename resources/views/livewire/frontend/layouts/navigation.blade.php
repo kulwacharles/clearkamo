@@ -49,9 +49,9 @@
 
             {{-- Nav links centred on desktop --}}
             <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                <li class="nav-item" id="ck-home-nav-item"@if(request()->is('/')) style="display:none"@endif>
+                {{-- <li class="nav-item" id="ck-home-nav-item"@if(request()->is('/')) style="display:none"@endif>
                     <a class="nav-link" wire:navigate href="/">Home</a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a class="nav-link" wire:navigate href="/about-us">Who We Are</a>
                 </li>

@@ -12,19 +12,7 @@ class BusinessInquiry extends Component
     public string $email = '';
     public string $phone = '';
     public string $company_name = '';
-    public string $job_title = '';
-    public string $industry = '';
-    public string $company_size = '';
-    public string $website = '';
-    public string $country = '';
-    public string $city = '';
-    public string $service_interest = '';
-    public string $budget_range = '';
-    public string $timeline = '';
     public string $business_summary = '';
-    public string $challenge_details = '';
-    public string $goals = '';
-    public string $additional_details = '';
     public bool $submitted = false;
 
     protected function rules(): array
@@ -34,19 +22,7 @@ class BusinessInquiry extends Component
             'email' => ['required', 'email', 'max:255'],
             'phone' => ['nullable', 'string', 'max:60'],
             'company_name' => ['required', 'string', 'min:2', 'max:255'],
-            'job_title' => ['nullable', 'string', 'max:255'],
-            'industry' => ['nullable', 'string', 'max:255'],
-            'company_size' => ['nullable', 'string', 'max:120'],
-            'website' => ['nullable', 'url', 'max:255'],
-            'country' => ['nullable', 'string', 'max:120'],
-            'city' => ['nullable', 'string', 'max:120'],
-            'service_interest' => ['nullable', 'string', 'max:255'],
-            'budget_range' => ['nullable', 'string', 'max:255'],
-            'timeline' => ['nullable', 'string', 'max:255'],
             'business_summary' => ['required', 'string', 'min:20'],
-            'challenge_details' => ['nullable', 'string'],
-            'goals' => ['nullable', 'string'],
-            'additional_details' => ['nullable', 'string'],
         ];
     }
 
@@ -58,9 +34,7 @@ class BusinessInquiry extends Component
         BusinessInquiryModel::create($validated);
 
         $this->reset([
-            'full_name', 'email', 'phone', 'company_name', 'job_title', 'industry', 'company_size',
-            'website', 'country', 'city', 'service_interest', 'budget_range', 'timeline',
-            'business_summary', 'challenge_details', 'goals', 'additional_details',
+            'full_name', 'email', 'phone', 'company_name', 'business_summary',
         ]);
 
         $this->submitted = true;

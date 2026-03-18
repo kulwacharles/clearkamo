@@ -18,7 +18,7 @@
             <div class="row g-4">
                 <div class="col-xl-5">
                     <div class="contact-form-v1 bg-smoke h-100">
-                        <h3 class="fs-32 mb-3 mt-n2">How We Help</h3>
+                        {{-- <h3 class="fs-32 mb-3 mt-n2">How can W</h3> --}}
                         <p class="mb-3">
                             Share your business context, key bottlenecks, and expected outcomes. Our team reviews each submission and responds with a practical next-step approach.
                         </p>
@@ -59,46 +59,9 @@
                                     <input type="text" class="form-control" wire:model.defer="company_name" placeholder="Company Name *">
                                     @error('company_name') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
-                                <div class="form-group col-md-6 style-white">
-                                    <input type="text" class="form-control" wire:model.defer="job_title" placeholder="Your Role / Job Title">
-                                </div>
-                                <div class="form-group col-md-6 style-white">
-                                    <input type="text" class="form-control" wire:model.defer="industry" placeholder="Industry">
-                                </div>
-                                <div class="form-group col-md-4 style-white">
-                                    <input type="text" class="form-control" wire:model.defer="company_size" placeholder="Company Size">
-                                </div>
-                                <div class="form-group col-md-4 style-white">
-                                    <input type="text" class="form-control" wire:model.defer="country" placeholder="Country">
-                                </div>
-                                <div class="form-group col-md-4 style-white">
-                                    <input type="text" class="form-control" wire:model.defer="city" placeholder="City">
-                                </div>
-                                <div class="form-group col-md-6 style-white">
-                                    <input type="url" class="form-control" wire:model.defer="website" placeholder="Company Website">
-                                    @error('website') <small class="text-danger">{{ $message }}</small> @enderror
-                                </div>
-                                <div class="form-group col-md-6 style-white">
-                                    <input type="text" class="form-control" wire:model.defer="service_interest" placeholder="Service of Interest">
-                                </div>
-                                <div class="form-group col-md-6 style-white">
-                                    <input type="text" class="form-control" wire:model.defer="budget_range" placeholder="Indicative Budget Range">
-                                </div>
-                                <div class="form-group col-md-6 style-white">
-                                    <input type="text" class="form-control" wire:model.defer="timeline" placeholder="Preferred Timeline">
-                                </div>
                                 <div class="form-group col-12 style-white">
                                     <textarea class="form-control" rows="4" wire:model.defer="business_summary" placeholder="Tell us about your business and what you need help with *"></textarea>
                                     @error('business_summary') <small class="text-danger">{{ $message }}</small> @enderror
-                                </div>
-                                <div class="form-group col-12 style-white">
-                                    <textarea class="form-control" rows="3" wire:model.defer="challenge_details" placeholder="Current challenges (optional)"></textarea>
-                                </div>
-                                <div class="form-group col-12 style-white">
-                                    <textarea class="form-control" rows="3" wire:model.defer="goals" placeholder="Expected outcomes/goals (optional)"></textarea>
-                                </div>
-                                <div class="form-group col-12 style-white">
-                                    <textarea class="form-control" rows="3" wire:model.defer="additional_details" placeholder="Any additional details (optional)"></textarea>
                                 </div>
                                 <div class="form-btn col-12">
                                     <button class="th-btn w-100" type="submit">Submit Inquiry</button>
