@@ -7,6 +7,8 @@ use App\Models\Blog;
 use App\Models\Team;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Throwable;
 class BackendTeamModal extends Component
 {
     use WithFileUploads;
@@ -33,7 +35,7 @@ class BackendTeamModal extends Component
         'description.required' => 'The Description is required.',
         'description.min'      => 'The Description must be at least 10 characters.',
         'image.image'          => 'The Image must be valid.',
-        'image.max'            => 'The Image may not be greater than 2MB.',
+        'image.max'            => 'The Image may not be greater than 20MB.',
         'status.required'      => 'The Status is required.',
         'status.in'            => 'The selected Status is invalid.',
     ];
@@ -49,8 +51,8 @@ class BackendTeamModal extends Component
             $last = Team::latest()->first();
             $newId = $last ? $last->id + 1 : 1;
 
-            $extension = $this->image->getClientOriginalExtension();
-            $filename  = 'clear_Kamo_' . $newId . '.' . $extension;
+            $extension = $this->resolveImageExtension($this->image);
+            $filename  = 'clear_Kamo_' . $newId . '_' . now()->timestamp . '_' . Str::lower(Str::random(6)) . '.' . $extension;
             $imagePath = 'teams/' . $filename;
 
             $this->image->storePubliclyAs('teams', $filename, 'public');
@@ -120,8 +122,8 @@ class BackendTeamModal extends Component
                 Storage::disk('public')->delete($blog->image);
             }
 
-            $extension = $this->image->getClientOriginalExtension();
-            $filename  = 'clear_Kamo_' . $blog->id . '.' . $extension;
+            $extension = $this->resolveImageExtension($this->image);
+            $filename  = 'clear_Kamo_' . $blog->id . '_' . now()->timestamp . '_' . Str::lower(Str::random(6)) . '.' . $extension;
             $imagePath = 'teams/' . $filename;
 
             $this->image->storePubliclyAs('teams', $filename, 'public');
@@ -208,9 +210,33 @@ class BackendTeamModal extends Component
         $this->position   = null;
         $this->keywords    = null;
     }
-        public function render()
+    public function render()
     {
         return view('livewire.team.backend-team-modal');
+    }
+
+    public function temporaryImagePreviewUrl($file): ?string
+    {
+        if (!$file) {
+            return null;
+        }
+
+        try {
+            return $file->temporaryUrl();
+        } catch (Throwable) {
+            return null;
+        }
+    }
+
+    private function resolveImageExtension($file): string
+    {
+        $extension = strtolower((string) $file->getClientOriginalExtension());
+        if ($extension !== '') {
+            return $extension;
+        }
+
+        $guessed = strtolower((string) $file->guessExtension());
+        return $guessed !== '' ? $guessed : 'jpg';
     }
 
 

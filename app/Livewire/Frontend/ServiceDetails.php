@@ -9,7 +9,7 @@ class ServiceDetails extends Component
 {
     public $service,$teams,$otherServices;
     public function mount($slug){
-        $this->service = Service::whereSlug($slug)->where('status', 'published')->first();
+        $this->service = Service::whereSlug($slug)->where('status', 'published')->firstOrFail();
         $this->otherServices = Service::where('id', '!=', $this->service->id)
                                  ->where('status', 'published')
                                  ->take(3)

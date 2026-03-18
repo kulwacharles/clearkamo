@@ -1439,7 +1439,7 @@
                         <div class="team-card h-100">
                             <a wire:navigate href="{{ route('team-details', ['slug' => $team->slug ?: $team->id]) }}" class="team-card-photo-link">
                                 <img
-                                    src="{{ asset('storage/'.$team->image) }}"
+                                    src="{{ asset('storage/'.$team->image) . '?v=' . (optional($team->updated_at)->timestamp ?? time()) }}"
                                     alt="{{ $team->name }}"
                                     class="team-card-photo"
                                 >
@@ -1858,7 +1858,7 @@
     <div class="ceo-popup-header">
         @if($ceoMessage->team->image)
             <img class="ceo-popup-avatar"
-                 src="{{ asset('storage/'.$ceoMessage->team->image) }}"
+                 src="{{ asset('storage/'.$ceoMessage->team->image) . '?v=' . (optional($ceoMessage->team->updated_at)->timestamp ?? time()) }}"
                  alt="{{ $ceoMessage->team->name }}">
         @else
             <div class="ceo-popup-avatar-placeholder">

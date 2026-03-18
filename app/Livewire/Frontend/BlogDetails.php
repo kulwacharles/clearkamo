@@ -10,7 +10,7 @@ class BlogDetails extends Component
     public $blog,$others,$teams;
     public function mount($slug){
         
-        $this->blog=Blog::whereSlug($slug)->first();
+        $this->blog = Blog::whereSlug($slug)->where('status', 'published')->firstOrFail();
         $this->others=Blog::where('status','published')->where('id','!=',$this->blog->id)->orderBy('id','desc')->latest()
     ->take(5)
     ->get();;

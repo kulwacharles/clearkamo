@@ -67,7 +67,7 @@
                         <div class="col-xl-3 col-lg-4 col-md-6">
                             <div class="team-card p-3 h-100" style="border:1px solid #e5e7eb;border-radius:14px;background:#fff;">
                                 <a wire:navigate href="{{ route('team-details', ['slug' => $team->slug ?: $team->id]) }}" class="d-block">
-                                    <img src="{{ asset('storage/' . $team->image) }}" alt="{{ $team->name }}" style="width:100%;height:240px;object-fit:cover;border-radius:10px;">
+                                    <img src="{{ asset('storage/' . $team->image) . '?v=' . (optional($team->updated_at)->timestamp ?? time()) }}" alt="{{ $team->name }}" style="width:100%;height:240px;object-fit:cover;border-radius:10px;">
                                 </a>
                                 <div class="pt-3">
                                     <h3 class="h5 mb-1">

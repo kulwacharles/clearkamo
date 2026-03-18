@@ -79,7 +79,7 @@
                                                     <td>{{ $blog->position }}</td>
                                                     <td>
                                                         @if($blog->image)
-                                                            <img class="img" src="{{ asset('storage/'.$blog->image) }}" width="100px" height="100px" style="object-fit: cover;">
+                                                            <img class="img" src="{{ asset('storage/'.$blog->image) . '?v=' . (optional($blog->updated_at)->timestamp ?? time()) }}" width="100px" height="100px" style="object-fit: cover;">
                                                         @else
                                                             No Image
                                                         @endif
