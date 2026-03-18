@@ -9,10 +9,10 @@
     </div>
     <div class="container">
         <div class="breadcumb-content">
-            <h1 class="breadcumb-title">About Us</h1>
+            <h1 class="breadcumb-title">Who we are</h1>
             <ul class="breadcumb-menu">
                 <li><a wire:navigate href="/">Home</a></li> 
-                <li>About Us</li>
+                <li>Who we are</li>
             </ul>
         </div>
     </div>

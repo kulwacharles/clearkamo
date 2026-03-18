@@ -4,8 +4,9 @@
                 <div class="row justify-content-between">
                     <div class="col-md-6 col-xl-auto">
                         <div class="widget footer-widget">
+                            <h3 class="widget_title">Contact Us</h3>
                             <div class="th-widget-about">
-                                @if($logo)
+                                {{-- @if($logo)
                                   <div class="about-logo">
                                         <a wire:navigate href="/">
                                             <img src="{{ url('/storage/'.$logo) }}" alt="ClearKamo Logo">
@@ -17,7 +18,7 @@
                                             <img src="{{asset('assets/img/ProjectClear.png')}}" alt="ClearKamo Logo">
                                         </a>
                                     </div>
-                                @endif
+                                @endif --}}
                                 {{-- <p class="about-text">Consulting services can provide valuable insights, strategic guidance, pecialized</p> --}}
                                 <div class="info-box">
                                     <div class="info-box_icon"><i class="far fa-phone"></i>
