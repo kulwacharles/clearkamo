@@ -30,7 +30,7 @@ class Services extends Component
     }
     public function render()
     {
-        $services=Service::where('status','published')->orderBy('created_at','desc')->paginate(8);
+        $services=Service::where('status','published')->orderBy('created_at','asc')->paginate(8);
         return view('livewire.frontend.services',['services'=>$services])->layout("components.layouts.frontend", ["title"=>"Our Services","description"=>"ClearKamo services","keywords"=>"Our services, clearkamo services,projects, mtu ni afya","image"=>$this->logo]);
     }
         public function paginationView()

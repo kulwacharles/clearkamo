@@ -140,7 +140,7 @@
             position: relative;
             background: linear-gradient(135deg, #080809 0%, #080e1c 100%);
             transition: box-shadow .25s ease;
-            overflow: clip;
+            overflow: visible;
         }
 
         .ck-header-wrap.scrolled {
@@ -269,6 +269,7 @@
             padding: 8px 0 12px;
             z-index: 2;
             transition: padding .35s ease;
+            overflow: visible;
         }
 
         .ck-header-wrap.scrolled .ck-navbar {
@@ -276,6 +277,7 @@
         }
 
         .ck-nav-shell {
+            position: relative;
             background: rgba(255, 255, 255, .96);
             border: 1px solid rgba(255, 255, 255, .56);
             box-shadow: 0 18px 38px rgba(2, 20, 43, .22);
@@ -365,6 +367,7 @@
             box-shadow: 0 18px 34px rgba(15, 23, 42, .14);
             padding: 8px;
             min-width: 220px;
+            z-index: 1400;
         }
 
         .ck-resource-link {
@@ -420,7 +423,7 @@
             box-shadow: 0 18px 38px rgba(15, 23, 42, .16);
             padding: 10px;
             display: none;
-            z-index: 1300;
+            z-index: 1500;
         }
 
         .ck-search-wrap.open .ck-search-popover {
@@ -568,6 +571,13 @@
                 box-shadow: none;
                 padding: 4px 0 4px 14px;
                 margin-top: 2px;
+            }
+
+            .ck-resources-nav .dropdown-menu {
+                position: static;
+                float: none;
+                transform: none !important;
+                width: 100%;
             }
 
             .ck-nav-actions {

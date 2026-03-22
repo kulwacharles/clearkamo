@@ -945,6 +945,9 @@
             </div>
             <div class="row g-4 justify-content-center svc-row svc-row-{{ $serviceCount }}">
                 @if($services)
+                    @php
+                        $services = $services->sortBy('created_at');
+                    @endphp
                     @foreach ($services as $key => $service)
                         @php
                             $serviceColClass = match (true) {

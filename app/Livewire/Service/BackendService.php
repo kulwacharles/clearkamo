@@ -14,7 +14,7 @@ class BackendService extends Component
     }
     public function mount(){
         abort_unless(auth()->check(), 401);
-        $this->services=Service::all();
+        $this->services=Service::orderBy('created_at', 'desc')->take(5)->get()  ;
     }
 
 }
