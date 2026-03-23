@@ -27,7 +27,7 @@
                             PORTFOLIO
                             <img class="ms-2" src="{{asset('assets/img/theme-img/title_icon.svg')}}" alt="shape">
                         </span>
-                        <h2 class="sec-title">We're proud of our works</h2>
+                        {{-- <h2 class="sec-title">We're proud of our works</h2> --}}
                     </div>
                 </div>
                 <div class="col-12">

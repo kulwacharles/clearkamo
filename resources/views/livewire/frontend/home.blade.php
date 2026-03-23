@@ -1882,7 +1882,7 @@
 
 <script>
 (function () {
-    var AUTO_HIDE_MS = 2 * 60 * 1000; // 2 minutes
+    var AUTO_HIDE_MS = 1 * 60 * 1000; // 2 minutes
     var trigger = {{ (int)$ceoMessage->scroll_trigger_percent }};
     var popup   = document.getElementById('ceo-popup');
     var closeBtn = document.getElementById('ceo-popup-close-btn');
