@@ -91,7 +91,7 @@
                                 </a>
                                 <ul class="dropdown-menu ck-resources-menu" aria-labelledby="ckResourcesDropdown">
                                     <li><a class="dropdown-item ck-resource-link" wire:navigate href="/publications">Publications</a></li>
-                                    <li><a class="dropdown-item ck-resource-link" wire:navigate href="/news-and-updates">Reports</a></li>
+                                    {{-- <li><a class="dropdown-item ck-resource-link" wire:navigate href="/news-and-updates">Reports</a></li> --}}
                                 </ul>
                             </li>
                         </ul>
