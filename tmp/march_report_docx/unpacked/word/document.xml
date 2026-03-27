@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas" xmlns:cx="http://schemas.microsoft.com/office/drawing/2014/chartex" xmlns:cx1="http://schemas.microsoft.com/office/drawing/2015/9/8/chartex" xmlns:cx2="http://schemas.microsoft.com/office/drawing/2015/10/21/chartex" xmlns:cx3="http://schemas.microsoft.com/office/drawing/2016/5/9/chartex" xmlns:cx4="http://schemas.microsoft.com/office/drawing/2016/5/10/chartex" xmlns:cx5="http://schemas.microsoft.com/office/drawing/2016/5/11/chartex" xmlns:cx6="http://schemas.microsoft.com/office/drawing/2016/5/12/chartex" xmlns:cx7="http://schemas.microsoft.com/office/drawing/2016/5/13/chartex" xmlns:cx8="http://schemas.microsoft.com/office/drawing/2016/5/14/chartex" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:aink="http://schemas.microsoft.com/office/drawing/2016/ink" xmlns:am3d="http://schemas.microsoft.com/office/drawing/2017/model3d" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:oel="http://schemas.microsoft.com/office/2019/extlst" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:w16cex="http://schemas.microsoft.com/office/word/2018/wordml/cex" xmlns:w16cid="http://schemas.microsoft.com/office/word/2016/wordml/cid" xmlns:w16="http://schemas.microsoft.com/office/word/2018/wordml" xmlns:w16du="http://schemas.microsoft.com/office/word/2023/wordml/word16du" xmlns:w16sdtdh="http://schemas.microsoft.com/office/word/2020/wordml/sdtdatahash" xmlns:w16se="http://schemas.microsoft.com/office/word/2015/wordml/symex" xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup" xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape" mc:Ignorable="w14 w15 w16se w16cid w16 w16cex w16sdtdh w16du wp14">
+  <w:body>
+    <w:p w:rsidR="00FD7788" w:rsidRDefault="00000000">
+      <w:pPr>
+        <w:jc w:val="right"/>
+      </w:pPr>
+      <w:r><w:rPr><w:b/></w:rPr><w:t>Kelvin Ekonia Kusenha</w:t></w:r>
+      <w:r><w:rPr><w:b/></w:rPr><w:br/><w:t>IT Officer</w:t></w:r>
+      <w:r><w:rPr><w:b/></w:rPr><w:br/><w:t>CLEAR KAMO</w:t></w:r>
+      <w:r><w:rPr><w:b/></w:rPr><w:br/><w:t>Date: 25 March 2026</w:t></w:r>
+    </w:p>
+    <w:p/>
+    <w:p>
+      <w:r><w:rPr><w:b/></w:rPr><w:t>MONTHLY TECHNICAL REPORT - MARCH 2026</w:t></w:r>
+    </w:p>
+    <w:p>
+      <w:r><w:t>Reporting period: 1 March 2026 to 25 March 2026</w:t></w:r>
+    </w:p>
+    <w:p>
+      <w:r><w:t>Projects covered: ClearKamo Website, ClearKamo Admin Dashboard, Content Management Modules, and Platform Maintenance Tools</w:t></w:r>
+    </w:p>
+
+    <w:p>
+      <w:pPr><w:pStyle w:val="Heading1"/></w:pPr>
+      <w:r><w:t>INTRODUCTION</w:t></w:r>
+    </w:p>
+    <w:p>
+      <w:r><w:t>This monthly report summarizes the technical activities completed and advanced during March 2026 for the ClearKamo website and administration platform. Work during the month focused on strengthening the public website experience, modernizing homepage presentation, improving content management through admin-driven modules, refining publication and inquiry workflows, and supporting platform stability through maintenance, upload, and navigation improvements.</w:t></w:r>
+    </w:p>
+
+    <w:p>
+      <w:pPr><w:pStyle w:val="Heading1"/></w:pPr>
+      <w:r><w:t>WORK PLAN IMPLEMENTATION SUMMARY</w:t></w:r>
+    </w:p>
+
+    <w:tbl>
+      <w:tblPr>
+        <w:tblW w:w="0" w:type="auto"/>
+        <w:tblBorders>
+          <w:top w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+          <w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+          <w:bottom w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+          <w:right w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+          <w:insideH w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+          <w:insideV w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+        </w:tblBorders>
+        <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
+      </w:tblPr>
+      <w:tblGrid>
+        <w:gridCol w:w="1965"/>
+        <w:gridCol w:w="1722"/>
+        <w:gridCol w:w="1726"/>
+        <w:gridCol w:w="1718"/>
+        <w:gridCol w:w="1725"/>
+      </w:tblGrid>
+      <w:tr>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Activity</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Planned</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Achieved</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Status</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Lessons</w:t></w:r></w:p></w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Homepage redesign and visual optimization</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Modernize the homepage, strengthen section order, and improve the balance between visuals and text.</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Redesigned homepage sections, improved service presentation, added stronger visual storytelling, refined spacing, and updated content flow across major home sections.</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Completed</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Clear visual hierarchy and stronger section sequencing improve user attention and readability.</w:t></w:r></w:p></w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Admin-managed content modules</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Make key website sections manageable from the admin panel without requiring code changes.</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Introduced admin-backed modules for Who We Are, Focus Areas, Core Values, gallery content, and CEO messaging, with frontend integration across home and about pages.</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Completed</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Admin ownership improves maintainability and reduces turnaround time for content updates.</w:t></w:r></w:p></w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Business inquiry and contact workflow improvement</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Create a structured lead capture workflow and expose submissions to administrators for follow-up.</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Built the business inquiry feature, admin review interface, and later simplified the form fields and database structure to keep only the most relevant business details.</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Completed</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Lean forms produce clearer submissions and reduce friction for potential clients.</w:t></w:r></w:p></w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Media, gallery, and video experience enhancement</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Strengthen visual storytelling by adding richer gallery, video, and client presentation blocks.</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Added project gallery management, homepage gallery presentation, YouTube integration in the Who We Are section, autoplay support, and improved client logo presentation on the homepage.</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Completed</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Media-heavy sections need careful layout control to remain attractive across devices.</w:t></w:r></w:p></w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Publications and resources workflow refinement</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Improve publication management and make resource access clearer on the frontend.</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Updated publication management to support resource links, simplified frontend publication presentation, aligned the data model by removing unused description dependency, and improved resource navigation in the header.</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Completed</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Publishing tools work best when required fields match actual business usage.</w:t></w:r></w:p></w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Platform maintenance, upload support, and operational controls</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Improve operational safety, maintenance controls, and support for larger media uploads.</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Implemented maintenance mode controls, increased upload capacity support, improved file handling behavior, and resolved content upload issues affecting publications and team images.</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Completed</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Operational tooling reduces production risk and gives administrators more control during updates.</w:t></w:r></w:p></w:tc>
+      </w:tr>
+      <w:tr>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Header, navigation, and responsive experience refinement</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Deliver a more modern header and improve sticky navigation behavior across desktop and mobile devices.</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Redesigned the top bar and navigation area, introduced sticky transitions, refined mobile collapse behavior, and continued adjustments for dropdown and search visibility.</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>In Progress</w:t></w:r></w:p></w:tc>
+        <w:tc><w:tcPr><w:tcW w:w="1728" w:type="dxa"/></w:tcPr><w:p><w:r><w:t>Navigation redesigns require repeated device testing to avoid regressions in overlays and responsive states.</w:t></w:r></w:p></w:tc>
+      </w:tr>
+    </w:tbl>
+
+    <w:p>
+      <w:pPr><w:pStyle w:val="Heading1"/></w:pPr>
+      <w:r><w:t>CHALLENGES AND LESSONS LEARNED</w:t></w:r>
+    </w:p>
+    <w:p>
+      <w:r><w:t>March 2026 involved significant frontend and admin platform iteration. The main challenges were preserving layout quality across devices, balancing visual redesign with brand consistency, and keeping new admin-driven content workflows aligned with existing data structures.</w:t></w:r>
+      <w:r><w:br/></w:r>
+      <w:r><w:br/><w:t>Lessons learned:</w:t></w:r>
+      <w:r><w:br/><w:t>- Stronger admin content control reduces dependency on code-level changes.</w:t></w:r>
+      <w:r><w:br/><w:t>- Responsive navigation and overlay behavior require repeated real-device validation.</w:t></w:r>
+      <w:r><w:br/><w:t>- Homepage visual improvements must still preserve readability and clear content hierarchy.</w:t></w:r>
+      <w:r><w:br/><w:t>- Simpler forms and data models improve reliability for both users and administrators.</w:t></w:r>
+    </w:p>
+
+    <w:p>
+      <w:pPr><w:pStyle w:val="Heading1"/></w:pPr>
+      <w:r><w:t>APRIL 2026 - PLANNED ACTIVITIES</w:t></w:r>
+    </w:p>
+    <w:p><w:r><w:t>Finalize responsive header, dropdown, and search behavior across all supported devices.</w:t></w:r></w:p>
+    <w:p><w:r><w:t>Continue homepage refinement and QA for visual sections, media blocks, and spacing consistency.</w:t></w:r></w:p>
+    <w:p><w:r><w:t>Extend admin usability improvements for publications, team content, and other dynamic sections.</w:t></w:r></w:p>
+    <w:p><w:r><w:t>Strengthen search, analytics, and reporting support for better operational monitoring.</w:t></w:r></w:p>
+    <w:p><w:r><w:t>Carry out further regression testing on upload, inquiry, and navigation workflows.</w:t></w:r></w:p>
+
+    <w:p>
+      <w:pPr><w:pStyle w:val="Heading1"/></w:pPr>
+      <w:r><w:t>CONCLUSION</w:t></w:r>
+    </w:p>
+    <w:p>
+      <w:r><w:t>March 2026 has been productive for the ClearKamo platform. Major progress was made in homepage redesign, admin-managed content, publication workflow refinement, business inquiry handling, media presentation, and operational support features. These improvements have strengthened both the public-facing website and the administration environment, while also preparing the platform for further optimization in April.</w:t></w:r>
+    </w:p>
+
+    <w:sectPr>
+      <w:pgSz w:w="12240" w:h="15840"/>
+      <w:pgMar w:top="1440" w:right="1800" w:bottom="1440" w:left="1800" w:header="720" w:footer="720" w:gutter="0"/>
+      <w:cols w:space="720"/>
+      <w:docGrid w:linePitch="360"/>
+    </w:sectPr>
+  </w:body>
+</w:document>
