@@ -18,19 +18,23 @@
         <div id="mainSlider" class="hero-slider">
             @foreach($slides as $index => $slide)
                 <div class="hero-slide{{ $index === 0 ? ' active' : '' }}">
-                    {{-- Pure background photo — no overlay, no text --}}
                     @if($slide->image)
                         <div class="hero-slide-bg" style="background-image: url('{{ asset('storage/'.$slide->image) }}');"></div>
                     @endif
-                    {{-- Subtle bottom vignette for controls readability only --}}
                     <div class="hero-slide-vignette"></div>
-                    {{-- Progress bar --}}
+                    @if(!empty($slide->title))
+                        <div class="hero-slide-copy">
+                            <div class="hero-slide-copy-inner">
+                                <span class="hero-slide-kicker">Featured Insight</span>
+                                <h2 class="hero-slide-title">{{ $slide->title }}</h2>
+                            </div>
+                        </div>
+                    @endif
                     <div class="hero-progress{{ $index === 0 ? ' running' : '' }}"></div>
                 </div>
             @endforeach
         </div>
 
-        {{-- Prev / Next arrows --}}
         <button id="sliderPrev" class="hero-nav hero-nav-prev" aria-label="Previous slide">
             <i class="fas fa-chevron-left"></i>
         </button>
@@ -38,7 +42,6 @@
             <i class="fas fa-chevron-right"></i>
         </button>
 
-        {{-- Dot indicators --}}
         <div class="hero-dots">
             @foreach($slides as $index => $slide)
                 <button class="hero-dot{{ $index === 0 ? ' active' : '' }}" data-slide="{{ $index }}" aria-label="Go to slide {{ $index + 1 }}"></button>
@@ -47,7 +50,6 @@
     </section>
 
     <style>
-        /* ── Hero Section — pure image slideshow ─────────────────── */
         #hero-sec {
             position: relative;
             overflow: hidden;
@@ -60,7 +62,6 @@
             max-height: 900px;
         }
 
-        /* Each slide */
         .hero-slide {
             position: absolute;
             inset: 0;
@@ -75,7 +76,6 @@
             z-index: 2;
         }
 
-        /* Background photo — fills frame, subtle Ken Burns on active */
         .hero-slide-bg {
             position: absolute;
             inset: 0;
@@ -88,20 +88,68 @@
             transform: scale(1);
         }
 
-        /* Very subtle bottom vignette — only to keep controls legible */
         .hero-slide-vignette {
             position: absolute;
             inset: 0;
             background: linear-gradient(
                 to top,
-                rgba(0,0,0,.35) 0%,
-                rgba(0,0,0,.08) 22%,
-                transparent     50%
+                rgba(3, 14, 31, .62) 0%,
+                rgba(3, 14, 31, .26) 24%,
+                rgba(3, 14, 31, .06) 46%,
+                transparent 66%
             );
             pointer-events: none;
         }
 
-        /* Progress bar at bottom of slide */
+        .hero-slide-copy {
+            position: absolute;
+            left: clamp(18px, 4vw, 56px);
+            bottom: clamp(56px, 10vw, 92px);
+            z-index: 8;
+            width: min(560px, calc(100% - 120px));
+            pointer-events: none;
+        }
+        .hero-slide-copy-inner {
+            display: inline-flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 100%;
+            padding: 18px 22px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, rgba(3,164,252,.90) 0%, rgba(7,122,214,.82) 100%);
+            color: #fff;
+            box-shadow: 0 22px 48px rgba(3, 38, 72, .22);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,.22);
+        }
+        .hero-slide-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            line-height: 1;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            font-weight: 700;
+            opacity: .92;
+        }
+        .hero-slide-kicker::before {
+            content: "";
+            width: 26px;
+            height: 2px;
+            border-radius: 999px;
+            background: rgba(255,255,255,.92);
+        }
+        .hero-slide-title {
+            margin: 0;
+            font-size: clamp(1.35rem, 1rem + 1.55vw, 2.8rem);
+            line-height: 1.08;
+            font-weight: 800;
+            max-width: 16ch;
+            text-wrap: balance;
+            color: #fff;
+        }
+
         .hero-progress {
             position: absolute;
             bottom: 0;
@@ -119,7 +167,6 @@
             to   { width: 100%; }
         }
 
-        /* Navigation arrows */
         .hero-nav {
             position: absolute;
             top: 50%;
@@ -148,7 +195,6 @@
         .hero-nav-prev { left: 24px; }
         .hero-nav-next { right: 24px; }
 
-        /* Dot indicators */
         .hero-dots {
             position: absolute;
             bottom: 22px;
@@ -174,12 +220,31 @@
             border-radius: 5px;
         }
 
-        /* Mobile */
         @media (max-width: 767.98px) {
             .hero-slider { height: 88svh; min-height: 420px; }
             .hero-nav { width: 40px; height: 40px; font-size: 15px; }
             .hero-nav-prev { left: 10px; }
             .hero-nav-next { right: 10px; }
+            .hero-slide-copy {
+                left: 14px;
+                right: 14px;
+                bottom: 68px;
+                width: auto;
+            }
+            .hero-slide-copy-inner {
+                width: min(100%, 360px);
+                padding: 14px 16px;
+                border-radius: 18px;
+            }
+            .hero-slide-kicker {
+                font-size: 10px;
+                letter-spacing: .18em;
+            }
+            .hero-slide-title {
+                max-width: none;
+                font-size: clamp(1.1rem, 4.8vw, 1.7rem);
+                line-height: 1.15;
+            }
         }
     </style>
 
