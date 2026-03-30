@@ -365,10 +365,139 @@
             color: var(--ac-muted);
         }
 
+        .admin-chat-ui .ac-launch-wrap {
+            display: grid;
+            grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr);
+            gap: 16px;
+        }
+
+        .admin-chat-ui .ac-launch-card,
+        .admin-chat-ui .ac-setup-card {
+            background: var(--ac-white);
+            border: 1px solid var(--ac-border);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .admin-chat-ui .ac-launch-title,
+        .admin-chat-ui .ac-setup-title {
+            margin: 0 0 10px;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--ac-text);
+        }
+
+        .admin-chat-ui .ac-launch-text,
+        .admin-chat-ui .ac-setup-text {
+            margin: 0;
+            color: var(--ac-muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .admin-chat-ui .ac-launch-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .admin-chat-ui .ac-link-btn,
+        .admin-chat-ui .ac-link-btn-alt {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 46px;
+            padding: 0 18px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+        }
+
+        .admin-chat-ui .ac-link-btn {
+            background: linear-gradient(135deg, #03a4fc 0%, #0f86e8 100%);
+            color: #fff;
+            box-shadow: 0 16px 32px rgba(3, 164, 252, .22);
+        }
+
+        .admin-chat-ui .ac-link-btn:hover {
+            transform: translateY(-1px);
+            color: #fff;
+        }
+
+        .admin-chat-ui .ac-link-btn-alt {
+            background: rgba(3, 164, 252, .09);
+            color: var(--ac-primary-dark);
+            border: 1px solid rgba(3, 164, 252, .2);
+        }
+
+        .admin-chat-ui .ac-link-btn-alt:hover {
+            transform: translateY(-1px);
+        }
+
+        .admin-chat-ui .ac-config-list {
+            margin: 16px 0 0;
+            padding: 0;
+            list-style: none;
+            display: grid;
+            gap: 10px;
+        }
+
+        .admin-chat-ui .ac-config-item {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: center;
+            padding: 12px 14px;
+            border-radius: 12px;
+            background: var(--ac-bg);
+            border: 1px solid var(--ac-border);
+            font-size: 13px;
+        }
+
+        .admin-chat-ui .ac-config-label {
+            font-weight: 700;
+            color: var(--ac-text);
+        }
+
+        .admin-chat-ui .ac-config-value {
+            color: var(--ac-muted);
+            word-break: break-all;
+            text-align: right;
+        }
+
+        .admin-chat-ui .ac-status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .admin-chat-ui .ac-status-pill.is-ready {
+            color: #065f46;
+            background: rgba(16, 185, 129, .14);
+        }
+
+        .admin-chat-ui .ac-status-pill.is-warning {
+            color: #9a3412;
+            background: rgba(249, 115, 22, .16);
+        }
+
         @media (max-width: 991.98px) {
             .admin-chat-ui .ac-layout {
                 grid-template-columns: 1fr;
                 min-height: auto;
+            }
+
+            .admin-chat-ui .ac-launch-wrap {
+                grid-template-columns: 1fr;
             }
 
             .admin-chat-ui .ac-session-list {
@@ -405,111 +534,169 @@
     </style>
 
     <div class="admin-chat-ui">
-        <div class="ac-header">
-            <div>
-                <h1 class="ac-title">Support Inbox</h1>
-                <p class="ac-subtitle">Manage customer conversations in one place.</p>
+        @if($usesTawk)
+            <div class="ac-header">
+                <div>
+                    <h1 class="ac-title">Tawk Inbox</h1>
+                    <p class="ac-subtitle">Customer chat is now handled through Tawk for both visitors and admins.</p>
+                </div>
+                <div class="ac-badge">
+                    <span class="ac-badge-dot"></span>
+                    {{ $tawkConfigured ? 'Connected' : 'Setup needed' }}
+                </div>
             </div>
-            <div class="ac-badge">
-                <span class="ac-badge-dot"></span>
-                {{ $unreadCount }} unread
-            </div>
-        </div>
 
-        @if(empty($sessions))
-            <div class="ac-empty-page">No conversations yet. Waiting for customer messages.</div>
+            <div class="ac-launch-wrap">
+                <div class="ac-launch-card">
+                    <span class="ac-status-pill {{ $tawkConfigured ? 'is-ready' : 'is-warning' }}">
+                        <i class="ti-comments-smiley"></i>
+                        {{ $tawkConfigured ? 'Website widget is ready' : 'Tawk keys are not configured yet' }}
+                    </span>
+                    <h2 class="ac-launch-title">Open the Tawk dashboard for live conversations</h2>
+                    <p class="ac-launch-text">
+                        Visitors will chat through the Tawk widget on the website, and admins should reply from the Tawk dashboard or mobile app.
+                        This replaces the old local inbox so conversations stay in one place.
+                    </p>
+                    <div class="ac-launch-actions">
+                        <a href="{{ $tawkDashboardUrl }}" target="_blank" rel="noopener noreferrer" class="ac-link-btn">
+                            <i class="ti-new-window"></i>
+                            Open Tawk Dashboard
+                        </a>
+                        <a href="https://dashboard.tawk.to/" target="_blank" rel="noopener noreferrer" class="ac-link-btn-alt">
+                            <i class="ti-external-link"></i>
+                            Tawk Login
+                        </a>
+                    </div>
+                </div>
+
+                <div class="ac-setup-card">
+                    <h3 class="ac-setup-title">Integration status</h3>
+                    <p class="ac-setup-text">
+                        Add your Tawk property and widget IDs to the environment, then clear config cache on the server.
+                    </p>
+                    <ul class="ac-config-list">
+                        <li class="ac-config-item">
+                            <span class="ac-config-label">TAWK_ENABLED</span>
+                            <span class="ac-config-value">{{ config('services.tawk.enabled') ? 'true' : 'false' }}</span>
+                        </li>
+                        <li class="ac-config-item">
+                            <span class="ac-config-label">TAWK_PROPERTY_ID</span>
+                            <span class="ac-config-value">{{ $tawkPropertyId !== '' ? $tawkPropertyId : 'Not set' }}</span>
+                        </li>
+                        <li class="ac-config-item">
+                            <span class="ac-config-label">TAWK_WIDGET_ID</span>
+                            <span class="ac-config-value">{{ $tawkWidgetId !== '' ? $tawkWidgetId : 'Not set' }}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         @else
-            <div class="ac-layout">
-                <div class="ac-panel">
-                    <div class="ac-panel-head">
-                        <p class="ac-panel-title">Conversations</p>
-                        <p class="ac-panel-meta">{{ count($sessions) }} active chat{{ count($sessions) === 1 ? '' : 's' }}</p>
-                    </div>
-                    <div class="ac-session-list" wire:poll.3s="refreshChatData">
-                        @foreach($sessions as $session)
-                            <button
-                                type="button"
-                                wire:click="selectSession('{{ $session['session_id'] }}')"
-                                class="ac-session-item {{ $selectedSession === $session['session_id'] ? 'is-active' : '' }}"
-                            >
-                                <div class="ac-session-row">
-                                    <div class="ac-avatar">{{ strtoupper(substr($session['name'], 0, 1)) }}</div>
-                                    <div class="ac-session-content">
-                                        <div class="ac-session-top">
-                                            <p class="ac-name">{{ $session['name'] }}</p>
-                                            <p class="ac-time">{{ $session['last_time'] }}</p>
-                                        </div>
-                                        <p class="ac-email">{{ $session['email'] }}</p>
-                                        <p class="ac-preview">{{ $session['last_message'] }}</p>
-                                    </div>
-                                    @if($session['unread_count'] > 0)
-                                        <span class="ac-unread">{{ $session['unread_count'] }}</span>
-                                    @endif
-                                </div>
-                            </button>
-                        @endforeach
-                    </div>
+            <div class="ac-header">
+                <div>
+                    <h1 class="ac-title">Support Inbox</h1>
+                    <p class="ac-subtitle">Manage customer conversations in one place.</p>
                 </div>
-
-                <div class="ac-panel">
-                    @if($selectedSession && !empty($activeUser))
-                        <div class="ac-chat-head">
-                            <div class="ac-chat-user">
-                                <div class="ac-avatar">{{ strtoupper(substr($activeUser['name'], 0, 1)) }}</div>
-                                <div>
-                                    <p class="ac-name">{{ $activeUser['name'] }}</p>
-                                    <p class="ac-email">{{ $activeUser['email'] }}</p>
-                                </div>
-                            </div>
-                            <span class="ac-status">Active chat</span>
-                        </div>
-
-                        <div class="ac-messages" wire:poll.3s="refreshChatData">
-                            @foreach($messages as $message)
-                                @if($message['sender_type'] === 'user')
-                                    <div class="ac-message-row user">
-                                        <div class="ac-bubble user">
-                                            {{ $message['message'] }}
-                                            <span class="ac-bubble-meta">
-                                                {{ $message['name'] ?: 'Customer' }} • {{ \Carbon\Carbon::parse($message['created_at'])->format('g:i A') }}
-                                            </span>
-                                        </div>
-                                    </div>
-                                @else
-                                    <div class="ac-message-row admin">
-                                        <div class="ac-bubble admin">
-                                            {{ $message['message'] }}
-                                            <span class="ac-bubble-meta">
-                                                Support Team • {{ \Carbon\Carbon::parse($message['created_at'])->format('g:i A') }}
-                                            </span>
-                                        </div>
-                                    </div>
-                                @endif
-                            @endforeach
-
-                            @if(empty($messages))
-                                <div class="ac-empty">No messages yet. Send the first reply.</div>
-                            @endif
-                        </div>
-
-                        <div class="ac-input-wrap">
-                            <form wire:submit.prevent="sendMessage" class="ac-input-form">
-                                <input type="text" wire:model="newMessage" placeholder="Write a helpful response..." class="ac-input">
-                                <button type="submit" class="ac-send">Send message</button>
-                            </form>
-                            @error('newMessage')
-                                <p class="ac-error">{{ $message }}</p>
-                            @enderror
-                        </div>
-                    @else
-                        <div class="ac-empty">Select a conversation to view messages.</div>
-                    @endif
+                <div class="ac-badge">
+                    <span class="ac-badge-dot"></span>
+                    {{ $unreadCount }} unread
                 </div>
             </div>
+
+            @if(empty($sessions))
+                <div class="ac-empty-page">No conversations yet. Waiting for customer messages.</div>
+            @else
+                <div class="ac-layout">
+                    <div class="ac-panel">
+                        <div class="ac-panel-head">
+                            <p class="ac-panel-title">Conversations</p>
+                            <p class="ac-panel-meta">{{ count($sessions) }} active chat{{ count($sessions) === 1 ? '' : 's' }}</p>
+                        </div>
+                        <div class="ac-session-list" wire:poll.3s="refreshChatData">
+                            @foreach($sessions as $session)
+                                <button
+                                    type="button"
+                                    wire:click="selectSession('{{ $session['session_id'] }}')"
+                                    class="ac-session-item {{ $selectedSession === $session['session_id'] ? 'is-active' : '' }}"
+                                >
+                                    <div class="ac-session-row">
+                                        <div class="ac-avatar">{{ strtoupper(substr($session['name'], 0, 1)) }}</div>
+                                        <div class="ac-session-content">
+                                            <div class="ac-session-top">
+                                                <p class="ac-name">{{ $session['name'] }}</p>
+                                                <p class="ac-time">{{ $session['last_time'] }}</p>
+                                            </div>
+                                            <p class="ac-email">{{ $session['email'] }}</p>
+                                            <p class="ac-preview">{{ $session['last_message'] }}</p>
+                                        </div>
+                                        @if($session['unread_count'] > 0)
+                                            <span class="ac-unread">{{ $session['unread_count'] }}</span>
+                                        @endif
+                                    </div>
+                                </button>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div class="ac-panel">
+                        @if($selectedSession && !empty($activeUser))
+                            <div class="ac-chat-head">
+                                <div class="ac-chat-user">
+                                    <div class="ac-avatar">{{ strtoupper(substr($activeUser['name'], 0, 1)) }}</div>
+                                    <div>
+                                        <p class="ac-name">{{ $activeUser['name'] }}</p>
+                                        <p class="ac-email">{{ $activeUser['email'] }}</p>
+                                    </div>
+                                </div>
+                                <span class="ac-status">Active chat</span>
+                            </div>
+
+                            <div class="ac-messages" wire:poll.3s="refreshChatData">
+                                @foreach($messages as $message)
+                                    @if($message['sender_type'] === 'user')
+                                        <div class="ac-message-row user">
+                                            <div class="ac-bubble user">
+                                                {{ $message['message'] }}
+                                                <span class="ac-bubble-meta">
+                                                    {{ $message['name'] ?: 'Customer' }} • {{ \Carbon\Carbon::parse($message['created_at'])->format('g:i A') }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    @else
+                                        <div class="ac-message-row admin">
+                                            <div class="ac-bubble admin">
+                                                {{ $message['message'] }}
+                                                <span class="ac-bubble-meta">
+                                                    Support Team • {{ \Carbon\Carbon::parse($message['created_at'])->format('g:i A') }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+
+                                @if(empty($messages))
+                                    <div class="ac-empty">No messages yet. Send the first reply.</div>
+                                @endif
+                            </div>
+
+                            <div class="ac-input-wrap">
+                                <form wire:submit.prevent="sendMessage" class="ac-input-form">
+                                    <input type="text" wire:model="newMessage" placeholder="Write a helpful response..." class="ac-input">
+                                    <button type="submit" class="ac-send">Send message</button>
+                                </form>
+                                @error('newMessage')
+                                    <p class="ac-error">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        @else
+                            <div class="ac-empty">Select a conversation to view messages.</div>
+                        @endif
+                    </div>
+                </div>
+            @endif
         @endif
     </div>
 
-    @if(config('broadcasting.connections.pusher.key'))
+    @if(!$usesTawk && config('broadcasting.connections.pusher.key'))
         <script src="https://js.pusher.com/8.4.0/pusher.min.js"></script>
         <script>
             document.addEventListener('livewire:initialized', () => {

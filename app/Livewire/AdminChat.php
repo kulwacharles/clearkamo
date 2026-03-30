@@ -9,6 +9,11 @@ use Throwable;
 
 class AdminChat extends Component
 {
+    public $usesTawk = false;
+    public $tawkDashboardUrl = '';
+    public $tawkPropertyId = '';
+    public $tawkWidgetId = '';
+    public $tawkConfigured = false;
     public $messages = [];
     public $newMessage = '';
     public $selectedSession = null;
@@ -22,6 +27,16 @@ class AdminChat extends Component
 
     public function mount()
     {
+        $this->usesTawk = (bool) config('services.tawk.enabled');
+        $this->tawkDashboardUrl = (string) config('services.tawk.dashboard_url', 'https://dashboard.tawk.to/');
+        $this->tawkPropertyId = trim((string) config('services.tawk.property_id'));
+        $this->tawkWidgetId = trim((string) config('services.tawk.widget_id'));
+        $this->tawkConfigured = $this->usesTawk && $this->tawkPropertyId !== '' && $this->tawkWidgetId !== '';
+
+        if ($this->usesTawk) {
+            return;
+        }
+
         $this->loadSessions();
         $this->loadUnreadCount();
     }

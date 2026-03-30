@@ -31,4 +31,11 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'tawk' => [
+        'enabled' => filter_var(env('TAWK_ENABLED', false), FILTER_VALIDATE_BOOL),
+        'property_id' => env('TAWK_PROPERTY_ID'),
+        'widget_id' => env('TAWK_WIDGET_ID'),
+        'dashboard_url' => env('TAWK_DASHBOARD_URL', 'https://dashboard.tawk.to/'),
+    ],
+
 ];

@@ -428,16 +428,22 @@
     </head>
     <body  class="crm_body_bg admin-modern-ui">
          <!-- sidebar  -->
-         @livewire('sidebar')
+        @livewire('sidebar')
         <!--/ sidebar  -->
         @php
-            $initialUnreadChats = \App\Models\ChatMessage::where('sender_type', 'user')
-                ->where('is_read', false)
-                ->distinct('session_id')
-                ->count('session_id');
+            $usesTawkChat = (bool) config('services.tawk.enabled')
+                && trim((string) config('services.tawk.property_id')) !== ''
+                && trim((string) config('services.tawk.widget_id')) !== '';
+            $initialUnreadChats = $usesTawkChat
+                ? 0
+                : \App\Models\ChatMessage::where('sender_type', 'user')
+                    ->where('is_read', false)
+                    ->distinct('session_id')
+                    ->count('session_id');
 
-            $initialLatestUserMessageId = \App\Models\ChatMessage::where('sender_type', 'user')
-                ->max('id') ?? 0;
+            $initialLatestUserMessageId = $usesTawkChat
+                ? 0
+                : (\App\Models\ChatMessage::where('sender_type', 'user')->max('id') ?? 0);
 
             $routeName = request()->route()?->getName();
             $adminRouteLabels = [
@@ -455,7 +461,7 @@
                 'admin.client' => 'Clients',
                 'admin.contacts' => 'Contact Us',
                 'admin.business-inquiries' => 'Business Inquiries',
-                'admin.chat' => 'Chat Inbox',
+                'admin.chat' => $usesTawkChat ? 'Tawk Inbox' : 'Chat Inbox',
             ];
 
             $currentPageTitle = $adminRouteLabels[$routeName] ?? ucfirst(str_replace(['-', '_'], ' ', request()->segment(2) ?? 'Dashboard'));
@@ -583,9 +589,11 @@
                                     <!--/ Menu_NOtification_Wrap  -->
                                     </li>
                                     <li>
-                                        <a class="CHATBOX_open" href="{{ route('admin.chat') }}" title="Open chat inbox">
+                                        <a class="CHATBOX_open" href="{{ route('admin.chat') }}" title="{{ $usesTawkChat ? 'Open Tawk inbox' : 'Open chat inbox' }}">
                                             <img src="{{asset('img/icon/msg.svg')}}" alt="">
-                                            <span id="admin-chat-badge">{{ $initialUnreadChats }}</span>
+                                            @unless($usesTawkChat)
+                                                <span id="admin-chat-badge">{{ $initialUnreadChats }}</span>
+                                            @endunless
                                         </a>
                                     </li>
                                 </div>
@@ -771,55 +779,57 @@
                     applyThemeToggleLabel();
                 });
 
-                const badgeEl = document.getElementById('admin-chat-badge');
-                const popEl = document.getElementById('admin-chat-pop');
-                const popNameEl = document.getElementById('admin-chat-pop-name');
-                const popTextEl = document.getElementById('admin-chat-pop-text');
-                const realtimeUrl = "{{ route('admin.chat.realtime') }}";
-                const isOnChatPage = "{{ request()->routeIs('admin.chat') ? '1' : '0' }}" === '1';
-                let lastSeenMessageId = Number("{{ $initialLatestUserMessageId }}") || 0;
-                let hideTimer = null;
+                @unless($usesTawkChat)
+                    const badgeEl = document.getElementById('admin-chat-badge');
+                    const popEl = document.getElementById('admin-chat-pop');
+                    const popNameEl = document.getElementById('admin-chat-pop-name');
+                    const popTextEl = document.getElementById('admin-chat-pop-text');
+                    const realtimeUrl = "{{ route('admin.chat.realtime') }}";
+                    const isOnChatPage = "{{ request()->routeIs('admin.chat') ? '1' : '0' }}" === '1';
+                    let lastSeenMessageId = Number("{{ $initialLatestUserMessageId }}") || 0;
+                    let hideTimer = null;
 
-                const showPopup = (name, text) => {
-                    if (!popEl || isOnChatPage) {
-                        return;
-                    }
+                    const showPopup = (name, text) => {
+                        if (!popEl || isOnChatPage) {
+                            return;
+                        }
 
-                    popNameEl.textContent = name || 'Customer';
-                    popTextEl.textContent = text || 'You have a new incoming message.';
-                    popEl.classList.add('active');
+                        popNameEl.textContent = name || 'Customer';
+                        popTextEl.textContent = text || 'You have a new incoming message.';
+                        popEl.classList.add('active');
 
-                    if (hideTimer) {
-                        clearTimeout(hideTimer);
-                    }
+                        if (hideTimer) {
+                            clearTimeout(hideTimer);
+                        }
 
-                    hideTimer = setTimeout(() => {
-                        popEl.classList.remove('active');
-                    }, 4500);
-                };
+                        hideTimer = setTimeout(() => {
+                            popEl.classList.remove('active');
+                        }, 4500);
+                    };
 
-                const refreshChatMeta = () => {
-                    fetch(realtimeUrl, {
-                        headers: { 'X-Requested-With': 'XMLHttpRequest' },
-                        credentials: 'same-origin',
-                    })
-                        .then((response) => response.json())
-                        .then((data) => {
-                            if (badgeEl && typeof data.unread_chats !== 'undefined') {
-                                badgeEl.textContent = data.unread_chats;
-                            }
-
-                            const latestId = Number(data.latest_user_message_id || 0);
-                            if (latestId > lastSeenMessageId) {
-                                showPopup(data.latest_user_name, data.latest_user_message);
-                                lastSeenMessageId = latestId;
-                            }
+                    const refreshChatMeta = () => {
+                        fetch(realtimeUrl, {
+                            headers: { 'X-Requested-With': 'XMLHttpRequest' },
+                            credentials: 'same-origin',
                         })
-                        .catch(() => {});
-                };
+                            .then((response) => response.json())
+                            .then((data) => {
+                                if (badgeEl && typeof data.unread_chats !== 'undefined') {
+                                    badgeEl.textContent = data.unread_chats;
+                                }
 
-                refreshChatMeta();
-                setInterval(refreshChatMeta, 8000);
+                                const latestId = Number(data.latest_user_message_id || 0);
+                                if (latestId > lastSeenMessageId) {
+                                    showPopup(data.latest_user_name, data.latest_user_message);
+                                    lastSeenMessageId = latestId;
+                                }
+                            })
+                            .catch(() => {});
+                    };
+
+                    refreshChatMeta();
+                    setInterval(refreshChatMeta, 8000);
+                @endunless
             })();
         </script>
         

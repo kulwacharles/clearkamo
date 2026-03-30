@@ -98,7 +98,16 @@
     </div>
 </div>
     @livewire('frontend.layouts.footer')
-    @livewire('chat')
+    @php
+        $tawkReady = (bool) config('services.tawk.enabled')
+            && trim((string) config('services.tawk.property_id')) !== ''
+            && trim((string) config('services.tawk.widget_id')) !== '';
+    @endphp
+    @if($tawkReady)
+        @include('components.tawk-widget', ['title' => $title ?? null])
+    @else
+        @livewire('chat')
+    @endif
 <div class="scroll-top">
     <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
         <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 307.919;"></path>
