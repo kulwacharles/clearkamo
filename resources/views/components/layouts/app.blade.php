@@ -461,6 +461,7 @@
                 'admin.client' => 'Clients',
                 'admin.contacts' => 'Contact Us',
                 'admin.business-inquiries' => 'Business Inquiries',
+                'admin.change-password' => 'Change Password',
                 'admin.chat' => $usesTawkChat ? 'Tawk Inbox' : 'Chat Inbox',
             ];
 
@@ -601,12 +602,12 @@
                                     <img src="{{asset('img/client_img.png')}}" alt="#">
                                     <div class="profile_info_iner">
                                         <div class="profile_author_name">
-                                            <p>Neurologist </p>
-                                            <h5>Dr. Robar Smith</h5>
+                                            <p>Administrator</p>
+                                            <h5>{{ auth()->user()?->name ?? 'Admin User' }}</h5>
                                         </div>
                                         <div class="profile_info_details">
-                                            <a href="#">My Profile </a>
-                                            <a href="#">Settings</a>
+                                            <a wire:navigate href="{{ route('admin.change-password') }}">Change Password</a>
+                                            <a href="mailto:{{ auth()->user()?->email }}">{{ auth()->user()?->email }}</a>
                                             
                                             <form action="{{ route('logout') }}" method="POST">
                                                 @csrf

@@ -1,6 +1,8 @@
 <?php
 use App\Livewire\Auth\Login;
+use App\Livewire\Auth\ForgotPassword;
 use App\Livewire\Auth\Register;
+use App\Livewire\Auth\ResetPassword;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Slider\Sliders;
 use App\Livewire\About\Abouts;
@@ -33,6 +35,7 @@ use App\Livewire\Vacancy\VacancyBackend;
 use App\Livewire\AdminChat;
 use App\Livewire\Admin\Dashboard as AdminDashboard;
 use App\Livewire\Admin\MaintenanceMode as AdminMaintenanceMode;
+use App\Livewire\Admin\ChangePassword as AdminChangePassword;
 use App\Livewire\FocusArea\BackendFocusArea;
 use App\Livewire\CoreValue\BackendCoreValue;
 use App\Livewire\Gallery\BackendGallery;
@@ -48,6 +51,8 @@ use App\Models\ChatMessage;
 //Auth::routes();
 Route::middleware('guest')->group(function () {
     Route::get('/admin/login', Login::class)->name('login');
+    Route::get('/admin/forgot-password', ForgotPassword::class)->name('password.request');
+    Route::get('/admin/reset-password/{token}', ResetPassword::class)->name('password.reset');
     //Route::get('/admin/register', Register::class)->name('register');
 });
 Route::middleware(['auth'])->prefix('/admin')->group(function () {
@@ -66,6 +71,7 @@ Route::middleware(['auth'])->prefix('/admin')->group(function () {
     Route::get('contacts',BackendContacts::class)->name('admin.contacts');
     Route::get('business-inquiries', AdminBusinessInquiries::class)->name('admin.business-inquiries');
     Route::get('maintenance', AdminMaintenanceMode::class)->name('admin.maintenance');
+    Route::get('change-password', AdminChangePassword::class)->name('admin.change-password');
     Route::get('focus-areas', BackendFocusArea::class)->name('admin.focus-areas');
     Route::get('core-values', BackendCoreValue::class)->name('admin.core-values');
     Route::get('gallery', BackendGallery::class)->name('admin.gallery');
