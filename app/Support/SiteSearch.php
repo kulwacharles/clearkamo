@@ -186,8 +186,13 @@ class SiteSearch
         }
 
         $whoWeAre = WhoWeAre::query()->first();
-        if ($whoWeAre && self::matches($q, [$whoWeAre->title, $whoWeAre->description])) {
-            $items->push(self::item('Page', 'Who We Are', (string) $whoWeAre->description, url('/about-us'), optional($whoWeAre->updated_at)?->toDateString()));
+        if ($whoWeAre && self::matches($q, [
+            $whoWeAre->title,
+            $whoWeAre->description,
+            $whoWeAre->market_position_description ?? null,
+            $whoWeAre->purpose_description ?? null,
+        ])) {
+            $items->push(self::item('Page', 'Who We Are', (string) ($whoWeAre->description ?: $whoWeAre->market_position_description ?: $whoWeAre->purpose_description), url('/about-us'), optional($whoWeAre->updated_at)?->toDateString()));
         }
 
         $contact = Contact::query()->first();

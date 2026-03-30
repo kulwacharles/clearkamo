@@ -15,11 +15,17 @@ class BackendWhoWeAre extends Component
     public $description = '';
     public $years_of_experience = 15;
     public $youtube_url;
+    public $market_position_description = '';
+    public $purpose_description = '';
 
     public $image;
     public $secondary_image;
+    public $market_position_image;
+    public $purpose_image;
     public $existingImagePath;
     public $existingSecondaryImagePath;
+    public $existingMarketPositionImagePath;
+    public $existingPurposeImagePath;
 
     protected $rules = [
         'title' => 'required|string|min:3|max:255',
@@ -28,12 +34,18 @@ class BackendWhoWeAre extends Component
         'youtube_url' => 'nullable|url|max:255',
         'image' => 'nullable|image|max:20480',
         'secondary_image' => 'nullable|image|max:20480',
+        'market_position_description' => 'nullable|string|min:20',
+        'purpose_description' => 'nullable|string|min:20',
+        'market_position_image' => 'nullable|image|max:20480',
+        'purpose_image' => 'nullable|image|max:20480',
     ];
 
     protected $messages = [
         'title.required' => 'Title is required.',
         'description.required' => 'Description is required.',
         'description.min' => 'Description must be at least 20 characters.',
+        'market_position_description.min' => 'Market Position must be at least 20 characters.',
+        'purpose_description.min' => 'Our Purpose must be at least 20 characters.',
         'years_of_experience.integer' => 'Years of experience must be a number.',
         'youtube_url.url' => 'Please enter a valid YouTube URL.',
     ];
@@ -56,8 +68,12 @@ class BackendWhoWeAre extends Component
         $this->description = $record->description;
         $this->years_of_experience = $record->years_of_experience ?? 15;
         $this->youtube_url = $record->youtube_url;
+        $this->market_position_description = $record->market_position_description ?? '';
+        $this->purpose_description = $record->purpose_description ?? '';
         $this->existingImagePath = $record->image_path;
         $this->existingSecondaryImagePath = $record->secondary_image_path;
+        $this->existingMarketPositionImagePath = $record->market_position_image_path;
+        $this->existingPurposeImagePath = $record->purpose_image_path;
 
         $this->dispatch('load-who-we-are-ckeditor', $this->description);
     }
@@ -76,6 +92,16 @@ class BackendWhoWeAre extends Component
             $secondaryImagePath = $this->secondary_image->store('who-we-are', 'public');
         }
 
+        $marketPositionImagePath = $this->existingMarketPositionImagePath;
+        if ($this->market_position_image) {
+            $marketPositionImagePath = $this->market_position_image->store('who-we-are', 'public');
+        }
+
+        $purposeImagePath = $this->existingPurposeImagePath;
+        if ($this->purpose_image) {
+            $purposeImagePath = $this->purpose_image->store('who-we-are', 'public');
+        }
+
         $record = WhoWeAreModel::query()->updateOrCreate(
             ['id' => $this->recordId],
             [
@@ -85,14 +111,22 @@ class BackendWhoWeAre extends Component
                 'youtube_url' => $this->youtube_url,
                 'image_path' => $imagePath,
                 'secondary_image_path' => $secondaryImagePath,
+                'market_position_description' => $this->market_position_description ?: null,
+                'market_position_image_path' => $marketPositionImagePath,
+                'purpose_description' => $this->purpose_description ?: null,
+                'purpose_image_path' => $purposeImagePath,
             ]
         );
 
         $this->recordId = $record->id;
         $this->existingImagePath = $record->image_path;
         $this->existingSecondaryImagePath = $record->secondary_image_path;
+        $this->existingMarketPositionImagePath = $record->market_position_image_path;
+        $this->existingPurposeImagePath = $record->purpose_image_path;
         $this->image = null;
         $this->secondary_image = null;
+        $this->market_position_image = null;
+        $this->purpose_image = null;
 
         session()->flash('message', 'Who We Are section updated successfully.');
         $this->dispatch('load-who-we-are-ckeditor', $this->description);
@@ -104,4 +138,3 @@ class BackendWhoWeAre extends Component
             ->layout('components.layouts.app');
     }
 }
-

@@ -61,6 +61,44 @@
                         </div>
                     </div>
 
+                    <hr class="my-4">
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Market Position</label>
+                            <textarea class="form-control" rows="6" wire:model.defer="market_position_description" placeholder="Explain why ClearKamo is different."></textarea>
+                            @error('market_position_description') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="col-md-6">
+                            @if ($market_position_image)
+                                <img src="{{ $market_position_image->temporaryUrl() }}" class="img img-responsive mb-2" style="max-height: 220px;">
+                            @elseif ($existingMarketPositionImagePath)
+                                <img src="{{ asset('storage/'.$existingMarketPositionImagePath) }}" class="img img-responsive mb-2" style="max-height: 220px;">
+                            @endif
+                            <label class="form-label d-block">Market Position Image</label>
+                            <input type="file" class="form-control" wire:model="market_position_image" accept="image/*">
+                            @error('market_position_image') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label">Our Purpose</label>
+                            <textarea class="form-control" rows="6" wire:model.defer="purpose_description" placeholder="Describe ClearKamo's purpose."></textarea>
+                            @error('purpose_description') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="col-md-6">
+                            @if ($purpose_image)
+                                <img src="{{ $purpose_image->temporaryUrl() }}" class="img img-responsive mb-2" style="max-height: 220px;">
+                            @elseif ($existingPurposeImagePath)
+                                <img src="{{ asset('storage/'.$existingPurposeImagePath) }}" class="img img-responsive mb-2" style="max-height: 220px;">
+                            @endif
+                            <label class="form-label d-block">Our Purpose Image</label>
+                            <input type="file" class="form-control" wire:model="purpose_image" accept="image/*">
+                            @error('purpose_image') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+
                     <button type="submit" class="btn btn-primary" wire:loading.attr="disabled">
                         Save Who We Are
                     </button>

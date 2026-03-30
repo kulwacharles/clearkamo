@@ -406,6 +406,47 @@
                 </div>
             </div>
 
+            @if(
+                !empty($whoWeAre->market_position_description) ||
+                !empty($whoWeAre->market_position_image_path) ||
+                !empty($whoWeAre->purpose_description) ||
+                !empty($whoWeAre->purpose_image_path)
+            )
+            <div class="row gy-4 mt-4" id="identity-row">
+                <div class="col-lg-6">
+                    <article class="identity-story-card identity-story-card-primary h-100">
+                        <div class="identity-story-media">
+                            <img
+                                src="{{ !empty($whoWeAre->market_position_image_path) ? asset('storage/'.$whoWeAre->market_position_image_path) : asset('assets/img/default/about.jpg') }}"
+                                alt="Market Position"
+                            >
+                        </div>
+                        <div class="identity-story-copy">
+                            {{-- <span class="identity-story-kicker">What Sets Us Apart</span> --}}
+                            <h3>Market Position</h3>
+                            <p>{{ $whoWeAre->market_position_description ?: 'ClearKamo stands apart by connecting strategy, execution, and decision support into one practical delivery model that helps clients achieve reliable results.' }}</p>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col-lg-6">
+                    <article class="identity-story-card identity-story-card-secondary h-100">
+                        <div class="identity-story-media">
+                            <img
+                                src="{{ !empty($whoWeAre->purpose_image_path) ? asset('storage/'.$whoWeAre->purpose_image_path) : asset('assets/img/default/about.jpg') }}"
+                                alt="Our Purpose"
+                            >
+                        </div>
+                        <div class="identity-story-copy">
+                            {{-- <span class="identity-story-kicker">Why We Exist</span> --}}
+                            <h3>Our Purpose</h3>
+                            <p>{{ $whoWeAre->purpose_description ?: 'Our purpose is to help organizations make better decisions, execute with confidence, and build systems that produce measurable, dependable outcomes.' }}</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            @endif
+
         </div>
 
         <style>
@@ -554,11 +595,18 @@
                 margin-top: 36px;
                 align-items: stretch;
             }
+            #about-sec #identity-row {
+                margin-top: 32px;
+            }
             #about-sec #media-row > [class*='col-'] {
                 display: flex;
             }
+            #about-sec #identity-row > [class*='col-'] {
+                display: flex;
+            }
             #about-sec #media-row .mission-vision-core-values,
-            #about-sec #media-row .about-video-cinema {
+            #about-sec #media-row .about-video-cinema,
+            #about-sec #identity-row .identity-story-card {
                 width: 100%;
                 height: 100%;
             }
@@ -737,6 +785,80 @@
                 font-size: 4rem;
                 color: rgba(3,164,252,0.7);
             }
+            #about-sec .identity-story-card {
+                position: relative;
+                overflow: hidden;
+                border-radius: 24px;
+                box-shadow: 0 18px 38px rgba(3, 164, 252, 0.12);
+            }
+            #about-sec .identity-story-card-primary {
+                background: linear-gradient(180deg, #ffffff 0%, #f2f9ff 100%);
+                border: 1px solid rgba(3, 164, 252, 0.16);
+            }
+            #about-sec .identity-story-card-secondary {
+                background: linear-gradient(180deg, #03A4FC 0%, #0284c7 100%);
+                border: 1px solid rgba(3, 164, 252, 0.22);
+            }
+            #about-sec .identity-story-media {
+                position: relative;
+                aspect-ratio: 16 / 10;
+                overflow: hidden;
+            }
+            #about-sec .identity-story-media img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+                transition: transform .65s ease;
+            }
+            #about-sec .identity-story-card:hover .identity-story-media img {
+                transform: scale(1.04);
+            }
+            #about-sec .identity-story-copy {
+                padding: 24px 24px 26px;
+            }
+            #about-sec .identity-story-card-primary .identity-story-copy {
+                background: linear-gradient(180deg, #ffffff 0%, #f5fbff 100%);
+            }
+            #about-sec .identity-story-card-secondary .identity-story-copy {
+                background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%);
+                backdrop-filter: blur(4px);
+            }
+            #about-sec .identity-story-kicker {
+                display: inline-block;
+                margin-bottom: 10px;
+                font-size: 0.78rem;
+                font-weight: 800;
+                text-transform: uppercase;
+                letter-spacing: 0.12em;
+            }
+            #about-sec .identity-story-card-primary .identity-story-kicker {
+                color: #03A4FC;
+            }
+            #about-sec .identity-story-card-secondary .identity-story-kicker {
+                color: rgba(255, 255, 255, 0.85);
+            }
+            #about-sec .identity-story-copy h3 {
+                margin-bottom: 12px;
+                font-size: 1.75rem;
+                line-height: 1.2;
+            }
+            #about-sec .identity-story-card-primary h3 {
+                color: #0f172a;
+            }
+            #about-sec .identity-story-card-secondary h3 {
+                color: #ffffff;
+            }
+            #about-sec .identity-story-card-primary p {
+                margin-bottom: 0;
+                color: #475569;
+                line-height: 1.85;
+            }
+            #about-sec .identity-story-card-secondary p {
+                margin-bottom: 0;
+                color: rgba(255, 255, 255, 0.92);
+                line-height: 1.85;
+            }
 
             @media (max-width: 1199.98px) {
                 #about-sec .about-hero-stage {
@@ -774,8 +896,17 @@
                 #about-sec #media-row > [class*='col-'] {
                     display: block;
                 }
+                #about-sec #identity-row > [class*='col-'] {
+                    display: block;
+                }
                 #about-sec .mission-vision-core-values {
                     padding: 24px 22px;
+                }
+                #about-sec .identity-story-copy {
+                    padding: 20px 20px 22px;
+                }
+                #about-sec .identity-story-copy h3 {
+                    font-size: 1.5rem;
                 }
             }
             @media (max-width: 575.98px) {
@@ -816,6 +947,18 @@
                 #about-sec .mission-vision-core-values {
                     border-radius: 16px;
                     padding: 18px 16px;
+                }
+                #about-sec .identity-story-card {
+                    border-radius: 18px;
+                }
+                #about-sec .identity-story-media {
+                    aspect-ratio: 16 / 11;
+                }
+                #about-sec .identity-story-copy {
+                    padding: 18px 16px 20px;
+                }
+                #about-sec .identity-story-copy h3 {
+                    font-size: 1.3rem;
                 }
                 #about-sec .home-news-side {
                     border-radius: 16px;

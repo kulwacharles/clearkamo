@@ -6,6 +6,8 @@ use Livewire\Component;
 use App\Models\Testimony;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Throwable;
 class TestimonyModal extends Component
 {
     use WithFileUploads;
@@ -17,58 +19,65 @@ class TestimonyModal extends Component
     // View modal properties
     public $viewName,  $viewDescription, $viewStatus, $viewImage,$viewPosition;
 
-    protected $rules = [
-        'name'       => 'required|min:3|max:255',
-        'description' => 'required|min:10',
-        'image'       => 'nullable|image|max:20480',
-        'status'      => 'required|in:published,draft,archived',
+    protected $messages = [
+        'name.required'        => 'The testimonial name is required.',
+        'name.min'             => 'The testimonial name must be at least 3 characters.',
+        'position.required'    => 'The testimonial position is required.',
+        'position.min'         => 'The testimonial position must be at least 2 characters.',
+        'description.required' => 'The testimonial description is required.',
+        'description.min'      => 'The testimonial description must be at least 10 characters.',
+        'image.required'       => 'The testimonial image is required.',
+        'image.image'          => 'The testimonial image must be valid.',
+        'image.max'            => 'The testimonial image may not be greater than 20MB.',
+        'status.required'      => 'The testimonial status is required.',
+        'status.in'            => 'The selected testimonial status is invalid.',
     ];
 
-    protected $messages = [
-        'name.required'       => 'The Title is required.',
-        'name.min'            => 'The Title must be at least 3 characters.',
-        'category.required'    => 'The Category is required.',
-        'description.required' => 'The Description is required.',
-        'description.min'      => 'The Description must be at least 10 characters.',
-        'image.image'          => 'The Image must be valid.',
-        'image.max'            => 'The Image may not be greater than 2MB.',
-        'status.required'      => 'The Status is required.',
-        'status.in'            => 'The selected Status is invalid.',
-    ];
+    protected function rules(): array
+    {
+        return [
+            'name'        => 'required|min:3|max:255',
+            'position'    => 'required|min:2|max:255',
+            'description' => 'required|min:10',
+            'image'       => $this->blogId ? 'nullable|image|max:20480' : 'required|image|max:20480',
+            'status'      => 'required|in:published,draft,archived',
+        ];
+    }
 
     public function store()
     {
         $this->validate();
+        try {
+            $imagePath = null;
 
-        $imagePath = null;
+            if ($this->image) {
+                $last = Testimony::latest()->first();
+                $newId = $last ? $last->id + 1 : 1;
 
-        // Handle image upload
-        if ($this->image) {
-            $last = Testimony::latest()->first();
-            $newId = $last ? $last->id + 1 : 1;
+                $extension = $this->resolveImageExtension($this->image);
+                $filename  = 'testimony_' . $newId . '_' . now()->timestamp . '_' . Str::lower(Str::random(6)) . '.' . $extension;
+                $imagePath = 'testimony/' . $filename;
 
-            $extension = $this->image->getClientOriginalExtension();
-            $filename  = 'testimony_' . $newId . '.' . $extension;
-            $imagePath = 'testimony/' . $filename;
+                $this->image->storePubliclyAs('testimony', $filename, 'public');
+            }
 
-            $this->image->storePubliclyAs('testimony', $filename, 'public');
-        }
+            $blog = new Testimony;
+            $blog->name = $this->name;
+            $blog->description = $this->description;
+            $blog->image = $imagePath;
+            $blog->status = $this->status;
+            $blog->position = $this->position;
 
-        // Create blog post
-        $blog = new Testimony;          
-        $blog->name       = $this->name;
-        $blog->description = $this->description;
-        $blog->image       = $imagePath;
-        $blog->status      = $this->status;
-        $blog->position   = $this->position; 
-        $result = $blog->save();
-        
-        if($result){
-            session()->flash('message', 'Vacancy saved successfully.'); 
-            $this->resetAll();
-            $this->dispatch('reset-ckeditor');
-            $this->dispatch('close-modal', 'addBlogModal');
-            $this->dispatch('blog-updated');
+            if ($blog->save()) {
+                session()->flash('message', 'Testimonial saved successfully.');
+                $this->resetAll();
+                $this->dispatch('reset-ckeditor');
+                $this->dispatch('close-modal', 'addBlogModal');
+                $this->dispatch('blog-updated');
+            }
+        } catch (Throwable $e) {
+            report($e);
+            session()->flash('error', 'Failed to save testimonial. Please confirm all required fields are filled and the image upload completed.');
         }
     }
 
@@ -90,37 +99,37 @@ class TestimonyModal extends Component
     public function update()
     {
         $this->validate();
+        try {
+            $blog = Testimony::findOrFail($this->blogId);
+            $imagePath = $blog->image;
 
-        $blog = Testimony::findOrFail($this->blogId);
-        $imagePath = $blog->image;
+            if ($this->image) {
+                if ($blog->image && Storage::disk('public')->exists($blog->image)) {
+                    Storage::disk('public')->delete($blog->image);
+                }
 
-        // Handle image upload if new image is provided
-        if ($this->image) {
-            // Delete old image if exists
-            if ($blog->image && Storage::disk('public')->exists($blog->image)) {
-                Storage::disk('public')->delete($blog->image);
+                $extension = $this->resolveImageExtension($this->image);
+                $filename  = 'testimony_' . $blog->id . '_' . now()->timestamp . '_' . Str::lower(Str::random(6)) . '.' . $extension;
+                $imagePath = 'testimony/' . $filename;
+
+                $this->image->storePubliclyAs('testimony', $filename, 'public');
             }
 
-            $extension = $this->image->getClientOriginalExtension();
-            $filename  = 'testimony_' . $blog->id . '.' . $extension;
-            $imagePath = 'testimony/' . $filename;
+            $blog->name = $this->name;
+            $blog->description = $this->description;
+            $blog->image = $imagePath;
+            $blog->status = $this->status;
+            $blog->position = $this->position;
 
-            $this->image->storePubliclyAs('testimony', $filename, 'public');
-        }
-
-        // Update blog post
-        $blog->name       = $this->name;
-        $blog->description = $this->description;
-        $blog->image       = $imagePath;
-        $blog->status      = $this->status;
-        $blog->position   = $this->position;
-        $result = $blog->save();
-        
-        if($result){
-            session()->flash('message', 'Testimony Post updated successfully.'); 
-            $this->resetAll();
-            $this->dispatch('close-modal', 'editBlogModal');
-            $this->dispatch('blog-updated');
+            if ($blog->save()) {
+                session()->flash('message', 'Testimonial updated successfully.');
+                $this->resetAll();
+                $this->dispatch('close-modal', 'editBlogModal');
+                $this->dispatch('blog-updated');
+            }
+        } catch (Throwable $e) {
+            report($e);
+            session()->flash('error', 'Failed to update testimonial. Please try again after the image upload finishes.');
         }
     }
 
@@ -165,6 +174,30 @@ class TestimonyModal extends Component
         $this->status      = 'draft';
         $this->currentImage = null;
         $this->position = null;
+    }
+
+    public function temporaryImagePreviewUrl($file): ?string
+    {
+        if (!$file) {
+            return null;
+        }
+
+        try {
+            return $file->temporaryUrl();
+        } catch (Throwable) {
+            return null;
+        }
+    }
+
+    private function resolveImageExtension($file): string
+    {
+        $extension = strtolower((string) $file->getClientOriginalExtension());
+        if ($extension !== '') {
+            return $extension;
+        }
+
+        $guessed = strtolower((string) $file->guessExtension());
+        return $guessed !== '' ? $guessed : 'jpg';
     }
 
 

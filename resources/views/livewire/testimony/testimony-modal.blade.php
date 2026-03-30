@@ -6,7 +6,7 @@
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add News & updates Post</h5>
+                    <h5 class="modal-title">Add Testimonial</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" wire:click="resetAll">
                         <span>&times;</span>
                     </button>
@@ -21,18 +21,25 @@
                             </div>
                         @endif
 
+                        @if (session()->has('error'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ session('error') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
+
                         <div class="row mb-3">
                             <div class="col-md-12">
                                 <label>Name</label>
-                                <input type="text" class="form-control" wire:model="name">
+                                <input type="text" class="form-control" wire:model="name" required>
                                 @error('name') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
 
                         <div class="mb-3 row">
                             <div class="col-md-6">
-                                <label>position</label>
-                                <input type="text" class="form-control" wire:model="position">
+                                <label>Position</label>
+                                <input type="text" class="form-control" wire:model="position" required>
                                 @error('position') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-md-6">
@@ -54,11 +61,12 @@
 
                         <div class="mb-3">
                             <label>Image</label>
-                            <input type="file" class="form-control" wire:model="image">
+                            <input type="file" class="form-control" wire:model="image" accept="image/*">
                             @error('image') <span class="text-danger">{{ $message }}</span> @enderror
-                            @if($image)
+                            @php($imagePreview = $this->temporaryImagePreviewUrl($image))
+                            @if($imagePreview)
                                 <div class="mt-2">
-                                    <img src="{{ $image->temporaryUrl() }}" class="blog-image-preview">
+                                    <img src="{{ $imagePreview }}" class="blog-image-preview" alt="Testimonial preview">
                                 </div>
                             @endif
                         </div>
@@ -83,7 +91,7 @@
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit News & updates Post</h5>
+                    <h5 class="modal-title">Edit Testimonial</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" wire:click="resetAll">
                         <span>&times;</span>
                     </button>
@@ -98,19 +106,26 @@
                             </div>
                         @endif
 
+                        @if (session()->has('error'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ session('error') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
+
                         <input type="hidden" wire:model="blogId">
                         <div class="row mb-3">
                             <div class="col-md-12">
                                 <label>Name</label>
-                                <input type="text" class="form-control" wire:model="name">
+                                <input type="text" class="form-control" wire:model="name" required>
                                 @error('name') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
 
                         <div class="mb-3 row">
                             <div class="col-md-6">
-                                <label>position</label>
-                                <input type="text" class="form-control" wire:model="position">
+                                <label>Position</label>
+                                <input type="text" class="form-control" wire:model="position" required>
                                 @error('position') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-md-6">
@@ -143,13 +158,14 @@
                             @endif
                             
                             <label>Change Image (Optional)</label>
-                            <input type="file" class="form-control" wire:model="image">
+                            <input type="file" class="form-control" wire:model="image" accept="image/*">
                             @error('image') <span class="text-danger">{{ $message }}</span> @enderror
                             
-                            @if($image)
+                            @php($editImagePreview = $this->temporaryImagePreviewUrl($image))
+                            @if($editImagePreview)
                                 <div class="mt-2">
                                     <p>New Image Preview:</p>
-                                    <img src="{{ $image->temporaryUrl() }}" class="blog-image-preview">
+                                    <img src="{{ $editImagePreview }}" class="blog-image-preview" alt="New testimonial preview">
                                 </div>
                             @endif
                         </div>
@@ -174,7 +190,7 @@
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">View News & Updates Post</h5>
+                    <h5 class="modal-title">View Testimonial</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span>&times;</span>
                     </button>
