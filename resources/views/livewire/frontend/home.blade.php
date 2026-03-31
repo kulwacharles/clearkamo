@@ -1761,6 +1761,10 @@
                 <img class="me-2" src="assets/img/theme-img/title_icon.svg" alt="shape">TESTIMONIAL
                 <img class="ms-2" src="assets/img/theme-img/title_icon.svg" alt="shape">
             </span>
+            <h2 class="sec-title">What partners say about working with us</h2>
+            <p class="sec-text ck-testi-intro">
+                Real feedback from leaders, institutions, and programme partners who have experienced our work firsthand.
+            </p>
         </div>
         <div class="slider-area testi-grid-area">
             <div class="swiper th-slider" id="testiSlide1" data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"1"},"768":{"slidesPerView":"1"},"992":{"slidesPerView":"2"},"1356":{"slidesPerView":"3"}}}'>
@@ -1768,29 +1772,39 @@
                     @if($testimonies)
                         @foreach ($testimonies as $testimony)
                             <div class="swiper-slide">
-                                <div class="testi-card-3">
-                                    <div class="testi-card-thumb">
-                                        <img class="avatar" src="{{ asset('storage/'.$testimony->image) }}" alt="img">
-                                        <div class="quote-icon">
-                                            <img src="assets/img/icon/quote2.svg" alt="icon">
+                                <div class="testi-card-3 ck-testi-card">
+                                    <div class="ck-testi-head">
+                                        <div class="ck-testi-identity">
+                                            <div class="ck-testi-avatar-wrap">
+                                                {{-- @if(!empty($testimony->image))
+                                                    <img class="ck-testi-avatar" src="{{ asset('storage/'.$testimony->image) }}" alt="{{ $testimony->name }}">
+                                                @else --}}
+                                                    <span class="ck-testi-avatar ck-testi-avatar-fallback">{{ strtoupper(substr($testimony->name, 0, 1)) }}</span>
+                                                {{-- @endif --}}
+                                            </div>
+                                            <div class="testi-card_content">
+                                                <h3 class="testi-card_name">{{ $testimony->name }}</h3>
+                                                <span class="testi-card_desig">{{ $testimony->position }}</span>
+                                                @if(!empty($testimony->context))
+                                                    <span class="testi-card_context">{{ $testimony->context }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="ck-testi-quote">
+                                            <i class="fa-solid fa-quote-right"></i>
                                         </div>
                                     </div>
                                     <div class="testi-card-details">
-                                        <p class="testi-card_text">
+                                        <div class="testi-card_text">
                                             {!! $testimony->description !!}
-                                        </p>
-                                        <div class="testi-card_profile">
-                                            <div class="testi-card_content">
-                                                <h3 class="testi-card_name">{{$testimony->name}}</h3>
-                                                <span class="testi-card_desig">{{$testimony->position}}</span>
-                                            </div>
                                         </div>
-                                        <div class="testi-card_review">
+                                        <div class="testi-card_review" aria-label="Five star testimonial">
                                             <i class="fa-sharp fa-solid fa-star"></i>
                                             <i class="fa-sharp fa-solid fa-star"></i>
                                             <i class="fa-sharp fa-solid fa-star"></i>
                                             <i class="fa-sharp fa-solid fa-star"></i>
                                             <i class="fa-sharp fa-solid fa-star"></i>
+                                            <span class="ck-testi-review-label">Trusted collaboration</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1808,6 +1822,223 @@
         </div>
     </div>
 </section>
+
+<style>
+    #testimonials {
+        position: relative;
+        background:
+            radial-gradient(circle at top left, rgba(3, 164, 252, .08), transparent 30%),
+            linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+    }
+
+    #testimonials .title-area {
+        max-width: 720px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 26px;
+    }
+
+    #testimonials .sec-title {
+        margin-top: 12px;
+        margin-bottom: 10px;
+        color: #0f172a;
+    }
+
+    #testimonials .ck-testi-intro {
+        color: #64748b;
+        line-height: 1.75;
+        margin: 0 auto;
+    }
+
+    #testimonials .swiper-slide {
+        height: auto;
+    }
+
+    #testimonials .ck-testi-card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 22px;
+        padding: 28px 24px 24px;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, .96);
+        border: 1px solid rgba(3, 164, 252, .12);
+        box-shadow: 0 18px 40px rgba(15, 23, 42, .08);
+        transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+    }
+
+    #testimonials .ck-testi-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 26px 54px rgba(3, 164, 252, .14);
+        border-color: rgba(3, 164, 252, .24);
+    }
+
+    #testimonials .ck-testi-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    #testimonials .ck-testi-identity {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        min-width: 0;
+    }
+
+    #testimonials .ck-testi-avatar-wrap {
+        flex-shrink: 0;
+    }
+
+    #testimonials .ck-testi-avatar {
+        width: 68px;
+        height: 68px;
+        border-radius: 50%;
+        object-fit: cover;
+        display: block;
+        border: 3px solid rgba(3, 164, 252, .18);
+        box-shadow: 0 10px 22px rgba(3, 164, 252, .12);
+    }
+
+    #testimonials .ck-testi-avatar-fallback {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #03a4fc 0%, #0b7dd6 100%);
+        color: #fff;
+        font-weight: 800;
+        font-size: 1.1rem;
+    }
+
+    #testimonials .ck-testi-quote {
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(3, 164, 252, .08);
+        color: #03a4fc;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+    }
+
+    #testimonials .testi-card_content {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        min-width: 0;
+    }
+
+    #testimonials .testi-card_name {
+        margin: 0;
+        font-size: 1.35rem;
+        font-weight: 800;
+        line-height: 1.2;
+        color: #0f172a;
+    }
+
+    #testimonials .testi-card_desig {
+        font-size: .95rem;
+        line-height: 1.5;
+        color: #475569;
+        font-weight: 600;
+    }
+
+    #testimonials .testi-card_context {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        margin-top: 6px;
+        width: fit-content;
+        padding: 7px 12px;
+        border-radius: 999px;
+        background: rgba(3, 164, 252, .08);
+        border: 1px solid rgba(3, 164, 252, .12);
+        font-size: .8rem;
+        line-height: 1.45;
+        color: #0369a1;
+        font-weight: 700;
+    }
+
+    #testimonials .testi-card_context::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: #03a4fc;
+        flex-shrink: 0;
+    }
+
+    #testimonials .testi-card-details {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        flex: 1;
+    }
+
+    #testimonials .testi-card_text {
+        margin: 0;
+        color: #334155;
+        font-size: 1rem;
+        line-height: 1.9;
+    }
+
+    #testimonials .testi-card_text p:last-child {
+        margin-bottom: 0;
+    }
+
+    #testimonials .testi-card_review {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin-top: auto;
+        padding-top: 12px;
+        border-top: 1px solid rgba(148, 163, 184, .18);
+        color: #f59e0b;
+    }
+
+    #testimonials .ck-testi-review-label {
+        margin-left: 8px;
+        color: #64748b;
+        font-size: .82rem;
+        font-weight: 700;
+        letter-spacing: .02em;
+    }
+
+    @media (max-width: 767.98px) {
+        #testimonials .ck-testi-card {
+            padding: 22px 18px 20px;
+            border-radius: 20px;
+        }
+
+        #testimonials .ck-testi-head {
+            align-items: flex-start;
+        }
+
+        #testimonials .ck-testi-avatar {
+            width: 58px;
+            height: 58px;
+        }
+
+        #testimonials .testi-card_name {
+            font-size: 1.15rem;
+        }
+
+        #testimonials .testi-card_text {
+            font-size: .96rem;
+            line-height: 1.75;
+        }
+
+        #testimonials .ck-testi-review-label {
+            width: 100%;
+            margin-left: 0;
+        }
+    }
+</style>
 
 {{-- ── Clients & Partners Marquee ──────────────────────────── --}}
 @if($clients && $clients->count() > 0)

@@ -12,18 +12,19 @@ class TestimonyModal extends Component
 {
     use WithFileUploads;
 
-    public $name, $category, $description, $image, $imagePath, $blogId, $PostDate,$DueDate,$position;
+    public $name, $category, $description, $image, $imagePath, $blogId, $PostDate,$DueDate,$position, $context;
     public $status = 'draft';
     public $currentImage;
     
     // View modal properties
-    public $viewName,  $viewDescription, $viewStatus, $viewImage,$viewPosition;
+    public $viewName,  $viewDescription, $viewStatus, $viewImage,$viewPosition, $viewContext;
 
     protected $messages = [
         'name.required'        => 'The testimonial name is required.',
         'name.min'             => 'The testimonial name must be at least 3 characters.',
         'position.required'    => 'The testimonial position is required.',
         'position.min'         => 'The testimonial position must be at least 2 characters.',
+        'context.max'          => 'The testimonial context may not be greater than 255 characters.',
         'description.required' => 'The testimonial description is required.',
         'description.min'      => 'The testimonial description must be at least 10 characters.',
         'image.required'       => 'The testimonial image is required.',
@@ -38,6 +39,7 @@ class TestimonyModal extends Component
         return [
             'name'        => 'required|min:3|max:255',
             'position'    => 'required|min:2|max:255',
+            'context'     => 'nullable|max:255',
             'description' => 'required|min:10',
             'image'       => $this->blogId ? 'nullable|image|max:20480' : 'required|image|max:20480',
             'status'      => 'required|in:published,draft,archived',
@@ -67,6 +69,7 @@ class TestimonyModal extends Component
             $blog->image = $imagePath;
             $blog->status = $this->status;
             $blog->position = $this->position;
+            $blog->context = $this->context;
 
             if ($blog->save()) {
                 session()->flash('message', 'Testimonial saved successfully.');
@@ -92,6 +95,7 @@ class TestimonyModal extends Component
         $this->status = $blog->status;
         $this->currentImage = $blog->image;
         $this->position = $blog->position;
+        $this->context = $blog->context;
         $this->dispatch('set-ckeditor-content', content: $blog->description);
         $this->dispatch('open-modal', 'editBlogModal');
     }
@@ -120,6 +124,7 @@ class TestimonyModal extends Component
             $blog->image = $imagePath;
             $blog->status = $this->status;
             $blog->position = $this->position;
+            $blog->context = $this->context;
 
             if ($blog->save()) {
                 session()->flash('message', 'Testimonial updated successfully.');
@@ -142,6 +147,7 @@ class TestimonyModal extends Component
         $this->viewDescription = $blog->description;
         $this->viewStatus = $blog->status;
         $this->viewPosition = $blog->position;
+        $this->viewContext = $blog->context;
         $this->viewImage = $blog->image;
         
         $this->dispatch('open-modal', 'viewBlogModal');
@@ -174,6 +180,7 @@ class TestimonyModal extends Component
         $this->status      = 'draft';
         $this->currentImage = null;
         $this->position = null;
+        $this->context = null;
     }
 
     public function temporaryImagePreviewUrl($file): ?string

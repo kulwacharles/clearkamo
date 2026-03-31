@@ -66,6 +66,7 @@
                                             <tr>
                                                 <th scope="col">Name</th>
                                                 <th scope="col">Position</th>
+                                                <th scope="col">Context</th>
                                                 <th scope="col">Image</th> 
                                                 <th scope="col">Status</th>
                                                 <th scope="col">Actions</th>
@@ -77,6 +78,7 @@
                                                 <tr>
                                                     <th scope="row"><a href="#" class="question_content">{{ $blog->name }}</a></th>
                                                     <td>{{ $blog->position }}</td>
+                                                    <td>{{ $blog->context ?: 'No context' }}</td>
                                                     <td>
                                                         @if($blog->image)
                                                             <img class="img" src="{{ asset('storage/'.$blog->image) }}" width="100px" height="100px" style="object-fit: cover;">

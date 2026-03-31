@@ -43,6 +43,14 @@
                                 @error('position') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-md-6">
+                                <label>Context / Reference</label>
+                                <input type="text" class="form-control" wire:model="context" placeholder="Example: Programme participant">
+                                @error('context') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
                                 <label>Status</label>
                                 <select class="form-control" wire:model="status" required>
                                     <option value="draft">Draft</option>
@@ -129,6 +137,14 @@
                                 @error('position') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-md-6">
+                                <label>Context / Reference</label>
+                                <input type="text" class="form-control" wire:model="context" placeholder="Example: Programme participant">
+                                @error('context') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
                                 <label>Status</label>
                                 <select class="form-control" wire:model="status" required>
                                     <option value="draft">Draft</option>
@@ -204,6 +220,13 @@
                         <div class="col-md-4">
                             <label class="fw-bold">Position</label>
                             <p class="form-control-plaintext border-bottom pb-2">{{ $viewPosition ?? 'No category' }}</p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label class="fw-bold">Context / Reference</label>
+                            <p class="form-control-plaintext border-bottom pb-2">{{ $viewContext ?: 'No context provided' }}</p>
                         </div>
                     </div>
 
